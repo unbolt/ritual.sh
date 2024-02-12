@@ -3,6 +3,7 @@ title: What’s up?
 author: Dan
 type: page
 date: 2024-01-09T11:46:01+00:00
+comments: false
 
 ---
 <div class="wp-block-group alignfull has-accent-background-color has-background has-global-padding is-layout-constrained wp-block-group-is-layout-constrained" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">

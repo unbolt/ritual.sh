@@ -1,7 +1,7 @@
 ---
 title: Cutting off from Compulsive Connectivity
 date: 2024-01-24T15:11:51+00:00
-url: /post/cutting-off-from-compulsive-connectivity/
+url: /posts/cutting-off-from-compulsive-connectivity/
 tags:
   - 'digital minimalism'
   - tech

@@ -1,7 +1,7 @@
 ---
 title: Moving all my stuff into a server rack – Part 3, Housing the PS5 and some decor
 date: 2023-08-15T12:06:15+00:00
-url: /post/moving-stuff-into-a-server-rackhousing-the-ps5-and-some-decor/
+url: /posts/moving-stuff-into-a-server-rackhousing-the-ps5-and-some-decor/
 tags:
   - homelab
   - ps5

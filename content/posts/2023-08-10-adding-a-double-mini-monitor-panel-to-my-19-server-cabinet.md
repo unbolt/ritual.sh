@@ -1,7 +1,7 @@
 ---
 title: Adding a double mini-monitor panel to my 19″ server cabinet
 date: 2023-08-10T08:52:36+00:00
-url: /post/adding-a-double-mini-monitor-panel-to-my-19-server-cabinet/
+url: /posts/adding-a-double-mini-monitor-panel-to-my-19-server-cabinet/
 featured_image: /wp-content/uploads/2024/01/IMG_6358-edited.webp
 enclosure:
   - |

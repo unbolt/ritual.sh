@@ -18,7 +18,9 @@ More recently we decided we should be focusing on quality over quantity. Moreso 
 
 Deciding we could do better, we needed to find a local coffee supplier. They needed to also be environmentally minded.
 
-A friend suggested we try Cirencester based <a href="https://i.refs.cc/m9Xi83Rv?smile_ref=eyJzbWlsZV9zb3VyY2UiOiJzbWlsZV91aSIsInNtaWxlX21lZGl1bSI6IiIsInNtaWxlX2NhbXBhaWduIjoicmVmZXJyYWxfcHJvZ3JhbSIsInNtaWxlX2N1c3RvbWVyX2lkIjoxOTk0ODg5ODk5fQ%3D%3D" target="_blank" rel="noreferrer noopener sponsored nofollow">Rave Coffee</a>. This is a brief review of the experience so far.<figure class="wp-block-image size-large is-style-rounded">
+A friend suggested we try Cirencester based [Rave Coffee](https://i.refs.cc/m9Xi83Rv?smile_ref=eyJzbWlsZV9zb3VyY2UiOiJzbWlsZV91aSIsInNtaWxlX21lZGl1bSI6IiIsInNtaWxlX2NhbXBhaWduIjoicmVmZXJyYWxfcHJvZ3JhbSIsInNtaWxlX2N1c3RvbWVyX2lkIjoxOTk0ODg5ODk5fQ%3D%3D). This is a brief review of the experience so far.
+
+<figure class="wp-block-image size-large is-style-rounded">
 
 <img data-dominant-color="7c6d68" data-has-transparency="false" style="--dominant-color: #7c6d68;" loading="lazy" decoding="async" width="1024" height="1024" src="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-1024x1024.webp?resize=1024%2C1024&#038;ssl=1" alt="Rave coffee with a pumpkin coffee mug and a jar of coffee beans" class="not-transparent wp-image-152" srcset="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=1024%2C1024&ssl=1 1024w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=300%2C300&ssl=1 300w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=150%2C150&ssl=1 150w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=768%2C768&ssl=1 768w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=1536%2C1536&ssl=1 1536w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?w=2048&ssl=1 2048w" sizes="(max-width: 1000px) 100vw, 1000px" data-recalc-dims="1" /> </figure> 
 
