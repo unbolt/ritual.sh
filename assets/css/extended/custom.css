@@ -9,3 +9,12 @@
     padding: var(--gap);
 }
 
+article a[href^="http"]:not(article .social-icons a, .paginav a, .buy-me-a-coffee a, .post-tags a, a.entry-link),
+article a[href^="https://"]:not(article .social-icons a, .paginav a, .buy-me-a-coffee a, .post-tags a, a.entry-link)
+{
+    box-shadow: none;
+    background: linear-gradient(to left, #c34722, #fdbb2d 100%);
+    background-position: 0 100%;
+    background-size: 100% 2px;
+    background-repeat: repeat-x;
+}

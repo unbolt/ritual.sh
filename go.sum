@@ -1,2 +1,7 @@
 github.com/UtkarshVerma/hugo-modules/responsive-images v0.0.0-20231218022719-c138711ef070 h1:uMV+dVf78Ro9ee1yXFem1tUYJnliuKZpvg7Noyu1jDI=
 github.com/UtkarshVerma/hugo-modules/responsive-images v0.0.0-20231218022719-c138711ef070/go.mod h1:jencpjZ0EdTGd6YEHFEhAPi9mVCJbVgZ5VQaKlXrGhg=
+github.com/aFarkas/lazysizes v0.0.0-20210408151554-27c7ceb7d737/go.mod h1:xl3heUINAn0oPowV1biDQ2Pyw1w3x66I7KEbWkaxox0=
+github.com/aFarkas/lazysizes v0.0.0-20210517092641-1523a4ff4579 h1:K8ukOfj0MOBEWWsL8Mzd8GXIbAf7/RHnX1hipqbjeto=
+github.com/aFarkas/lazysizes v0.0.0-20210517092641-1523a4ff4579/go.mod h1:xl3heUINAn0oPowV1biDQ2Pyw1w3x66I7KEbWkaxox0=
+github.com/hugo-mods/lazyimg v0.0.0-20220925161121-72183e14a364 h1:D6wkkO/MtNX597ihy0eS0+KhtjQz5B6c6YBgnXAczcc=
+github.com/hugo-mods/lazyimg v0.0.0-20220925161121-72183e14a364/go.mod h1:mUw/5rIlzxiJfDnKsFnZAITZ29I7n3QeDd8WwGsBmTI=
