@@ -27,9 +27,9 @@ There are multiple issues which will need overcoming and I want to address them 
 
 Those are the main areas to address if I want to cut my smart phone usage in the evenings and weekends.
 
-The first one, the watch, was actually pretty easy to address. I've always admired the retro styling of the old-school Casio watches so I picked up one of those for around £10 and have been wearing it for a week already. I haven't missed the notifications on my wrist and I really don't care how many steps I haven't taken in the day so it's really not been much of a transition.<figure class="wp-block-image size-large is-style-rounded">
+The first one, the watch, was actually pretty easy to address. I've always admired the retro styling of the old-school Casio watches so I picked up one of those for around £10 and have been wearing it for a week already. I haven't missed the notifications on my wrist and I really don't care how many steps I haven't taken in the day so it's really not been much of a transition.
 
-<img data-dominant-color="5f3655" data-has-transparency="false" style="--dominant-color: #5f3655;" loading="lazy" decoding="async" width="1024" height="683" src="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3156-1024x683.webp?resize=1024%2C683&#038;ssl=1" alt="Casio digital watch on pink and purple background" class="not-transparent wp-image-170" srcset="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3156-jpg.webp?resize=1024%2C683&ssl=1 1024w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3156-jpg.webp?resize=300%2C200&ssl=1 300w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3156-jpg.webp?resize=768%2C512&ssl=1 768w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3156-jpg.webp?resize=1536%2C1024&ssl=1 1536w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3156-jpg.webp?w=2048&ssl=1 2048w" sizes="(max-width: 1000px) 100vw, 1000px" data-recalc-dims="1" /> </figure> 
+{{< figure src="DSCF3156.jpg" title="" >}}
 
 I do really enjoy wearing this strangely, it's lighter and smaller than the Apple Watch so is quite a bit more comfortable over long periods.
 

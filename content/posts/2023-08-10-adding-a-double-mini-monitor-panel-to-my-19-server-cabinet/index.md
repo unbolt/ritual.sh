@@ -2,14 +2,10 @@
 title: Adding a double mini-monitor panel to my 19″ server cabinet
 date: 2023-08-10T08:52:36+00:00
 url: /posts/adding-a-double-mini-monitor-panel-to-my-19-server-cabinet/
-featured_image: /wp-content/uploads/2024/01/IMG_6358-edited.webp
-enclosure:
-  - |
-    |
-        https://danbaker.dev/wp-content/uploads/2024/01/IMG_6353.mp4
-        3466771
-        video/mp4
-        
+cover: 
+  image: 'IMG_6358-edited.webp'
+  alt: "A mounting panel in a server rack containing two small display panels"
+  relative: false        
 tags:
   - homelab
   - rack
@@ -32,7 +28,7 @@ The panels arrived and I plugged them both into the Intel NUC I was planning on 
 
 {{< figure src="IMG_6352.jpg" title="" >}}
 
-I planned to use one screen to display my Grafana dashboard (more on that in the future&#8230;) - and another to display video content, so I tested it out with Lord of the Rings.<figure class="wp-block-video"><video controls src="https://danbaker.dev/wp-content/uploads/2024/01/IMG_6353.mp4"></video></figure> 
+I planned to use one screen to display my Grafana dashboard (more on that in the future&#8230;) - and another to display video content, so I tested it out with Lord of the Rings.
 
 With the monitors sorted, I got back to thinking about how to mount the things in the rack. I had two main options, either get someone to fabricate something, or DIY something myself.
 

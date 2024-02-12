@@ -35,13 +35,11 @@ The main aim was to make my phone as uninteresting as possible. One of the main 
 
 Okay, so with my phone able to toggle between colour and greyscale it did make it significantly less interesting, but I wanted to take it further.
 
-A bit more research led me to an app named <a href="https://www.blankspaces.app/" target="_blank" rel="noreferrer noopener">Blank Spaces</a>. This is a paid app, but in my opinion is well worth it. It allows you to add two widgets to your home screen that act as shortcuts, letting to remove easy access to any other apps you want to restrict yourself with.
+A bit more research led me to an app named [Blank Spaces](https://www.blankspaces.app/). This is a paid app, but in my opinion is well worth it. It allows you to add two widgets to your home screen that act as shortcuts, letting to remove easy access to any other apps you want to restrict yourself with.
 
-Setting it up is quite easy, the app has a great walk through. This is how my homescreen looks now:<figure class="wp-block-image aligncenter size-large">
+Setting it up is quite easy, the app has a great walk through. This is how my homescreen looks now:
 
-<img data-dominant-color="2b2b2b" data-has-transparency="false" style="--dominant-color: #2b2b2b;" loading="lazy" decoding="async" width="473" height="1024" src="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/02/IMG_7455-473x1024.webp?resize=473%2C1024&#038;ssl=1" alt="" class="not-transparent wp-image-184" srcset="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/02/IMG_7455-jpg.webp?resize=473%2C1024&ssl=1 473w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/02/IMG_7455-jpg.webp?resize=139%2C300&ssl=1 139w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/02/IMG_7455-jpg.webp?resize=768%2C1662&ssl=1 768w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/02/IMG_7455-jpg.webp?resize=710%2C1536&ssl=1 710w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/02/IMG_7455-jpg.webp?w=828&ssl=1 828w" sizes="(max-width: 473px) 100vw, 473px" data-recalc-dims="1" /> <figcaption class="wp-element-caption">My dumb iPhone homescreen</figcaption></figure> 
-
-
+{{< figure src="IMG_7455.jpg" title="My dumb iPhone homescreen" >}}
 
 If I want to access any other apps I have to go into the library and manually search for them. 
 

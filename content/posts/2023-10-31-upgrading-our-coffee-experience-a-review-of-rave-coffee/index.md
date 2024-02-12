@@ -14,15 +14,13 @@ cover:
 ---
 One of the first presents we bought ourselves after we got married was a proper bean-to-cup coffee machine. For the longest time we just picked up whichever beans were cheap enough and easily available, be it from large online retailers or the local supermarket. We really needed to upgrade our coffee experience - here is my review of Rave Coffee.
 
-More recently we decided we should be focusing on quality over quantity. Moreso we had become concerned over the <a href="https://www.theworldcounts.com/challenges/consumption/foods-and-beverages/environmental-effects-of-coffee-production" target="_blank" rel="noreferrer noopener">environmental impact</a> our coffee habits were having. 
+More recently we decided we should be focusing on quality over quantity. Moreso we had become concerned over the [environmental impact](https://www.theworldcounts.com/challenges/consumption/foods-and-beverages/environmental-effects-of-coffee-production) our coffee habits were having. 
 
 Deciding we could do better, we needed to find a local coffee supplier. They needed to also be environmentally minded.
 
 A friend suggested we try Cirencester based [Rave Coffee](https://i.refs.cc/m9Xi83Rv?smile_ref=eyJzbWlsZV9zb3VyY2UiOiJzbWlsZV91aSIsInNtaWxlX21lZGl1bSI6IiIsInNtaWxlX2NhbXBhaWduIjoicmVmZXJyYWxfcHJvZ3JhbSIsInNtaWxlX2N1c3RvbWVyX2lkIjoxOTk0ODg5ODk5fQ%3D%3D). This is a brief review of the experience so far.
 
-<figure class="wp-block-image size-large is-style-rounded">
-
-<img data-dominant-color="7c6d68" data-has-transparency="false" style="--dominant-color: #7c6d68;" loading="lazy" decoding="async" width="1024" height="1024" src="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-1024x1024.webp?resize=1024%2C1024&#038;ssl=1" alt="Rave coffee with a pumpkin coffee mug and a jar of coffee beans" class="not-transparent wp-image-152" srcset="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=1024%2C1024&ssl=1 1024w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=300%2C300&ssl=1 300w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=150%2C150&ssl=1 150w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=768%2C768&ssl=1 768w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?resize=1536%2C1536&ssl=1 1536w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3114-jpg.webp?w=2048&ssl=1 2048w" sizes="(max-width: 1000px) 100vw, 1000px" data-recalc-dims="1" /> </figure> 
+{{< figure src="DSCF3114.jpg" title="" >}}
 
 ### The Coffee
 
@@ -42,7 +40,7 @@ _Now That's What I Call Coffee Nº 2023_ is a must-try for anyone seeking a coff
 
 As I mentioned at the start, the coffee alone wasn't all we were looking for. We also wanted a coffee supplier that was in some alignment with our values.
 
-Good news is, Rave Coffee seem quite environmentally minded. They are a member of <a href="https://ravecoffee.co.uk/pages/1-for-the-planet" target="_blank" rel="noreferrer noopener">1% For The Planet</a> - which donates 1% of sales (not profits) to environmental causes.
+Good news is, Rave Coffee seem quite environmentally minded. They are a member of [1% For The Planet](https://ravecoffee.co.uk/pages/1-for-the-planet)</a> - which donates 1% of sales (not profits) to environmental causes.
 
 They're also not that far away from us geographically, so hopefully that cuts down on the carbon footprint a little bit.
 
@@ -52,10 +50,10 @@ The price is probably 50% more than we were paying for coffee previously, but wi
 
 I don't have much more to say, the coffee we've had so far has been fantastic. Give it a go.
 
-Before I sign off, can we just take a moment to appreciate how cool this pumpkin mug is? <figure class="wp-block-image size-large is-style-rounded">
+Before I sign off, can we just take a moment to appreciate how cool this pumpkin mug is? 
 
-<img data-dominant-color="705f67" data-has-transparency="false" style="--dominant-color: #705f67;" loading="lazy" decoding="async" width="1024" height="1024" src="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3121-1024x1024.webp?resize=1024%2C1024&#038;ssl=1" alt="A mug shaped like a pumpkin" class="not-transparent wp-image-154" srcset="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3121-jpg.webp?resize=1024%2C1024&ssl=1 1024w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3121-jpg.webp?resize=300%2C300&ssl=1 300w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3121-jpg.webp?resize=150%2C150&ssl=1 150w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3121-jpg.webp?resize=768%2C768&ssl=1 768w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3121-jpg.webp?resize=1536%2C1536&ssl=1 1536w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DSCF3121-jpg.webp?w=2048&ssl=1 2048w" sizes="(max-width: 1000px) 100vw, 1000px" data-recalc-dims="1" /> </figure> 
+{{< figure src="DSCF3121.jpg" title="" >}}
 
 Enjoy your coffee, feel free to send me any other coffee producers in the UK that we could try out.
 
-If you want to try Rave Coffee, <a href="https://i.refs.cc/m9Xi83Rv?smile_ref=eyJzbWlsZV9zb3VyY2UiOiJzbWlsZV91aSIsInNtaWxlX21lZGl1bSI6IiIsInNtaWxlX2NhbXBhaWduIjoicmVmZXJyYWxfcHJvZ3JhbSIsInNtaWxlX2N1c3RvbWVyX2lkIjoxOTk0ODg5ODk5fQ%3D%3D" target="_blank" rel="noreferrer noopener sponsored nofollow">use this link to get £5 off</a>, sorted!
+If you want to try Rave Coffee, [use this link to get £5 off](https://i.refs.cc/m9Xi83Rv?smile_ref=eyJzbWlsZV9zb3VyY2UiOiJzbWlsZV91aSIsInNtaWxlX21lZGl1bSI6IiIsInNtaWxlX2NhbXBhaWduIjoicmVmZXJyYWxfcHJvZ3JhbSIsInNtaWxlX2N1c3RvbWVyX2lkIjoxOTk0ODg5ODk5fQ%3D%3D), sorted!

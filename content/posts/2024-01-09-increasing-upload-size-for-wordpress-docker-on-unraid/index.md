@@ -13,10 +13,7 @@ This is the simplest way I found of doing it, though I am sure there are other m
 
 First locate the `.htaccess` file in your webroot. If you don't know where to find the appdata path you can just edit the container and look for the following option:
 
-
-<figure class="wp-block-image size-large wp-duotone-duotone-1">
-
-<img data-dominant-color="efeceb" data-has-transparency="false" style="--dominant-color: #efeceb;" loading="lazy" decoding="async" width="1024" height="86" src="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/Screenshot-2024-01-09-125819.png?resize=1024%2C86&#038;ssl=1" alt="" class="not-transparent wp-image-73" srcset="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/Screenshot-2024-01-09-125819.png?resize=1024%2C86&ssl=1 1024w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/Screenshot-2024-01-09-125819.png?resize=300%2C25&ssl=1 300w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/Screenshot-2024-01-09-125819.png?resize=768%2C65&ssl=1 768w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/Screenshot-2024-01-09-125819.png?w=1435&ssl=1 1435w" sizes="(max-width: 1000px) 100vw, 1000px" data-recalc-dims="1" /> </figure> 
+{{< figure src="Screenshot-2024-01-09-125819.png" title="" >}}
 
 Depending on your setup you may need to edit the file permissions so it can be edited, so open the terminal on your server and navigate to the above path:
 
