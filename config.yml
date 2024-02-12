@@ -10,6 +10,8 @@ buildExpired: false
 
 googleAnalytics: UA-123-45
 
+enableEmoji: true
+
 minify:
   disableXML: true
   minifyOutput: true
@@ -29,7 +31,7 @@ params:
   ShowReadingTime: true
   ShowShareButtons: false
   ShowPostNavLinks: true
-  ShowBreadCrumbs: true
+  ShowBreadCrumbs: false
   ShowCodeCopyButtons: false
   ShowWordCount: true
   ShowRssButtonInSectionTermList: true
@@ -39,8 +41,13 @@ params:
   comments: false
   hidemeta: false
   hideSummary: false
+  hideAuthor: true
   showtoc: false
   tocopen: false
+
+  mainSections:
+    - posts
+    - gear
 
   assets:
     # disableHLJS: true # to disable highlight.js
@@ -53,8 +60,9 @@ params:
 
   label:
     text: "ritual"
-    icon: /images/coffee-cup-9-512.png
-    iconHeight: 35
+    icon: /images/android-chrome-512x512.png
+    iconImageHeight: 35
+    iconHeight: 70
 
   # profile-mode
   profileMode:
@@ -73,16 +81,16 @@ params:
 
   # home-info mode
   homeInfoParams:
-    Title: "Hi there \U0001F44B"
-    Content: Welcome to my blog
+    Title: "I’m Dan. I live in the Golden Valley, Herefordshire. I work remotely as a software engineer, team leader, and system architect. "
+    Content: "I like to talk about engineering, networking, and system design. There’s a higher I may also talk about many of my other interests – photography, digital minimalism, lego, gaming and game dev, coffee, or the great outdoors."
 
   socialIcons:
-    - name: x
-      url: "https://x.com/"
-    - name: stackoverflow
-      url: "https://stackoverflow.com"
+    - name: instagram
+      url: "https://www.instagram.com/ritualphotos"
+    - name: mastodon
+      url: "https://dice.camp/@ritual"
     - name: github
-      url: "https://github.com/"
+      url: "https://github.com/unbolt"
 
   analytics:
     google:
@@ -93,9 +101,9 @@ params:
       SiteVerificationTag: "XYZabc"
 
   cover:
-    hidden: true # hide everywhere but not in structured data
+    hidden: false # hide everywhere but not in structured data
     hiddenInList: true # hide on list pages and home
-    hiddenInSingle: true # hide on single page
+    hiddenInSingle: false # hide on single page
 
   editPost:
     URL: "https://github.com/<path_to_repo>/content"
@@ -115,18 +123,22 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    - identifier: categories
-      name: categories
-      url: /categories/
+    - identifier: about
+      name: about
+      url: /about/
+      weight: 5
+    - identifier: gear
+      name: gear & edc
+      url: /gear/
       weight: 10
+    - identifier: archives
+      name: archives
+      url: /archives/
+      weight: 15
     - identifier: tags
       name: tags
       url: /tags/
       weight: 20
-    - identifier: example
-      name: example.org
-      url: https://example.org
-      weight: 30
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:

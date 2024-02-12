@@ -10,11 +10,11 @@ date: 2024-01-09T11:46:01+00:00
     <div class="wp-block-column is-vertically-aligned-stretch is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:50%">
       <div class="wp-block-group is-vertical is-content-justification-stretch is-layout-flex wp-container-core-group-layout-1 wp-block-group-is-layout-flex" style="min-height:100%">
         <p class="has-large-font-size">
-          I&#8217;m <strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-base-color">Dan</mark></strong>. I live in the Golden Valley, <strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-base-color">Herefordshire</mark></strong>. I work remotely as a <strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-base-color">software engineer</mark></strong>, team leader, and system architect.
+          I'm <strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-base-color">Dan</mark></strong>. I live in the Golden Valley, <strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-base-color">Herefordshire</mark></strong>. I work remotely as a <strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-base-color">software engineer</mark></strong>, team leader, and system architect.
         </p>
         
         <p>
-          I like to talk about engineering, networking, and system design. There&#8217;s a really good chance I may also talk about some of my other interests &#8211; photography, lego, gaming and game dev, coffee, or the great outdoors.
+          I like to talk about engineering, networking, and system design. There's a really good chance I may also talk about some of my other interests - photography, lego, gaming and game dev, coffee, or the great outdoors.
         </p>
       </div>
     </div>
@@ -29,7 +29,7 @@ date: 2024-01-09T11:46:01+00:00
   <div class="wp-block-columns alignwide is-layout-flex wp-container-core-columns-layout-2 wp-block-columns-is-layout-flex">
     <div class="wp-block-column is-vertically-aligned-stretch is-layout-flow wp-block-column-is-layout-flow" style="padding-right:0;flex-basis:60%">
       <div class="wp-block-group is-vertical is-content-justification-stretch is-layout-flex wp-container-core-group-layout-3 wp-block-group-is-layout-flex" style="min-height:100%">
-        <figure class="wp-block-image size-large is-resized is-style-rounded is-layout-flow wp-block-image-is-layout-flow"><img data-dominant-color="898b75" data-has-transparency="false" loading="lazy" decoding="async" width="1024" height="732" src="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-1024x732.webp?resize=1024%2C732&#038;ssl=1" alt="" class="not-transparent wp-image-64" style="--dominant-color: #898b75; width:667px;height:auto" srcset="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?resize=1024%2C732&ssl=1 1024w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?resize=300%2C214&ssl=1 300w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?resize=768%2C549&ssl=1 768w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?resize=1536%2C1097&ssl=1 1536w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?w=2048&ssl=1 2048w" sizes="(max-width: 1000px) 100vw, 1000px" data-recalc-dims="1" /><figcaption class="wp-element-caption">Dorset 2023, near Bridport. 50°41&#8217;28&#8221; N 2°42&#8217;32&#8221; W</figcaption></figure> 
+        <figure class="wp-block-image size-large is-resized is-style-rounded is-layout-flow wp-block-image-is-layout-flow"><img data-dominant-color="898b75" data-has-transparency="false" loading="lazy" decoding="async" width="1024" height="732" src="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-1024x732.webp?resize=1024%2C732&#038;ssl=1" alt="" class="not-transparent wp-image-64" style="--dominant-color: #898b75; width:667px;height:auto" srcset="https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?resize=1024%2C732&ssl=1 1024w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?resize=300%2C214&ssl=1 300w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?resize=768%2C549&ssl=1 768w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?resize=1536%2C1097&ssl=1 1536w, https://i0.wp.com/danbaker.dev/wp-content/uploads/2024/01/DJI_0229-HDR-jpg.webp?w=2048&ssl=1 2048w" sizes="(max-width: 1000px) 100vw, 1000px" data-recalc-dims="1" /><figcaption class="wp-element-caption">Dorset 2023, near Bridport. 50°41'28&#8221; N 2°42'32&#8221; W</figcaption></figure> 
         
         <p>
           As well as traditional photoghraphy, I am trying to get to grips with my DJI Mini 2 for drone photography which opens up a whole new world of angles.
@@ -44,7 +44,7 @@ date: 2024-01-09T11:46:01+00:00
         </h2>
         
         <p>
-          I&#8217;ve been a keen photographer for many years. Currently I shoot with a Fujifilm X-T5, mainly with the 16-55mm f2.8. I also have the 70-300 f4-5. I&#8217;m making some effort to post my photos to <a href="https://www.instagram.com/ritualphotos/" target="_blank" rel="noreferrer noopener">instagram</a> more frequently.
+          I've been a keen photographer for many years. Currently I shoot with a Fujifilm X-T5, mainly with the 16-55mm f2.8. I also have the 70-300 f4-5. I'm making some effort to post my photos to <a href="https://www.instagram.com/ritualphotos/" target="_blank" rel="noreferrer noopener">instagram</a> more frequently.
         </p>
         
         <div class="wp-block-jetpack-instagram-gallery wp-block-jetpack-instagram-gallery__grid wp-block-jetpack-instagram-gallery__grid-columns-3 is-stacked-on-mobile" style="grid-gap: 10px; --latest-instagram-posts-spacing: 10px;">

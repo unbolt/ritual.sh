@@ -1,22 +1,25 @@
 ---
-title: Turning my smart phone into a dumb phone
-author: Dan
-type: post
+title: "Turning my smart phone into a dumb phone"
+url: "/posts/turning-my-smartphone-into-a-dumb-phone"
 date: 2024-02-05T13:55:21+00:00
-url: /post/turning-my-smart-phone-into-a-dumb-phone/
-featured_image: /wp-content/uploads/2024/02/DSCF3198-Enhanced-NR-jpg.webp
-categories:
-  - Digital Minimalism
 tags:
-  - dumbphone
-  - tech
+  - 'digital minimalism'
+  - 'dumbphone'
+  - 'tech'
 
+
+cover: 
+  image: 'DSCF3198-Enhanced-NR-jpg.webp'
+  alt: "<alt text>"
+  caption: "<text>"
+  relative: false
 ---
+
 One of the first things I wanted to explore in my [mission to cut myself off from compulsive connectivity][1] was to find the options for turning my smart phone into a dumb phone.
 
-The main aim was to make my phone as uninteresting as possible. One of the main tips thrown around for this is to turn your phone greyscale. Luckily on the iPhone that is quite simple, and you can also setup a toggle button. I found this feature to be quite useful as accessibility on the internet is really quite terrible &#8211; you don&#8217;t know annoyance until you try and submit a form and it tells you there&#8217;s an error but there&#8217;s no obvious indiciation as to what that error is unless you&#8217;re viewing the page in colour.
+The main aim was to make my phone as uninteresting as possible. One of the main tips thrown around for this is to turn your phone greyscale. Luckily on the iPhone that is quite simple, and you can also setup a toggle button. I found this feature to be quite useful as accessibility on the internet is really quite terrible - you don't know annoyance until you try and submit a form and it tells you there's an error but there's no obvious indiciation as to what that error is unless you're viewing the page in colour.
 
-### Enable Greyscale Mode {.wp-block-heading}
+### Enable Greyscale Mode
 
   1. Go to iOS **Settings** > **Accessibility**
   2. Tap on **Display & Text Size**
@@ -24,7 +27,7 @@ The main aim was to make my phone as uninteresting as possible. One of the main 
   4. Toggle the switch to turn on **Color Filters**
   5. Tap on **Grayscale** to select it.
 
-### Setup a Toggle Shortcut {.wp-block-heading}
+### Setup a Toggle Shortcut
 
   1. Go to iOS **Settings** > **Accessibility**
   2. Scroll down to **Accessibility Shortcut** > select **Color Filter**
@@ -44,8 +47,8 @@ If I want to access any other apps I have to go into the library and manually se
 
 So far it has really restricted my use of these apps. The added few steps whenever I pull my phone out has really helped.
 
-### Turning my smart phone into a dumb phone {.wp-block-heading}
+### Turning my smart phone into a dumb phone
 
-I&#8217;ve been using this system for a couple of weeks now, and while it works, I still want to be able to turn off my iPhone completely in the evenings and weekends. Due to needing banking apps to approve payments, and various functions required for my day-to-day job, I need to keep the iPhone. I am going to be looking for alternatives so I can walk away from it.
+I've been using this system for a couple of weeks now, and while it works, I still want to be able to turn off my iPhone completely in the evenings and weekends. Due to needing banking apps to approve payments, and various functions required for my day-to-day job, I need to keep the iPhone. I am going to be looking for alternatives so I can walk away from it.
 
  [1]: https://danbaker.dev/post/cutting-off-from-compulsive-connectivity/
