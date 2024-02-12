@@ -32,24 +32,6 @@ hideMeta: true
 
 
 
-### Computers
-
-  * **Windows PC**<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-accent-3-color">*</mark> - _<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-contrast-2-color">Mainly gaming</mark>_ 
-      * Ryzen 5 3600, 32gb RAM, nvidia 2060
-      * Lives in a [Logic Case 4U Chassis][1]
-  * **MacBook Pro** #1 - _<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-contrast-2-color">Daily driver development machine</mark>_ 
-      * macOS
-      * 2022 13 inch M2, 16gb RAM
-  * **MacBook Pro** #2 - _<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-contrast-2-color">Occasional use, old boy</mark>_ 
-      * Arch Linux
-      * 2015 13 inch i5, 8gb RAM
-  * **Unraid Server**<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-accent-3-color">*</mark> - _<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-contrast-2-color">Docker and VM host, NAS</mark>_ 
-      * <a href="https://unraid.net/" target="_blank" rel="noreferrer noopener">Unraid</a>
-      * i5-12400, 32gb RAM, 8TB storage
-      * Lives in a pretty <a href="https://www.servercase.co.uk/shop/server-cases/rackmount/4u-chassis/4u-standard-chassis-15-x-35-hdd---480mm-short-depth-sc-h4-480/" target="_blank" rel="noreferrer noopener">generic 4U NAS Chassis</a>
-  * **Intel NUC**<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-accent-3-color">*</mark> - _<mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-contrast-2-color">Docker host</mark>_ 
-      * Ubuntu
-      * i5-3259, 16gb RAM
 
 ### Peripherals
 
