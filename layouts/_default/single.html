@@ -48,7 +48,9 @@
       {{- end }}
     </ul>
 
+    {{- if ne .Params.disableCoffee true }}
     {{- partial "buy_me_a_coffee.html" . -}}
+    {{- end }}
 
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
@@ -56,7 +58,6 @@
     {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
     {{- partial "share_icons.html" . -}}
     {{- end }}
-
 
   </footer>
 
