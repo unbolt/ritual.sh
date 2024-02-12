@@ -11,6 +11,8 @@ tags:
 
 Here is the current list of hardware that lives in my server rack, from top to bottom. I am making use of blanking and brush panels at the moment but as I add more to the rack I will move the power supplies to the back and tuck them out of the way. Until then I enjoy this aesthetic.
 
+{{< figure src="/posts/adding-a-double-mini-monitor-panel-to-my-19-server-cabinet/IMG_6367-jpg.webp" >}}
+
 * 1U Blanking panel
 * Unifi Switch
 * [24 port patch panel](https://amzn.to/4bDkbwD)
