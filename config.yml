@@ -73,7 +73,7 @@ params:
   # home-info mode
   homeInfoParams:
     Title: "I’m Dan. I live in the Golden Valley, Herefordshire. I work remotely as a software engineer, team leader, and system architect. "
-    Content: "I like to talk about engineering, networking, and system design. There’s a higher I may also talk about many of my other interests – photography, digital minimalism, lego, gaming and game dev, coffee, or the great outdoors."
+    Content: "I like to talk about engineering, networking, and system design. There’s a higher change I will also talk about many of my other interests – photography, digital minimalism, lego, gaming and game dev, coffee, or the great outdoors."
 
   socialIcons:
     - name: instagram
@@ -82,6 +82,8 @@ params:
       url: "https://dice.camp/@ritual"
     - name: github
       url: "https://github.com/unbolt"
+    - name: lastfm
+      url: "https://www.last.fm/user/ritualplays"
 
   analytics:
     google:

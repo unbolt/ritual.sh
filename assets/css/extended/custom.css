@@ -18,3 +18,31 @@ article a[href^="https://"]:not(article .social-icons a, .paginav a, .buy-me-a-c
     background-size: 100% 2px;
     background-repeat: repeat-x;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 14px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+.photo {
+    flex: 25%;
+
+    img {
+        border-radius: var(--radius);
+    
+    }
+}
+
+.intro-text {
+    flex: 75%;
+}

@@ -1,0 +1,28 @@
+.nowplayingcard {
+    margin: auto;
+    padding: 14px;
+}
+
+.nowplayingcontainer-inner {
+    transition: 0.3s;
+    display: inline-flex;
+
+    .trackInfo {
+        width: 100%;
+    }
+
+    #album {
+        display: none;
+    }
+}
+
+img#trackart {
+    transition: 0.3s;
+    width: 60px;
+    height: 50px;
+    padding-left: 10px;
+}
+
+img#trackart[src=""] {
+    display: none;
+}
