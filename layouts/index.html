@@ -155,85 +155,107 @@
 <div class="desk-item mouse"></div>
 <div class="desk-item coffee-mug"></div>
 
-<!-- VU Meter on desk -->
-<div class="vu-meter">
-  <div class="vu-meter-body">
-    <div class="vu-meter-screen">
-      <div class="vu-bars crt">
-        <div class="vu-bar" style="--delay: 0s; --height: 45%"></div>
-        <div class="vu-bar" style="--delay: 0.1s; --height: 65%"></div>
-        <div class="vu-bar" style="--delay: 0.2s; --height: 80%"></div>
-        <div class="vu-bar" style="--delay: 0.3s; --height: 55%"></div>
-        <div class="vu-bar" style="--delay: 0.4s; --height: 90%"></div>
-        <div class="vu-bar" style="--delay: 0.5s; --height: 70%"></div>
-        <div class="vu-bar" style="--delay: 0.6s; --height: 85%"></div>
-        <div class="vu-bar" style="--delay: 0.7s; --height: 60%"></div>
-        <div class="vu-bar" style="--delay: 0.8s; --height: 75%"></div>
-        <div class="vu-bar" style="--delay: 0.9s; --height: 50%"></div>
-        <div class="vu-bar" style="--delay: 1s; --height: 65%"></div>
-        <div class="vu-bar" style="--delay: 1.1s; --height: 40%"></div>
-        <div class="vu-bar" style="--delay: 1.2s; --height: 55%"></div>
-        <div class="vu-bar" style="--delay: 1.3s; --height: 70%"></div>
-        <div class="vu-bar" style="--delay: 1.4s; --height: 45%"></div>
-        <div class="vu-bar" style="--delay: 1.5s; --height: 35%"></div>
+<!-- MUSICAL STUFF -->
+<a href="/music/">
+  <div class="music">
+    <div class="music-text">MUSIC&nbsp;&amp;&nbsp;AUDIO&nbsp;GEAR</div>
+
+    <!-- iPod group - container keeps all elements positioned relative to each other -->
+    <div class="ipod-group">
+      <div class="ipod">
+        <div class="ipod-wheel"></div>
       </div>
-      <!-- Peak indicator line -->
-      <div class="vu-peak-line"></div>
+
+      <!-- Earbud cables within the group container -->
+      <svg class="ipod-cables" viewBox="0 0 150 100" style="overflow: visible">
+        <defs>
+          <linearGradient
+            id="cableGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <stop offset="0%" style="stop-color: #6b4fb3" />
+            <stop offset="100%" style="stop-color: #4169e1" />
+          </linearGradient>
+        </defs>
+        <!-- Main cable: plugs in at top RIGHT of iPod, makes a big loop to the LEFT, then hangs down -->
+        <!-- Start at x=85 (top right), arc way left to x=30, then come back down on the left side -->
+        <path
+          d="M 85,3 C 85,-12 75,-22 55,-22 C 35,-22 25,-15 25,0 C 25,15 28,35 32,50 L 35,65"
+          stroke="url(#cableGradient)"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+        />
+        <!-- Left branch to left earbud -->
+        <path
+          d="M 35,65 C 28,72 20,82 5,88"
+          stroke="url(#cableGradient)"
+          stroke-width="1.8"
+          fill="none"
+          stroke-linecap="round"
+        />
+        <!-- Right branch to right earbud -->
+        <path
+          d="M 35,65 C 55,73 95,82 125,83"
+          stroke="url(#cableGradient)"
+          stroke-width="1.8"
+          fill="none"
+          stroke-linecap="round"
+        />
+      </svg>
+
+      <div class="earbud earbud-left"></div>
+      <div class="earbud earbud-right"></div>
     </div>
-    <!-- VU Meter LEDs -->
-    <div class="vu-leds">
-      <div class="vu-led green"></div>
-      <div class="vu-led green"></div>
-      <div class="vu-led yellow"></div>
-      <div class="vu-led red"></div>
+
+    <!-- VU Meter on desk -->
+    <div class="vu-meter">
+      <div class="vu-meter-body">
+        <div class="vu-meter-screen">
+          <div class="vu-bars crt">
+            <div class="vu-bar" style="--delay: 0s; --height: 45%"></div>
+            <div class="vu-bar" style="--delay: 0.1s; --height: 65%"></div>
+            <div class="vu-bar" style="--delay: 0.2s; --height: 80%"></div>
+            <div class="vu-bar" style="--delay: 0.3s; --height: 55%"></div>
+            <div class="vu-bar" style="--delay: 0.4s; --height: 90%"></div>
+            <div class="vu-bar" style="--delay: 0.5s; --height: 70%"></div>
+            <div class="vu-bar" style="--delay: 0.6s; --height: 85%"></div>
+            <div class="vu-bar" style="--delay: 0.7s; --height: 60%"></div>
+            <div class="vu-bar" style="--delay: 0.8s; --height: 75%"></div>
+            <div class="vu-bar" style="--delay: 0.9s; --height: 50%"></div>
+            <div class="vu-bar" style="--delay: 1s; --height: 65%"></div>
+            <div class="vu-bar" style="--delay: 1.1s; --height: 40%"></div>
+            <div class="vu-bar" style="--delay: 1.2s; --height: 55%"></div>
+            <div class="vu-bar" style="--delay: 1.3s; --height: 70%"></div>
+            <div class="vu-bar" style="--delay: 1.4s; --height: 45%"></div>
+            <div class="vu-bar" style="--delay: 1.5s; --height: 35%"></div>
+          </div>
+          <!-- Peak indicator line -->
+          <div class="vu-peak-line"></div>
+        </div>
+        <!-- VU Meter LEDs -->
+        <div class="vu-leds">
+          <div class="vu-led green"></div>
+          <div class="vu-led green"></div>
+          <div class="vu-led yellow"></div>
+          <div class="vu-led red"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="note">♪</div>
+      <div class="note">♫</div>
+      <div class="note">♪</div>
+      <div class="note">♫</div>
+      <div class="note">♪</div>
+      <div class="note">♫</div>
     </div>
   </div>
-</div>
-
-<!-- iPod group - container keeps all elements positioned relative to each other -->
-<div class="ipod-group">
-  <div class="ipod">
-    <div class="ipod-wheel"></div>
-  </div>
-
-  <!-- Earbud cables within the group container -->
-  <svg class="ipod-cables" viewBox="0 0 150 100" style="overflow: visible">
-    <defs>
-      <linearGradient id="cableGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color: #6b4fb3" />
-        <stop offset="100%" style="stop-color: #4169e1" />
-      </linearGradient>
-    </defs>
-    <!-- Main cable: plugs in at top RIGHT of iPod, makes a big loop to the LEFT, then hangs down -->
-    <!-- Start at x=85 (top right), arc way left to x=30, then come back down on the left side -->
-    <path
-      d="M 85,3 C 85,-12 75,-22 55,-22 C 35,-22 25,-15 25,0 C 25,15 28,35 32,50 L 35,65"
-      stroke="url(#cableGradient)"
-      stroke-width="2.5"
-      fill="none"
-      stroke-linecap="round"
-    />
-    <!-- Left branch to left earbud -->
-    <path
-      d="M 35,65 C 28,72 20,82 5,88"
-      stroke="url(#cableGradient)"
-      stroke-width="1.8"
-      fill="none"
-      stroke-linecap="round"
-    />
-    <!-- Right branch to right earbud -->
-    <path
-      d="M 35,65 C 55,73 95,82 125,83"
-      stroke="url(#cableGradient)"
-      stroke-width="1.8"
-      fill="none"
-      stroke-linecap="round"
-    />
-  </svg>
-
-  <div class="earbud earbud-left"></div>
-  <div class="earbud earbud-right"></div>
-</div>
+</a>
 
 <!-- Widgets and gadgets -->
 <div class="widget router"></div>

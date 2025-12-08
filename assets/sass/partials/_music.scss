@@ -1,0 +1,279 @@
+.music {
+  position: absolute;
+  bottom: 15%;
+  right: 27%;
+  cursor: pointer;
+}
+
+.music-text {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: -150px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 8000;
+  transform: rotate(-20deg);
+  border: 1px solid #0f0;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  background-color: black;
+  opacity: 0;
+}
+
+.music:hover .music-text {
+  opacity: 1;
+}
+
+/* Notes container */
+.notes {
+  position: absolute;
+  bottom: 30%;
+  left: -100px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.note {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+/* Only animate when hovering over the poster */
+.music:hover .note {
+  animation: floatOut 3s ease-out infinite;
+}
+
+.music:hover .note:nth-child(1) {
+  animation-delay: 0s;
+  color: #ffd700;
+}
+
+.music:hover .note:nth-child(2) {
+  animation-delay: 0.5s;
+  color: #fff;
+}
+
+.music:hover .note:nth-child(3) {
+  animation-delay: 1s;
+  color: #ffd700;
+}
+
+.music:hover .note:nth-child(4) {
+  animation-delay: 1.5s;
+  color: #fff;
+}
+
+.music:hover .note:nth-child(5) {
+  animation-delay: 2s;
+  color: #ffd700;
+}
+
+.music:hover .note:nth-child(6) {
+  animation-delay: 2.5s;
+  color: #fff;
+}
+
+@keyframes floatOut {
+  0% {
+    bottom: 0;
+    left: 50%;
+    opacity: 0;
+    transform: translateX(-50%) rotate(0deg) scale(0.5);
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 300px;
+    left: calc(50% + var(--offset-x));
+    opacity: 0;
+    transform: translateX(-50%) rotate(var(--rotation)) scale(1);
+  }
+}
+
+/* Different trajectories for each note */
+.note:nth-child(1) {
+  --offset-x: -80px;
+  --rotation: -30deg;
+}
+
+.note:nth-child(2) {
+  --offset-x: 80px;
+  --rotation: 30deg;
+}
+
+.note:nth-child(3) {
+  --offset-x: -120px;
+  --rotation: -45deg;
+}
+
+.note:nth-child(4) {
+  --offset-x: 120px;
+  --rotation: 45deg;
+}
+
+.note:nth-child(5) {
+  --offset-x: -40px;
+  --rotation: -15deg;
+}
+
+.note:nth-child(6) {
+  --offset-x: 40px;
+  --rotation: 15deg;
+}
+
+/* iPod group container - maintains relative positioning */
+.ipod-group {
+  position: absolute;
+  left: -200px;
+  width: 150px;
+  height: 100px;
+  z-index: 15;
+}
+
+/* iPod 5th Generation */
+.ipod {
+  position: absolute;
+  top: 0;
+  left: 52px;
+  width: 45px;
+  height: 70px;
+  background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+  border-radius: 8px;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.2);
+  transform: rotate(-8deg);
+  z-index: 2;
+}
+
+.ipod::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 22px;
+  background: linear-gradient(180deg, #1a1a2a 0%, #0a0a1a 100%);
+  border-radius: 2px;
+  box-shadow: inset 0 0 5px rgba(0, 100, 150, 0.3);
+}
+
+.ipod-wheel {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 30px;
+  background: radial-gradient(
+    circle at center,
+    #fff 0%,
+    #fff 35%,
+    #ddd 35%,
+    #ccc 100%
+  );
+  border-radius: 50%;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ipod-wheel::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #e8e8e8;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Earbuds/IEMs - redesigned to look like in-ear monitors */
+.earbud {
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  background: linear-gradient(135deg, #2a2a3a 0%, #1a1a2a 50%, #0a0a1a 100%);
+  border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+  z-index: 3;
+}
+
+/* IEM tips */
+.earbud::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(
+    circle,
+    rgba(200, 200, 200, 0.3),
+    rgba(100, 100, 100, 0.2)
+  );
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* IEM nozzle/sound bore */
+.earbud::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 5px;
+  background: linear-gradient(180deg, #444 0%, #222 100%);
+  border-radius: 2px;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.earbud-left {
+  top: 85px;
+  left: 0px;
+  transform: rotate(-25deg);
+}
+
+.earbud-right {
+  top: 80px;
+  left: 120px;
+  transform: rotate(35deg);
+}
+
+/* Cable SVG positioned in container */
+.ipod-cables {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Purple-blue gradient for cable */
+.ipod-cables defs stop.cable-start {
+  stop-color: #6b4fb3;
+}
+
+.ipod-cables defs stop.cable-end {
+  stop-color: #4169e1;
+}
