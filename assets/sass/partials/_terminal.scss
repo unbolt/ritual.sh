@@ -1,0 +1,99 @@
+#terminal {
+  padding: 3px;
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.output-line {
+  margin: 2px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.boot-line {
+  opacity: 0;
+  animation: fadeIn 0.1s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.prompt {
+  color: #00ff00;
+  margin-right: 8px;
+}
+
+#input {
+  background: transparent;
+  border: none;
+  color: #00ff00;
+  font-family: monospace;
+  font-size: 12px;
+  outline: none;
+  flex: 1;
+  caret-color: #00ff00;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background: #00ff00;
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.error {
+  color: #ff4444;
+}
+
+.success {
+  color: #44ff44;
+}
+
+.info {
+  color: #00ffff;
+}
+
+.warning {
+  color: #ff9900;
+}
+
+#terminal::-webkit-scrollbar {
+  width: 10px;
+}
+
+#terminal::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+#terminal::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,0 +1,401 @@
+{{ define "main" }}
+<div class="wall"></div>
+
+<!-- Neon sign above monitor -->
+<div class="neon-sign">
+  <div class="neon-text">ritual.sh</div>
+</div>
+
+<!-- Sticky notes -->
+<div class="sticky-note note1">fix bugs</div>
+<div class="sticky-note note2">pwd:<br />puppies</div>
+<div class="sticky-note note3">finish<br />coffee</div>
+<div class="sticky-note note4">CALL<br />WIFE</div>
+
+<!-- Papers pinned to wall -->
+<div class="wall-paper paper1"></div>
+<div class="wall-paper paper2"></div>
+
+<!-- X-Files "I want to believe" poster -->
+<div class="xfiles-poster">
+  <div class="xfiles-content">
+    <div class="ufo-illustration">
+      <div class="ufo-dome"></div>
+      <div class="ufo-body">
+        <div class="ufo-lights">
+          <div class="ufo-light"></div>
+          <div class="ufo-light"></div>
+          <div class="ufo-light"></div>
+          <div class="ufo-light"></div>
+        </div>
+      </div>
+      <div class="light-beam"></div>
+    </div>
+    <div class="believe-text">I WANT TO<br />BELIEVE</div>
+  </div>
+</div>
+
+<!-- Poster on wall -->
+<div class="poster">
+  <div class="poster-image" id="posterImage">
+    <script src="/js/nowplaying.js"></script>
+
+    <div class="nowplayingcard">
+      <div class="nowplayingcontainer-inner">
+        <img id="trackart" src="" />
+      </div>
+    </div>
+  </div>
+  <div class="now-playing-note">Recently Played</div>
+  <div class="now-playing-artist">
+    <div class="trackInfo">
+      <span id="artist"></span>
+      <a id="tracktitle" style="display: none"></a>
+      <a id="album" style="display: none"></a>
+    </div>
+  </div>
+</div>
+
+<script>
+  setInterval(
+    getLastTrack("ritualplays", "3a4fef48fecc593d25e0f9a40df1fefe"),
+    10 * 1000,
+  );
+</script>
+
+<!-- Desk -->
+<div class="desk"></div>
+
+<!-- Curved cables on desk using SVG -->
+<svg
+  class="cable-svg"
+  style="position: absolute; bottom: 8%; left: 15%; width: 200px; height: 150px"
+>
+  <path
+    d="M 20 10 Q 40 60, 80 120"
+    stroke="#222"
+    stroke-width="3"
+    fill="none"
+  />
+</svg>
+<svg
+  class="cable-svg"
+  style="
+    position: absolute;
+    bottom: 8%;
+    right: 20%;
+    width: 180px;
+    height: 140px;
+  "
+>
+  <path
+    d="M 150 20 Q 100 70, 40 130"
+    stroke="#1a1a1a"
+    stroke-width="3"
+    fill="none"
+  />
+</svg>
+<svg
+  class="cable-svg"
+  style="position: absolute; bottom: 8%; left: 28%; width: 220px; height: 160px"
+>
+  <path
+    d="M 10 30 Q 80 40, 160 140"
+    stroke="#252525"
+    stroke-width="2.5"
+    fill="none"
+  />
+</svg>
+<svg
+  class="cable-svg"
+  style="
+    position: absolute;
+    bottom: 8%;
+    right: 35%;
+    width: 150px;
+    height: 120px;
+  "
+>
+  <path
+    d="M 130 15 Q 70 50, 20 110"
+    stroke="#2a2a2a"
+    stroke-width="2.5"
+    fill="none"
+  />
+</svg>
+<svg
+  class="cable-svg"
+  style="position: absolute; bottom: 8%; left: 42%; width: 160px; height: 130px"
+>
+  <path
+    d="M 30 20 Q 60 80, 120 125"
+    stroke="#1f1f1f"
+    stroke-width="2"
+    fill="none"
+  />
+</svg>
+
+<div class="monitor-stand-small"></div>
+
+<!-- Desk monitor -->
+<div class="secondary-screen desk-monitor">
+  <div class="screen-display large crt">
+    SYSTEM LOAD<br />
+    CPU: 67%<br />
+    RAM: 4.2/8GB<br />
+    NET: 2.4MB/s<br />
+    DISK: 89%<br />
+    <span class="cursor-blink">_</span>
+  </div>
+  <div class="monitor-stand-small"></div>
+</div>
+
+<!-- Desk clutter -->
+<div class="desk-item keyboard"></div>
+<div class="desk-item mouse"></div>
+<div class="desk-item coffee-mug"></div>
+
+<!-- VU Meter on desk -->
+<div class="vu-meter">
+  <div class="vu-meter-body">
+    <div class="vu-meter-screen">
+      <div class="vu-bars crt">
+        <div class="vu-bar" style="--delay: 0s; --height: 45%"></div>
+        <div class="vu-bar" style="--delay: 0.1s; --height: 65%"></div>
+        <div class="vu-bar" style="--delay: 0.2s; --height: 80%"></div>
+        <div class="vu-bar" style="--delay: 0.3s; --height: 55%"></div>
+        <div class="vu-bar" style="--delay: 0.4s; --height: 90%"></div>
+        <div class="vu-bar" style="--delay: 0.5s; --height: 70%"></div>
+        <div class="vu-bar" style="--delay: 0.6s; --height: 85%"></div>
+        <div class="vu-bar" style="--delay: 0.7s; --height: 60%"></div>
+        <div class="vu-bar" style="--delay: 0.8s; --height: 75%"></div>
+        <div class="vu-bar" style="--delay: 0.9s; --height: 50%"></div>
+        <div class="vu-bar" style="--delay: 1s; --height: 65%"></div>
+        <div class="vu-bar" style="--delay: 1.1s; --height: 40%"></div>
+        <div class="vu-bar" style="--delay: 1.2s; --height: 55%"></div>
+        <div class="vu-bar" style="--delay: 1.3s; --height: 70%"></div>
+        <div class="vu-bar" style="--delay: 1.4s; --height: 45%"></div>
+        <div class="vu-bar" style="--delay: 1.5s; --height: 35%"></div>
+      </div>
+      <!-- Peak indicator line -->
+      <div class="vu-peak-line"></div>
+    </div>
+    <!-- VU Meter LEDs -->
+    <div class="vu-leds">
+      <div class="vu-led green"></div>
+      <div class="vu-led green"></div>
+      <div class="vu-led yellow"></div>
+      <div class="vu-led red"></div>
+    </div>
+  </div>
+</div>
+
+<!-- iPod group - container keeps all elements positioned relative to each other -->
+<div class="ipod-group">
+  <div class="ipod">
+    <div class="ipod-wheel"></div>
+  </div>
+
+  <!-- Earbud cables within the group container -->
+  <svg class="ipod-cables" viewBox="0 0 150 100" style="overflow: visible">
+    <defs>
+      <linearGradient id="cableGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color: #6b4fb3" />
+        <stop offset="100%" style="stop-color: #4169e1" />
+      </linearGradient>
+    </defs>
+    <!-- Main cable: plugs in at top RIGHT of iPod, makes a big loop to the LEFT, then hangs down -->
+    <!-- Start at x=85 (top right), arc way left to x=30, then come back down on the left side -->
+    <path
+      d="M 85,3 C 85,-12 75,-22 55,-22 C 35,-22 25,-15 25,0 C 25,15 28,35 32,50 L 35,65"
+      stroke="url(#cableGradient)"
+      stroke-width="2.5"
+      fill="none"
+      stroke-linecap="round"
+    />
+    <!-- Left branch to left earbud -->
+    <path
+      d="M 35,65 C 28,72 20,82 5,88"
+      stroke="url(#cableGradient)"
+      stroke-width="1.8"
+      fill="none"
+      stroke-linecap="round"
+    />
+    <!-- Right branch to right earbud -->
+    <path
+      d="M 35,65 C 55,73 95,82 125,83"
+      stroke="url(#cableGradient)"
+      stroke-width="1.8"
+      fill="none"
+      stroke-linecap="round"
+    />
+  </svg>
+
+  <div class="earbud earbud-left"></div>
+  <div class="earbud earbud-right"></div>
+</div>
+
+<!-- Widgets and gadgets -->
+<div class="widget router"></div>
+<div class="widget hard-drive"></div>
+
+{{ partial "lavalamp.html" . }}
+
+<!-- CRT Monitor -->
+<div class="crt-container">
+  <div class="crt-monitor">
+    <div class="crt-screen">
+      <div class="content crt">
+        <div id="terminal">
+          <div id="output"></div>
+          <div id="input-container" class="input-line hidden">
+            <span class="prompt">></span>
+            <input
+              type="text"
+              id="input"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="monitor-stand">
+    <div class="stand-neck"></div>
+    <div class="stand-base"></div>
+  </div>
+
+  <!-- Wall-mounted monitors -->
+  <div class="secondary-screen wall-monitor-1">
+    <div class="screen-display crt">
+      > netstat -an<br />
+      <pre>
+tcp   0   0 127.0.0.1:33842      0.0.0.0:*            LISTEN     
+tcp   0   0 127.0.0.1:41267      0.0.0.0:*            LISTEN     
+tcp   0   0 127.0.0.54:53        0.0.0.0:*            LISTEN     
+tcp   0   0 127.0.0.1:52918      127.0.0.1:38471      ESTABLISHED
+tcp   0   0 192.168.1.147:44321  52.143.67.201:443    ESTABLISHED
+tcp   0   0 192.168.1.147:39854  104.26.15.88:80      TIME_WAIT  
+tcp   0   0 127.0.0.1:38471      127.0.0.1:52918      ESTABLISHED
+tcp   0   0 127.0.0.1:56732      127.0.0.1:8080       ESTABLISHED
+tcp   0   0 192.168.1.147:41209  13.107.42.16:443     ESTABLISHED
+tcp   0   0 127.0.0.1:49563      127.0.0.1:8080       TIME_WAIT
+
+Proto RefCnt Flags  Type    State      I-Node Path
+unix  3      [ ]    STREAM  CONNECTED  50896  /run/user/1000/bus
+</pre
+      >
+    </div>
+  </div>
+
+  <div class="secondary-screen wall-monitor-2">
+    <div class="screen-display tiny cyan crt">
+      <div class="scroll-text">
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+        [PKT] 172.16.0.1:22<br />
+        [PKT] 192.168.1.1:443<br />
+        [PKT] 10.0.0.15:8080<br />
+      </div>
+    </div>
+  </div>
+
+  <div class="secondary-screen wall-monitor-3">
+    <div class="screen-display crt">
+      PING 8.8.8.8<br />
+      64 bytes: 12ms<br />
+      64 bytes: 11ms<br />
+      64 bytes: 13ms<br />
+      <span class="cursor-blink">_</span>
+    </div>
+  </div>
+
+  <div class="secondary-screen wall-monitor-4">
+    <div class="screen-display tiny amber crt">
+      > tail -f /var/log<br />
+      [INFO] Process OK<br />
+      [WARN] High load detected - time for coffee break<br />
+      [INFO] Connected to database (it's in a relationship now)<br />
+      [ERROR] 404: Motivation not found<br />
+      [WARN] Firewall detected actual fire, calling emergency services<br />
+      [INFO] Successfully hacked into mainframe (jk it's just localhost)<br />
+      [ERROR] Keyboard not found. Press F1 to continue.<br />
+      [WARN] Too many open tabs. Browser having existential crisis.<br />
+      [INFO] Ping 127.0.0.1 - there's no place like home<br />
+      [ERROR] SQL injection attempt detected. Nice try, Bobby Tables.<br />
+      <span class="cursor-blink">_</span>
+    </div>
+  </div>
+</div>
+{{ end }}

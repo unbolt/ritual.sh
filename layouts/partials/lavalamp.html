@@ -1,0 +1,25 @@
+<div class="container">
+  <svg style="position: absolute; width: 0; height: 0">
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+        <feColorMatrix
+          in="blur"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+          result="goo"
+        />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
+  <a href="/about/">
+    <div class="lava-lamp-container">
+      <div class="lamp-cap"></div>
+      <div class="lava-lamp" id="lavaLamp">
+        <div class="lamp-text">ABOUT</div>
+      </div>
+      <div class="lamp-base"></div>
+    </div>
+  </a>
+</div>

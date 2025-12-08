@@ -1,0 +1,1762 @@
+@import "partials/global-styles";
+
+@import "partials/vu-meter";
+@import "partials/terminal";
+@import "partials/now-playing";
+@import "partials/lavalamp";
+
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Courier New", monospace;
+  background: #1a1a1a;
+  position: relative;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.27861;
+  }
+  5% {
+    opacity: 0.34769;
+  }
+  10% {
+    opacity: 0.23604;
+  }
+  15% {
+    opacity: 0.90626;
+  }
+  20% {
+    opacity: 0.18128;
+  }
+  25% {
+    opacity: 0.83891;
+  }
+  30% {
+    opacity: 0.65583;
+  }
+  35% {
+    opacity: 0.67807;
+  }
+  40% {
+    opacity: 0.26559;
+  }
+  45% {
+    opacity: 0.84693;
+  }
+  50% {
+    opacity: 0.96019;
+  }
+  55% {
+    opacity: 0.08594;
+  }
+  60% {
+    opacity: 0.20313;
+  }
+  65% {
+    opacity: 0.71988;
+  }
+  70% {
+    opacity: 0.53455;
+  }
+  75% {
+    opacity: 0.37288;
+  }
+  80% {
+    opacity: 0.71428;
+  }
+  85% {
+    opacity: 0.70419;
+  }
+  90% {
+    opacity: 0.7003;
+  }
+  95% {
+    opacity: 0.36108;
+  }
+  100% {
+    opacity: 0.24387;
+  }
+}
+@keyframes textShadow {
+  0% {
+    text-shadow:
+      0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
+      -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  5% {
+    text-shadow:
+      2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5),
+      -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  10% {
+    text-shadow:
+      0.02956275843481219px 0 1px rgba(0, 30, 255, 0.5),
+      -0.02956275843481219px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  15% {
+    text-shadow:
+      0.40218538552878136px 0 1px rgba(0, 30, 255, 0.5),
+      -0.40218538552878136px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  20% {
+    text-shadow:
+      3.4794037899852017px 0 1px rgba(0, 30, 255, 0.5),
+      -3.4794037899852017px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  25% {
+    text-shadow:
+      1.6125630401149584px 0 1px rgba(0, 30, 255, 0.5),
+      -1.6125630401149584px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  30% {
+    text-shadow:
+      0.7015590085143956px 0 1px rgba(0, 30, 255, 0.5),
+      -0.7015590085143956px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  35% {
+    text-shadow:
+      3.896914047650351px 0 1px rgba(0, 30, 255, 0.5),
+      -3.896914047650351px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  40% {
+    text-shadow:
+      3.870905614848819px 0 1px rgba(0, 30, 255, 0.5),
+      -3.870905614848819px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  45% {
+    text-shadow:
+      2.231056963361899px 0 1px rgba(0, 30, 255, 0.5),
+      -2.231056963361899px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  50% {
+    text-shadow:
+      0.08084290417898504px 0 1px rgba(0, 30, 255, 0.5),
+      -0.08084290417898504px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  55% {
+    text-shadow:
+      2.3758461067427543px 0 1px rgba(0, 30, 255, 0.5),
+      -2.3758461067427543px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  60% {
+    text-shadow:
+      2.202193051050636px 0 1px rgba(0, 30, 255, 0.5),
+      -2.202193051050636px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  65% {
+    text-shadow:
+      2.8638780614874975px 0 1px rgba(0, 30, 255, 0.5),
+      -2.8638780614874975px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  70% {
+    text-shadow:
+      0.48874025155497314px 0 1px rgba(0, 30, 255, 0.5),
+      -0.48874025155497314px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  75% {
+    text-shadow:
+      1.8948491305757957px 0 1px rgba(0, 30, 255, 0.5),
+      -1.8948491305757957px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  80% {
+    text-shadow:
+      0.0833037308038857px 0 1px rgba(0, 30, 255, 0.5),
+      -0.0833037308038857px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  85% {
+    text-shadow:
+      0.09769827255241735px 0 1px rgba(0, 30, 255, 0.5),
+      -0.09769827255241735px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  90% {
+    text-shadow:
+      3.443339761481782px 0 1px rgba(0, 30, 255, 0.5),
+      -3.443339761481782px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  95% {
+    text-shadow:
+      2.1841838852799786px 0 1px rgba(0, 30, 255, 0.5),
+      -2.1841838852799786px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+  100% {
+    text-shadow:
+      2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5),
+      -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3),
+      0 0 3px;
+  }
+}
+.crt::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+.crt::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: 2;
+  background-size:
+    100% 2px,
+    3px 100%;
+  pointer-events: none;
+}
+.crt {
+  animation: textShadow 1.6s infinite;
+  background: black;
+  color: greenyellow;
+  font-family: monospace;
+}
+
+/* Brick wall background */
+.wall {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 49%,
+      #0a0a0a 49%,
+      #0a0a0a 51%,
+      transparent 51%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 0%,
+      transparent 49%,
+      #0a0a0a 49%,
+      #0a0a0a 51%,
+      transparent 51%
+    );
+  background-size: 120px 60px;
+  background-position:
+    0 0,
+    60px 30px;
+}
+
+.wall::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #0f0a06 0px,
+      #1a110a 30px,
+      #0f0a06 30px,
+      #0f0a06 60px
+    ),
+    /* Dirt and grime texture */
+    radial-gradient(
+        ellipse at 15% 20%,
+        rgba(20, 15, 10, 0.4) 0%,
+        transparent 30%
+      ),
+    radial-gradient(
+      ellipse at 85% 40%,
+      rgba(15, 10, 5, 0.5) 0%,
+      transparent 25%
+    ),
+    radial-gradient(
+      ellipse at 40% 80%,
+      rgba(25, 15, 10, 0.3) 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 70% 60%,
+      rgba(10, 8, 5, 0.6) 0%,
+      transparent 20%
+    ),
+    /* Stains and discoloration */
+    radial-gradient(
+        circle at 25% 50%,
+        rgba(40, 25, 15, 0.2) 0%,
+        transparent 40%
+      ),
+    radial-gradient(
+      circle at 60% 30%,
+      rgba(35, 20, 10, 0.3) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(30, 18, 10, 0.25) 0%,
+      transparent 35%
+    );
+  opacity: 0.95;
+}
+
+.wall::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+                /* More aggressive dark patches */
+    radial-gradient(circle at 10% 15%, rgba(10, 5, 0, 0.5) 0%, transparent 25%),
+    radial-gradient(circle at 30% 70%, rgba(15, 8, 2, 0.4) 0%, transparent 30%),
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(12, 6, 0, 0.45) 0%,
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(18, 10, 3, 0.35) 0%,
+      transparent 35%
+    ),
+    radial-gradient(circle at 95% 50%, rgba(8, 4, 0, 0.5) 0%, transparent 22%),
+    /* Noise/texture overlay */
+    repeating-linear-gradient(
+        45deg,
+        transparent 0px,
+        rgba(0, 0, 0, 0.03) 1px,
+        transparent 2px,
+        transparent 4px
+      );
+}
+
+/* Post-it notes and papers on wall */
+.sticky-note {
+  font-family: "Caveat", cursive;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #ffd966;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  font-size: 12px;
+  padding: 5px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.note1 {
+  top: 19%;
+  left: 66%;
+  transform: rotate(-8deg);
+}
+
+.note2 {
+  top: 20%;
+  left: 32%;
+  transform: rotate(5deg);
+  background: #ff9999;
+}
+
+.note3 {
+  top: 12%;
+  left: 38%;
+  transform: rotate(-3deg);
+  background: #99ff99;
+}
+
+.note4 {
+  top: 43%;
+  left: 18%;
+  transform: rotate(12deg);
+  background: #99ccff;
+}
+
+/* Poster on wall */
+.poster {
+  position: absolute;
+  top: 10%;
+  right: 8%;
+  width: 200px;
+  height: 200px;
+  background: #000;
+  border: 8px solid #1a1a1a;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  transform: rotate(-2deg);
+  z-index: 1;
+}
+
+.poster-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%23222" width="200" height="200"/><text x="50%" y="50%" fill="%23666" font-size="20" text-anchor="middle" dominant-baseline="middle" font-family="monospace">NOW PLAYING</text></svg>');
+  overflow: hidden;
+}
+
+/* Now Playing post-it note */
+.now-playing-note,
+.now-playing-artist {
+  position: absolute;
+  bottom: 145px;
+  right: 150px;
+  width: 60px;
+  height: 60px;
+  background: #ffd966;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  transform: rotate(8deg);
+  font-size: 14px;
+  font-family: "Caveat", cursive;
+  padding: 8px;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  /* Word wrapping */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+.now-playing-artist {
+  bottom: -15px;
+  right: -20px;
+  transform: rotate(-8deg);
+}
+
+/* X-Files "I want to believe" poster */
+.xfiles-poster {
+  position: absolute;
+  top: 15%;
+  left: 7%;
+  width: 220px;
+  height: 300px;
+  background: #000;
+  border: 10px solid #2a2a2a;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6);
+  transform: rotate(1.5deg);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.xfiles-content {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #001a33 0%, #000814 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+.ufo-illustration {
+  width: 140px;
+  height: 80px;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.ufo-body {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(180deg, #444 0%, #222 50%, #111 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: relative;
+  box-shadow: 0 -5px 20px rgba(100, 150, 255, 0.6);
+}
+
+.ufo-dome {
+  width: 50px;
+  height: 25px;
+  background: linear-gradient(
+    180deg,
+    rgba(100, 150, 200, 0.4) 0%,
+    rgba(50, 100, 150, 0.2) 100%
+  );
+  border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ufo-lights {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 20px;
+}
+
+.ufo-light {
+  width: 8px;
+  height: 8px;
+  background: #ffeb3b;
+  border-radius: 50%;
+  box-shadow:
+    0 0 10px #ffeb3b,
+    0 0 20px #ffeb3b;
+  animation: ufo-blink 2s infinite;
+}
+
+.ufo-light:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.ufo-light:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.ufo-light:nth-child(4) {
+  animation-delay: 1.2s;
+}
+
+@keyframes ufo-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.light-beam {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 50px;
+  background: linear-gradient(
+    180deg,
+    rgba(150, 200, 255, 0.4) 0%,
+    transparent 100%
+  );
+  clip-path: polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%);
+  animation: beam-pulse 3s ease-in-out infinite;
+}
+
+@keyframes beam-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.believe-text {
+  color: #fff;
+  font-family: "Courier New", monospace;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  margin-top: 20px;
+}
+
+/* CRT Monitor container */
+.crt-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* CRT Monitor bezel */
+.crt-monitor {
+  width: 650px;
+  height: 500px;
+  background: linear-gradient(145deg, #e8e0c8, #c4b89a);
+  border-radius: 12px;
+  padding: 25px 30px 45px 30px;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Brand logo on bezel */
+.crt-monitor::before {
+  content: "ARASAKA";
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #666;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Power indicator LED */
+.crt-monitor::after {
+  content: "";
+  position: absolute;
+  bottom: 15px;
+  right: 40px;
+  width: 8px;
+  height: 8px;
+  background: #0f0;
+  border-radius: 50%;
+  box-shadow:
+    0 0 10px #0f0,
+    0 0 20px #0f0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow:
+      0 0 10px #0f0,
+      0 0 20px #0f0;
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow:
+      0 0 5px #0f0,
+      0 0 10px #0f0;
+  }
+}
+
+/* Monitor stand */
+.monitor-stand {
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 80px;
+  z-index: -1;
+}
+
+/* Stand neck */
+.stand-neck {
+  width: 40px;
+  height: 50px;
+  background: linear-gradient(90deg, #b8ac90, #a89978);
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow:
+    inset -2px 0 5px rgba(0, 0, 0, 0.3),
+    2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Stand base */
+.stand-base {
+  width: 120px;
+  height: 30px;
+  background: linear-gradient(180deg, #a89978, #8a7d62);
+  border-radius: 50% 50% 5px 5px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.4),
+    inset 0 2px 3px rgba(255, 255, 255, 0.2);
+  position: relative;
+  top: 0;
+}
+
+.stand-base::before {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+/* CRT Screen */
+.crt-screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 80px rgba(0, 255, 100, 0.1),
+    inset 0 0 40px rgba(0, 255, 100, 0.05),
+    inset 3px 3px 8px rgba(255, 255, 255, 0.1),
+    inset -3px -3px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Screen curvature/glass emboss effect */
+.crt-screen::before {
+  content: "";
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  right: -5%;
+  bottom: -5%;
+  background:
+    radial-gradient(
+      ellipse at 30% 30%,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 40%
+    ),
+    radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+  z-index: 3;
+  border-radius: 8px;
+}
+
+/* Scanlines */
+.crt-screen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+/* Screen flicker */
+.crt-flicker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 255, 100, 0.02);
+  animation: flicker 0.15s infinite;
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.98;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.97;
+  }
+}
+
+/* Content area */
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  color: #0f0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+.content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  animation: textGlow 1.5s ease-in-out infinite alternate;
+}
+
+.content p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  max-width: 500px;
+  text-align: center;
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  }
+  to {
+    text-shadow:
+      0 0 20px rgba(0, 255, 0, 1),
+      0 0 30px rgba(0, 255, 0, 0.6);
+  }
+}
+
+/* Desk */
+.desk {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 25%;
+  background: 
+                /* Wear and tear patterns */
+    radial-gradient(
+      ellipse at 30% 40%,
+      rgba(20, 15, 10, 0.3) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 70% 60%,
+      rgba(15, 10, 5, 0.4) 0%,
+      transparent 25%
+    ),
+    radial-gradient(
+      ellipse at 50% 20%,
+      rgba(25, 18, 10, 0.2) 0%,
+      transparent 40%
+    ),
+    /* Coffee stains */
+    radial-gradient(
+        circle at 20% 50%,
+        rgba(40, 25, 10, 0.6) 0%,
+        rgba(30, 20, 8, 0.3) 5%,
+        transparent 8%
+      ),
+    radial-gradient(
+      circle at 65% 30%,
+      rgba(35, 22, 8, 0.5) 0%,
+      rgba(25, 15, 5, 0.2) 4%,
+      transparent 7%
+    ),
+    /* Scratches and marks */
+    linear-gradient(
+        92deg,
+        transparent 45%,
+        rgba(50, 40, 30, 0.1) 49%,
+        transparent 51%
+      ),
+    linear-gradient(
+      88deg,
+      transparent 60%,
+      rgba(40, 30, 20, 0.15) 62%,
+      transparent 64%
+    ),
+    linear-gradient(
+      94deg,
+      transparent 25%,
+      rgba(45, 35, 25, 0.12) 27%,
+      transparent 29%
+    ),
+    /* Base wood color */ linear-gradient(180deg, #2d1f12 0%, #1d1208 100%);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.desk::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1d1208, #0d0804, #1d1208);
+}
+
+.desk::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+                /* Dust and grime texture */ repeating-linear-gradient(
+    60deg,
+    transparent 0px,
+    rgba(0, 0, 0, 0.02) 1px,
+    transparent 2px,
+    transparent 5px
+  );
+  pointer-events: none;
+}
+
+/* Cables on desk - now using SVG for curves */
+.desk-cables {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 7;
+}
+
+/* Better curved cables using SVG paths */
+.cable-svg {
+  position: absolute;
+  bottom: 20%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.cable-svg svg {
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Secondary monitors on desk */
+/* Secondary CRT monitors - positioned relative to main monitor */
+.secondary-screen {
+  position: absolute;
+  border-radius: 8px;
+  z-index: 6;
+  padding: 8px 10px 20px 10px;
+}
+
+/* Wall-mounted CRT 1 - upper left relative to main */
+.wall-monitor-1 {
+  top: 3%;
+  left: -34%;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(145deg, #c8c8c0, #a8a898);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  padding: 5px 7px 15px 7px;
+}
+
+.wall-monitor-1::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  right: 7px;
+  width: 4px;
+  height: 4px;
+  background: #0f0;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #0f0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Wall-mounted CRT 2 - upper right, larger, closely stacked */
+.wall-monitor-2 {
+  top: 4%;
+  right: -50%;
+  width: 300px;
+  height: 245px;
+  background: linear-gradient(145deg, #b8b8b0, #989888);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  padding: 6px 8px 18px 8px;
+  transform: rotate(-1deg);
+}
+
+.wall-monitor-2::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
+  width: 5px;
+  height: 5px;
+  background: #0ff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #0ff;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+/* Wall-mounted CRT 3 - lower right, larger, closely aligned to monitor 2 */
+.wall-monitor-3 {
+  top: 57%;
+  right: -33%;
+  width: 195px;
+  height: 140px;
+  background: linear-gradient(145deg, #d8d0b8, #b8b098);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  padding: 6px 8px 18px 8px;
+  transform: rotate(1deg);
+}
+
+.wall-monitor-3::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
+  width: 5px;
+  height: 5px;
+  background: #f00;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #f00;
+  animation: pulse 2.3s ease-in-out infinite;
+}
+
+/* Wall-mounted CRT 4 - lower left relative to main */
+.wall-monitor-4 {
+  top: 50%;
+  left: -53%;
+  width: 300px;
+  height: 225px;
+  background: linear-gradient(145deg, #a8a898, #888878);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  padding: 5px 7px 15px 7px;
+  transform: rotate(-1deg);
+}
+
+.wall-monitor-4::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  right: 7px;
+  width: 4px;
+  height: 4px;
+  background: #fa0;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #fa0;
+  animation: pulse 2.1s ease-in-out infinite;
+}
+
+/* Desk-mounted CRT - on desk left side */
+.desk-monitor {
+  bottom: 10%;
+  left: 6%;
+  width: 200px;
+  height: 145px;
+  background: linear-gradient(145deg, #d8d0b8, #b8b098);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.desk-monitor::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  width: 5px;
+  height: 5px;
+  background: #0f0;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #0f0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* Equipment stacks */
+.equipment-stack {
+  position: absolute;
+  z-index: 2;
+}
+
+/* LED indicators on equipment */
+.led-indicator {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  box-shadow: 0 0 4px currentColor;
+}
+
+.led-green {
+  background: #0f0;
+  color: #0f0;
+  top: 50%;
+  right: 5px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.led-red {
+  background: #f00;
+  color: #f00;
+  top: 50%;
+  right: 12px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Small equipment on desk */
+.desk-equipment {
+  position: absolute;
+  bottom: 10%;
+  background: linear-gradient(145deg, #4a4a4a 0%, #2a2a2a 100%);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  z-index: 8;
+}
+
+.modem {
+  right: 25%;
+  width: 35px;
+  height: 12px;
+}
+
+.modem::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 2px;
+  background: #0f0;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #0f0;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.power-strip {
+  left: 35%;
+  width: 50px;
+  height: 8px;
+  background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+.power-strip::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 3px;
+  background: #f00;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #f00;
+}
+.monitor-stand-small {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 20px;
+  background: linear-gradient(180deg, #a8a898 0%, #888878 100%);
+  z-index: 4;
+  border-radius: 0 0 8px 8px;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.monitor-stand-small::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 8px;
+  background: linear-gradient(90deg, transparent, #666, transparent);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.screen-display {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  padding: 8px;
+  font-family: monospace;
+  font-size: 10px;
+  color: #0f0;
+  overflow: hidden;
+  line-height: 1.3;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 40px rgba(0, 255, 100, 0.08),
+    inset 0 0 20px rgba(0, 255, 100, 0.05),
+    inset 2px 2px 6px rgba(255, 255, 255, 0.08),
+    inset -2px -2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.screen-display::after {
+  content: "";
+  position: absolute;
+  top: -3%;
+  left: -3%;
+  right: -3%;
+  bottom: -3%;
+  background:
+    radial-gradient(
+      ellipse at 25% 25%,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 35%
+    ),
+    radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.25) 100%);
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 6px;
+}
+
+.screen-display::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.screen-display.large {
+  font-size: 10px;
+  padding: 10px;
+}
+
+.screen-display.tiny {
+  font-size: 7px;
+  padding: 5px;
+  line-height: 1.2;
+}
+
+.screen-display.amber {
+  color: #ff9900;
+  background: #0a0600;
+}
+
+.screen-display.amber::after {
+  background:
+    radial-gradient(
+      ellipse at 25% 25%,
+      rgba(255, 200, 100, 0.12) 0%,
+      transparent 35%
+    ),
+    radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+.screen-display.cyan {
+  color: #00ffff;
+  background: #001a1a;
+}
+
+.screen-display.cyan::after {
+  background:
+    radial-gradient(
+      ellipse at 25% 25%,
+      rgba(100, 255, 255, 0.12) 0%,
+      transparent 35%
+    ),
+    radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+/* Scrolling text animation */
+.scroll-text {
+  animation: scroll-up 5s linear infinite;
+  display: block;
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-200px);
+  }
+}
+
+/* Blinking cursor effect on screens */
+.cursor-blink {
+  animation: cursor 1s infinite;
+}
+
+@keyframes cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Widgets and gadgets */
+.widget {
+  position: absolute;
+  bottom: 8%;
+  border-radius: 2px;
+  z-index: 6;
+}
+
+.router {
+  left: 25%;
+  width: 170px;
+  height: 50px;
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 1px solid #333;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.router::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: #0f0;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #0f0;
+  animation: blink-fast 1s infinite;
+}
+
+.router::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: #ff0;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #ff0;
+  animation: blink-fast 1.5s infinite;
+}
+
+@keyframes blink-fast {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.hard-drive {
+  left: 30%;
+  bottom: 20%;
+  width: 55px;
+  height: 35px;
+  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+  border: 1px solid #444;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.hard-drive::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 3px;
+  height: 3px;
+  background: #f00;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #f00;
+  animation: pulse-slow 2s infinite;
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Desk clutter */
+.desk-item {
+  position: absolute;
+  z-index: 8;
+}
+
+/* Keyboard */
+.keyboard {
+  bottom: 9%;
+  left: 42%;
+  width: 170px;
+  height: 55px;
+  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+  border-radius: 3px;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.keyboard::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  right: 10px;
+  bottom: 8px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #1a1a1a 0px,
+      #1a1a1a 6px,
+      transparent 6px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      #1a1a1a 0px,
+      #1a1a1a 8px,
+      transparent 8px,
+      transparent 10px
+    );
+}
+
+/* Mouse */
+.mouse {
+  bottom: 8.5%;
+  right: 45%;
+  width: 25px;
+  height: 35px;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 12px 12px 8px 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.mouse::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 12px;
+  background: #111;
+  border-radius: 1px;
+}
+
+/* Coffee mug */
+.coffee-mug {
+  bottom: 12%;
+  left: 75%;
+  width: 55px;
+  height: 62px;
+  background: linear-gradient(180deg, #4a2a1a 0%, #3a1a0a 100%);
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.coffee-mug::before {
+  content: "";
+  position: absolute;
+  top: 24%;
+  right: -33%;
+  width: 28%;
+  height: 42%;
+  border: 3px solid #3a1a0a;
+  border-left: none;
+  border-radius: 0 12px 12px 0;
+}
+
+.coffee-mug::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 9%;
+  right: 9%;
+  height: 23%;
+  background: radial-gradient(ellipse, #2a1a0a 0%, #1a0a00 100%);
+  border-radius: 50%;
+}
+
+/* iPod group container - maintains relative positioning */
+.ipod-group {
+  position: absolute;
+  bottom: 6%;
+  right: 34%;
+  width: 150px;
+  height: 100px;
+  z-index: 15;
+}
+
+/* iPod 5th Generation */
+.ipod {
+  position: absolute;
+  top: 0;
+  left: 52px;
+  width: 45px;
+  height: 70px;
+  background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+  border-radius: 8px;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.2);
+  transform: rotate(-8deg);
+  z-index: 2;
+}
+
+.ipod::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 22px;
+  background: linear-gradient(180deg, #1a1a2a 0%, #0a0a1a 100%);
+  border-radius: 2px;
+  box-shadow: inset 0 0 5px rgba(0, 100, 150, 0.3);
+}
+
+.ipod-wheel {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 30px;
+  background: radial-gradient(
+    circle at center,
+    #fff 0%,
+    #fff 35%,
+    #ddd 35%,
+    #ccc 100%
+  );
+  border-radius: 50%;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ipod-wheel::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #e8e8e8;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Earbuds/IEMs - redesigned to look like in-ear monitors */
+.earbud {
+  position: absolute;
+  width: 10px;
+  height: 12px;
+  background: linear-gradient(135deg, #2a2a3a 0%, #1a1a2a 50%, #0a0a1a 100%);
+  border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+  z-index: 3;
+}
+
+/* IEM tips */
+.earbud::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(
+    circle,
+    rgba(200, 200, 200, 0.3),
+    rgba(100, 100, 100, 0.2)
+  );
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* IEM nozzle/sound bore */
+.earbud::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 5px;
+  background: linear-gradient(180deg, #444 0%, #222 100%);
+  border-radius: 2px;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.earbud-left {
+  top: 85px;
+  left: 0px;
+  transform: rotate(-25deg);
+}
+
+.earbud-right {
+  top: 80px;
+  left: 120px;
+  transform: rotate(35deg);
+}
+
+/* Cable SVG positioned in container */
+.ipod-cables {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Purple-blue gradient for cable */
+.ipod-cables defs stop.cable-start {
+  stop-color: #6b4fb3;
+}
+
+.ipod-cables defs stop.cable-end {
+  stop-color: #4169e1;
+}
+/* Import a nice cursive font */
+@import url("https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap");
+
+/* Neon sign styling */
+.neon-sign {
+  position: absolute;
+  top: 5%;
+  left: 60%;
+  transform: translateX(-50%) rotate(-10deg);
+  z-index: 1;
+}
+
+.neon-text {
+  font-family: "Neonderthaw", cursive;
+  font-size: 7rem;
+  color: #fff;
+  text-shadow:
+    /* White core */
+    0 0 5px #fff,
+    0 0 5px #fff,
+    /* Bright green inner glow */ 0 0 21px #0f0,
+    0 0 42px #0f0,
+    0 0 82px #0f0,
+    /* Outer green glow */ 0 0 92px #0f0,
+    0 0 142px #0f0,
+    0 0 181px #0f0;
+  animation:
+    neon-flicker 10s infinite alternate,
+    neon-pulse 3s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #0f0,
+      0 0 42px #0f0,
+      0 0 82px #0f0,
+      0 0 92px #0f0,
+      0 0 102px #0f0,
+      0 0 151px #0f0;
+  }
+  50% {
+    text-shadow:
+      0 0 4px #fff,
+      0 0 7px #fff,
+      0 0 15px #0f0,
+      0 0 30px #0f0,
+      0 0 60px #0f0,
+      0 0 70px #0f0,
+      0 0 80px #0f0,
+      0 0 120px #0f0;
+  }
+}
+
+@keyframes neon-flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  24%,
+  55% {
+    opacity: 0.4;
+  }
+  22% {
+    opacity: 0.6;
+  }
+}

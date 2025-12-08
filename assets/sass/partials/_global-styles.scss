@@ -1,0 +1,23 @@
+footer[role="contentinfo"] {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10000;
+  background: #000; // or whatever color you want
+  color: #0f0; // match your terminal green theme
+  padding: 5px;
+  text-align: center;
+  font-family: monospace;
+  border-top: 1px solid #0f0;
+  border-left: 1px solid #0f0;
+  border-top-left-radius: 5px;
+
+  a {
+    color: #0f0;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

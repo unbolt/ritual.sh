@@ -1,0 +1,191 @@
+/* VU Meter on desk */
+.vu-meter {
+  position: absolute;
+  bottom: 18%;
+  right: 30%;
+  width: 120px;
+  height: 60px;
+  z-index: 8;
+}
+
+.vu-meter-body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  border-radius: 4px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vu-meter-screen {
+  flex: 1;
+  background: #0a0a0a;
+  border-radius: 2px;
+  padding: 6px 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.vu-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 100%;
+  gap: 2px;
+}
+
+.vu-bar {
+  flex: 1;
+  background: linear-gradient(
+    to top,
+    #0f0 0%,
+    #0f0 60%,
+    #ff0 60%,
+    #ff0 85%,
+    #f00 85%,
+    #f00 100%
+  );
+  border-radius: 1px;
+  box-shadow:
+    0 0 4px rgba(0, 255, 0, 0.6),
+    inset 0 0 2px rgba(255, 255, 255, 0.2);
+  animation: vu-bounce 1.5s ease-in-out infinite;
+  animation-delay: var(--delay);
+  height: var(--height);
+  min-height: 10%;
+}
+
+@keyframes vu-bounce {
+  0%,
+  100% {
+    height: var(--height);
+    filter: brightness(1);
+  }
+  25% {
+    height: calc(var(--height) * 0.6);
+    filter: brightness(0.8);
+  }
+  50% {
+    height: calc(var(--height) * 1.2);
+    filter: brightness(1.2);
+  }
+  75% {
+    height: calc(var(--height) * 0.8);
+    filter: brightness(0.9);
+  }
+}
+
+/* Peak indicator line */
+.vu-peak-line {
+  position: absolute;
+  top: 15%;
+  left: 4px;
+  right: 4px;
+  height: 1px;
+  background: #f00;
+  opacity: 0.6;
+  box-shadow: 0 0 3px #f00;
+  animation: peak-pulse 2s ease-in-out infinite;
+}
+
+@keyframes peak-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    top: 15%;
+  }
+  50% {
+    opacity: 0.3;
+    top: 25%;
+  }
+}
+
+/* LED indicators */
+.vu-leds {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.vu-led {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.vu-led.green {
+  background: #0f0;
+  box-shadow:
+    0 0 6px #0f0,
+    inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  animation: led-blink-green 2s ease-in-out infinite;
+}
+
+.vu-led.yellow {
+  background: #880;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  animation: led-blink-yellow 2s ease-in-out infinite;
+}
+
+.vu-led.red {
+  background: #400;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  animation: led-blink-red 2s ease-in-out infinite;
+}
+
+@keyframes led-blink-green {
+  0%,
+  100% {
+    background: #0f0;
+    box-shadow:
+      0 0 6px #0f0,
+      inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    background: #0a0;
+    box-shadow:
+      0 0 3px #0a0,
+      inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes led-blink-yellow {
+  0%,
+  40%,
+  100% {
+    background: #880;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  50%,
+  60% {
+    background: #ff0;
+    box-shadow:
+      0 0 6px #ff0,
+      inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes led-blink-red {
+  0%,
+  85%,
+  100% {
+    background: #400;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  90%,
+  95% {
+    background: #f00;
+    box-shadow:
+      0 0 6px #f00,
+      inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
