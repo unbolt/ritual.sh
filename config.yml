@@ -1,6 +1,5 @@
 baseURL: "https://ritual.sh/"
 title: ritual.sh
-theme: "hugo-starter"
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
@@ -17,13 +16,13 @@ minify:
 
 params:
   env: production
-  
+
   label:
     text: "ritual"
     icon: /images/android-chrome-512x512.png
     iconImageHeight: 35
     iconHeight: 70
-  
+
   profileMode:
     enabled: false
     title: ExampleSite
@@ -37,7 +36,7 @@ params:
         url: posts
       - name: Tags
         url: tags
-  
+
   socialIcons:
     - name: instagram
       url: "https://www.instagram.com/ritualphotos"
@@ -48,12 +47,11 @@ params:
     - name: lastfm
       url: "https://www.last.fm/user/ritualplays"
 
-  
   cover:
     hidden: false
     hiddenInList: true
     hiddenInSingle: false
-  
+
   fuseOpts:
     isCaseSensitive: false
     shouldSort: true
@@ -96,5 +94,3 @@ markup:
 module:
   imports:
     - path: github.com/hugo-mods/lazyimg
-
-  

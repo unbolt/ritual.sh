@@ -1,0 +1,12 @@
+<footer role="contentinfo">
+  <div class="crt">
+    <a href="https://neocities.org/site/ritualsh" target="_blank">
+      Follow on Neocities
+    </a>
+    &nbsp;&bull;&nbsp;
+    <a href="{{ .Site.BaseURL }}">
+      &copy; {{ now.Format "2006" }} {{ .Site.Title }}
+    </a>
+    <div>{{ partial "social-follow.html" . }}</div>
+  </div>
+</footer>
