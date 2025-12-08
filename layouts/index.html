@@ -140,11 +140,6 @@
 <!-- Desk monitor -->
 <div class="secondary-screen desk-monitor">
   <div class="screen-display large crt">
-    SYSTEM LOAD<br />
-    CPU: 67%<br />
-    RAM: 4.2/8GB<br />
-    NET: 2.4MB/s<br />
-    DISK: 89%<br />
     <span class="cursor-blink">_</span>
   </div>
   <div class="monitor-stand-small"></div>
@@ -156,11 +151,10 @@
 <div class="desk-item coffee-mug"></div>
 
 <!-- MUSICAL STUFF -->
-<a href="/music/">
+<a href="/audio/">
   <div class="music">
     <div class="music-text">MUSIC&nbsp;&amp;&nbsp;AUDIO&nbsp;GEAR</div>
 
-    <!-- iPod group - container keeps all elements positioned relative to each other -->
     <div class="ipod-group">
       <div class="ipod">
         <div class="ipod-wheel"></div>
@@ -180,8 +174,7 @@
             <stop offset="100%" style="stop-color: #4169e1" />
           </linearGradient>
         </defs>
-        <!-- Main cable: plugs in at top RIGHT of iPod, makes a big loop to the LEFT, then hangs down -->
-        <!-- Start at x=85 (top right), arc way left to x=30, then come back down on the left side -->
+
         <path
           d="M 85,3 C 85,-12 75,-22 55,-22 C 35,-22 25,-15 25,0 C 25,15 28,35 32,50 L 35,65"
           stroke="url(#cableGradient)"
@@ -189,7 +182,7 @@
           fill="none"
           stroke-linecap="round"
         />
-        <!-- Left branch to left earbud -->
+
         <path
           d="M 35,65 C 28,72 20,82 5,88"
           stroke="url(#cableGradient)"
@@ -197,7 +190,7 @@
           fill="none"
           stroke-linecap="round"
         />
-        <!-- Right branch to right earbud -->
+
         <path
           d="M 35,65 C 55,73 95,82 125,83"
           stroke="url(#cableGradient)"
@@ -211,7 +204,6 @@
       <div class="earbud earbud-right"></div>
     </div>
 
-    <!-- VU Meter on desk -->
     <div class="vu-meter">
       <div class="vu-meter-body">
         <div class="vu-meter-screen">
@@ -291,23 +283,17 @@
   <!-- Wall-mounted monitors -->
   <div class="secondary-screen wall-monitor-1">
     <div class="screen-display crt">
-      > netstat -an<br />
-      <pre>
-tcp   0   0 127.0.0.1:33842      0.0.0.0:*            LISTEN     
-tcp   0   0 127.0.0.1:41267      0.0.0.0:*            LISTEN     
-tcp   0   0 127.0.0.54:53        0.0.0.0:*            LISTEN     
-tcp   0   0 127.0.0.1:52918      127.0.0.1:38471      ESTABLISHED
-tcp   0   0 192.168.1.147:44321  52.143.67.201:443    ESTABLISHED
-tcp   0   0 192.168.1.147:39854  104.26.15.88:80      TIME_WAIT  
-tcp   0   0 127.0.0.1:38471      127.0.0.1:52918      ESTABLISHED
-tcp   0   0 127.0.0.1:56732      127.0.0.1:8080       ESTABLISHED
-tcp   0   0 192.168.1.147:41209  13.107.42.16:443     ESTABLISHED
-tcp   0   0 127.0.0.1:49563      127.0.0.1:8080       TIME_WAIT
+      > updates -lah<br />
+      {{ $pages := where .Site.RegularPages "Kind" "page" }} {{ range first 5
+      (sort $pages "Lastmod" "desc") }} [<time
+        >{{ .Lastmod.Format "2006-01-02" }}</time
+      >] -
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
 
-Proto RefCnt Flags  Type    State      I-Node Path
-unix  3      [ ]    STREAM  CONNECTED  50896  /run/user/1000/bus
-</pre
-      >
+      <br />
+      {{ end }}
+
+      <span class="cursor-blink">_</span>
     </div>
   </div>
 
@@ -421,7 +407,9 @@ unix  3      [ ]    STREAM  CONNECTED  50896  /run/user/1000/bus
   </div>
 </div>
 
-{{ range first 1 (where .Site.RegularPages "Type" "posts") }}
+{{ $pages := where .Site.RegularPages "Kind" "page" }} {{ range first 1 (sort
+$pages "Lastmod" "desc") }}
+
 <div id="latest-post">
   <div id="latest-post-link">{{ .Permalink }}</div>
   <div id="latest-post-title">{{ .Title }}</div>
