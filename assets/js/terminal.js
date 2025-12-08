@@ -46,12 +46,29 @@ class TerminalShell {
       this.scrollToBottom();
     }
 
+    this.printHTML("&nbsp;");
+
+    // Get latest post info
+    let latestPostTitle = document.getElementById("latest-post-title");
+    let latestPostDate = document.getElementById("latest-post-date");
+    this.printHTML(
+      "<span class='info'>Latest Post: </span>" +
+        latestPostTitle.innerText +
+        " (" +
+        latestPostDate.innerText +
+        ")",
+    );
+    this.printHTML(
+      "<span class='info'>&nbsp;- Type \"latest\" to view it.</span>",
+    );
+    this.printHTML("&nbsp;");
+
     this.printHTML(
       '<span class="info">Type "help" for available commands.</span>',
     );
 
     this.printHTML(
-      '<span class="warning">This site is under contstruction. There\'s nothing of interest here yet.</span>',
+      '<span class="warning">This site is under construction. There\'s nothing of interest here yet.</span>',
     );
 
     this.inputContainer.classList.remove("hidden");

@@ -420,4 +420,11 @@ unix  3      [ ]    STREAM  CONNECTED  50896  /run/user/1000/bus
     </div>
   </div>
 </div>
-{{ end }}
+
+{{ range first 1 (where .Site.RegularPages "Type" "posts") }}
+<div id="latest-post">
+  <div id="latest-post-link">{{ .Permalink }}</div>
+  <div id="latest-post-title">{{ .Title }}</div>
+  <div id="latest-post-date">{{ .Date.Format "Jan 2, 2006" }}</div>
+</div>
+{{ end }} {{ end }}

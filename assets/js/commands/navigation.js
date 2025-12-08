@@ -46,6 +46,15 @@ window.terminal.registerCommand("reload", "Reload the current page", () => {
 
 // PAGE NAVIGATION
 
+window.terminal.registerCommand(
+  "latest",
+  "View the latest post, regardles of section",
+  () => {
+    let latestPostLink = document.getElementById("latest-post-link");
+    window.location.href = latestPostLink.textContent;
+  },
+);
+
 // About command
 window.terminal.registerCommand("about", "About this site", () => {
   window.location.href = "/about/";
