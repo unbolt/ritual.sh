@@ -1,18 +1,20 @@
-{{ $script := .Site.Data.webpack_assets.app }}
-{{ with $script.js }}
-<script src="{{ relURL (printf "%s%s" "dist/" .) }}"></script>
-{{ end }}
-
-{{/* Terminal Scripts Partial */}}
-{{/* This compiles all terminal JS files into a single minified bundle */}}
-{{ $terminal := resources.Get "js/terminal.js" }}
-{{ $lavalamp := resources.Get "js/lavalamp.js" }}
+<!-- prettier-ignore -->
+{{ $terminalShell := resources.Get "js/terminal.js" }}
 {{ $init := resources.Get "js/init.js" }}
-{{ $coreCommands := resources.Get "js/commands/core.js" }}
-{{ $utilityCommands := resources.Get "js/commands/utility.js" }}
-{{ $navigationCommands := resources.Get "js/commands/navigation.js" }}
-{{ $customCommands := resources.Get "js/commands/custom.js" }}
-
-{{ $terminalBundle := slice $terminal $lavalamp $init $coreCommands $utilityCommands $navigationCommands $customCommands | resources.Concat "js/terminal-bundle.js" | resources.Minify | resources.Fingerprint }}
-
-<script src="{{ $terminalBundle.RelPermalink }}" integrity="{{ $terminalBundle.Data.Integrity }}"></script>
+{{ $commandFiles := resources.Match "js/commands/*.js" }}
+{{ $subfolderFiles := resources.Match "js/*/*.js" }}
+{{ $remaining := resources.Match "js/*.js" }}
+{{ $filtered := slice }}
+{{ range $remaining }}
+  {{ $path := .RelPermalink }}
+  {{ if and (not (strings.Contains $path "/terminal.js")) (not (strings.Contains $path "/init.js")) }}
+    {{ $filtered = $filtered | append . }}
+  {{ end }}
+{{ end }}
+{{ $allFiles := slice $terminalShell | append $filtered | append $init | append $commandFiles | append $subfolderFiles }}
+{{ $terminalBundle := $allFiles | resources.Concat "js/terminal-bundle.js" | resources.Minify | resources.Fingerprint }}
+<!-- prettier-ignore-end -->
+<script
+  src="{{ $terminalBundle.RelPermalink }}"
+  integrity="{{ $terminalBundle.Data.Integrity }}"
+></script>

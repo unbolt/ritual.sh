@@ -92,8 +92,10 @@
   }
 
   function init() {
-    updateBlobCount();
-    updateLampBackground();
+    if (document.getElementById("lavaLamp")) {
+      updateBlobCount();
+      updateLampBackground();
+    }
   }
 
   init();

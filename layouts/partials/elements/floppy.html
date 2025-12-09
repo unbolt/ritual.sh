@@ -1,0 +1,23 @@
+{{ $title := .title | default "" }} {{ $lines := .lines | default (slice "" ""
+"" "" "") }} {{ $bgColor := .bgColor | default "#1a1a1a" }} {{ $bgColorDark :=
+.bgColorDark | default "#000000" }}
+
+<div
+  class="floppy-disk"
+  style="background: linear-gradient(135deg, {{ $bgColor }} 0%, {{ $bgColorDark }} 100%);"
+>
+  <div class="metal-shutter">
+    <div
+      class="shutter-opening"
+      style="background: linear-gradient(135deg, {{ $bgColor }} 0%, {{ $bgColorDark }} 100%);"
+    ></div>
+  </div>
+  <div class="label">
+    <div class="label-header">{{ $title }}</div>
+    <div class="label-lines">
+      {{ range $lines }}
+      <div class="label-line">{{ . }}</div>
+      {{ end }}
+    </div>
+  </div>
+</div>

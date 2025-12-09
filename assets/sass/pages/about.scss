@@ -17,11 +17,30 @@
     > .about-header {
       text-align: center;
     }
+
+    > .manifesto-container {
+      position: relative;
+      > .manifesto-floppy {
+        position: absolute;
+        right: -50px;
+        top: -20px;
+        width: 150px;
+        transform: rotate(5deg);
+      }
+    }
   }
 }
 
 @media (max-width: 800px) {
   .about-page > .about-content {
     width: 100%;
+
+    > .manifesto-container {
+      > .manifesto-floppy {
+        width: 75px;
+        top: -10px;
+        right: -20px;
+      }
+    }
   }
 }
