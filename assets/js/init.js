@@ -1,16 +1,21 @@
 // Terminal Initialization Script
-// This script creates the terminal instance immediately
-// so command modules can register commands
+// This script creates the terminal instance only if terminal element exists
 
-// Create global terminal instance immediately
 window.terminal = new TerminalShell();
 
-// Boot the terminal when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => {
+// Function to initialize terminal
+function initTerminal() {
+  // Check if terminal element exists
+  if (document.getElementById("terminal")) {
+    // Boot the terminal
     terminal.boot();
-  });
+  }
+}
+
+// Wait for DOM to be ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initTerminal);
 } else {
   // DOM already loaded
-  terminal.boot();
+  initTerminal();
 }

@@ -1,14 +1,17 @@
 // Terminal Shell System
 class TerminalShell {
   constructor() {
-    this.output = document.getElementById("output");
-    this.input = document.getElementById("input");
-    this.inputContainer = document.getElementById("input-container");
     this.history = [];
     this.historyIndex = -1;
     this.commands = {};
 
-    this.setupEventListeners();
+    if (document.getElementById("terminal")) {
+      this.output = document.getElementById("output");
+      this.input = document.getElementById("input");
+      this.inputContainer = document.getElementById("input-container");
+
+      this.setupEventListeners();
+    }
   }
 
   // Boot sequence
