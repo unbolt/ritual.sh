@@ -5,8 +5,9 @@ url: /posts/increasing-upload-size-for-wordpress-docker-on-unraid/
 tags:
   - unraid
   - wordpress
-
+draft: true
 ---
+
 If you're using unraid and want to use the docker engine to run your wordpress site, you're likely going to want to increase the maximum upload size.
 
 This is the simplest way I found of doing it, though I am sure there are other methods.
@@ -23,7 +24,7 @@ cd /mnt/user/appdata/rest_of_path_you_found_above && chmod 777 .htaccess
 
 This will make the file writable by every group. If you've got security concerns you should probably not be following instructions found on someones blog without understanding them.
 
-Now edit the file however you wish, either using a terminal based editor like `nano` or opening the file in something on your local machine. 
+Now edit the file however you wish, either using a terminal based editor like `nano` or opening the file in something on your local machine.
 
 Add the following two lines to the bottom of the file:
 
@@ -38,4 +39,4 @@ In the latest version of WordPress this didn't seem to do the trick for me, I al
 
 That's it! Let me know if there's a way to do this without the plugin.
 
- [1]: https://wordpress.org/plugins/upload-max-file-size/
+[1]: https://wordpress.org/plugins/upload-max-file-size/

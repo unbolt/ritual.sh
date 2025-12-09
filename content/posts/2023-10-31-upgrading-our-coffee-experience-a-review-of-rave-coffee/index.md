@@ -3,18 +3,20 @@ title: Upgrading our coffee experience – a review of Rave Coffee
 date: 2023-10-31T11:45:21+00:00
 url: /posts/upgrading-our-coffee-experience-a-review-of-rave-coffee/
 tags:
-  - 'food & drink'
+  - "food & drink"
   - coffee
 
-cover: 
-  image: 'DSCF3116.jpg'
+cover:
+  image: "DSCF3116.jpg"
   alt: "A bag of Rave coffee next to a mug and jar of coffee beans"
   relative: false
 
+draft: true
 ---
+
 One of the first presents we bought ourselves after we got married was a proper bean-to-cup coffee machine. For the longest time we just picked up whichever beans were cheap enough and easily available, be it from large online retailers or the local supermarket. We really needed to upgrade our coffee experience - here is my review of Rave Coffee.
 
-More recently we decided we should be focusing on quality over quantity. Moreso we had become concerned over the [environmental impact](https://www.theworldcounts.com/challenges/consumption/foods-and-beverages/environmental-effects-of-coffee-production) our coffee habits were having. 
+More recently we decided we should be focusing on quality over quantity. Moreso we had become concerned over the [environmental impact](https://www.theworldcounts.com/challenges/consumption/foods-and-beverages/environmental-effects-of-coffee-production) our coffee habits were having.
 
 Deciding we could do better, we needed to find a local coffee supplier. They needed to also be environmentally minded.
 
@@ -26,7 +28,7 @@ A friend suggested we try Cirencester based [Rave Coffee](https://i.refs.cc/m9Xi
 
 Despite the photos in this post being of The Italian Job Blend, which is very nice in itself I am going to be talking about their _Now That's What I Call Coffee Nº 2023_ blend that is currently in our machine.
 
-This coffee truly lives up to its name, offering a symphony of flavors that left us singing its praises. 
+This coffee truly lives up to its name, offering a symphony of flavors that left us singing its praises.
 
 First and foremost, the aroma of this coffee is amazing. As soon as you open the bag, you're greeted with a rich and inviting fragrance that hints at the magic within. The beans are beautifully roasted to a 4/5 level, hitting that perfect balance between depth and brightness.
 
@@ -50,7 +52,7 @@ The price is probably 50% more than we were paying for coffee previously, but wi
 
 I don't have much more to say, the coffee we've had so far has been fantastic. Give it a go.
 
-Before I sign off, can we just take a moment to appreciate how cool this pumpkin mug is? 
+Before I sign off, can we just take a moment to appreciate how cool this pumpkin mug is?
 
 {{< figure src="DSCF3121.jpg" title="" >}}
 

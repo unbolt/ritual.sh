@@ -7,9 +7,8 @@ tags:
   - ps5
   - rack
   - tech
-
+draft: true
 ---
- 
 
 At this stage in the build I was about ready to find a way to house my PS5 in my rack, and do some general decor. If you haven't checked out [Part 1][1] and [part 2][2] yet, check them out first!
 
@@ -45,5 +44,5 @@ And with that, the rack is almost complete. I'll cover networking in a completel
 
 Please let me know if this has inspired you to move your own stuff into a server rack, and send me pictures if you go wild with the decoration!
 
- [1]: /posts/moving-all-my-stuff-into-a-server-rack-part-1-the-rack/
- [2]: /posts/moving-my-stuff-into-a-server-rack-part-2-server-chassis-shopping/
+[1]: /posts/moving-all-my-stuff-into-a-server-rack-part-1-the-rack/
+[2]: /posts/moving-my-stuff-into-a-server-rack-part-2-server-chassis-shopping/

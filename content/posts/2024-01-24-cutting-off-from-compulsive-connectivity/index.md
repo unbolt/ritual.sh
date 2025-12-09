@@ -3,27 +3,29 @@ title: Cutting off from Compulsive Connectivity
 date: 2024-01-24T15:11:51+00:00
 url: /posts/cutting-off-from-compulsive-connectivity/
 tags:
-  - 'digital minimalism'
+  - "digital minimalism"
   - tech
 
+draft: true
 ---
+
 Towards the end of 2023, a growing unease prompted me to seriously evaluate my device and app usage. I found myself habitually reaching for my phone, ostensibly to "just check". Recognizing that I wasn't alone in this sentiment, I delved into the realm of digital minimalism and connected with various communities centered around this philosophy.
 
 The main issue that surfaced was my persistent need to stay connected— whether through Discord, iMessage, Reddit, or email. I found myself compulsively checking these apps, only to discover that I was missing out on nothing substantial. Even with the majority of notifications disabled, allowing people instant access to my time and attention started to feel very wrong.
 
-I wanted to cut people off, and cut myself off. 
+I wanted to cut people off, and cut myself off.
 
 I found the book [Digital Minimalism: Choosing a Focused Life in a Noisy World](https://amzn.to/3UaFteI) by Cal Newport, which I can highly recommend. As with all books like this, all the methods won't work for everyone. I am choosing to implement some of the suggestions, and then going far more extreme and deciding to put my iPhone in a box outside of work hours.
 
 There are multiple issues which will need overcoming and I want to address them all in individual posts as I come up with proper solutions, here is the rough list so far:
 
-  * **Watch** - I currently use an Apple Watch
-  * **Phone** - Yes, the obvious iPhone replacement quest looms. But not just any replacement — a humble dumb phone dedicated to emergency calls and texts. A bold move towards essential communication without the smartphone overwhelm.
-  * **Camera** - With the iPhone out of the picture, my portable camera dilemma surfaces..
-  * **Music** - No iPhone, no portable music player. The silence is about to be shattered by a new rhythm, a device solely devoted to delivering musical bliss.
-  * **Gaming** - Portable gaming system enthusiasts, fear not! The absence of an iPhone won't hinder the gaming experience. A new, dedicated device is on the horizon.
-  * **Notes** - Joining the league of paper aficionados, I'm set to conquer the world of note-taking without the digital distractions.
-  * **Reading** - I'm finally going to get a kindle I think.
+- **Watch** - I currently use an Apple Watch
+- **Phone** - Yes, the obvious iPhone replacement quest looms. But not just any replacement — a humble dumb phone dedicated to emergency calls and texts. A bold move towards essential communication without the smartphone overwhelm.
+- **Camera** - With the iPhone out of the picture, my portable camera dilemma surfaces..
+- **Music** - No iPhone, no portable music player. The silence is about to be shattered by a new rhythm, a device solely devoted to delivering musical bliss.
+- **Gaming** - Portable gaming system enthusiasts, fear not! The absence of an iPhone won't hinder the gaming experience. A new, dedicated device is on the horizon.
+- **Notes** - Joining the league of paper aficionados, I'm set to conquer the world of note-taking without the digital distractions.
+- **Reading** - I'm finally going to get a kindle I think.
 
 Those are the main areas to address if I want to cut my smart phone usage in the evenings and weekends.
 

@@ -3,16 +3,17 @@ title: "Turning my smart phone into a dumb phone"
 url: "/posts/turning-my-smartphone-into-a-dumb-phone"
 date: 2024-02-05T13:55:21+00:00
 tags:
-  - 'digital minimalism'
-  - 'dumbphone'
-  - 'tech'
+  - "digital minimalism"
+  - "dumbphone"
+  - "tech"
 
-
-cover: 
-  image: 'DSCF3198-Enhanced-NR-jpg.webp'
+cover:
+  image: "DSCF3198-Enhanced-NR-jpg.webp"
   alt: "<alt text>"
   caption: "<text>"
   relative: false
+
+draft: true
 ---
 
 One of the first things I wanted to explore in my [mission to cut myself off from compulsive connectivity][1] was to find the options for turning my smart phone into a dumb phone.
@@ -21,17 +22,17 @@ The main aim was to make my phone as uninteresting as possible. One of the main 
 
 ### Enable Greyscale Mode
 
-  1. Go to iOS **Settings** > **Accessibility**
-  2. Tap on **Display & Text Size**
-  3. Under the **Vision** section, tap on **Color Filters**
-  4. Toggle the switch to turn on **Color Filters**
-  5. Tap on **Grayscale** to select it.
+1. Go to iOS **Settings** > **Accessibility**
+2. Tap on **Display & Text Size**
+3. Under the **Vision** section, tap on **Color Filters**
+4. Toggle the switch to turn on **Color Filters**
+5. Tap on **Grayscale** to select it.
 
 ### Setup a Toggle Shortcut
 
-  1. Go to iOS **Settings** > **Accessibility**
-  2. Scroll down to **Accessibility Shortcut** > select **Color Filter**
-  3. Triple-click the side button to turn the Grayscale filter on and off.
+1. Go to iOS **Settings** > **Accessibility**
+2. Scroll down to **Accessibility Shortcut** > select **Color Filter**
+3. Triple-click the side button to turn the Grayscale filter on and off.
 
 Okay, so with my phone able to toggle between colour and greyscale it did make it significantly less interesting, but I wanted to take it further.
 
@@ -41,7 +42,7 @@ Setting it up is quite easy, the app has a great walk through. This is how my ho
 
 {{< figure src="IMG_7455.jpg" title="My dumb iPhone homescreen" >}}
 
-If I want to access any other apps I have to go into the library and manually search for them. 
+If I want to access any other apps I have to go into the library and manually search for them.
 
 So far it has really restricted my use of these apps. The added few steps whenever I pull my phone out has really helped.
 
@@ -49,4 +50,4 @@ So far it has really restricted my use of these apps. The added few steps whenev
 
 I've been using this system for a couple of weeks now, and while it works, I still want to be able to turn off my iPhone completely in the evenings and weekends. Due to needing banking apps to approve payments, and various functions required for my day-to-day job, I need to keep the iPhone. I am going to be looking for alternatives so I can walk away from it.
 
- [1]: https://danbaker.dev/post/cutting-off-from-compulsive-connectivity/
+[1]: https://danbaker.dev/post/cutting-off-from-compulsive-connectivity/

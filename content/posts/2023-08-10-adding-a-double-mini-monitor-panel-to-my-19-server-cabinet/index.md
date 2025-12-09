@@ -2,17 +2,18 @@
 title: Adding a double mini-monitor panel to my 19″ server cabinet
 date: 2023-08-10T08:52:36+00:00
 url: /posts/adding-a-double-mini-monitor-panel-to-my-19-server-cabinet/
-cover: 
-  image: 'IMG_6358-edited.webp'
+cover:
+  image: "IMG_6358-edited.webp"
   alt: "A mounting panel in a server rack containing two small display panels"
-  relative: false        
+  relative: false
 tags:
   - homelab
   - rack
   - tech
-
+draft: true
 ---
-When I started the project to move all my computers into a single rack to save some space, and to look cool, I knew I wanted some kind of monitor in it. 
+
+When I started the project to move all my computers into a single rack to save some space, and to look cool, I knew I wanted some kind of monitor in it.
 
 There were a bunch of options for big and ugly KVM panels that pull out, but that wasn't what I was looking for.
 
@@ -34,7 +35,7 @@ With the monitors sorted, I got back to thinking about how to mount the things i
 
 ## Monitor Mount Panel
 
-I can get access to a CO2 laser cutter with a decent sized bed that could cut something, but that would involve designing something to size, acquiring something to cut - metal? plastic? - and then actually doing it. 
+I can get access to a CO2 laser cutter with a decent sized bed that could cut something, but that would involve designing something to size, acquiring something to cut - metal? plastic? - and then actually doing it.
 
 Getting someone to fabricate me something was also an option, but obviously more expensive.
 
@@ -54,7 +55,7 @@ The only downside to this method is the original mounting holes on the panel rem
 
 {{< figure src="IMG_6367-jpg.webp" title="" align=center >}}
 
- [1]: https://amzn.to/3TUjw3I
- [2]: https://amzn.to/3NURgtH
- [3]: https://lilliputdirect.com/
- [4]: https://lilliputdirect.com/19-inch-4U-rackmount-bracket
+[1]: https://amzn.to/3TUjw3I
+[2]: https://amzn.to/3NURgtH
+[3]: https://lilliputdirect.com/
+[4]: https://lilliputdirect.com/19-inch-4U-rackmount-bracket

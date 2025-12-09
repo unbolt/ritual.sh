@@ -6,8 +6,9 @@ tags:
   - homelab
   - rack
   - tech
-
+draft: true
 ---
+
 Server Chassis Shopping, say that three times fast.
 
 If you haven't alreay [seen Part 1 of this series][1] you might be interested in catching up on that first. In that post I go over picking the rack I did, and now it's time to look at decanting my existing machines into chassis that will fit that server rack.
@@ -18,7 +19,7 @@ The main issue with this was always going to be height, there was a chance I cou
 
 My gaming PC is currently water cooled, and while the chassis I found did technically support a water cooler, my cooler didn't actually fit it. Which was quite annoying.
 
-The chassis in question is the [Logic Case 4U Short][2]. Everything fit in pretty well with a lot of breathing room, but having to replace the CPU cooler was a bit of a pain. I needed to replace it with something not to tall, not too expensive, and available with next day delivery. 
+The chassis in question is the [Logic Case 4U Short][2]. Everything fit in pretty well with a lot of breathing room, but having to replace the CPU cooler was a bit of a pain. I needed to replace it with something not to tall, not too expensive, and available with next day delivery.
 
 I found the [be quiet! PURE ROCK SLIM 2 9.2cm](https://amzn.to/41Tgdf5) fit all my requirements and it did indeed arrive the next day so I was able to fit it and crack on.
 
@@ -52,5 +53,5 @@ I've been using that Powercool UPS for a few months now and can confirm it's bee
 
 In Part 3 I am planning on covering the PS5 being in the rack, and decoration&#8230; See you then.
 
- [1]: /posts/moving-all-my-stuff-into-a-server-rack-part-1-the-rack/
- [2]: https://www.scan.co.uk/products/logic-case-4u-short-depth-server-chassis-4x-35-hdd-450mm-depth-high-airflow-with-water-cooling-mount
+[1]: /posts/moving-all-my-stuff-into-a-server-rack-part-1-the-rack/
+[2]: https://www.scan.co.uk/products/logic-case-4u-short-depth-server-chassis-4x-35-hdd-450mm-depth-high-airflow-with-water-cooling-mount

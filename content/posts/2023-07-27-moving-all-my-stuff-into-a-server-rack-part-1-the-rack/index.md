@@ -5,8 +5,9 @@ url: /posts/moving-all-my-stuff-into-a-server-rack-part-1-the-rack/
 tags:
   - homelab
   - rack
-
+draft: true
 ---
+
 My den, where I keep all my tech and hobby related safely away from children's mitts and wife's eyes was becoming quite chaotic. Between 2 full sized PCs, a NUC, my PS5, 3 monitors and all the associated networking and wiring it was becoming quite the rats nest.
 
 It was time to do something about it, and I decided to move build a server rack containing all my stuff.
@@ -29,7 +30,7 @@ The rack arrived and was relatively easy to put together without any assistance.
 
 {{< figure src="IMG_6156-1536x2048.webp" title="Excuse the mess - it is not normally this bad." >}}
 
-Overall the quality is good, it feels sturdy. My only gripe is that the front glass isn't great - there are tiny abrasions on it if you get really close. From more than 30cm away though it looks great. 
+Overall the quality is good, it feels sturdy. My only gripe is that the front glass isn't great - there are tiny abrasions on it if you get really close. From more than 30cm away though it looks great.
 
 I added an LED strip around the inside without a diffuser for now, I quite like the harsh look. Everyone knows that LEDs make things go faster.
 
@@ -49,7 +50,7 @@ Most of all, plan for the space you have. You might not even need a full size ra
 
 There were loads of bargains on facebook marketplace and eBay, but none of them were the right size for me. If you live in a city there are almost certainly going to be some in your area.
 
-If you're patient you can get a deal. 
+If you're patient you can get a deal.
 
 ### Consider future expansion
 
