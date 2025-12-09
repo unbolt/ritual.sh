@@ -1,4 +1,5 @@
 (function () {
+  const blobsContainer = document.querySelector(".blobs-container"); // Changed from lavaLamp
   const lavaLamp = document.getElementById("lavaLamp");
   let blobs = [];
   let baseSpeed = 0.8;
@@ -6,39 +7,69 @@
   function createBlob() {
     const blob = document.createElement("div");
     blob.className = "blob";
-    const size = Math.random() * 30 + 20; // Smaller blobs (20-50px)
-    const startY = Math.random() * 100; // Within ~150px height
+
+    // Get container dimensions from lavaLamp
+    const containerWidth = lavaLamp.offsetWidth;
+    const containerHeight = lavaLamp.offsetHeight;
+
+    // Size relative to container width (25-50% of width)
+    const size = (Math.random() * 0.15 + 0.25) * containerWidth;
+
     const duration = (Math.random() * 8 + 12) / baseSpeed;
-    const maxX = 60 - size; // Adjusted for narrower tube (80px wide)
+
+    // Max X position accounting for blob size
+    const maxX = containerWidth - size;
     const startX = Math.random() * maxX;
 
     blob.style.width = `${size}px`;
     blob.style.height = `${size}px`;
     blob.style.left = `${startX}px`;
+    blob.style.bottom = "10px";
+    blob.style.position = "absolute";
+
     blob.style.setProperty("--duration", `${duration}s`);
+
+    // Start position (bottom of lamp)
     blob.style.setProperty("--start-x", "0px");
-    blob.style.setProperty("--start-y", `${startY}px`);
-    blob.style.setProperty("--mid1-x", `${Math.random() * 15 - 15}px`);
-    blob.style.setProperty("--mid1-y", `${Math.random() * -40 - 40}px`);
-    blob.style.setProperty("--mid2-x", `${Math.random() * 20 - 20}px`);
-    blob.style.setProperty("--mid2-y", `${Math.random() * -80 - 40}px`);
-    blob.style.setProperty("--mid3-x", `${Math.random() * 15 - 15}px`);
-    blob.style.setProperty("--mid3-y", `${Math.random() * -60 - 10}px`);
+    blob.style.setProperty("--start-y", "0px");
+
+    // Movement waypoints (moving upward - negative Y values)
+    blob.style.setProperty(
+      "--mid1-x",
+      `${(Math.random() * 0.3 - 0.15) * containerWidth}px`,
+    );
+    blob.style.setProperty(
+      "--mid1-y",
+      `${-(Math.random() * 0.15 + 0.25) * containerHeight}px`,
+    );
+
+    blob.style.setProperty(
+      "--mid2-x",
+      `${(Math.random() * 0.4 - 0.2) * containerWidth}px`,
+    );
+    blob.style.setProperty(
+      "--mid2-y",
+      `${-(Math.random() * 0.2 + 0.5) * containerHeight}px`,
+    );
+
+    blob.style.setProperty(
+      "--mid3-x",
+      `${(Math.random() * 0.3 - 0.15) * containerWidth}px`,
+    );
+    blob.style.setProperty(
+      "--mid3-y",
+      `${-(Math.random() * 0.15 + 0.8) * containerHeight}px`,
+    );
+
+    // Scale variations
     blob.style.setProperty("--scale1", (Math.random() * 0.3 + 1.0).toFixed(2));
     blob.style.setProperty("--scale2", (Math.random() * 0.3 + 0.85).toFixed(2));
     blob.style.setProperty("--scale3", (Math.random() * 0.3 + 0.95).toFixed(2));
+
+    // Random delay to stagger animations
     blob.style.animationDelay = `${Math.random() * -20}s`;
 
     return blob;
-  }
-
-  function updateBlobColors() {
-    const color1 = "#FF7800";
-    const color2 = "#E01B24";
-    const gradient = `radial-gradient(circle at 30% 30%, ${color1}, ${color2})`;
-    blobs.forEach((blob) => {
-      blob.style.background = gradient;
-    });
   }
 
   function updateLampBackground() {
@@ -51,13 +82,12 @@
     const count = parseInt(6);
     while (blobs.length > count) {
       const blob = blobs.pop();
-      lavaLamp.removeChild(blob);
+      blobsContainer.removeChild(blob); // Changed
     }
     while (blobs.length < count) {
       const blob = createBlob();
       blobs.push(blob);
-      lavaLamp.appendChild(blob);
-      updateBlobColors();
+      blobsContainer.appendChild(blob); // Changed
     }
   }
 

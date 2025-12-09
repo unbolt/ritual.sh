@@ -1,0 +1,111 @@
+.content-screen {
+  margin: auto;
+  position: relative;
+  border-radius: 8px;
+  width: 100%;
+  aspect-ratio: 300 / 245;
+  background: linear-gradient(145deg, #b8b8b0, #989888);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  padding: 6px 8px 18px 8px;
+
+  > .crt {
+    animation: textShadow 1.6s infinite;
+    background: black;
+    color: greenyellow;
+    font-family: monospace;
+
+    &::before {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 6px;
+      left: 8px;
+      bottom: 18px;
+      right: 8px;
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(
+          90deg,
+          rgba(255, 0, 0, 0.06),
+          rgba(0, 255, 0, 0.02),
+          rgba(0, 0, 255, 0.06)
+        );
+      z-index: 2;
+      background-size:
+        100% 2px,
+        3px 100%;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 6px;
+      left: 8px;
+      bottom: 18px;
+      right: 8px;
+      background: rgba(18, 16, 16, 0.1);
+      opacity: 0;
+      z-index: 2;
+      pointer-events: none;
+      animation: flicker 0.15s infinite;
+    }
+  }
+
+  > .screen-display {
+    position: relative;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-color: #0f0 #000;
+
+    &.no-scroll {
+      overflow: hidden;
+    }
+
+    > p {
+      margin-bottom: 1em;
+    }
+    > p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: fixed;
+    bottom: 5px;
+    right: 8px;
+    width: 5px;
+    height: 5px;
+    background: #0f0;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #0f0;
+    animation: pulse 1.8s ease-in-out infinite;
+    overflow: hidden;
+  }
+}
+
+.content-screen:nth-child(1) {
+  transform: rotate(-0.5deg);
+}
+.content-screen:nth-child(2) {
+  transform: rotate(0.4deg);
+}
+.content-screen:nth-child(3) {
+  transform: rotate(-0.5deg);
+}
+.content-screen:nth-child(4) {
+  transform: rotate(1deg);
+}
+.content-screen:nth-child(5) {
+  transform: rotate(-1.2deg);
+}
+.content-screen:nth-child(6) {
+  transform: rotate(0.3deg);
+}

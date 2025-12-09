@@ -52,7 +52,7 @@ class TerminalShell {
     let latestPostTitle = document.getElementById("latest-post-title");
     let latestPostDate = document.getElementById("latest-post-date");
     this.printHTML(
-      "<span class='info'>Latest Post: </span>" +
+      "<span class='info'>Latest Update: </span>" +
         latestPostTitle.innerText +
         " (" +
         latestPostDate.innerText +

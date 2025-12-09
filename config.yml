@@ -14,6 +14,13 @@ minify:
   disableXML: true
   minifyOutput: true
 
+frontmatter:
+  lastmod:
+    - lastmod
+    - :git
+    - date
+    - publishDate
+
 params:
   env: production
 

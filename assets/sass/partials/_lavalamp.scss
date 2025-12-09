@@ -8,6 +8,26 @@
   flex-direction: column;
   align-items: center;
   z-index: 999;
+
+  margin: 0 auto;
+  //width: fit-content; /* or specify a fixed width */
+
+  .about-content & {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 160px;
+    height: 300px;
+
+    transform: rotate(-5deg);
+
+    .lamp-text {
+      font-size: 60px;
+      color: rgba(224, 27, 36, 0.7);
+    }
+  }
 }
 
 .lamp-cap {
@@ -21,11 +41,10 @@
   position: relative;
   z-index: 10;
 }
-
 .lava-lamp {
   position: relative;
   width: 100%;
-  height: 102%; /*Being above 100% fixes the occasional gap when resizing the page, theoretically */
+  height: 110%;
   background: var(--lamp-bg, linear-gradient(180deg, #2a1a4a 0%, #1a0a3a 100%));
   clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
   overflow: hidden;
@@ -53,6 +72,27 @@
   pointer-events: none;
 }
 
+.blobs-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: url(#goo);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  background: #f74b1e;
+  animation: float var(--duration) ease-in-out infinite;
+  opacity: 0.95;
+  mix-blend-mode: normal;
+  z-index: 3;
+}
+
 .lamp-base {
   width: 100%;
   height: 20%;
@@ -66,20 +106,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  background: var(
-    --blob-color,
-    radial-gradient(circle at 30% 30%, #ff6b9d, #c44569)
-  );
-  filter: url(#goo);
-  animation: float var(--duration) ease-in-out infinite;
-  opacity: 0.95;
-  mix-blend-mode: normal;
-  z-index: 3;
 }
 
 @keyframes float {
@@ -119,4 +145,8 @@
 
 .lava-lamp:hover {
   cursor: pointer;
+
+  > .lamp-text {
+    z-index: 4;
+  }
 }
