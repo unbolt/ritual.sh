@@ -11,23 +11,6 @@
 
   margin: 0 auto;
   //width: fit-content; /* or specify a fixed width */
-
-  .about-content & {
-    position: relative;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 160px;
-    height: 300px;
-
-    transform: rotate(-5deg);
-
-    .lamp-text {
-      font-size: 60px;
-      color: rgba(224, 27, 36, 0.7);
-    }
-  }
 }
 
 .lamp-cap {
@@ -106,6 +89,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid #924706;
 }
 
 @keyframes float {

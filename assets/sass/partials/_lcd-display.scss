@@ -1,0 +1,56 @@
+.lcd-container {
+  background: #2a2a2a;
+  padding: 1%;
+  border-radius: 0.5cqw;
+  box-shadow: 0 1cqw 2cqw rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  min-width: 0;
+  opacity: 0;
+
+  > .lcd-screen {
+    position: relative;
+    font-family: "DSEG14-Classic";
+    text-transform: uppercase;
+    padding: 2% 4%;
+    background: #1a0f00;
+    border: 0.1cqw solid #4a3520;
+    border-radius: 0.3cqw;
+    overflow: hidden;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+
+    > .lcd-text {
+      display: inline-block;
+      pointer-events: none;
+      position: relative;
+      color: #ff8800;
+      text-shadow: 0 0 10px rgba(255, 136, 0, 0.2);
+      z-index: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 2.2rem;
+      line-height: 1;
+
+      &::before {
+        content: attr(data-placeholder);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: #4a2800;
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: -1;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+.lcd-container,
+.lcd-screen,
+.lcd-text {
+  box-sizing: border-box;
+  height: auto;
+}

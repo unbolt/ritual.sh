@@ -2,9 +2,8 @@
 "main" }}
 <article class="about-page">
   <div class="about-content">
-    <div class="about-header">{{ partial "elements/lavalamp.html" . }}</div>
-
     <div class="content-screen">
+      <div class="about-header">{{ partial "elements/lavalamp.html" . }}</div>
       <div class="screen-display crt no-scroll">
         > about -v <br />
         <span>Name</span> / <span class="info">Dan (He/Him)</span><br />
@@ -16,6 +15,12 @@
         ><br />
         <span class="cursor-blink">_</span>
       </div>
+    </div>
+
+    <div class="info-badges random-rotation">
+      {{ $likes := slice "LovingWifex1" "CrazyKidsx3" "labradorsx2" "Linux_User"
+      "Developer" "PC_GAMING" "RETRO_TECH"}} {{ range $likes }} {{ partial
+      "elements/lcd-screen.html" (dict "text" .) }} {{ end }}
     </div>
 
     <div class="wide-item manifesto-container">
