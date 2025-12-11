@@ -122,13 +122,9 @@
   <div class="secondary-screen wall-monitor-1 hidden-xl-down">
     <div class="screen-display crt">
       > updates -lah<br />
-      {{ $pages := where .Site.RegularPages "Kind" "page" }} {{ range first 5
-      (sort $pages "Lastmod" "desc") }} [<time
+      {{ range first 5 (sort .Site.Pages "Lastmod" "desc") }} [<time
         >{{ .Lastmod.Format "2006-01-02" }}</time
-      >] -
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
-
-      <br />
+      >] - <a href="{{ .Permalink }}">{{ .Title }}</a><br />
       {{ end }}
 
       <span class="cursor-blink">_</span>

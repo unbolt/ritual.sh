@@ -3,7 +3,32 @@
   width: 100%;
   height: 100vh;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  overflow: hidden;
+
+  > .page-content {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    margin: auto;
+    z-index: 999;
+  }
+}
+
+.starfield-full {
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  background: linear-gradient(180deg, #0a0f1a 0%, #1a2a3a 50%, #2a3a52);
+
+  > .buildings-bg {
+    position: fixed;
+    bottom: 0;
+    left: 15%;
+    height: 40%;
+    width: 50%;
+    z-index: 2;
+  }
 }
 
 .star {
@@ -39,13 +64,4 @@
   50% {
     opacity: 1;
   }
-}
-
-.buildings-bg {
-  position: fixed;
-  bottom: 0;
-  left: 15%;
-  height: 40%;
-  width: 50%;
-  z-index: 90;
 }
