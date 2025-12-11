@@ -4,24 +4,23 @@
   aspect-ratio: 16/9;
   background: #3a3a3a;
   border: 3px solid #2a2520;
-  border-top: 0px;
+  border-top: 0;
   box-shadow:
     inset 0 0 20px rgba(0, 0, 0, 0.8),
     0 10px 40px rgba(0, 0, 0, 0.9);
   overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    border: 5px solid #1a1510;
+    border-top: 0;
+    pointer-events: none;
+    z-index: 10;
+  }
 }
 
-.window-frame::before {
-  content: "";
-  position: absolute;
-  inset: -20px;
-  border: 5px solid #1a1510;
-  border-top: 0px;
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* Cityscape view */
 .cityscape {
   width: 100%;
   height: 100%;
@@ -31,116 +30,62 @@
     #1a2332 0%,
     #2a3a52 30%,
     #4a5a72 60%,
-    #6a7a92 100%
+    #6a7a92
   );
   overflow: hidden;
 }
 
-/* Sky with slight gradient */
 .starfield {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   height: 100%;
-  background: linear-gradient(180deg, #0a0f1a 0%, #1a2a3a 50%, #2a3a52 100%);
+  background: linear-gradient(180deg, #0a0f1a 0%, #1a2a3a 50%, #2a3a52);
 }
 
 .building-windows {
   width: 100%;
   display: grid;
+  gap: 10%;
+  padding: 5%;
 
   > .window-light {
     width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
   }
 }
 
-@mixin buildings-base {
+@mixin buildings($opacity, $bg-start, $bg-end) {
   position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 0 0;
   display: flex;
   align-items: flex-end;
 
-  @for $i from 1 through 20 {
-    > .building:nth-child(#{$i}) {
-      @if random(4) == 1 {
-        opacity: 0;
-      }
-
-      > .building-windows {
-        @for $j from 1 through 40 {
-          > .window-light:nth-child(#{$j}) {
-            @if random(2) == 1 {
-              background: transparent;
-              box-shadow: none;
-            } @else {
-              $color-choice: random(100);
-              $light-color: null;
-
-              @if $color-choice <= 85 {
-                $hue: 40 + random(20); // 40-60
-                $sat: 70 + random(30); // 70-100%
-                $light: 50 + random(30); // 50-80%
-                $light-color: hsl($hue, $sat * 1%, $light * 1%);
-              } @else if $color-choice <= 95 {
-                $hue: 320 + random(20); // 320-340 (pink range)
-                $sat: 60 + random(40); // 60-100%
-                $light: 60 + random(20); // 60-80%
-                $light-color: hsl($hue, $sat * 1%, $light * 1%);
-              } @else {
-                $hue: 260 + random(40); // 260-300 (purple range)
-                $sat: 50 + random(50); // 50-100%
-                $light: 50 + random(30); // 50-80%
-                $light-color: hsl($hue, $sat * 1%, $light * 1%);
-              }
-
-              background: $light-color;
-              box-shadow: 0 0 10px $light-color;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.buildings-far {
-  @include buildings-base;
-
   > .building {
-    background: linear-gradient(180deg, #272629 0%, #2a3a52 100%);
+    background: linear-gradient(180deg, $bg-start, $bg-end);
     box-shadow:
       inset -2px 0 5px rgba(0, 0, 0, 0.1),
       0 0 10px rgba(42, 38, 31, 0.1);
 
     > .building-windows {
-      width: 100%;
       height: 50%;
-      opacity: 0.3;
-      padding: 5%;
+      opacity: $opacity;
     }
   }
+}
+
+.buildings-far {
+  @include buildings(0.3, #272629, #2a3a52);
 
   @for $i from 1 through 20 {
     > .building:nth-child(#{$i}) {
-      @if random(2) == 1 {
-        $width: random(10) + 5;
-        width: $width * 1%;
-      } @else {
-        $width: random(15) + 5;
-        width: $width + 15px;
+      width: if(random(2) ==1, (random(10) + 5) * 1%, random(15) + 20px);
+      height: (random(60) + 30) * 1%;
+      @if random(4) ==1 {
+        opacity: 0;
       }
-
-      $height: random(60) + 30;
-      height: $height * 1%;
 
       > .building-windows {
         grid-template-columns: repeat(#{random(3) + 3}, 1fr);
-
         > .window-light {
           aspect-ratio: #{0.5 + random(150) / 100};
         }
@@ -150,38 +95,18 @@
 }
 
 .buildings-mid {
-  @include buildings-base;
-
-  > .building {
-    background: linear-gradient(180deg, #201e22 0%, #2a3a52 100%);
-    box-shadow:
-      inset -2px 0 5px rgba(0, 0, 0, 0.1),
-      0 0 10px rgba(42, 38, 31, 0.1);
-
-    > .building-windows {
-      width: 100%;
-      height: 50%;
-      opacity: 0.7;
-      padding: 5%;
-    }
-  }
+  @include buildings(0.7, #201e22, #2a3a52);
 
   @for $i from 1 through 20 {
     > .building:nth-child(#{$i}) {
-      @if random(2) == 1 {
-        $width: random(10) + 10;
-        width: $width * 1%;
-      } @else {
-        $width: random(15) + 10;
-        width: $width + 15px;
+      width: if(random(2) ==1, (random(10) + 10) * 1%, random(15) + 25px);
+      height: (random(20) + 30) * 1%;
+      @if random(4) ==1 {
+        opacity: 0;
       }
-
-      $height: random(20) + 30;
-      height: $height * 1%;
 
       > .building-windows {
         grid-template-columns: repeat(#{random(3) + 3}, 1fr);
-
         > .window-light {
           aspect-ratio: #{0.5 + random(150) / 100};
         }
@@ -191,38 +116,18 @@
 }
 
 .buildings-near {
-  @include buildings-base;
-
-  > .building {
-    background: linear-gradient(180deg, #121113 0%, #182230 100%);
-    box-shadow:
-      inset -2px 0 5px rgba(0, 0, 0, 0.1),
-      0 0 10px rgba(42, 38, 31, 0.1);
-
-    > .building-windows {
-      width: 100%;
-      height: 50%;
-      opacity: 0.8;
-      padding: 5%;
-    }
-  }
+  @include buildings(0.8, #121113, #182230);
 
   @for $i from 1 through 20 {
     > .building:nth-child(#{$i}) {
-      @if random(2) == 1 {
-        $width: random(3) * 7;
-        width: $width * 1%;
-      } @else {
-        $width: random(10) + 50;
-        width: $width + 15px;
+      width: if(random(2) ==1, random(3) * 7 * 1%, random(10) + 65px);
+      height: random(3) * 10 * 1%;
+      @if random(4) ==1 {
+        opacity: 0;
       }
-
-      $height: random(3) * 10;
-      height: $height * 1%;
 
       > .building-windows {
         grid-template-columns: repeat(#{random(2) + 3}, 1fr);
-
         > .window-light {
           aspect-ratio: #{0.5 + random(150) / 100};
         }
@@ -231,7 +136,6 @@
   }
 }
 
-/* Buildings container */
 .buildings {
   position: absolute;
   bottom: 0;
@@ -249,34 +153,34 @@
 
 .building {
   position: relative;
-  background: linear-gradient(180deg, #1a1a2e 0%, #0a0a1e 100%);
+  background: linear-gradient(180deg, #1a1a2e, #0a0a1e);
   box-shadow:
     inset -2px 0 10px rgba(0, 0, 0, 0.5),
     0 0 20px rgba(255, 200, 100, 0.1);
 }
 
-/* Building windows */
-.building-windows {
-  gap: 10%;
-  padding: 5% 5%;
-}
-
 .window-light {
-  background: #ffd700;
-  box-shadow: 0 0 10px #ffd700;
+  --hue: 45;
+  --sat: 85%;
+  --light: 65%;
+  background: hsl(var(--hue), var(--sat), var(--light));
+  box-shadow: 0 0 10px hsl(var(--hue), var(--sat), var(--light));
   animation: windowFlicker 5s ease-in-out infinite;
-}
 
-.window-light:nth-child(odd) {
-  animation-delay: 0.5s;
-}
+  &[data-off] {
+    background: transparent;
+    box-shadow: none;
+  }
 
-.window-light:nth-child(3n) {
-  animation-delay: 3s;
-}
-
-.window-light:nth-child(4n) {
-  animation-delay: 5.5s;
+  &:nth-child(odd) {
+    animation-delay: 0.5s;
+  }
+  &:nth-child(3n) {
+    animation-delay: 3s;
+  }
+  &:nth-child(4n) {
+    animation-delay: 5.5s;
+  }
 }
 
 @keyframes windowFlicker {
@@ -303,7 +207,6 @@
   }
 }
 
-/* Dirt and grime on window */
 .window-grime {
   position: absolute;
   inset: 0;
@@ -327,7 +230,6 @@
   z-index: 6;
 }
 
-/* Glass reflection */
 .glass-reflection {
   position: absolute;
   inset: 0;
@@ -336,13 +238,12 @@
     rgba(255, 255, 255, 0.1) 0%,
     transparent 30%,
     transparent 70%,
-    rgba(255, 255, 255, 0.05) 100%
+    rgba(255, 255, 255, 0.05)
   );
   pointer-events: none;
   z-index: 7;
 }
 
-/* Ambient light from city */
 .ambient-light {
   position: absolute;
   bottom: -50px;
