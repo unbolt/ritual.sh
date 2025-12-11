@@ -1,0 +1,64 @@
+// Define your breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+// Mixin for min-width (mobile-first)
+@mixin media-up($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @if $value == 0 {
+      @content;
+    } @else {
+      @media (min-width: $value) {
+        @content;
+      }
+    }
+  }
+}
+
+// Mixin for max-width (desktop-first)
+@mixin media-down($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @media (max-width: #{$value - 1px}) {
+      @content;
+    }
+  }
+}
+
+// Generate utility classes
+@each $breakpoint, $value in $breakpoints {
+  // Hidden at this breakpoint and up
+  .hidden-#{$breakpoint}-up {
+    @include media-up($breakpoint) {
+      display: none !important;
+    }
+  }
+
+  // Hidden at this breakpoint and down
+  .hidden-#{$breakpoint}-down {
+    @include media-down($breakpoint) {
+      display: none !important;
+    }
+  }
+
+  // Visible only at this breakpoint
+  .visible-#{$breakpoint}-only {
+    display: none !important;
+    @include media-up($breakpoint) {
+      @if $breakpoint != xxl {
+        @include media-down($breakpoint) {
+          display: block !important;
+        }
+      } @else {
+        display: block !important;
+      }
+    }
+  }
+}

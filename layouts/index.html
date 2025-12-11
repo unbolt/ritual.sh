@@ -3,6 +3,8 @@
 {{ end }}{{ define "main" }}
 <div class="wall"></div>
 
+<div class="window">{{ partial "elements/window.html" . }}</div>
+
 <!-- Neon sign above monitor -->
 {{ partial "elements/neon-sign.html" . }}
 
@@ -67,122 +69,29 @@
 <div class="desk"></div>
 
 <!-- Desk monitor -->
+{{/*
 <div class="secondary-screen desk-monitor">
   <div class="screen-display large crt">
     <span class="cursor-blink">_</span>
   </div>
   <div class="monitor-stand-small"></div>
 </div>
+*/}}
 
 <!-- Desk clutter -->
+{{/*
 <div class="desk-item keyboard"></div>
 <div class="desk-item mouse"></div>
-<div class="desk-item coffee-mug"></div>
+
+*/}}
 
 <!-- MUSICAL STUFF -->
-<a href="/audio/">
-  <div class="music">
-    <div class="music-text">MUSIC&nbsp;&amp;&nbsp;AUDIO&nbsp;GEAR</div>
-
-    <div class="ipod-group">
-      <div class="ipod">
-        <div class="ipod-wheel"></div>
-      </div>
-
-      <!-- Earbud cables within the group container -->
-      <svg class="ipod-cables" viewBox="0 0 150 100" style="overflow: visible">
-        <defs>
-          <linearGradient
-            id="cableGradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" style="stop-color: #6b4fb3" />
-            <stop offset="100%" style="stop-color: #4169e1" />
-          </linearGradient>
-        </defs>
-
-        <path
-          d="M 85,3 C 85,-12 75,-22 55,-22 C 35,-22 25,-15 25,0 C 25,15 28,35 32,50 L 35,65"
-          stroke="url(#cableGradient)"
-          stroke-width="2.5"
-          fill="none"
-          stroke-linecap="round"
-        />
-
-        <path
-          d="M 35,65 C 28,72 20,82 5,88"
-          stroke="url(#cableGradient)"
-          stroke-width="1.8"
-          fill="none"
-          stroke-linecap="round"
-        />
-
-        <path
-          d="M 35,65 C 55,73 95,82 125,83"
-          stroke="url(#cableGradient)"
-          stroke-width="1.8"
-          fill="none"
-          stroke-linecap="round"
-        />
-      </svg>
-
-      <div class="earbud earbud-left"></div>
-      <div class="earbud earbud-right"></div>
-    </div>
-
-    <div class="vu-meter">
-      <div class="vu-meter-body">
-        <div class="vu-meter-screen">
-          <div class="vu-bars crt">
-            <div class="vu-bar" style="--delay: 0s; --height: 45%"></div>
-            <div class="vu-bar" style="--delay: 0.1s; --height: 65%"></div>
-            <div class="vu-bar" style="--delay: 0.2s; --height: 80%"></div>
-            <div class="vu-bar" style="--delay: 0.3s; --height: 55%"></div>
-            <div class="vu-bar" style="--delay: 0.4s; --height: 90%"></div>
-            <div class="vu-bar" style="--delay: 0.5s; --height: 70%"></div>
-            <div class="vu-bar" style="--delay: 0.6s; --height: 85%"></div>
-            <div class="vu-bar" style="--delay: 0.7s; --height: 60%"></div>
-            <div class="vu-bar" style="--delay: 0.8s; --height: 75%"></div>
-            <div class="vu-bar" style="--delay: 0.9s; --height: 50%"></div>
-            <div class="vu-bar" style="--delay: 1s; --height: 65%"></div>
-            <div class="vu-bar" style="--delay: 1.1s; --height: 40%"></div>
-            <div class="vu-bar" style="--delay: 1.2s; --height: 55%"></div>
-            <div class="vu-bar" style="--delay: 1.3s; --height: 70%"></div>
-            <div class="vu-bar" style="--delay: 1.4s; --height: 45%"></div>
-            <div class="vu-bar" style="--delay: 1.5s; --height: 35%"></div>
-          </div>
-          <!-- Peak indicator line -->
-          <div class="vu-peak-line"></div>
-        </div>
-        <!-- VU Meter LEDs -->
-        <div class="vu-leds">
-          <div class="vu-led green"></div>
-          <div class="vu-led green"></div>
-          <div class="vu-led yellow"></div>
-          <div class="vu-led red"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="notes">
-      <div class="note">♪</div>
-      <div class="note">♫</div>
-      <div class="note">♪</div>
-      <div class="note">♫</div>
-      <div class="note">♪</div>
-      <div class="note">♫</div>
-    </div>
-  </div>
-</a>
 
 <!-- Widgets and gadgets -->
+{{/*
 <div class="widget router"></div>
 <div class="widget hard-drive"></div>
-
-{{ partial "elements/lavalamp.html" . }}
+*/}}
 
 <!-- CRT Monitor -->
 <div class="crt-container">
@@ -210,7 +119,7 @@
   </div>
 
   <!-- Wall-mounted monitors -->
-  <div class="secondary-screen wall-monitor-1">
+  <div class="secondary-screen wall-monitor-1 hidden-xl-down">
     <div class="screen-display crt">
       > updates -lah<br />
       {{ $pages := where .Site.RegularPages "Kind" "page" }} {{ range first 5
@@ -226,7 +135,7 @@
     </div>
   </div>
 
-  <div class="secondary-screen wall-monitor-2">
+  <div class="secondary-screen wall-monitor-2 hidden-xl-down">
     <div class="screen-display tiny cyan crt">
       <div class="scroll-text">
         [PKT] 192.168.1.1:443<br />
@@ -308,7 +217,7 @@
     </div>
   </div>
 
-  <div class="secondary-screen wall-monitor-3">
+  <div class="secondary-screen wall-monitor-3 hidden-xl-down">
     <div class="screen-display crt">
       PING 8.8.8.8<br />
       64 bytes: 12ms<br />
@@ -318,7 +227,7 @@
     </div>
   </div>
 
-  <div class="secondary-screen wall-monitor-4">
+  <div class="secondary-screen wall-monitor-4 hidden-xl-down">
     <div class="screen-display tiny amber crt">
       > tail -f /var/log<br />
       [INFO] Process OK<br />
@@ -333,6 +242,39 @@
       [ERROR] SQL injection attempt detected. Nice try, Bobby Tables.<br />
       <span class="cursor-blink">_</span>
     </div>
+  </div>
+</div>
+
+<div class="navigation">
+  <div class="nav-lamp">{{ partial "elements/lavalamp.html" . }}</div>
+  <div>
+    <a href="/audio/">
+      <div class="music">
+        <div class="music-text">MUSIC &amp; AUDIO GEAR</div>
+
+        {{ partial "elements/ipod.html" . }}
+
+        <div class="hidden-md-down">
+          {{ partial "elements/vu-meter.html" . }}
+        </div>
+
+        <div class="notes">
+          <div class="note">♪</div>
+          <div class="note">♫</div>
+          <div class="note">♪</div>
+          <div class="note">♫</div>
+          <div class="note">♪</div>
+          <div class="note">♫</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="time-display">
+    {{ partial "elements/lcd-screen.html" (dict "text" "12:03:31" "placeholder"
+    "00:00:00") }}
+  </div>
+  <div class="hidden-xl-down">
+    <div class="coffee-mug"></div>
   </div>
 </div>
 

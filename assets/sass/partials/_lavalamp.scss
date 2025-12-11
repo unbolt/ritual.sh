@@ -1,16 +1,129 @@
 .lava-lamp-container {
-  position: absolute;
-  bottom: 20%;
-  left: 20%;
   width: 80px;
   height: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 999;
-
+  position: relative;
   margin: 0 auto;
-  //width: fit-content; /* or specify a fixed width */
+
+  .nav-lamp & {
+    top: -20px;
+
+    @include media-down(lg) {
+      top: auto;
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    width: 150%;
+    height: 80%;
+    background: conic-gradient(
+      from 0deg,
+      rgba(255, 100, 0, 0.8) 0deg,
+      transparent 5deg,
+      transparent 10deg,
+      rgba(255, 150, 0, 0.6) 15deg,
+      transparent 20deg,
+      transparent 25deg,
+      rgba(255, 200, 0, 0.7) 30deg,
+      transparent 35deg,
+      transparent 40deg,
+      rgba(255, 100, 0, 0.8) 45deg,
+      transparent 50deg,
+      transparent 55deg,
+      rgba(255, 150, 0, 0.6) 60deg,
+      transparent 65deg,
+      transparent 70deg,
+      rgba(255, 200, 0, 0.7) 75deg,
+      transparent 80deg,
+      transparent 85deg,
+      rgba(255, 100, 0, 0.8) 90deg,
+      transparent 95deg,
+      transparent 100deg,
+      rgba(255, 150, 0, 0.6) 105deg,
+      transparent 110deg,
+      transparent 115deg,
+      rgba(255, 200, 0, 0.7) 120deg,
+      transparent 125deg,
+      transparent 130deg,
+      rgba(255, 100, 0, 0.8) 135deg,
+      transparent 140deg,
+      transparent 145deg,
+      rgba(255, 150, 0, 0.6) 150deg,
+      transparent 155deg,
+      transparent 160deg,
+      rgba(255, 200, 0, 0.7) 165deg,
+      transparent 170deg,
+      transparent 175deg,
+      rgba(255, 100, 0, 0.8) 180deg,
+      transparent 185deg,
+      transparent 190deg,
+      rgba(255, 150, 0, 0.6) 195deg,
+      transparent 200deg,
+      transparent 205deg,
+      rgba(255, 200, 0, 0.7) 210deg,
+      transparent 215deg,
+      transparent 220deg,
+      rgba(255, 100, 0, 0.8) 225deg,
+      transparent 230deg,
+      transparent 235deg,
+      rgba(255, 150, 0, 0.6) 240deg,
+      transparent 245deg,
+      transparent 250deg,
+      rgba(255, 200, 0, 0.7) 255deg,
+      transparent 260deg,
+      transparent 265deg,
+      rgba(255, 100, 0, 0.8) 270deg,
+      transparent 275deg,
+      transparent 280deg,
+      rgba(255, 150, 0, 0.6) 285deg,
+      transparent 290deg,
+      transparent 295deg,
+      rgba(255, 200, 0, 0.7) 300deg,
+      transparent 305deg,
+      transparent 310deg,
+      rgba(255, 100, 0, 0.8) 315deg,
+      transparent 320deg,
+      transparent 325deg,
+      rgba(255, 150, 0, 0.6) 330deg,
+      transparent 335deg,
+      transparent 340deg,
+      rgba(255, 200, 0, 0.7) 345deg,
+      transparent 350deg,
+      transparent 355deg,
+      rgba(255, 100, 0, 0.8) 360deg
+    );
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(12px);
+    pointer-events: none;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    animation: rotate-beams 7s linear infinite;
+  }
+}
+
+@keyframes rotate-beams {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
 
 .lamp-cap {
@@ -116,14 +229,32 @@
   transform: translate(-35%, -50%) rotate(85deg);
   font-size: 30px;
   font-weight: bold;
-  color: rgba(224, 27, 36, 0);
+  color: rgba(224, 27, 36, 0.7);
   transition: color 0.5s ease;
   pointer-events: none;
-  z-index: 1;
+  z-index: 4;
   letter-spacing: 2px;
 }
 
-.lava-lamp:hover .lamp-text {
+.lamp-text-shadow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-35%, -50%) rotate(85deg);
+  font-size: 30px;
+  font-weight: bold;
+  color: rgba(224, 27, 36, 0);
+  transition: color 0.5s ease;
+  pointer-events: none;
+  z-index: 4;
+  letter-spacing: 2px;
+
+  @include media-down(lg) {
+    color: rgba(224, 27, 36, 0.2);
+  }
+}
+
+.lava-lamp:hover .lamp-text-shadow {
   color: rgba(224, 27, 36, 0.7);
 }
 

@@ -1,6 +1,5 @@
-{{ $text := .text | default "" }} {{ $placeholder := strings.Repeat (len $text)
-"8" }}
-
+{{ $text := .text | default "" }} {{ $placeholder := .placeholder | default
+(strings.Repeat (len $text) "8" ) }}
 <div class="lcd-container">
   <div class="lcd-screen">
     <span class="lcd-text" data-placeholder="{{ $placeholder }}"
