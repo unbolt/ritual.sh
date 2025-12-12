@@ -11,22 +11,65 @@
   </div>
 
   <div class="page-content">
-    <h1>LIST</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
+    <div class="neon-sign">
+      <div class="neon-text purple">music <span>&</span> audio gear</div>
+    </div>
+
+    <div class="record-shelf-container">
+      <div class="shelf">
+        <!-- prettier-ignore -->
+        {{ $posts := where site.RegularPages "Type" "media" }} 
+        {{ $posts = where $posts "Params.tags" "intersect" (slice "album") }}
+    
+        {{ range first 5 $posts }}
+        <a class="record-slot" href="{{ .RelPermalink }}">
+          <div class="record-sleeve">
+            <!-- prettier-ignore -->
+            {{ with .Resources.GetMatch "cover.*" }} 
+            {{ $image := .Resize "500x webp q85" }}
+            <div
+              class="sleeve-front"
+              style="--album-cover: url({{ $image.RelPermalink }})"
+            >
+              {{ end }}
+              <!-- prettier-ignore -->
+              <div class="album-title">
+                {{ .Title }}
+              </div>
+            </div>
+            <div class="vinyl-record"></div>
+          </div>
+        </a>
+        {{ end }}
+
+        <!-- prettier-ignore -->
+        {{ if gt (len $posts) 5 }}
+        <a href="/tags/tutorial/" class="view-all">
+          View all {{ len $posts }} posts →
+        </a>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- prettier-ignore -->
+    {{ partial "elements/ipod.html" . }} 
+    {{ $posts := where site.RegularPages "Type" "gear" }} 
+    {{ $posts = where $posts "Params.tags" "intersect" (slice "audio") }}
+    
+    {{ range first 5 $posts }}
+    <h2>{{ .Title }}</h2>
+    {{ with .Params.icon }}
+    <p>{{ . }}</p>
+    {{ end }}
+    <a href="{{ .RelPermalink }}">Read more</a>
+    {{ end }}
+
+    <!-- prettier-ignore -->
+    {{ if gt (len $posts) 5 }}
+    <a href="/tags/tutorial/" class="view-all">
+      View all {{ len $posts }} posts →
+    </a>
+    {{ end }}
   </div>
 </article>
 {{ end }}

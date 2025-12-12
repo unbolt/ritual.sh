@@ -122,7 +122,7 @@
   <div class="secondary-screen wall-monitor-1 hidden-xl-down">
     <div class="screen-display crt">
       > updates -lah<br />
-      {{ range first 5 (sort .Site.Pages "Lastmod" "desc") }} [<time
+      {{ range first 10 (sort .Site.Pages "Lastmod" "desc") }} [<time
         >{{ .Lastmod.Format "2006-01-02" }}</time
       >] - <a href="{{ .Permalink }}">{{ .Title }}</a><br />
       {{ end }}
@@ -265,10 +265,15 @@
       </div>
     </a>
   </div>
-  <div class="time-display">
-    {{ partial "elements/lcd-screen.html" (dict "text" "12:03:31" "placeholder"
-    "00:00:00") }}
+  <div>
+    <a href="/now/">
+      <div class="time-display">
+        {{ partial "elements/lcd-screen.html" (dict "text" "12:03:31"
+        "placeholder" "00:00:00") }}
+      </div>
+    </a>
   </div>
+
   <div class="hidden-xl-down">
     <div class="coffee-mug"></div>
   </div>

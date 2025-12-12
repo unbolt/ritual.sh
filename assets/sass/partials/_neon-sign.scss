@@ -5,24 +5,34 @@
   left: 60%;
   transform: translateX(-50%) rotate(-10deg);
   z-index: 1;
+  text-align: center;
+  line-height: 5rem;
 
   > .neon-text {
     font-family: "Neonderthaw", cursive;
     font-size: 7rem;
     color: #fff;
-    text-shadow:
-    /* White core */
-      0 0 5px #fff,
-      0 0 5px #fff,
-      /* Bright green inner glow */ 0 0 21px #0f0,
-      0 0 42px #0f0,
-      0 0 82px #0f0,
-      /* Outer green glow */ 0 0 92px #0f0,
-      0 0 142px #0f0,
-      0 0 181px #0f0;
+    text-shadow: neon-glow(#0f0);
     animation:
       neon-flicker 10s infinite alternate,
       neon-pulse 3s ease-in-out infinite;
+
+    &.purple {
+      text-shadow: neon-glow(#f0f);
+      animation:
+        neon-flicker 10s infinite alternate,
+        neon-pulse-purple 3s ease-in-out infinite;
+      animation-delay: 1.2s;
+
+      > span {
+        color: #fff;
+        text-shadow: neon-glow(#0ff);
+        animation:
+          neon-flicker 10s infinite alternate,
+          neon-pulse-cyan 3s ease-in-out infinite;
+        animation-delay: 0.5s;
+      }
+    }
   }
 
   [role="navigation"] & {
@@ -32,47 +42,61 @@
     left: 10px;
     transform: translateX(0) rotate(-10deg);
     z-index: 9999;
+
     > .neon-text {
       font-size: 2rem;
       text-shadow:
-    /* White core */
         0 0 5px #fff,
         0 0 5px #fff,
-        /* Bright green inner glow */ 0 0 11px #0f0,
+        0 0 11px #0f0,
         0 0 22px #0f0,
         0 0 42px #0f0,
-        /* Outer green glow */ 0 0 22px #0f0,
+        0 0 22px #0f0,
         0 0 42px #0f0,
         0 0 81px #0f0;
     }
   }
 }
 
-@keyframes neon-pulse {
-  0%,
-  100% {
-    text-shadow:
-      0 0 7px #fff,
-      0 0 10px #fff,
-      0 0 21px #0f0,
-      0 0 42px #0f0,
-      0 0 82px #0f0,
-      0 0 92px #0f0,
-      0 0 102px #0f0,
-      0 0 151px #0f0;
-  }
-  50% {
-    text-shadow:
-      0 0 4px #fff,
-      0 0 7px #fff,
-      0 0 15px #0f0,
-      0 0 30px #0f0,
-      0 0 60px #0f0,
-      0 0 70px #0f0,
-      0 0 80px #0f0,
-      0 0 120px #0f0;
+// Function for standard neon glow effect
+@function neon-glow($color) {
+  @return 0 0 5px #fff, 0 0 5px #fff, 0 0 21px $color, 0 0 42px $color,
+    0 0 82px $color, 0 0 92px $color, 0 0 142px $color, 0 0 181px $color;
+}
+
+// Mixin for pulse animation - generates keyframes for any color
+@mixin neon-pulse-animation($name, $color) {
+  @keyframes #{$name} {
+    0%,
+    100% {
+      text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px $color,
+        0 0 42px $color,
+        0 0 82px $color,
+        0 0 92px $color,
+        0 0 102px $color,
+        0 0 151px $color;
+    }
+    50% {
+      text-shadow:
+        0 0 4px #fff,
+        0 0 7px #fff,
+        0 0 15px $color,
+        0 0 30px $color,
+        0 0 60px $color,
+        0 0 70px $color,
+        0 0 80px $color,
+        0 0 120px $color;
+    }
   }
 }
+
+// Generate all three pulse animations
+@include neon-pulse-animation(neon-pulse, #0f0);
+@include neon-pulse-animation(neon-pulse-purple, #f0f);
+@include neon-pulse-animation(neon-pulse-cyan, #0ff);
 
 @keyframes neon-flicker {
   0%,
