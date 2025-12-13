@@ -1,8 +1,8 @@
 ---
-title: "Fiio FT-1"
-date: 2025-12-08
+title: "CVJ Vivian"
+date: 2025-12-11
 tags: ["audio", "headphones"]
-category: ["headphones"]
+category: ["iem"]
 description: ""
 icon: 🎧
 ---

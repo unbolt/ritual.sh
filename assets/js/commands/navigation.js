@@ -45,17 +45,16 @@ if (window.terminal) {
 
   // PAGE NAVIGATION
 
-  window.terminal.registerCommand(
-    "latest",
-    "View the latest post, regardles of section",
-    () => {
-      let latestPostLink = document.getElementById("latest-post-link");
-      window.location.href = latestPostLink.textContent;
-    },
-  );
-
   // About command
   window.terminal.registerCommand("about", "About this site", () => {
     window.location.href = "/about/";
   });
+
+  window.terminal.registerCommand(
+    "music",
+    "My music interests and audio gear",
+    () => {
+      window.location.href = "/audio/";
+    },
+  );
 }

@@ -6,6 +6,10 @@
   color: #fff;
   text-align: center;
 
+  a {
+    color: #fff;
+  }
+
   > .page-content {
     position: absolute;
     left: 50%;
@@ -20,7 +24,77 @@
       padding-top: 400px;
     }
 
-    .neon-sign {
+    .audio-intro {
+      width: 100%;
+      margin: auto;
+      text-align: left;
+      margin-bottom: 30px;
+
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 2rem;
+
+      > div > .neon-sign {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+        margin-bottom: 40px;
+
+        > .neon-text {
+          font-size: 3rem;
+          animation-delay: 2.5s;
+          line-height: 1rem;
+
+          > span {
+            display: block;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: rotate(110deg);
+            letter-spacing: -20%;
+            animation-delay: 2.3s;
+          }
+        }
+      }
+
+      > *:nth-child(3n + 2) {
+        align-self: center;
+        font-size: 3rem;
+      }
+
+      @include media-down(xl) {
+        width: 100%;
+        grid-template-columns: 1fr;
+
+        > *:nth-child(3n + 2) {
+          display: none;
+        }
+      }
+
+      ul {
+        margin-bottom: 2rem;
+
+        li {
+          margin-left: 2rem;
+        }
+      }
+
+      .intro-ipod {
+        float: left;
+        @include media-down(lg) {
+          display: none;
+        }
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+    }
+
+    > .neon-sign {
       position: absolute;
       top: 0;
       left: 50%;
@@ -39,11 +113,11 @@
   .record-shelf-container {
     .shelf {
       display: flex;
-      gap: 5rem;
+      gap: 5%;
       position: relative;
       overflow: visible;
-      padding-left: 2em;
-      padding-right: 2em;
+      padding-left: 5%;
+      padding-right: 5%;
     }
 
     .shelf::before {
@@ -65,10 +139,9 @@
 
     .record-slot {
       position: relative;
-      width: 200px;
-      min-width: 140px;
-      height: 200px;
-      perspective: 1000px;
+      width: 20%;
+      min-width: 100px;
+      aspect-ratio: 1/1;
     }
 
     .record-sleeve {
@@ -76,11 +149,18 @@
       height: 100%;
       position: relative;
       transition: transform 0.3s ease;
+
+      &.active {
+        .sleeve-front {
+          border: 3px solid white;
+        }
+      }
     }
 
     .sleeve-front {
       width: 100%;
       height: 100%;
+      aspect-ratio: 1/1;
       position: absolute;
       border-radius: 2px;
       box-shadow:
@@ -179,6 +259,134 @@
 
     .record-slot:hover .sleeve-front {
       transform: translateX(-10%);
+    }
+  }
+
+  .audio-shelf-text {
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: left;
+    border: 1px solid white;
+
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.1);
+
+    @include media-down(lg) {
+      width: 100%;
+      padding: 10px;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .audio-gear {
+    margin: 2rem 0;
+
+    > .neon-sign {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      bottom: auto;
+      transform: none;
+      margin-bottom: 90px;
+
+      > .neon-text {
+        font-size: 5rem;
+        animation-delay: 2.5s;
+        line-height: 1rem;
+
+        > span {
+          display: block;
+          position: absolute;
+          top: 50px;
+          left: 50%;
+          transform: rotate(80deg);
+          letter-spacing: -20%;
+          animation-delay: 2.3s;
+        }
+      }
+    }
+
+    .gear-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .gear-item {
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid white;
+        border-radius: 4px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+
+        .gear-icon {
+          font-size: 2rem;
+          text-align: center;
+        }
+
+        .gear-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          flex: 1;
+        }
+      }
+    }
+
+    .gear-title {
+      font-size: 1.2rem;
+      margin: 0;
+      color: var(--neon-cyan);
+      font-family: var(--mono-font, monospace);
+    }
+
+    .gear-category {
+      font-size: 0.85rem;
+      color: var(--neon-magenta);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
+    }
+
+    .gear-summary {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      opacity: 0.85;
+      margin: 0.5rem 0;
+      flex: 1;
+    }
+
+    .gear-link {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-top: auto;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--neon-magenta);
+        text-decoration: underline;
+      }
     }
   }
 }

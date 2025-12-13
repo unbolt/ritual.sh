@@ -1,3 +1,4 @@
+@import "normalize";
 @import "mixins";
 
 @import "partials/global-styles";
@@ -17,7 +18,7 @@
 @import "pages/about";
 @import "pages/audio";
 
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Neonderthaw&display=swap");
 
 @font-face {
   font-family: "DSEG7-Classic";
@@ -48,7 +49,7 @@
 body {
   width: 100%;
   height: 100vh;
-  font-family: "Courier New", monospace;
+  font-family: "Lato", sans-serif;
   background: #1a1a1a;
   position: relative;
 }
@@ -291,6 +292,12 @@ body {
   background: black;
   color: greenyellow;
   font-family: monospace;
+
+  > .scroll {
+    overflow: scroll;
+    max-height: 100%;
+    @include scrollbar-custom(#0f0, 3px);
+  }
 }
 
 .crt a {
@@ -1615,9 +1622,6 @@ body {
   background: radial-gradient(ellipse, #2a1a0a 0%, #1a0a00 100%);
   border-radius: 50%;
 }
-
-/* Import a nice cursive font */
-@import url("https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap");
 
 .navigation {
   position: absolute;

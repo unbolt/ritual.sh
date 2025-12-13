@@ -121,13 +121,18 @@
   <!-- Wall-mounted monitors -->
   <div class="secondary-screen wall-monitor-1 hidden-xl-down">
     <div class="screen-display crt">
-      > updates -lah<br />
-      {{ range first 10 (sort .Site.Pages "Lastmod" "desc") }} [<time
-        >{{ .Lastmod.Format "2006-01-02" }}</time
-      >] - <a href="{{ .Permalink }}">{{ .Title }}</a><br />
-      {{ end }}
+      <div class="scroll">
+        > updates -lah<br />
+        {{ range first 10 (where .Site.RegularPages "Type"
+        "updates").ByLastmod.Reverse }} [<time
+          >{{ .Lastmod.Format "2006-01-02" }}</time
+        >]<br />
+        {{ .Plain }}<br />
+        ---<br />
+        {{ end }}
 
-      <span class="cursor-blink">_</span>
+        <span class="cursor-blink">_</span>
+      </div>
     </div>
   </div>
 
@@ -279,12 +284,11 @@
   </div>
 </div>
 
-{{ $pages := where .Site.RegularPages "Kind" "page" }} {{ range first 1 (sort
-$pages "Lastmod" "desc") }}
-
+{{ range first 1 (where .Site.RegularPages "Type" "updates").ByLastmod.Reverse
+}}
 <div id="latest-post">
   <div id="latest-post-link">{{ .Permalink }}</div>
-  <div id="latest-post-title">{{ .Title }}</div>
+  <div id="latest-post-title">{{ .Plain }}</div>
   <div id="latest-post-date">{{ .Lastmod.Format "Jan 2, 2006" }}</div>
 </div>
 {{ end }} {{ end }}

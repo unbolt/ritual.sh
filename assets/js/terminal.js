@@ -61,9 +61,9 @@ class TerminalShell {
         latestPostDate.innerText +
         ")",
     );
-    this.printHTML(
-      "<span class='info'>&nbsp;- Type \"latest\" to view it.</span>",
-    );
+    // this.printHTML(
+    //   "<span class='info'>&nbsp;- Type \"latest\" to view it.</span>",
+    // );
     this.printHTML("&nbsp;");
 
     this.printHTML(
@@ -71,7 +71,7 @@ class TerminalShell {
     );
 
     this.printHTML(
-      '<span class="warning">This site is under construction. There\'s nothing of interest here yet.</span>',
+      '<span class="warning">This site is under construction. There\'s not much of interest here yet.</span>',
     );
 
     this.inputContainer.classList.remove("hidden");

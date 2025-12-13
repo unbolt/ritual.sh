@@ -19,3 +19,61 @@ if (document.getElementById("starfield")) {
     starfield.appendChild(star);
   }
 }
+
+(function () {
+  const container = document.querySelector(".record-shelf-container");
+
+  // Exit if the record shelf doesn't exist on this page
+  if (!container) {
+    return;
+  }
+
+  const recordSlots = container.querySelectorAll(".record-slot");
+  const albumContents = container.querySelectorAll(".album-content");
+
+  // Exit if we don't have the necessary elements
+  if (!recordSlots.length || !albumContents.length) {
+    return;
+  }
+
+  // Set first album as active by default
+  const firstSlot = recordSlots[0];
+  if (firstSlot) {
+    const firstSleeve = firstSlot.querySelector(".record-sleeve");
+    if (firstSleeve) {
+      firstSleeve.classList.add("active");
+    }
+  }
+
+  recordSlots.forEach((slot) => {
+    slot.addEventListener("click", function (e) {
+      e.preventDefault();
+      const index = this.getAttribute("data-album-index");
+
+      // Hide all content
+      albumContents.forEach((content) => (content.style.display = "none"));
+
+      // Show selected content
+      const selectedContent = container.querySelector(
+        `[data-content-index="${index}"]`,
+      );
+      if (selectedContent) {
+        selectedContent.style.display = "block";
+      }
+
+      // Remove active class from all sleeves
+      recordSlots.forEach((s) => {
+        const sleeve = s.querySelector(".record-sleeve");
+        if (sleeve) {
+          sleeve.classList.remove("active");
+        }
+      });
+
+      // Add active class to clicked sleeve
+      const clickedSleeve = this.querySelector(".record-sleeve");
+      if (clickedSleeve) {
+        clickedSleeve.classList.add("active");
+      }
+    });
+  });
+})();

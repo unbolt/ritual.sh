@@ -1,5 +1,8 @@
 {{ define "header" }}{{ partial "page-header.html" . }}{{ end }} {{ define
-"main" }}
+"main" }} {{ $intro := .Resources.GetMatch "intro.md" }} {{ $intro :=
+.Resources.GetMatch "intro.md" }} {{ $currently := .Resources.GetMatch
+"currently.md" }}
+
 <article class="audio-page">
   <div class="starfield-full" id="starfield">
     <div class="buildings-bg">
@@ -11,96 +14,101 @@
   </div>
 
   <div class="page-content">
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
-    <h1>Music &amp; Audio Gear</h1>
+    <div class="neon-sign">
+      <div class="neon-text purple">music <span>&</span> audio gear</div>
+    </div>
+
+    <div class="audio-intro">
+      <div>
+        <div class="intro-ipod">{{ partial "elements/ipod.html" . }}</div>
+
+        {{ with $intro }} {{ .Content }} {{ end }}
+      </div>
+      <div>♫</div>
+      <div>
+        <div class="neon-sign">
+          <div class="neon-text purple">current rotation <span>-></span></div>
+        </div>
+        {{ with $currently }} {{ .Content }} {{end}}
+      </div>
+    </div>
+
+    <div class="record-shelf-container">
+      <div class="shelf">
+        <!-- prettier-ignore -->
+        {{ $posts := where site.RegularPages "Type" "media" }} 
+        {{ $posts = where $posts "Params.tags" "intersect" (slice "album") }}
+        {{ range $index, $post := first 5 $posts }}
+        <a
+          class="record-slot"
+          href="{{ .RelPermalink }}"
+          data-album-index="{{ $index }}"
+        >
+          <div class="record-sleeve">
+            <!-- prettier-ignore -->
+            {{ with .Resources.GetMatch "cover.*" }} 
+              {{ $image := .Resize "500x webp q85" }}
+            <div
+              class="sleeve-front"
+              style="--album-cover: url({{ $image.RelPermalink }})"
+            >
+              {{ end }}
+              <!-- prettier-ignore -->
+              <div class="album-title">
+               {{ .Title }}
+              </div>
+            </div>
+            <div class="vinyl-record"></div>
+          </div>
+        </a>
+        {{ end }}
+        <!-- prettier-ignore -->
+        {{ if gt (len $posts) 5 }}
+        <a href="/tags/album/" class="view-all">
+          View all {{ len $posts }} posts →
+        </a>
+        {{ end }}
+      </div>
+
+      <div class="audio-shelf-text">
+        {{ range $index, $post := first 5 $posts }}
+        <div
+          class="album-content"
+          data-content-index="{{ $index }}"
+          style="{{ if ne $index 0 }}display: none;{{ end }}"
+        >
+          {{ .Content }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="audio-gear">
+      <div class="neon-sign">
+        <div class="neon-text purple">gear <span>-></span></div>
+      </div>
+      <div class="gear-grid">
+        {{ $posts := where site.RegularPages "Type" "gear" }} {{ $posts = where
+        $posts "Params.tags" "intersect" (slice "audio") }} {{ range first 5
+        $posts }}
+        <div class="gear-item">
+          {{ with .Params.icon }}
+          <div class="gear-icon">{{ . }}</div>
+          {{ end }}
+          <div class="gear-content">
+            <h3 class="gear-title">{{ .Title }}</h3>
+            {{ with .Params.category }}
+            <span class="gear-category">{{ . }}</span>
+            {{ end }} {{ with .Summary }}
+            <p class="gear-summary">{{ . }}</p>
+            {{ end }} {{/*
+            <a href="{{ .RelPermalink }}" class="gear-link">View details →</a>
+            */}}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
   </div>
 </article>
 {{ end }}

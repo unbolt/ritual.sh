@@ -62,3 +62,34 @@ $breakpoints: (
     }
   }
 }
+
+@mixin scrollbar-custom(
+  $color: greenyellow,
+  $width: 8px,
+  $track-bg: transparent
+) {
+  scrollbar-color: $color $track-bg;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track-bg;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color;
+    border-radius: calc($width / 2);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: darken($color, 10%);
+  }
+}
+
+// Usage
+.scrollable-child {
+  @include scrollbar-custom(greenyellow, 10px);
+}
