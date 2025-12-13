@@ -13,8 +13,6 @@ minify:
   disableXML: true
   minifyOutput: true
 
-enableGitInfo: true
-
 frontmatter:
   lastmod:
     - lastmod

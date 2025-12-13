@@ -124,7 +124,7 @@
       <div class="scroll">
         > updates -lah<br />
         {{ range first 10 (where .Site.RegularPages "Type"
-        "updates").ByLastmod.Reverse }} [<time
+        "updates").ByDate.Reverse }} [<time
           >{{ .Lastmod.Format "2006-01-02" }}</time
         >]<br />
         {{ .Plain }}<br />
@@ -284,8 +284,7 @@
   </div>
 </div>
 
-{{ range first 1 (where .Site.RegularPages "Type" "updates").ByLastmod.Reverse
-}}
+{{ range first 1 (where .Site.RegularPages "Type" "updates").ByDate.Reverse }}
 <div id="latest-post">
   <div id="latest-post-link">{{ .Permalink }}</div>
   <div id="latest-post-title">{{ .Plain }}</div>
