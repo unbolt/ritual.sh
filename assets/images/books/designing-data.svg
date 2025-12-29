@@ -1,0 +1,6 @@
+<svg width="150" height="250" xmlns="http://www.w3.org/2000/svg">
+  <rect width="150" height="250" fill="#2f4f4f"/>
+  <text x="75" y="125" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle" writing-mode="tb" transform="rotate(180 75 125)">
+    Designing Data-Intensive Apps
+  </text>
+</svg>

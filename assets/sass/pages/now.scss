@@ -1,0 +1,1748 @@
+// Server Room - Horizontal Scrolling Now/Uses Page
+
+// Color variables
+$color-green: #0f0;
+$color-amber: #ff9900;
+$color-blue: #0ff;
+$color-red: #f00;
+
+$dark-bg-1: #1a1a1a;
+$dark-bg-2: #2a2a2a;
+$dark-bg-3: #0a0a0a;
+
+// Mixins for common patterns
+@mixin led-color($color) {
+  background: $color;
+  color: $color;
+}
+
+@mixin panel-unit {
+  background: linear-gradient(
+    90deg,
+    $dark-bg-2 0%,
+    $dark-bg-1 50%,
+    $dark-bg-2 100%
+  );
+  border: 1px solid #444;
+  border-radius: 3px;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+@mixin monitor-color-variant($color) {
+  .metrics-header,
+  .metric-label,
+  .metric-value,
+  .graph-legend,
+  .terminal-output,
+  .network-label,
+  .network-value {
+    color: $color;
+    text-shadow: 0 0 5px $color;
+  }
+
+  .metrics-header {
+    border-bottom-color: $color;
+  }
+
+  .metric-bar {
+    border-color: $color;
+  }
+
+  .metric-fill {
+    background: linear-gradient(90deg, $color 0%, darken($color, 10%) 100%);
+    box-shadow: 0 0 10px $color;
+  }
+
+  .graph-grid {
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        rgba($color, 0.1) 0px,
+        transparent 1px,
+        transparent 30px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba($color, 0.1) 0px,
+        transparent 1px,
+        transparent 30px
+      );
+  }
+}
+
+.server-room {
+  width: 100vw;
+  height: 100vh;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      $dark-bg-2 0px,
+      $dark-bg-2 100px,
+      #252525 100px,
+      #252525 101px
+    ),
+    linear-gradient(180deg, $dark-bg-1 0%, $dark-bg-2 50%, $dark-bg-1 100%);
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+
+  @include scrollbar-custom($color-green, 8px);
+}
+
+.server-room-container {
+  display: flex;
+  align-items: flex-end;
+  min-width: max-content;
+  height: 100%;
+  padding: 20px;
+  gap: 60px;
+  position: relative;
+}
+
+// Ceiling with cable trays
+.server-room::before {
+  content: "";
+  position: sticky;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      $dark-bg-3 0px,
+      $dark-bg-3 200px,
+      $dark-bg-1 200px,
+      $dark-bg-1 205px
+    ),
+    linear-gradient(180deg, #000 0%, $dark-bg-1 100%);
+  border-bottom: 2px solid #333;
+  z-index: 100;
+  pointer-events: none;
+}
+
+// Floor grid
+.server-room::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 99px,
+      rgba(255, 255, 255, 0.03) 99px,
+      rgba(255, 255, 255, 0.03) 100px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 99px,
+      rgba(255, 255, 255, 0.03) 99px,
+      rgba(255, 255, 255, 0.03) 100px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+// Server Rack
+.server-rack {
+  position: relative;
+  width: 250px;
+  background: linear-gradient(
+    180deg,
+    $dark-bg-1 0%,
+    $dark-bg-3 50%,
+    $dark-bg-1 100%
+  );
+  border: 3px solid #333;
+  border-radius: 8px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.8),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.rack-frame {
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rack-label {
+  background: #000;
+  color: $color-green;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid $color-green;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px $color-green;
+}
+
+.server-unit {
+  height: 45px;
+  @include panel-unit;
+}
+
+.server-front-panel {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 100%;
+  gap: 8px;
+}
+
+// LED base styling
+.server-led,
+.switch-status-led,
+.ups-led,
+.storage-drive-led {
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.server-led {
+  width: 6px;
+  height: 6px;
+}
+
+.switch-status-led {
+  width: 5px;
+  height: 5px;
+}
+
+.ups-led {
+  width: 8px;
+  height: 8px;
+  animation-duration: 2.5s;
+}
+
+.storage-drive-led {
+  width: 4px;
+  height: 4px;
+}
+
+// LED color variants - shared across all LED types
+@each $name,
+  $color
+    in (
+      green: $color-green,
+      amber: $color-amber,
+      blue: $color-blue,
+      red: $color-red
+    )
+{
+  .led-#{$name} {
+    @include led-color($color);
+  }
+}
+
+// Server LED animation staggering
+@for $i from 1 through 8 {
+  .server-unit:nth-child(#{$i}) .server-led {
+    animation-delay: #{($i - 1) * 0.2}s;
+  }
+
+  .server-unit:nth-child(#{$i}) .server-led:nth-child(2) {
+    animation-delay: #{($i - 1) * 0.2 + 0.5}s;
+  }
+}
+
+.server-drive-bays {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.drive-bay {
+  width: 30px;
+  height: 20px;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 2px;
+}
+
+.server-vents {
+  width: 60px;
+  height: 25px;
+  background: repeating-linear-gradient(
+    90deg,
+    $dark-bg-3 0px,
+    $dark-bg-3 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  margin-left: 10px;
+}
+
+.rack-legs {
+  position: absolute;
+  bottom: -20px;
+  left: 10%;
+  right: 10%;
+  height: 20px;
+  background: linear-gradient(180deg, #333 0%, $dark-bg-1 100%);
+  border-radius: 0 0 5px 5px;
+}
+
+// Server unit sizing
+@for $i from 1 through 4 {
+  .server-#{$i}u {
+    height: #{45 * $i + ($i - 1) * 5}px;
+  }
+}
+
+// Common labels
+.server-label,
+.switch-label,
+.patch-label,
+.ups-label,
+.storage-label {
+  font-family: monospace;
+  font-size: 9px;
+  color: #999;
+  padding: 2px 5px;
+  white-space: nowrap;
+}
+
+// Network Switch
+.network-switch {
+  height: 45px;
+  background: linear-gradient(
+    90deg,
+    $dark-bg-1 0%,
+    $dark-bg-3 50%,
+    $dark-bg-1 100%
+  );
+  border: 1px solid #333;
+  border-radius: 3px;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.switch-front-panel {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 10px;
+  position: relative;
+}
+
+.switch-ports {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  flex: 1;
+  padding: 5px;
+}
+
+.switch-port {
+  width: 8px;
+  height: 12px;
+  background: #000;
+  border: 1px solid #222;
+  border-radius: 1px;
+  position: relative;
+
+  &.active::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    background: $color-green;
+    border-radius: 50%;
+    box-shadow: 0 0 4px $color-green;
+    animation: blink-fast 1.5s infinite;
+  }
+
+  // Randomized delays for active ports
+  $delays:
+    0.73s, 0.21s, 0.94s, 0.11s, 0.58s, 1.22s, 0.37s, 0.85s, 0.04s, 0.67s, 1.15s,
+    0.42s, 0.98s, 0.29s, 0.76s, 0.13s, 1.08s, 0.51s, 0.89s, 0.33s, 1.01s, 0.46s,
+    0.19s, 0.62s;
+
+  @each $delay in $delays {
+    $i: index($delays, $delay);
+    &.active:nth-child(#{$i})::before {
+      animation-delay: $delay;
+    }
+  }
+}
+
+.switch-leds {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-right: 10px;
+}
+
+.switch-status-led {
+  @for $i from 1 through 3 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{($i - 1) * 0.4}s;
+    }
+  }
+}
+
+@keyframes blink-fast {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+// Patch Panel
+.patch-panel {
+  height: 45px;
+  @include panel-unit;
+}
+
+.patch-front {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 100%;
+  gap: 10px;
+}
+
+.patch-ports {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+  flex: 1;
+  padding: 5px;
+}
+
+.patch-port {
+  width: 10px;
+  height: 15px;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 2px;
+  position: relative;
+
+  &.connected::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 8px;
+    background: $color-amber;
+    border-radius: 1px;
+    box-shadow: 0 0 3px $color-amber;
+  }
+}
+
+// UPS Unit
+.ups-unit {
+  height: 90px;
+  background: linear-gradient(90deg, #3a3a3a 0%, $dark-bg-2 50%, #3a3a3a 100%);
+  border: 1px solid #444;
+  border-radius: 3px;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.ups-front-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  height: 100%;
+  gap: 10px;
+}
+
+.ups-display {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.ups-lcd {
+  background: #1a3a1a;
+  color: $color-green;
+  font-family: "DSEG7-Classic", monospace;
+  font-size: 16px;
+  padding: 8px 15px;
+  border: 2px solid $dark-bg-3;
+  border-radius: 3px;
+  text-shadow: 0 0 8px $color-green;
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.ups-indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ups-led {
+  @for $i from 1 through 2 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{($i - 1) * 0.6}s;
+    }
+  }
+}
+
+// Storage Unit
+.storage-unit {
+  height: 145px;
+  @include panel-unit;
+}
+
+.storage-front-panel {
+  padding: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.storage-drive-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  flex: 1;
+}
+
+.storage-drive {
+  background: $dark-bg-3;
+  border: 1px solid #333;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 2px;
+    background: $dark-bg-1;
+  }
+}
+
+// Storage drive LED animation staggering
+@for $i from 1 through 12 {
+  .storage-drive-grid .storage-drive:nth-child(#{$i}) .storage-drive-led {
+    animation-delay: #{($i - 1) * 0.15}s;
+  }
+}
+
+// Blank Panel
+.blank-panel {
+  height: 45px;
+  background: linear-gradient(
+    90deg,
+    $dark-bg-1 0%,
+    $dark-bg-3 50%,
+    $dark-bg-1 100%
+  );
+  border: 1px solid #333;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+// Rack Spacer
+.rack-spacer {
+  height: 10px;
+}
+
+// Monitor Screen
+.monitor-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.monitor-bezel {
+  border-radius: 8px;
+  padding: 15px 20px 30px 20px;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+
+  &.monitor-bezel-green {
+    background: linear-gradient(145deg, #c8c8c0, #a8a898);
+  }
+
+  &.monitor-bezel-amber {
+    background: linear-gradient(145deg, #d8d0b8, #b8b098);
+  }
+
+  &.monitor-bezel-blue {
+    background: linear-gradient(145deg, #b8b8b0, #989888);
+  }
+}
+
+.monitor-display {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 255, 100, 0.1);
+
+  &.monitor-display-green {
+    @include monitor-color-variant($color-green);
+    box-shadow: inset 0 0 40px rgba(0, 255, 100, 0.1);
+  }
+
+  &.monitor-display-amber {
+    @include monitor-color-variant($color-amber);
+    box-shadow: inset 0 0 40px rgba(255, 153, 0, 0.1);
+  }
+
+  &.monitor-display-blue {
+    @include monitor-color-variant($color-blue);
+    box-shadow: inset 0 0 40px rgba(0, 255, 255, 0.1);
+  }
+}
+
+.monitor-content {
+  padding: 15px;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.monitor-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: scanline 8s linear infinite;
+}
+
+.monitor-power-led {
+  position: absolute;
+  bottom: 8px;
+  right: 20px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulse 2s ease-in-out infinite;
+
+  &.monitor-led-green {
+    @include led-color($color-green);
+  }
+  &.monitor-led-amber {
+    @include led-color($color-amber);
+  }
+  &.monitor-led-blue {
+    @include led-color($color-blue);
+  }
+}
+
+.monitor-stand {
+  width: 60px;
+  height: 40px;
+  background: linear-gradient(180deg, #888 0%, #666 100%);
+  border-radius: 0 0 8px 8px;
+  margin-top: -5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 12px;
+    background: linear-gradient(90deg, transparent, #555, transparent);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+}
+
+// Metrics Display
+.metrics-header {
+  font-family: monospace;
+  font-size: 14px;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid currentColor;
+}
+
+.metrics-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.metric-item {
+  display: grid;
+  grid-template-columns: 60px 1fr 50px;
+  gap: 10px;
+  align-items: center;
+}
+
+.metric-label {
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.metric-bar {
+  height: 18px;
+  background: $dark-bg-3;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.metric-fill {
+  height: 100%;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+  }
+}
+
+.metric-fill-animated {
+  animation: metric-pulse 3s ease-in-out infinite;
+}
+
+@keyframes metric-pulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.metric-value {
+  font-family: "DSEG7-Classic", monospace;
+  font-size: 14px;
+  text-align: right;
+}
+
+// Graph Display
+.graph-container {
+  height: 200px;
+  position: relative;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.graph-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 200%;
+  animation: graph-scroll 15s linear infinite;
+}
+
+.graph-instance {
+  width: 50%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+@keyframes graph-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.graph-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.graph-svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.graph-line {
+  stroke-width: 2;
+
+  &.graph-line-green {
+    stroke: $color-green;
+    filter: drop-shadow(0 0 3px $color-green);
+  }
+  &.graph-line-amber {
+    stroke: $color-amber;
+    filter: drop-shadow(0 0 3px $color-amber);
+  }
+  &.graph-line-blue {
+    stroke: $color-blue;
+    filter: drop-shadow(0 0 3px $color-blue);
+  }
+}
+
+.graph-fill {
+  opacity: 0.2;
+
+  &.graph-fill-green {
+    fill: $color-green;
+  }
+  &.graph-fill-amber {
+    fill: $color-amber;
+  }
+  &.graph-fill-blue {
+    fill: $color-blue;
+  }
+}
+
+.graph-legend {
+  font-family: monospace;
+  font-size: 11px;
+  margin-top: 10px;
+}
+
+// Terminal Output
+.terminal-output {
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.terminal-line {
+  margin: 5px 0;
+}
+
+.status-active {
+  color: $color-green;
+  font-weight: bold;
+}
+
+.terminal-cursor {
+  margin-top: 15px;
+}
+
+// Log Display
+.log-container {
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  max-height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.log-line {
+  color: $color-green;
+  text-shadow: 0 0 3px $color-green;
+  animation: log-scroll 15s linear infinite;
+  opacity: 0;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.5}s;
+    }
+  }
+
+  &.log-warning {
+    color: $color-amber;
+    text-shadow: 0 0 3px $color-amber;
+  }
+
+  &.log-error {
+    color: $color-red;
+    text-shadow: 0 0 3px $color-red;
+  }
+
+  &.log-success {
+    color: $color-green;
+    text-shadow: 0 0 3px $color-green;
+    font-weight: bold;
+  }
+}
+
+@keyframes log-scroll {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+
+// Network Traffic
+.network-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.network-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px;
+  gap: 15px;
+  align-items: center;
+}
+
+.network-label {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.network-graph {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 60px;
+}
+
+.network-bar {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  animation: network-bar-pulse 2s ease-in-out infinite;
+
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) {
+      height: random(80) + 20%;
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+
+  &.network-bar-rx {
+    background: $color-green;
+    box-shadow: 0 0 5px $color-green;
+  }
+
+  &.network-bar-tx {
+    background: $color-blue;
+    box-shadow: 0 0 5px $color-blue;
+  }
+}
+
+.monitor-display-amber {
+  .network-bar.network-bar-rx {
+    background: $color-amber;
+    box-shadow: 0 0 5px $color-amber;
+  }
+
+  .network-bar.network-bar-tx {
+    background: #ffcc00;
+    box-shadow: 0 0 5px #ffcc00;
+  }
+}
+
+@keyframes network-bar-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.1);
+  }
+}
+
+.network-value {
+  font-family: "DSEG7-Classic", monospace;
+  font-size: 12px;
+  text-align: right;
+}
+
+// Whiteboard
+.whiteboard {
+  position: relative;
+  background: #f5f5f5;
+  border: 8px solid #8b7355;
+  border-radius: 8px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 100px rgba(200, 200, 200, 0.3);
+  z-index: 10;
+}
+
+.whiteboard-surface {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(150, 150, 150, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(150, 150, 150, 0.08) 0%,
+      transparent 50%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 24px,
+      rgba(200, 200, 200, 0.15) 24px,
+      rgba(200, 200, 200, 0.15) 25px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 24px,
+      rgba(200, 200, 200, 0.15) 24px,
+      rgba(200, 200, 200, 0.15) 25px
+    ),
+    #fafafa;
+  background-position:
+    0 0,
+    0 0,
+    20px 20px,
+    20px 20px,
+    0 0;
+}
+
+.whiteboard-title {
+  font-family: "Caveat", cursive;
+  font-size: 28px;
+  font-weight: bold;
+  color: $dark-bg-1;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -5px;
+    right: -5px;
+    width: 120%;
+    height: 15px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #333 2%,
+      #333 98%,
+      transparent 100%
+    );
+    clip-path: polygon(
+      0% 60%,
+      3% 45%,
+      8% 55%,
+      15% 40%,
+      22% 50%,
+      28% 35%,
+      35% 48%,
+      42% 52%,
+      48% 45%,
+      55% 55%,
+      62% 48%,
+      68% 52%,
+      75% 45%,
+      82% 50%,
+      88% 40%,
+      93% 52%,
+      97% 48%,
+      100% 55%,
+      100% 65%,
+      97% 58%,
+      93% 62%,
+      88% 50%,
+      82% 60%,
+      75% 55%,
+      68% 62%,
+      62% 58%,
+      55% 65%,
+      48% 55%,
+      42% 62%,
+      35% 58%,
+      28% 45%,
+      22% 60%,
+      15% 50%,
+      8% 65%,
+      3% 55%,
+      0% 70%
+    );
+    opacity: 0.95;
+  }
+}
+
+.whiteboard-content {
+  font-family: "Caveat", cursive;
+  font-size: 20px;
+  color: $dark-bg-1;
+  line-height: 1.8;
+
+  p {
+    margin: 10px 0;
+  }
+
+  ul,
+  ol {
+    margin-left: 20px;
+  }
+
+  ul li {
+    list-style: none;
+    position: relative;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    margin-bottom: 1rem;
+
+    &::before {
+      content: "●";
+      position: absolute;
+      left: -20px;
+      top: -0.2em;
+      font-size: 10px;
+      line-height: 1.8rem;
+      transform: rotate(20deg) scale(1.2, 0.9);
+      opacity: 0.85;
+      text-shadow:
+        1px 0 0 currentColor,
+        -1px 1px 0 currentColor,
+        0 -1px 0 currentColor;
+    }
+
+    // Vary the scribbled dots slightly
+    &:nth-child(2n)::before {
+      transform: rotate(-15deg) scale(0.95, 1.1);
+    }
+
+    &:nth-child(3n)::before {
+      transform: rotate(35deg) scale(1.1, 0.85);
+    }
+
+    &:nth-child(5n)::before {
+      transform: rotate(-25deg) scale(1.05, 0.95);
+      opacity: 0.9;
+    }
+  }
+
+  a {
+    background: linear-gradient(120deg, #d946ef 0%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    position: relative;
+    font-weight: 600;
+    display: inline;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(120deg, #d946ef 0%, #0ea5e9 100%);
+      clip-path: polygon(
+        0% 55%,
+        5% 40%,
+        12% 50%,
+        20% 35%,
+        28% 48%,
+        38% 42%,
+        48% 52%,
+        58% 38%,
+        68% 50%,
+        78% 42%,
+        88% 48%,
+        95% 40%,
+        100% 52%,
+        100% 62%,
+        95% 50%,
+        88% 58%,
+        78% 52%,
+        68% 60%,
+        58% 48%,
+        48% 62%,
+        38% 52%,
+        28% 58%,
+        20% 45%,
+        12% 60%,
+        5% 50%,
+        0% 65%
+      );
+      opacity: 1;
+    }
+
+    // External link icon
+    &[target="_blank"]::before {
+      content: "🌐";
+      font-size: 0.6em;
+      margin-right: 3px;
+      display: inline-block;
+    }
+
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// Whiteboard Notes
+.wb-notes {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 15px;
+  z-index: 5;
+}
+
+.wb-note {
+  width: 100px;
+  min-height: 90px;
+  padding: 10px;
+  font-family: "Caveat", cursive;
+  font-size: 14px;
+  line-height: 1.4;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow:
+    2px 2px 8px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+
+  &:nth-child(1) {
+    transform: rotate(1deg);
+  }
+
+  &:nth-child(2) {
+    transform: rotate(-2deg);
+  }
+
+  &:nth-child(3) {
+    transform: rotate(2deg);
+  }
+
+  // Pin at the top
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #666 0%, #333 60%);
+    border-radius: 50%;
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+}
+
+.wb-note-content {
+  word-wrap: break-word;
+}
+
+// Whiteboard note colors
+.wb-note-yellow {
+  background: linear-gradient(135deg, #fff59d 0%, #ffeb3b 100%);
+}
+
+.wb-note-pink {
+  background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+}
+
+.wb-note-blue {
+  background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+}
+
+.wb-note-green {
+  background: linear-gradient(135deg, #c5e1a5 0%, #aed581 100%);
+}
+
+.wb-note-orange {
+  background: linear-gradient(135deg, #ffcc80 0%, #ffb74d 100%);
+}
+
+.wb-note-purple {
+  background: linear-gradient(135deg, #ce93d8 0%, #ba68c8 100%);
+}
+
+// Bookshelf
+.bookshelf {
+  width: 400px;
+  height: 500px;
+  position: relative;
+  background: linear-gradient(90deg, #4a3528 0%, #3a2518 50%, #4a3528 100%);
+  border-radius: 5px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  padding-bottom: 30px;
+}
+
+.bookshelf-title {
+  font-family: monospace;
+  font-size: 11px;
+  color: #d4a574;
+  text-align: center;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.shelf {
+  position: relative;
+  width: 100%;
+  height: 23%;
+  margin: 5px 0;
+}
+
+.shelf-board {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15px;
+  background: linear-gradient(180deg, #6a4a3a 0%, #4a3528 100%);
+  border-radius: 2px;
+  box-shadow:
+    0 -2px 5px rgba(0, 0, 0, 0.3),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.shelf-items {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: calc(100% - 15px);
+  display: flex;
+  gap: 3px;
+  align-items: flex-start;
+}
+
+.shelf-books {
+  @extend .shelf-items;
+}
+
+.shelf-item {
+  position: relative;
+  transition: transform 0.2s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  &.item {
+    width: 45px !important;
+    height: 65px;
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 2px;
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.5),
+      inset 0 0 3px rgba(255, 255, 255, 0.1);
+
+    img.dvd-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 1px;
+    }
+  }
+
+  &.current {
+    transform: translateY(-8px);
+    z-index: 5;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%);
+      border-radius: 3px;
+      z-index: -1;
+      animation: current-pulse 2s ease-in-out infinite;
+    }
+
+    .current-indicator {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    .current-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(
+        circle,
+        rgba(255, 215, 0, 0.3) 0%,
+        transparent 70%
+      );
+      animation: glow-pulse 2s ease-in-out infinite;
+    }
+
+    .current-label {
+      font-family: monospace;
+      font-size: 8px;
+      font-weight: bold;
+      color: #ffd700;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-shadow: 0 0 5px #ffd700;
+      border: 1px solid #ffd700;
+      position: relative;
+      z-index: 11;
+    }
+  }
+}
+
+@keyframes current-pulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.bookshelf-frame {
+  position: absolute;
+  inset: -5px;
+  border: 5px solid #2a1a0f;
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bookshelf-legs {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bookshelf-leg {
+  width: 50px;
+  height: 100%;
+  background: linear-gradient(180deg, #5a4a38 0%, #3a2a18 100%);
+  border: 2px solid #2a1a0f;
+  border-top: none;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: -8px;
+    right: -8px;
+    height: 8px;
+    background: linear-gradient(180deg, #3a2a18 0%, #2a1a0f 100%);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  &.leg-left {
+    border-radius: 0 0 0 3px;
+  }
+
+  &.leg-right {
+    border-radius: 0 0 3px 0;
+  }
+}
+
+// Computer terminal on desk
+.terminal-desk {
+  width: 400px;
+  height: 500px;
+  position: relative;
+  z-index: 10;
+}
+
+.desk-surface {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(180deg, #2d1f12 0%, #1d1208 100%);
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.7);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1d1208, #0d0804, #1d1208);
+  }
+}
+
+.terminal-monitor {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
+  height: 280px;
+  background: linear-gradient(145deg, #e8e0c8, #c4b89a);
+  border-radius: 8px;
+  padding: 15px 20px 30px 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.terminal-screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 12px;
+  color: $color-green;
+  overflow-y: auto;
+  box-shadow: inset 0 0 40px rgba(0, 255, 100, 0.1);
+
+  @include scrollbar-custom($color-green, 3px);
+}
+
+// Ambient lighting effects
+.ambient-light {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.3;
+  pointer-events: none;
+  animation: ambient-pulse 4s ease-in-out infinite;
+
+  &.green {
+    background: $color-green;
+  }
+  &.blue {
+    background: #00f;
+  }
+  &.amber {
+    background: $color-amber;
+  }
+}
+
+@keyframes ambient-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.1);
+  }
+}
+
+// Server room sign/title
+.server-room-sign {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  pointer-events: none;
+}
+
+.sign-frame {
+  background: linear-gradient(145deg, $dark-bg-2 0%, $dark-bg-1 100%);
+  border: 8px solid #444;
+  border-radius: 8px;
+  padding: 20px 40px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: linear-gradient(145deg, #555 0%, #333 100%);
+    border-radius: 12px;
+    z-index: -1;
+  }
+}
+
+.sign-content {
+  text-align: center;
+}
+
+.sign-title {
+  font-family: "Courier New", monospace;
+  font-size: 48px;
+  font-weight: bold;
+  color: $color-green;
+  text-shadow:
+    0 0 10px $color-green,
+    0 0 20px $color-green,
+    0 0 30px $color-green;
+  letter-spacing: 8px;
+  margin-bottom: 5px;
+  animation: sign-flicker 4s infinite;
+}
+
+.sign-subtitle {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: #888;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+@keyframes sign-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  2%,
+  4% {
+    opacity: 0.8;
+  }
+  6% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.9;
+  }
+}
+
+// Shared animations
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+// Responsive adjustments
+@include media-down(lg) {
+  .server-room-container {
+    gap: 40px;
+  }
+
+  .server-rack {
+    width: 200px;
+  }
+
+  .whiteboard {
+    min-width: 300px;
+  }
+
+  .bookshelf {
+    min-width: 250px;
+  }
+}

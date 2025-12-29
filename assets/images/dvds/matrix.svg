@@ -1,0 +1,9 @@
+<svg width="120" height="180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="180" fill="#000"/>
+  <text x="60" y="90" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#0f0" text-anchor="middle">
+    THE
+  </text>
+  <text x="60" y="110" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#0f0" text-anchor="middle">
+    MATRIX
+  </text>
+</svg>

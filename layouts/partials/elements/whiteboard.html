@@ -1,0 +1,23 @@
+{{ $file := .file }}
+{{ $context := .context }}
+{{ with $context.Resources.GetMatch $file }}
+<div class="whiteboard" style="width: {{ .Params.width }}; height: {{ .Params.height }}">
+  <div class="whiteboard-surface">
+    <div class="whiteboard-title">{{ .Title }}</div>
+    <div class="whiteboard-content">
+      {{ .Content }}
+    </div>
+    {{ if .Params.sticky_notes }}
+    <div class="wb-notes">
+      {{ range $index, $note := .Params.sticky_notes }}
+      {{ if lt $index 3 }}
+      <div class="wb-note wb-note-{{ $note.color | default "yellow" }}">
+        <div class="wb-note-content">{{ $note.text }}</div>
+      </div>
+      {{ end }}
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,116 @@
+{{ $height := .height | default "600px" }}
+{{ $title := .title | default "" }}
+{{ $units := .units | default (slice) }}
+
+<div class="server-rack" style="height: {{ $height }};">
+  <div class="rack-frame">
+    {{ if $title }}
+    <div class="rack-label">{{ $title }}</div>
+    {{ end }}
+
+    {{ if $units }}
+      {{ range $units }}
+        {{ if eq .type "server" }}
+          <div class="server-unit {{ if .size }}server-{{ .size }}u{{ end }}">
+            <div class="server-front-panel">
+              <div class="server-led led-{{ .led1 | default "green" }}"></div>
+              <div class="server-led led-{{ .led2 | default "amber" }}"></div>
+              {{ if .label }}
+              <div class="server-label">{{ .label }}</div>
+              {{ end }}
+              <div class="server-drive-bays">
+                {{ range seq (.drives | default 2) }}
+                <div class="drive-bay"></div>
+                {{ end }}
+              </div>
+              <div class="server-vents"></div>
+            </div>
+          </div>
+        {{ else if eq .type "switch" }}
+          <div class="network-switch {{ if .size }}server-{{ .size }}u{{ end }}">
+            <div class="switch-front-panel">
+              {{ if .label }}
+              <div class="switch-label">{{ .label }}</div>
+              {{ end }}
+              <div class="switch-ports">
+                {{ range seq (.ports | default 24) }}
+                <div class="switch-port {{ if mod . 2 }}active{{ end }}"></div>
+                {{ end }}
+              </div>
+              <div class="switch-leds">
+                <div class="switch-status-led led-green"></div>
+                <div class="switch-status-led led-green"></div>
+                <div class="switch-status-led led-amber"></div>
+              </div>
+            </div>
+          </div>
+        {{ else if eq .type "patch-panel" }}
+          <div class="patch-panel {{ if .size }}server-{{ .size }}u{{ end }}">
+            <div class="patch-front">
+              {{ if .label }}
+              <div class="patch-label">{{ .label }}</div>
+              {{ end }}
+              <div class="patch-ports">
+                {{ range seq (.ports | default 24) }}
+                <div class="patch-port"></div>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        {{ else if eq .type "ups" }}
+          <div class="ups-unit {{ if .size }}server-{{ .size }}u{{ end }}">
+            <div class="ups-front-panel">
+              {{ if .label }}
+              <div class="ups-label">{{ .label }}</div>
+              {{ end }}
+              <div class="ups-display">
+                <div class="ups-lcd">
+                  <span style="font-size: 10px;">{{ .capacity | default "100" }}%</span>
+                </div>
+              </div>
+              <div class="ups-indicators">
+                <div class="ups-led led-green"></div>
+                <div class="ups-led led-green"></div>
+              </div>
+            </div>
+          </div>
+        {{ else if eq .type "storage" }}
+          <div class="storage-unit {{ if .size }}server-{{ .size }}u{{ end }}">
+            <div class="storage-front-panel">
+              {{ if .label }}
+              <div class="storage-label">{{ .label }}</div>
+              {{ end }}
+              <div class="storage-drive-grid">
+                {{ range seq (.drives | default 12) }}
+                <div class="storage-drive">
+                  <div class="storage-drive-led led-{{ if mod . 3 }}green{{ else }}amber{{ end }}"></div>
+                </div>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        {{ else if eq .type "blank" }}
+          <div class="blank-panel {{ if .size }}server-{{ .size }}u{{ end }}"></div>
+        {{ else if eq .type "spacer" }}
+          <div class="rack-spacer {{ if .size }}server-{{ .size }}u{{ end }}"></div>
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      <!-- Default configuration if no units specified -->
+      {{ range seq 8 }}
+      <div class="server-unit">
+        <div class="server-front-panel">
+          <div class="server-led led-green"></div>
+          <div class="server-led led-amber"></div>
+          <div class="server-drive-bays">
+            <div class="drive-bay"></div>
+            <div class="drive-bay"></div>
+          </div>
+          <div class="server-vents"></div>
+        </div>
+      </div>
+      {{ end }}
+    {{ end }}
+  </div>
+  <div class="rack-legs"></div>
+</div>

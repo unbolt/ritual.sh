@@ -1,0 +1,142 @@
+{{ $width := .width | default "400px" }}
+{{ $height := .height | default "350px" }}
+{{ $type := .type | default "metrics" }}
+{{ $title := .title | default "System Monitor" }}
+{{ $color := .color | default "green" }}
+
+<div class="monitor-screen" style="width: {{ $width }}; height: {{ $height }};">
+  <div class="monitor-bezel monitor-bezel-{{ $color }}">
+    <div class="monitor-display monitor-display-{{ $color }} crt">
+      <div class="monitor-content screen-display">
+
+        {{ if eq $type "metrics" }}
+          <!-- System Metrics Display -->
+          <div class="metrics-header">{{ $title }}</div>
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <div class="metric-label">CPU</div>
+              <div class="metric-bar">
+                <div class="metric-fill metric-fill-animated" style="width: 67%; animation-delay: 0s;"></div>
+              </div>
+              <div class="metric-value">67%</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">RAM</div>
+              <div class="metric-bar">
+                <div class="metric-fill metric-fill-animated" style="width: 82%; animation-delay: 0.2s;"></div>
+              </div>
+              <div class="metric-value">82%</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">DISK</div>
+              <div class="metric-bar">
+                <div class="metric-fill metric-fill-animated" style="width: 45%; animation-delay: 0.4s;"></div>
+              </div>
+              <div class="metric-value">45%</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">NET</div>
+              <div class="metric-bar">
+                <div class="metric-fill metric-fill-animated" style="width: 34%; animation-delay: 0.6s;"></div>
+              </div>
+              <div class="metric-value">34%</div>
+            </div>
+          </div>
+
+        {{ else if eq $type "graph" }}
+          <!-- Live Graph Display -->
+          <div class="metrics-header">{{ $title }}</div>
+          <div class="graph-container">
+            <div class="graph-wrapper">
+              <!-- First instance of the graph -->
+              <svg class="graph-svg graph-instance" viewBox="0 0 300 150" preserveAspectRatio="none">
+                <polyline class="graph-line graph-line-{{ $color }}"
+                  points="0,80 10,75 20,85 30,78 40,65 50,70 60,60 70,55 80,65 90,58 100,45 110,50 120,40 130,35 140,45 150,38 160,25 170,30 180,20 190,15 200,25 210,18 220,12 230,20 240,15 250,25 260,22 270,28 280,25 290,35 300,80"
+                  fill="none" />
+                <polyline class="graph-fill graph-fill-{{ $color }}"
+                  points="0,80 10,75 20,85 30,78 40,65 50,70 60,60 70,55 80,65 90,58 100,45 110,50 120,40 130,35 140,45 150,38 160,25 170,30 180,20 190,15 200,25 210,18 220,12 230,20 240,15 250,25 260,22 270,28 280,25 290,35 300,80 300,150 0,150"
+                  />
+              </svg>
+              <!-- Second instance (duplicate for seamless loop) -->
+              <svg class="graph-svg graph-instance" viewBox="0 0 300 150" preserveAspectRatio="none">
+                <polyline class="graph-line graph-line-{{ $color }}"
+                  points="0,80 10,75 20,85 30,78 40,65 50,70 60,60 70,55 80,65 90,58 100,45 110,50 120,40 130,35 140,45 150,38 160,25 170,30 180,20 190,15 200,25 210,18 220,12 230,20 240,15 250,25 260,22 270,28 280,25 290,35 300,80"
+                  fill="none" />
+                <polyline class="graph-fill graph-fill-{{ $color }}"
+                  points="0,80 10,75 20,85 30,78 40,65 50,70 60,60 70,55 80,65 90,58 100,45 110,50 120,40 130,35 140,45 150,38 160,25 170,30 180,20 190,15 200,25 210,18 220,12 230,20 240,15 250,25 260,22 270,28 280,25 290,35 300,80 300,150 0,150"
+                  />
+              </svg>
+            </div>
+            <div class="graph-grid"></div>
+          </div>
+          <div class="graph-legend">
+            <span class="graph-legend-item">▲ Throughput: 2.4 GB/s</span>
+          </div>
+
+        {{ else if eq $type "terminal" }}
+          <!-- Terminal Output -->
+          <div class="terminal-output">
+            <div class="terminal-line">$ systemctl status</div>
+            <div class="terminal-line">● {{ $title }}</div>
+            <div class="terminal-line">  Loaded: loaded (/etc/systemd/system/)</div>
+            <div class="terminal-line">  Active: <span class="status-active">active (running)</span></div>
+            <div class="terminal-line">  Memory: 2.4G</div>
+            <div class="terminal-line">  CPU: 12.5%</div>
+            <div class="terminal-line terminal-cursor">$<span class="cursor-blink">_</span></div>
+          </div>
+
+        {{ else if eq $type "logs" }}
+          <!-- Scrolling Logs -->
+          <div class="metrics-header">{{ $title }}</div>
+          <div class="log-container">
+            <div class="log-line">[OK] Started Network Manager</div>
+            <div class="log-line">[OK] Started User Login Management</div>
+            <div class="log-line log-warning">[WARN] High memory usage detected</div>
+            <div class="log-line">[INFO] Service nginx.service reloaded</div>
+            <div class="log-line">[OK] Mounted /mnt/storage</div>
+            <div class="log-line log-success">[OK] System backup completed</div>
+            <div class="log-line">[INFO] Connection established</div>
+            <div class="log-line">[OK] Started Docker Engine</div>
+            <div class="log-line log-error">[ERR] Failed to resolve hostname</div>
+            <div class="log-line">[INFO] Firewall rules updated</div>
+          </div>
+
+        {{ else if eq $type "network" }}
+          <!-- Network Traffic -->
+          <div class="metrics-header">{{ $title }}</div>
+          <div class="network-stats">
+            <div class="network-row">
+              <div class="network-label">↓ RX</div>
+              <div class="network-graph">
+                {{ range seq 20 }}
+                <div class="network-bar network-bar-rx"></div>
+                {{ end }}
+              </div>
+              <div class="network-value">24.3 MB/s</div>
+            </div>
+            <div class="network-row">
+              <div class="network-label">↑ TX</div>
+              <div class="network-graph">
+                {{ range seq 20 }}
+                <div class="network-bar network-bar-tx"></div>
+                {{ end }}
+              </div>
+              <div class="network-value">12.8 MB/s</div>
+            </div>
+          </div>
+
+        {{ end }}
+
+      </div>
+
+      <!-- Screen scanlines effect -->
+      <div class="monitor-scanlines"></div>
+    </div>
+
+    <!-- Monitor power LED -->
+    <div class="monitor-power-led monitor-led-{{ $color }}"></div>
+  </div>
+
+  <!-- Monitor stand -->
+  <div class="monitor-stand"></div>
+</div>

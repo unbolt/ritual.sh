@@ -1,0 +1,39 @@
+{{ $items := .items | default (slice) }} {{ $shelves := .shelves | default 4 }}
+{{ $width := .width | default "300px" }} {{ $height := .height | default "400px"
+}} {{ $type := .type | default "books" }} {{ $title := .title | default "" }}
+
+<div class="bookshelf">
+  {{ if $title }}
+  <div class="bookshelf-title">{{ $title }}</div>
+  {{ end }} {{ range seq $shelves }}
+  <div class="shelf">
+    <div class="shelf-board"></div>
+    <div class="shelf-items">
+      {{ if $items }} {{ range $items }}
+      <div class="shelf-item item {{ if .current }}current{{ end }}">
+        {{ if .image }} {{ $img := resources.Get .image }} {{ if $img }} {{
+        $resized := $img.Resize "100x120" }}
+        <img
+          src="{{ $resized.RelPermalink }}"
+          alt="{{ .title }}"
+          class="dvd-cover"
+        />
+        {{ end }} {{ end }} {{ if .current }}
+        <div class="current-indicator">
+          <div class="current-glow"></div>
+          <div class="current-label">
+            {{ if eq $type "dvds" }}WATCHING{{ else }}READING{{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }} {{ end }}
+    </div>
+  </div>
+  {{ end }}
+  <div class="bookshelf-frame"></div>
+  <div class="bookshelf-legs">
+    <div class="bookshelf-leg leg-left"></div>
+    <div class="bookshelf-leg leg-right"></div>
+  </div>
+</div>

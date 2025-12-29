@@ -4,6 +4,9 @@ date: 2025-01-12
 tags: ["album"]
 description: ""
 cover: "cover.jpg"
+render: never
+build:
+  render: never
 ---
 
 Neon Odin's _Allfather_ feels like mythology filtered through analog circuits and a CRT glow (much like myself). The album merges darksynth with handcrafted Nordic folk instruments - talharpa and nyckelharpa built by the artist himself - creating something that shouldn't work but absolutely does.

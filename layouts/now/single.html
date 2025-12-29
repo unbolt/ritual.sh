@@ -1,37 +1,176 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basement Window</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+{{ define "main" }}
+<div class="server-room">
+  <!-- Page title sign -->
+  <div class="server-room-sign">
+    <div class="sign-frame">
+      <div class="sign-content">
+        <div class="sign-title">/NOW</div>
+        <div class="sign-subtitle">Updated {{ now.Format "02/01/2006" }}</div>
+      </div>
+    </div>
+  </div>
 
-      body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
-        font-family: "Courier New", monospace;
-        overflow: hidden;
-      }
+  <div class="server-room-container">
+    <!-- Server Rack 1: Production Infrastructure -->
+    <!-- prettier-ignore -->
+    {{ partial "elements/server-rack.html"
+    (dict "height" "650px" "title" "PROD-RACK-01"
+    "units" (slice
+      (dict "type" "switch" "label" "Core-SW-01" "ports" 24)
+      (dict "type" "spacer")
+      (dict "type" "server" "label" "WEB-01" "led1" "green" "led2" "green" "drives" 1)
+      (dict "type" "server" "label" "WEB-02" "led1" "green" "led2" "amber" "drives" 1)
+      (dict "type" "server" "label" "DB-01" "led1" "green" "led2" "green" "drives" 2)
+      (dict "type" "spacer")
+      (dict "type" "patch-panel" "ports" 24)
+      (dict "type" "blank")
+      (dict "type" "server" "label" "API-01" "led1" "green" "led2" "blue" "drives" 1)
+      (dict "type" "server" "label" "Cache-01" "led1" "green" "led2" "green" "drives" 1)
+    ) ) }}
 
-      .basement-wall {
-        width: 100%;
-        max-width: 800px;
-        padding: 20px;
-        position: relative;
-        color: #fff;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="basement-wall">Coming soon...</div>
-  </body>
-</html>
+    <!-- Whiteboard: Currently -->
+    {{ partial "elements/whiteboard.html" (dict "file" "currently.md" "context" .) }}
+
+    <!-- Server Rack 2: Storage & Backup -->
+    <!-- prettier-ignore -->
+    {{ partial "elements/server-rack.html" 
+    (dict "height" "650px" "title" "STORAGE-01" 
+    "units" (slice 
+      (dict "type" "server" "label" "NAS-01" "led1" "green" "led2" "green" "drives" 1 "size" 1) 
+      (dict "type" "spacer") 
+      (dict "type" "storage" "label" "SAN-Primary" "drives" 12 "size" 3)
+      (dict "type" "spacer")
+      (dict "type" "server" "label" "Backup-01" "led1" "blue" "led2" "amber" "drives" 2)
+      (dict "type" "blank")
+    ) ) }}
+
+    <!-- Terminal Desk -->
+    <div class="terminal-desk">
+      <div class="terminal-monitor">
+        <div class="terminal-screen">
+          <div style="color: #0f0; text-shadow: 0 0 5px #0f0">
+            <p>$ whoami</p>
+            <p>dan@ritual.sh</p>
+            <br />
+            <p>$ cat current_stack.txt</p>
+            <p>Languages: JavaScript, TypeScript, Python, Rust (learning)</p>
+            <p>Frontend: React, Vue, Hugo</p>
+            <p>Backend: Node.js, FastAPI</p>
+            <p>DevOps: Docker, Linux, Git</p>
+            <p>Interests: Homelab, Self-hosting, Open Source</p>
+            <br />
+            <p>$ uptime</p>
+            <p>
+              {{ now.Format "15:04:05" }} up 42 days, load average: 0.15, 0.23,
+              0.18
+            </p>
+            <br />
+            <p><span class="cursor-blink">_</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="desk-surface"></div>
+      <div
+        class="ambient-light green"
+        style="bottom: 200px; left: 50%; width: 200px; height: 200px"
+      ></div>
+    </div>
+
+    <!-- Bookshelf: Currently Reading -->
+    <!-- prettier-ignore -->
+    {{ partial "elements/bookshelf.html" (dict
+      "width" "350px"
+      "height" "600px"
+      "title" "Currently Reading"
+      "type" "books"
+      "shelves" 1
+      "items" (slice
+        (dict "image" "images/books/alchemised.png" "title" "Alchemised" "current" true)
+      )
+    ) }}
+
+    <!-- Whiteboard: Daily Drivers -->
+    {{ partial "elements/whiteboard.html" (dict "file" "daily-drivers.md" "context" .) }}
+
+    <!-- Server Rack 3: Dev & Testing -->
+    <!-- prettier-ignore -->
+    {{ partial "elements/server-rack.html" 
+    (dict "height" "700px" "title" "DEV-RACK-01" 
+    "units" (slice 
+      (dict "type" "switch" "label" "Dev-SW-01" "ports" 24) 
+      (dict "type" "patch-panel" "label" "Patch-Dev" "ports" 24) 
+      (dict "type" "spacer") 
+      (dict "type" "server" "label" "Dev-01" "led1" "green" "led2" "amber" "drives" 2)
+      (dict "type" "server" "label" "Dev-02" "led1" "blue" "led2" "green" "drives" 2)
+      (dict "type" "server" "label" "Test-01" "led1" "green" "led2" "red" "drives" 1)
+      (dict "type" "spacer") 
+      (dict "type" "server" "label" "CI/CD" "led1" "green" "led2" "green" "drives" 2)
+      (dict "type" "blank") 
+      (dict "type" "server" "label" "Monitoring" "led1" "blue" "led2" "amber" "drives" 1)
+    )) }}
+
+    <!-- Whiteboard: Learning Queue -->
+    {{ partial "elements/whiteboard.html" (dict "file" "learning-queue.md" "context" .) }}
+
+    <!-- Server Rack 4: Power & Network -->
+    <!-- prettier-ignore -->
+    {{ partial "elements/server-rack.html" (dict "height" "550px" "title"
+    "INFRA-01" "units" (slice (dict "type" "ups" "label" "UPS-Primary"
+    "capacity" "98" "size" 2) (dict "type" "spacer") (dict "type" "switch"
+    "label" "Edge-SW-01" "ports" 24) (dict "type" "server" "label" "Firewall"
+    "led1" "green" "led2" "green" "drives" 1) (dict "type" "server" "label"
+    "DNS/DHCP" "led1" "green" "led2" "blue" "drives" 1) (dict "type" "blank")
+    (dict "type" "blank") ) ) }}
+
+    <!-- DVD Collection -->
+    <!-- prettier-ignore -->
+    {{ partial "elements/bookshelf.html" (dict "width" "400px" "height" "550px"
+    "title" "DVD Collection" "type" "dvds" "shelves" 2 "items" (slice (dict
+    "image" "images/dvds/dandadan.png" "title" "DAN DA DAN" "current" true)
+    (dict "image" "images/dvds/assassination_classroom.jpg" "title"
+    "Assassination Classroom") ) ) }}
+
+    <!-- Whiteboard: Homelab Architecture -->
+    {{ partial "elements/whiteboard.html" (dict "file" "homelab.md" "context" .) }}
+
+    <!-- Monitor: System Metrics -->
+    {{ partial "elements/monitor-screen.html" (dict "width" "400px" "height"
+    "350px" "type" "metrics" "title" "WEB-01 - METRICS" "color" "green" ) }}
+
+    <!-- Monitor: Live Graph -->
+    {{ partial "elements/monitor-screen.html" (dict "width" "450px" "height"
+    "380px" "type" "graph" "title" "NETWORK TRAFFIC" "color" "blue" ) }}
+
+    <!-- Monitor: System Logs -->
+    {{ partial "elements/monitor-screen.html" (dict "width" "420px" "height"
+    "400px" "type" "logs" "title" "SYSTEM LOGS" "color" "green" ) }}
+
+    <!-- Monitor: Network Stats -->
+    {{ partial "elements/monitor-screen.html" (dict "width" "380px" "height"
+    "380px" "type" "network" "title" "BANDWIDTH MONITOR" "color" "amber" ) }}
+
+    <!-- Monitor: Terminal -->
+    {{ partial "elements/monitor-screen.html" (dict "width" "400px" "height"
+    "320px" "type" "terminal" "title" "db-primary.local" "color" "green" ) }}
+  </div>
+</div>
+
+<script>
+  // Enable horizontal scrolling with mouse wheel
+  const serverRoom = document.querySelector(".server-room");
+
+  if (serverRoom) {
+    serverRoom.addEventListener(
+      "wheel",
+      (e) => {
+        // Check if there's horizontal scrollable content
+        if (serverRoom.scrollWidth > serverRoom.clientWidth) {
+          e.preventDefault();
+          serverRoom.scrollLeft += e.deltaY;
+        }
+      },
+      { passive: false },
+    );
+  }
+</script>
+{{ end }}
