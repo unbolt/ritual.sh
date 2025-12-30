@@ -1,9 +1,9 @@
 // Server Room - Horizontal Scrolling Now/Uses Page
 
 // Color variables
-$color-green: #0f0;
+$color-green: greenyellow;
 $color-amber: #ff9900;
-$color-blue: #0ff;
+$color-blue: #00ffff;
 $color-red: #f00;
 
 $dark-bg-1: #1a1a1a;
@@ -770,7 +770,6 @@ $dark-bg-3: #0a0a0a;
 .graph-container {
   height: 200px;
   position: relative;
-  margin: 20px 0;
   overflow: hidden;
 }
 
@@ -1020,7 +1019,9 @@ $dark-bg-3: #0a0a0a;
   width: 100%;
   height: 100%;
   padding: 20px;
+  overflow: scroll;
   position: relative;
+  @include scrollbar-custom(#8b7355, 5px);
   background:
     radial-gradient(
       circle at 20% 30%,
@@ -1254,7 +1255,7 @@ $dark-bg-3: #0a0a0a;
   min-height: 90px;
   padding: 10px;
   font-family: "Caveat", cursive;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4;
   position: relative;
   flex-shrink: 0;
@@ -1289,6 +1290,10 @@ $dark-bg-3: #0a0a0a;
     box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.3),
       inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+
+  a {
+    color: #000;
   }
 }
 
@@ -1368,6 +1373,7 @@ $dark-bg-3: #0a0a0a;
     .wb-media-cover {
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     }
+
   }
 }
 
@@ -1686,7 +1692,7 @@ $dark-bg-3: #0a0a0a;
   height: 280px;
   background: linear-gradient(145deg, #e8e0c8, #c4b89a);
   border-radius: 8px;
-  padding: 15px 20px 30px 20px;
+  padding: 8px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
 }
 
@@ -1710,7 +1716,7 @@ $dark-bg-3: #0a0a0a;
   position: absolute;
   border-radius: 50%;
   filter: blur(40px);
-  opacity: 0.3;
+  opacity: 0.1;
   pointer-events: none;
   animation: ambient-pulse 4s ease-in-out infinite;
 
@@ -1718,7 +1724,7 @@ $dark-bg-3: #0a0a0a;
     background: $color-green;
   }
   &.blue {
-    background: #00f;
+    background: $color-blue;
   }
   &.amber {
     background: $color-amber;
@@ -1728,11 +1734,11 @@ $dark-bg-3: #0a0a0a;
 @keyframes ambient-pulse {
   0%,
   100% {
-    opacity: 0.2;
+    opacity: 0.1;
     transform: scale(1);
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.3;
     transform: scale(1.1);
   }
 }
@@ -1743,7 +1749,7 @@ $dark-bg-3: #0a0a0a;
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 150;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -1775,7 +1781,8 @@ $dark-bg-3: #0a0a0a;
 }
 
 .sign-title {
-  font-family: "Courier New", monospace;
+  //font-family: "Courier New", monospace;
+  font-family: "DSEG14-Classic";
   font-size: 48px;
   font-weight: bold;
   color: $color-green;
@@ -1789,11 +1796,30 @@ $dark-bg-3: #0a0a0a;
 }
 
 .sign-subtitle {
-  font-family: "Courier New", monospace;
   font-size: 12px;
   color: #888;
   letter-spacing: 3px;
   text-transform: uppercase;
+}
+
+.server-rack-1 {
+  position: relative;
+  pointer-events: none;
+
+  .lava-lamp-on-top {
+    position: absolute;
+    top: -100px;
+    left: 20px;
+
+    .lava-lamp-container {
+      height: 100px !important;
+      width: 60px !important;
+
+      .lamp-text {
+        display: none;
+      }
+    }
+  }
 }
 
 @keyframes sign-flicker {

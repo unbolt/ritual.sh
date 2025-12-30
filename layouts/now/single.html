@@ -5,34 +5,38 @@
     <div class="sign-frame">
       <div class="sign-content">
         <div class="sign-title">/NOW</div>
-        <div class="sign-subtitle">Updated {{ now.Format "02/01/2006" }}</div>
+        <div class="sign-subtitle">Updated 30/12/2025</div>
       </div>
     </div>
   </div>
 
   <div class="server-room-container">
-    <!-- Server Rack 1: Production Infrastructure -->
+
+    <div class="server-rack-1">
+      <!-- prettier-ignore -->
+      {{ partial "elements/server-rack.html"
+      (dict "height" "650px" "title" "PROD-RACK-01"
+      "units" (slice
+        (dict "type" "switch" "label" "Core-SW-01" "ports" 24)
+        (dict "type" "spacer")
+        (dict "type" "server" "label" "WEB-01" "led1" "green" "led2" "green" "drives" 1)
+        (dict "type" "server" "label" "WEB-02" "led1" "green" "led2" "amber" "drives" 1)
+        (dict "type" "server" "label" "DB-01" "led1" "green" "led2" "green" "drives" 2)
+        (dict "type" "spacer")
+        (dict "type" "switch" "label" "" "ports" 24)
+        (dict "type" "blank")
+        (dict "type" "server" "label" "API-01" "led1" "green" "led2" "blue" "drives" 1)
+        (dict "type" "server" "label" "Cache-01" "led1" "green" "led2" "green" "drives" 1)
+      ) ) }}
+      <div class="lava-lamp-on-top">
+        {{ partial "elements/lavalamp.html" . }}
+      </div>
+    </div>
+
+
     <!-- prettier-ignore -->
-    {{ partial "elements/server-rack.html"
-    (dict "height" "650px" "title" "PROD-RACK-01"
-    "units" (slice
-      (dict "type" "switch" "label" "Core-SW-01" "ports" 24)
-      (dict "type" "spacer")
-      (dict "type" "server" "label" "WEB-01" "led1" "green" "led2" "green" "drives" 1)
-      (dict "type" "server" "label" "WEB-02" "led1" "green" "led2" "amber" "drives" 1)
-      (dict "type" "server" "label" "DB-01" "led1" "green" "led2" "green" "drives" 2)
-      (dict "type" "spacer")
-      (dict "type" "patch-panel" "ports" 24)
-      (dict "type" "blank")
-      (dict "type" "server" "label" "API-01" "led1" "green" "led2" "blue" "drives" 1)
-      (dict "type" "server" "label" "Cache-01" "led1" "green" "led2" "green" "drives" 1)
-    ) ) }}
+    {{ partial "elements/whiteboard.html" (dict "file" "currently.md" "context" .) }}
 
-    <!-- Whiteboard: Currently -->
-    {{ partial "elements/whiteboard.html" (dict "file" "currently.md" "context"
-    .) }}
-
-    <!-- Server Rack 2: Storage & Backup -->
     <!-- prettier-ignore -->
     {{ partial "elements/server-rack.html" 
     (dict "height" "650px" "title" "STORAGE-01" 
@@ -40,6 +44,7 @@
       (dict "type" "server" "label" "NAS-01" "led1" "green" "led2" "green" "drives" 1 "size" 1) 
       (dict "type" "spacer") 
       (dict "type" "storage" "label" "SAN-Primary" "drives" 20 "size" 3)
+      (dict "type" "switch" "label" "" "ports" 24)
       (dict "type" "spacer")
       (dict "type" "server" "label" "BACKUP-01" "led1" "blue" "led2" "amber" "drives" 1)
       (dict "type" "blank")
@@ -48,9 +53,10 @@
     <!-- Terminal Desk -->
     <div class="terminal-desk">
       <div class="terminal-monitor">
-        <div class="terminal-screen">
-          <div style="color: #0f0; text-shadow: 0 0 5px #0f0">
-            <p>$ neofetch</p>
+        <div class="crt-screen">
+          <div class="crt" style="padding: 5px;">
+            <div class="">
+            <p>$ fastfetch</p>
             <p><strong>NERV</strong></p>
             <p>---</p>
             <p><strong>CPU</strong>: AMD Ryzen 7 9800X3D @ 5.46 Ghz</p>
@@ -61,6 +67,8 @@
             <br />
             <p><strong>Usage</strong>: Main gaming and development machine</p>
             <p><span class="cursor-blink">_</span></p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -84,52 +92,102 @@
       (dict "type" "server" "label" "DEV-01" "led1" "green" "led2" "amber" "drives" 1)
       (dict "type" "server" "label" "DEV-02" "led1" "blue" "led2" "green" "drives" 1)
       (dict "type" "server" "label" "TEST-01" "led1" "green" "led2" "red" "drives" 1)
+      (dict "type" "switch" "label" "" "ports" 24)  
       (dict "type" "spacer") 
-      (dict "type" "server" "label" "CI/CD" "led1" "green" "led2" "green" "drives" 2)
+      (dict "type" "server" "label" "CICD-01" "led1" "green" "led2" "green" "drives" 1)
       (dict "type" "blank") 
       (dict "type" "server" "label" "MONITOR" "led1" "blue" "led2" "amber" "drives" 1)
     )) }}
 
-    <!-- Whiteboard: Learning Queue -->
-    {{ partial "elements/whiteboard.html" (dict "file" "learning-queue.md"
-    "context" .) }}
+    <div class="terminal-desk">
+      <div class="terminal-monitor">
+        <div class="crt-screen">
+          <div class="crt" style="padding: 5px;">
+            <div class="">
+            <p>$ fastfetch</p>
+            <p><strong>BALTHASAR</strong></p>
+            <p>---</p>
+            <p><strong>CPU</strong>: Intel i5-8250U @ 3.40 GHz</p>
+            <p><strong>GPU</strong>: Questionable</p>
+            <p><strong>RAM</strong>: 16 GiB</p>
+            <br />
+            <p><strong>OS</strong>: Pop!_OS 24.04 LTS</p>
+            <br />
+            <p><strong>Usage</strong>: Thinkpad T480s laptop, mostly for coding from bed.</p>
+            <p><span class="cursor-blink">_</span></p>
+            </div>
 
-    <!-- Server Rack 4: Power & Network -->
+          </div>
+        </div>
+      </div>
+      <div class="desk-surface"></div>
+      <div
+        class="ambient-light green"
+        style="bottom: 100px; left: 0; width: 400px; height: 320px; z-index: -1"
+      ></div>
+    </div>
+
+    <!-- prettier-ignore -->
+    {{ partial "elements/whiteboard.html" (dict "file" "hardware.md" "context" .) }}
+
     <!-- prettier-ignore -->
     {{ partial "elements/server-rack.html" 
       (dict "height" "550px" "title" "INFRA-01" "units" (slice 
-        (dict "type" "ups" "label" "UPS-Primary" "capacity" "98" "size" 2) 
+        (dict "type" "ups" "label" "UPS-01" "capacity" "98" "size" 2) 
         (dict "type" "spacer") 
-        (dict "type" "switch" "label" "Edge-SW-01" "ports" 24) 
-        (dict "type" "server" "label" "Firewall" "led1" "green" "led2" "green" "drives" 1) 
+        (dict "type" "switch" "label" "EDGE-SW-01" "ports" 24) 
+        (dict "type" "switch" "label" "CORE-SW-01" "ports" 24)
+        (dict "type" "server" "label" "FW-01" "led1" "green" "led2" "green" "drives" 1) 
         (dict "type" "server" "label" "DHCP" "led1" "green" "led2" "blue" "drives" 1) 
         (dict "type" "blank")
         (dict "type" "blank") 
       ) ) }}
 
-    <!-- Whiteboard: Homelab Architecture -->
-    {{ partial "elements/whiteboard.html" (dict "file" "homelab.md" "context" .)
-    }}
+ 
+    {{ partial "elements/whiteboard.html" (dict "file" "software.md" "context" .) }}
 
-    <!-- Monitor: System Metrics -->
-    {{ partial "elements/monitor-screen.html" (dict "width" "400px" "height"
-    "350px" "type" "metrics" "title" "WEB-01 - METRICS" "color" "green" ) }}
 
-    <!-- Monitor: Live Graph -->
-    {{ partial "elements/monitor-screen.html" (dict "width" "450px" "height"
-    "380px" "type" "graph" "title" "NETWORK TRAFFIC" "color" "blue" ) }}
+    <div class="terminal-desk">
+      <div class="terminal-monitor" style="height:290px">
+        <div class="crt-screen">
+          <div class="crt screen-display cyan" style="padding: 5px;">
+            <div class="metrics-header">NET</div>
+              <div class="graph-container">
+                <div class="graph-wrapper">
+                  <!-- First instance of the graph -->
+                  <svg class="graph-svg graph-instance" viewBox="0 0 300 150" preserveAspectRatio="none">
+                    <polyline class="graph-line graph-line-blue"
+                      points="0,35 10,75 20,85 30,78 40,65 50,70 60,60 70,55 80,65 90,58 100,45 110,50 120,40 130,35 140,45 150,38 160,25 170,30 180,20 190,15 200,25 210,18 220,12 230,20 240,15 250,25 260,22 270,28 280,25 290,35 300,35"
+                      fill="none" />
+                    <polyline class="graph-fill graph-fill-blue"
+                      points="0,35 10,75 20,85 30,78 40,65 50,70 60,60 70,55 80,65 90,58 100,45 110,50 120,40 130,35 140,45 150,38 160,25 170,30 180,20 190,15 200,25 210,18 220,12 230,20 240,15 250,25 260,22 270,28 280,25 290,35 300,35 300,150 0,150"
+                      />
+                  </svg>
+                  <!-- Second instance (duplicate for seamless loop) -->
+                  <svg class="graph-svg graph-instance" viewBox="0 0 300 150" preserveAspectRatio="none">
+                    <polyline class="graph-line graph-line-blue"
+                      points="0,35 10,75 20,85 30,78 40,65 50,70 60,60 70,55 80,65 90,58 100,45 110,50 120,40 130,35 140,45 150,38 160,25 170,30 180,20 190,15 200,25 210,18 220,12 230,20 240,15 250,25 260,22 270,28 280,25 290,35 300,35"
+                      fill="none" />
+                    <polyline class="graph-fill graph-fill-blue"
+                      points="0,35 10,75 20,85 30,78 40,65 50,70 60,60 70,55 80,65 90,58 100,45 110,50 120,40 130,35 140,45 150,38 160,25 170,30 180,20 190,15 200,25 210,18 220,12 230,20 240,15 250,25 260,22 270,28 280,25 290,35 300,35 300,150 0,150"
+                      />
+                  </svg>
+                </div>
+                <div class="graph-grid"></div>
+              </div>
+              <div class="graph-legend">
+                <span class="graph-legend-item">▲ Throughput: 2.4 GB/s</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Monitor: System Logs -->
-    {{ partial "elements/monitor-screen.html" (dict "width" "420px" "height"
-    "400px" "type" "logs" "title" "SYSTEM LOGS" "color" "green" ) }}
-
-    <!-- Monitor: Network Stats -->
-    {{ partial "elements/monitor-screen.html" (dict "width" "380px" "height"
-    "380px" "type" "network" "title" "BANDWIDTH MONITOR" "color" "amber" ) }}
-
-    <!-- Monitor: Terminal -->
-    {{ partial "elements/monitor-screen.html" (dict "width" "400px" "height"
-    "320px" "type" "terminal" "title" "db-primary.local" "color" "green" ) }}
+      <div class="desk-surface"></div>
+      <div
+        class="ambient-light blue"
+        style="bottom: 100px; left: 0; width: 400px; height: 320px; z-index: -1"
+      ></div>
+    </div>
   </div>
 </div>
 
