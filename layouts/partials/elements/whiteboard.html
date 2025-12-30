@@ -12,7 +12,7 @@
       {{ range $index, $note := .Params.sticky_notes }}
       {{ if lt $index 3 }}
       <div class="wb-note wb-note-{{ $note.color | default "yellow" }}">
-        <div class="wb-note-content">{{ $note.text }}</div>
+        <div class="wb-note-content">{{ $note.text | markdownify }}</div>
       </div>
       {{ end }}
       {{ end }}

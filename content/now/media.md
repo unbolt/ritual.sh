@@ -28,3 +28,4 @@ media_items:
 **Playing:**
 
 - Minecraft (Meatballcraft modpack) with friends
+- Cyberpunk 2077 (again)

@@ -74,21 +74,20 @@
     <!-- prettier-ignore -->
     {{ partial "elements/whiteboard.html" (dict "file" "media.md" "context" .) }}
 
-    <!-- Server Rack 3: Dev & Testing -->
     <!-- prettier-ignore -->
     {{ partial "elements/server-rack.html" 
     (dict "height" "700px" "title" "DEV-RACK-01" 
     "units" (slice 
-      (dict "type" "switch" "label" "Dev-SW-01" "ports" 24) 
-      (dict "type" "patch-panel" "label" "Patch-Dev" "ports" 24) 
+      (dict "type" "switch" "label" "DEV-SW-01" "ports" 24) 
+      (dict "type" "patch-panel" "label" "PATCH-DEV" "ports" 20) 
       (dict "type" "spacer") 
-      (dict "type" "server" "label" "Dev-01" "led1" "green" "led2" "amber" "drives" 2)
-      (dict "type" "server" "label" "Dev-02" "led1" "blue" "led2" "green" "drives" 2)
-      (dict "type" "server" "label" "Test-01" "led1" "green" "led2" "red" "drives" 1)
+      (dict "type" "server" "label" "DEV-01" "led1" "green" "led2" "amber" "drives" 1)
+      (dict "type" "server" "label" "DEV-02" "led1" "blue" "led2" "green" "drives" 1)
+      (dict "type" "server" "label" "TEST-01" "led1" "green" "led2" "red" "drives" 1)
       (dict "type" "spacer") 
       (dict "type" "server" "label" "CI/CD" "led1" "green" "led2" "green" "drives" 2)
       (dict "type" "blank") 
-      (dict "type" "server" "label" "Monitoring" "led1" "blue" "led2" "amber" "drives" 1)
+      (dict "type" "server" "label" "MONITOR" "led1" "blue" "led2" "amber" "drives" 1)
     )) }}
 
     <!-- Whiteboard: Learning Queue -->
