@@ -18,6 +18,25 @@
       {{ end }}
     </div>
     {{ end }}
+    {{ if .Params.media_items }}
+    <div class="wb-media">
+      {{ range $index, $item := .Params.media_items }}
+        {{ if lt $index 6 }}
+          {{ $image := resources.Get $item.image }}
+          {{ if $image }}
+            {{ $resized := $image.Fit "240x360" }}
+            <div class="wb-media-item">
+              <div class="wb-media-pin"></div>
+              <img src="{{ $resized.RelPermalink }}" alt="{{ $item.title }}" class="wb-media-cover" width="{{ $resized.Width }}" height="{{ $resized.Height }}" />
+              {{ if $item.current }}
+                <div class="wb-media-label">NOW</div>
+              {{ end }}
+            </div>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+    {{ end }}
   </div>
 </div>
 {{ end }}

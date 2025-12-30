@@ -29,7 +29,8 @@
     ) ) }}
 
     <!-- Whiteboard: Currently -->
-    {{ partial "elements/whiteboard.html" (dict "file" "currently.md" "context" .) }}
+    {{ partial "elements/whiteboard.html" (dict "file" "currently.md" "context"
+    .) }}
 
     <!-- Server Rack 2: Storage & Backup -->
     <!-- prettier-ignore -->
@@ -38,9 +39,9 @@
     "units" (slice 
       (dict "type" "server" "label" "NAS-01" "led1" "green" "led2" "green" "drives" 1 "size" 1) 
       (dict "type" "spacer") 
-      (dict "type" "storage" "label" "SAN-Primary" "drives" 12 "size" 3)
+      (dict "type" "storage" "label" "SAN-Primary" "drives" 20 "size" 3)
       (dict "type" "spacer")
-      (dict "type" "server" "label" "Backup-01" "led1" "blue" "led2" "amber" "drives" 2)
+      (dict "type" "server" "label" "BACKUP-01" "led1" "blue" "led2" "amber" "drives" 1)
       (dict "type" "blank")
     ) ) }}
 
@@ -49,22 +50,16 @@
       <div class="terminal-monitor">
         <div class="terminal-screen">
           <div style="color: #0f0; text-shadow: 0 0 5px #0f0">
-            <p>$ whoami</p>
-            <p>dan@ritual.sh</p>
+            <p>$ neofetch</p>
+            <p><strong>NERV</strong></p>
+            <p>---</p>
+            <p><strong>CPU</strong>: AMD Ryzen 7 9800X3D @ 5.46 Ghz</p>
+            <p><strong>GPU</strong>: AMD Radeon RX 7900 XTX</p>
+            <p><strong>RAM</strong>: 64 GiB @ 6000 MT/S</p>
             <br />
-            <p>$ cat current_stack.txt</p>
-            <p>Languages: JavaScript, TypeScript, Python, Rust (learning)</p>
-            <p>Frontend: React, Vue, Hugo</p>
-            <p>Backend: Node.js, FastAPI</p>
-            <p>DevOps: Docker, Linux, Git</p>
-            <p>Interests: Homelab, Self-hosting, Open Source</p>
+            <p><strong>OS</strong>: Bazzite</p>
             <br />
-            <p>$ uptime</p>
-            <p>
-              {{ now.Format "15:04:05" }} up 42 days, load average: 0.15, 0.23,
-              0.18
-            </p>
-            <br />
+            <p><strong>Usage</strong>: Main gaming and development machine</p>
             <p><span class="cursor-blink">_</span></p>
           </div>
         </div>
@@ -72,25 +67,12 @@
       <div class="desk-surface"></div>
       <div
         class="ambient-light green"
-        style="bottom: 200px; left: 50%; width: 200px; height: 200px"
+        style="bottom: 100px; left: 0; width: 400px; height: 320px; z-index: -1"
       ></div>
     </div>
 
-    <!-- Bookshelf: Currently Reading -->
     <!-- prettier-ignore -->
-    {{ partial "elements/bookshelf.html" (dict
-      "width" "350px"
-      "height" "600px"
-      "title" "Currently Reading"
-      "type" "books"
-      "shelves" 1
-      "items" (slice
-        (dict "image" "images/books/alchemised.png" "title" "Alchemised" "current" true)
-      )
-    ) }}
-
-    <!-- Whiteboard: Daily Drivers -->
-    {{ partial "elements/whiteboard.html" (dict "file" "daily-drivers.md" "context" .) }}
+    {{ partial "elements/whiteboard.html" (dict "file" "media.md" "context" .) }}
 
     <!-- Server Rack 3: Dev & Testing -->
     <!-- prettier-ignore -->
@@ -110,28 +92,25 @@
     )) }}
 
     <!-- Whiteboard: Learning Queue -->
-    {{ partial "elements/whiteboard.html" (dict "file" "learning-queue.md" "context" .) }}
+    {{ partial "elements/whiteboard.html" (dict "file" "learning-queue.md"
+    "context" .) }}
 
     <!-- Server Rack 4: Power & Network -->
     <!-- prettier-ignore -->
-    {{ partial "elements/server-rack.html" (dict "height" "550px" "title"
-    "INFRA-01" "units" (slice (dict "type" "ups" "label" "UPS-Primary"
-    "capacity" "98" "size" 2) (dict "type" "spacer") (dict "type" "switch"
-    "label" "Edge-SW-01" "ports" 24) (dict "type" "server" "label" "Firewall"
-    "led1" "green" "led2" "green" "drives" 1) (dict "type" "server" "label"
-    "DNS/DHCP" "led1" "green" "led2" "blue" "drives" 1) (dict "type" "blank")
-    (dict "type" "blank") ) ) }}
-
-    <!-- DVD Collection -->
-    <!-- prettier-ignore -->
-    {{ partial "elements/bookshelf.html" (dict "width" "400px" "height" "550px"
-    "title" "DVD Collection" "type" "dvds" "shelves" 2 "items" (slice (dict
-    "image" "images/dvds/dandadan.png" "title" "DAN DA DAN" "current" true)
-    (dict "image" "images/dvds/assassination_classroom.jpg" "title"
-    "Assassination Classroom") ) ) }}
+    {{ partial "elements/server-rack.html" 
+      (dict "height" "550px" "title" "INFRA-01" "units" (slice 
+        (dict "type" "ups" "label" "UPS-Primary" "capacity" "98" "size" 2) 
+        (dict "type" "spacer") 
+        (dict "type" "switch" "label" "Edge-SW-01" "ports" 24) 
+        (dict "type" "server" "label" "Firewall" "led1" "green" "led2" "green" "drives" 1) 
+        (dict "type" "server" "label" "DHCP" "led1" "green" "led2" "blue" "drives" 1) 
+        (dict "type" "blank")
+        (dict "type" "blank") 
+      ) ) }}
 
     <!-- Whiteboard: Homelab Architecture -->
-    {{ partial "elements/whiteboard.html" (dict "file" "homelab.md" "context" .) }}
+    {{ partial "elements/whiteboard.html" (dict "file" "homelab.md" "context" .)
+    }}
 
     <!-- Monitor: System Metrics -->
     {{ partial "elements/monitor-screen.html" (dict "width" "400px" "height"

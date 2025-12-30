@@ -691,6 +691,19 @@ body {
     top: auto;
     left: auto;
   }
+
+  /* Monitor stand */
+  > .monitor-stand {
+    position: absolute;
+    background: none;
+    box-shadow: none;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 80px;
+    z-index: -1;
+  }
 }
 
 /* CRT Monitor bezel */
@@ -760,17 +773,6 @@ body {
       0 0 5px #0f0,
       0 0 10px #0f0;
   }
-}
-
-/* Monitor stand */
-.monitor-stand {
-  position: absolute;
-  bottom: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 80px;
-  z-index: -1;
 }
 
 /* Stand neck */

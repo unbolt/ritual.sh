@@ -226,6 +226,10 @@ $dark-bg-3: #0a0a0a;
 }
 
 .storage-drive-led {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-2px);
   width: 4px;
   height: 4px;
 }
@@ -414,7 +418,6 @@ $dark-bg-3: #0a0a0a;
 .patch-front {
   display: flex;
   align-items: center;
-  padding: 0 10px;
   height: 100%;
   gap: 10px;
 }
@@ -1057,7 +1060,6 @@ $dark-bg-3: #0a0a0a;
   font-size: 28px;
   font-weight: bold;
   color: $dark-bg-1;
-  margin-bottom: 15px;
   padding-bottom: 8px;
   position: relative;
   display: inline-block;
@@ -1317,6 +1319,112 @@ $dark-bg-3: #0a0a0a;
 
 .wb-note-purple {
   background: linear-gradient(135deg, #ce93d8 0%, #ba68c8 100%);
+}
+
+// Whiteboard Media Items (Books, DVDs)
+.wb-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.wb-media-item {
+  position: relative;
+  width: 120px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+
+  // Random rotation for each item
+  &:nth-child(1) {
+    transform: rotate(-2deg);
+  }
+
+  &:nth-child(2) {
+    transform: rotate(3deg);
+  }
+
+  &:nth-child(3) {
+    transform: rotate(-1deg);
+  }
+
+  &:nth-child(4) {
+    transform: rotate(2deg);
+  }
+
+  &:nth-child(5) {
+    transform: rotate(-3deg);
+  }
+
+  &:nth-child(6) {
+    transform: rotate(1deg);
+  }
+
+  &:hover {
+    transform: rotate(0deg) scale(1.2);
+    z-index: 10;
+
+    .wb-media-cover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+.wb-media-pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, #888 0%, #444 60%);
+  border-radius: 50%;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  z-index: 2;
+
+  // Pin needle
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 2px;
+    background: #222;
+    border-radius: 50%;
+  }
+}
+
+.wb-media-cover {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  max-height: 180px;
+  display: block;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.2s ease;
+}
+
+.wb-media-label {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #333;
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+  letter-spacing: 0.5px;
 }
 
 // Bookshelf
