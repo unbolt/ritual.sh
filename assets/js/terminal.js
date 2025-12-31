@@ -16,6 +16,16 @@ class TerminalShell {
 
   // Boot sequence
   async boot() {
+    let skipBoot = false;
+
+    // Add listener to skip boot sequence on Enter key
+    const skipBootListener = (e) => {
+      if (e.key === "Enter") {
+        skipBoot = true;
+      }
+    };
+    document.addEventListener("keydown", skipBootListener);
+
     const bootMessages = [
       "  _   _ _____ ______     __",
       " | \\ | | ____|  _ \\ \\   / /",
@@ -39,8 +49,11 @@ class TerminalShell {
       "",
       "",
     ];
+
     for (let i = 0; i < bootMessages.length; i++) {
-      await this.sleep(100);
+      if (!skipBoot) {
+        await this.sleep(100);
+      }
       const line = document.createElement("div");
       line.className = "output-line boot-line";
       line.textContent = bootMessages[i];
@@ -48,6 +61,9 @@ class TerminalShell {
       this.output.appendChild(line);
       this.scrollToBottom();
     }
+
+    // Remove the skip boot listener
+    document.removeEventListener("keydown", skipBootListener);
 
     this.printHTML("&nbsp;");
 
@@ -71,7 +87,7 @@ class TerminalShell {
     );
 
     this.printHTML(
-      '<span class="warning">This site is under construction. There\'s not much of interest here yet.</span>',
+      '<span class="warning">This site is under construction. Feel free to look around...</span>',
     );
 
     this.inputContainer.classList.remove("hidden");

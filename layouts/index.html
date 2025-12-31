@@ -68,32 +68,6 @@
 <!-- Desk -->
 <div class="desk"></div>
 
-<!-- Desk monitor -->
-{{/*
-<div class="secondary-screen desk-monitor">
-  <div class="screen-display large crt">
-    <span class="cursor-blink">_</span>
-  </div>
-  <div class="monitor-stand-small"></div>
-</div>
-*/}}
-
-<!-- Desk clutter -->
-{{/*
-<div class="desk-item keyboard"></div>
-<div class="desk-item mouse"></div>
-
-*/}}
-
-<!-- MUSICAL STUFF -->
-
-<!-- Widgets and gadgets -->
-{{/*
-<div class="widget router"></div>
-<div class="widget hard-drive"></div>
-*/}}
-
-<!-- CRT Monitor -->
 <div class="crt-container">
   <div class="crt-monitor">
     <div class="crt-screen">
@@ -125,7 +99,7 @@
         > updates -lah<br />
         {{ range first 10 (where .Site.RegularPages "Type"
         "updates").ByDate.Reverse }} [<time
-          >{{ .Lastmod.Format "2006-01-02" }}</time
+          >{{ .Lastmod.Format "02-01-2006" }}</time
         >]<br />
         {{ .Plain }}<br />
         ---<br />
@@ -218,15 +192,32 @@
     </div>
   </div>
 
-  <div class="secondary-screen wall-monitor-3 hidden-xl-down">
-    <div class="screen-display crt">
-      PING 8.8.8.8<br />
-      64 bytes: 12ms<br />
-      64 bytes: 11ms<br />
-      64 bytes: 13ms<br />
-      <span class="cursor-blink">_</span>
+  <a
+    href="/blog/"
+    class="secondary-screen wall-monitor-3 hidden-xl-down"
+    style="text-decoration: none !important"
+  >
+    <div
+      class="screen-display crt"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <pre>
+      ▄▄
+ █▄    ██
+ ██    ██          ▄▄
+ ████▄ ██ ▄███▄ ▄████
+ ██ ██ ██ ██ ██ ██ ██
+▄████▀▄██▄▀███▀ ▀████
+                   ██
+██ NEW! ██▶▶▶    ▀▀▀</pre
+      >
     </div>
-  </div>
+  </a>
 
   <div class="secondary-screen wall-monitor-4 hidden-xl-down">
     <div class="screen-display tiny amber crt">

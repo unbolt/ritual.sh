@@ -25,6 +25,11 @@
       border-radius: 8px;
     }
 
+    .blog-header {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+
     // Brand on bezel
     &::before {
       content: "BLOG TERMINAL";
@@ -63,6 +68,40 @@
         height: 6px;
       }
     }
+
+    > .window {
+      z-index: -1;
+      position: fixed;
+      top: 0px;
+      left: 50%;
+      transform: translateX(250px);
+      width: 600px;
+    }
+
+    > .blogs-lavalamp {
+      position: fixed;
+      bottom: 0px;
+      left: 50%;
+      transform: translateX(-550px);
+      z-index: -1;
+
+      .lava-lamp-container {
+        height: 400px;
+        width: 180px;
+        pointer-events: none;
+
+        &::before {
+          opacity: 0.7;
+          filter: blur(30px);
+          animation: rotate-beams 7s linear infinite;
+        }
+
+        .lamp-text-shadow,
+        .lamp-text {
+          display: none;
+        }
+      }
+    }
   }
 
   // CRT screen content area
@@ -98,7 +137,11 @@
           rgba(255, 255, 255, 0.15) 0%,
           transparent 40%
         ),
-        radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+        radial-gradient(
+          ellipse at center,
+          transparent 0%,
+          rgba(0, 0, 0, 0.3) 100%
+        );
       pointer-events: none;
       z-index: 3;
       border-radius: 8px;
@@ -152,12 +195,12 @@
           font-size: 1.5rem;
         }
       }
+    }
 
-      p {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 1rem;
-      }
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
     }
   }
 
@@ -225,6 +268,7 @@
         background: rgba(255, 153, 0, 0.2);
         border-color: rgba(255, 153, 0, 0.5);
         color: #ff9900;
+        text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
       }
     }
 
@@ -251,16 +295,6 @@
         font-family: "DSEG7-Classic", monospace;
         text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
         white-space: nowrap;
-
-        &::before {
-          content: "[";
-          margin-right: 2px;
-        }
-
-        &::after {
-          content: "]";
-          margin-left: 2px;
-        }
 
         @include media-down(lg) {
           font-size: 0.7rem;
@@ -306,12 +340,7 @@
         font-size: 0.75rem;
         color: #0f0;
         font-family: monospace;
-        text-transform: uppercase;
         letter-spacing: 0.5px;
-
-        &::before {
-          content: "#";
-        }
       }
     }
 
@@ -345,7 +374,11 @@
       }
 
       // Headings in content
-      h2, h3, h4, h5, h6 {
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         margin-top: 1.5em;
         margin-bottom: 0.75em;
         color: greenyellow;
@@ -406,7 +439,8 @@
       }
 
       // Lists
-      ul, ol {
+      ul,
+      ol {
         margin: 1em 0;
         padding-left: 2em;
 
@@ -586,7 +620,8 @@
       flex-wrap: wrap;
 
       li {
-        a, span {
+        a,
+        span {
           display: block;
           padding: 6px 12px;
           background: transparent;
@@ -631,7 +666,8 @@
 
         // Disabled state
         &.disabled {
-          a, span {
+          a,
+          span {
             opacity: 0.3;
             cursor: not-allowed;
 

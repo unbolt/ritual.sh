@@ -7,9 +7,11 @@ if (window.terminal) {
 
     const commands = Object.keys(window.terminal.commands).sort();
     commands.forEach((cmd) => {
-      const desc =
-        window.terminal.commands[cmd].description || "No description";
-      window.terminal.print(`  ${cmd.padEnd(15)} - ${desc}`);
+      const desc = window.terminal.commands[cmd].description;
+      // Skip commands with no description (hidden commands)
+      if (desc) {
+        window.terminal.print(`  ${cmd.padEnd(15)} - ${desc}`);
+      }
     });
     window.terminal.print("");
   });
@@ -20,13 +22,13 @@ if (window.terminal) {
   });
 
   // Echo command
-  window.terminal.registerCommand(
-    "echo",
-    "Echo text to the terminal",
-    (args) => {
-      window.terminal.print(args.join(" "));
-    },
-  );
+  // window.terminal.registerCommand(
+  //   "echo",
+  //   "Echo text to the terminal",
+  //   (args) => {
+  //     window.terminal.print(args.join(" "));
+  //   },
+  // );
 
   // History command
   window.terminal.registerCommand("history", "Show command history", () => {

@@ -1,48 +1,49 @@
 {{ define "main" }}
 <div class="blogs-page">
-	<div class="blogs-container">
-		<div class="blogs-screen">
-			<div class="blogs-content">
-				<nav class="blog-navigation">
-					<a href="/blog/" class="nav-link back-link">← All Blog Posts</a>
-				</nav>
+  <div class="blogs-container">
+    <div class="blogs-screen">
+      <div class="blogs-content">
+        <nav class="blog-navigation">
+          <a href="/blog/" class="nav-link back-link">← All Blog Posts</a>
+        </nav>
 
-				<article class="blog-post-card">
-					<h1 class="blog-title">
-						{{ .Title }}
-						{{ if .Date }}
-						<span class="blog-date">{{ .Date.Format "02/01/2006" }}</span>
-						{{ end }}
-					</h1>
-					{{ if .Params.tags }}
-					<div class="blog-tags">
-						{{ range .Params.tags }}
-						<span class="tag">{{ . }}</span>
-						{{ end }}
-					</div>
-					{{ end }}
-					<div class="blog-summary">
-						{{ .Content }}
-					</div>
-				</article>
+        <article class="blog-post-card">
+          <h1 class="blog-title">
+            {{ .Title }} {{ if .Date }}
+            <span class="blog-date">{{ .Date.Format "02-01-2006" }}</span>
+            {{ end }}
+          </h1>
+          {{ if .Params.tags }}
+          <div class="blog-tags">
+            {{ range .Params.tags }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+          <div class="blog-summary">{{ .Content }}</div>
+        </article>
 
-				<nav class="blog-post-navigation">
-					<div class="post-nav-links">
-						{{ with .PrevInSection }}
-						<a href="{{ .Permalink }}" class="nav-link prev-post">← {{ .Title }}</a>
-						{{ else }}
-						<span class="nav-link disabled">← Previous</span>
-						{{ end }}
-
-						{{ with .NextInSection }}
-						<a href="{{ .Permalink }}" class="nav-link next-post">{{ .Title }} →</a>
-						{{ else }}
-						<span class="nav-link disabled">Next →</span>
-						{{ end }}
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
+        <nav class="blog-post-navigation">
+          <div class="post-nav-links">
+            {{ with .PrevInSection }}
+            <a href="{{ .Permalink }}" class="nav-link prev-post"
+              >← {{ .Title }}</a
+            >
+            {{ else }}
+            <span class="nav-link disabled">← Previous</span>
+            {{ end }} {{ with .NextInSection }}
+            <a href="{{ .Permalink }}" class="nav-link next-post"
+              >{{ .Title }} →</a
+            >
+            {{ else }}
+            <span class="nav-link disabled">Next →</span>
+            {{ end }}
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="window">{{ partial "elements/window.html" . }}</div>
+    <div class="blogs-lavalamp">{{ partial "elements/lavalamp.html" . }}</div>
+  </div>
 </div>
 {{ end }}

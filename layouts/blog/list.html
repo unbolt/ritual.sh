@@ -1,41 +1,47 @@
 {{ define "main" }}
 <div class="blogs-page">
-	<div class="blogs-container">
-		<div class="blogs-screen">
-			<div class="blogs-content">
-				<section>
-					{{ .Content }}
-				</section>
+  <div class="blogs-container">
+    <div class="blogs-screen">
+      <div class="blogs-content">
+        <div class="blog-header">
+          <pre>
+                                                    
+      ▄▄                                  
+ █▄    ██                            █▄   
+ ██    ██          ▄▄    ▄▄ ▀▀       ██   
+ ████▄ ██ ▄███▄ ▄████ ▄████ ██ ▄██▀█ ████▄
+ ██ ██ ██ ██ ██ ██ ██ ██ ██ ██ ▀███▄ ██ ██
+▄████▀▄██▄▀███▀ ▀████▄▀████▄███▄▄██▀▄██ ██
+                   ██    ██               
+                 ▀▀▀   ▀▀▀                
+        </pre
+          >
 
-				{{ $tags := slice }}
-				{{ range .Site.RegularPages }}
-					{{ if eq .Section "blog" }}
-						{{ range .Params.tags }}
-							{{ $tags = $tags | append . }}
-						{{ end }}
-					{{ end }}
-				{{ end }}
-				{{ $tags = $tags | uniq }}
+          <section>{{ .Content }}</section>
+        </div>
 
-				<nav class="blog-tags-filter">
-					<span class="filter-label">Filter by tag: (found {{ len $tags }} tags)</span>
-					<div class="tag-links">
-						<a href="/blog/" class="tag-filter-link active">All</a>
-						{{ range $tags }}
-						{{ $tagURL := printf "/tags/%s/" (. | urlize) }}
-						<a href="{{ $tagURL }}" class="tag-filter-link">{{ . }}</a>
-						{{ end }}
-					</div>
-				</nav>
+        {{ $tags := slice }} {{ range .Site.RegularPages }} {{ if eq .Section
+        "blog" }} {{ range .Params.tags }} {{ $tags = $tags | append . }} {{ end
+        }} {{ end }} {{ end }} {{ $tags = $tags | uniq }}
 
-				<aside class="blog-posts">
-					{{ range .Paginator.Pages }}
-					{{ .Render "summary" }}
-					{{ end }}
-				</aside>
-				{{ partial "pagination.html" .Paginator }}
-			</div>
-		</div>
-	</div>
+        <nav class="blog-tags-filter">
+          <span class="filter-label">Tags:</span>
+          <div class="tag-links">
+            <a href="/blog/" class="tag-filter-link active">all</a>
+            {{ range $tags }} {{ $tagURL := printf "/tags/%s/" (. | urlize) }}
+            <a href="{{ $tagURL }}" class="tag-filter-link">{{ . }}</a>
+            {{ end }}
+          </div>
+        </nav>
+
+        <aside class="blog-posts">
+          {{ range .Paginator.Pages }} {{ .Render "summary" }} {{ end }}
+        </aside>
+        {{ partial "pagination.html" .Paginator }}
+      </div>
+    </div>
+    <div class="window">{{ partial "elements/window.html" . }}</div>
+    <div class="blogs-lavalamp">{{ partial "elements/lavalamp.html" . }}</div>
+  </div>
 </div>
 {{ end }}

@@ -92,8 +92,8 @@ if (window.terminal) {
   });
 
   // Greet command
-  window.terminal.registerCommand("greet", "Greet the user", (args) => {
-    const name = args.length > 0 ? args.join(" ") : "User";
-    window.terminal.printSuccess(`Hello, ${name}! Welcome to the terminal.`);
-  });
+  // window.terminal.registerCommand("greet", "Greet the user", (args) => {
+  //   const name = args.length > 0 ? args.join(" ") : "User";
+  //   window.terminal.printSuccess(`Hello, ${name}! Welcome to the terminal.`);
+  // });
 }

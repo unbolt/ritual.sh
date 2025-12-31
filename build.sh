@@ -34,6 +34,14 @@ if [ $? -ne 0 ]; then
 fi
 
 echo -e "${GREEN}✓ Hugo build successful!${NC}"
+
+# Remove the updates section list page (we only want individual update pages)
+if [ -d "public/updates" ]; then
+    echo -e "${BLUE}Removing updates section list page...${NC}"
+    rm -rf public/updates
+    echo -e "${GREEN}✓ Updates folder removed!${NC}"
+fi
+
 echo ""
 
 # Count total files

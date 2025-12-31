@@ -1,32 +1,34 @@
 {{ define "main" }}
 <div class="blogs-page">
-	<div class="blogs-container">
-		<div class="blogs-screen">
-			<div class="blogs-content">
-				<section>
-					<h1>Posts tagged: {{ .Title }}</h1>
-				</section>
+  <div class="blogs-container">
+    <div class="blogs-screen">
+      <div class="blogs-content">
+        <section>
+          <h1>Posts tagged: {{ .Title }}</h1>
+        </section>
 
-				{{ if .Site.Taxonomies.tags }}
-				<nav class="blog-tags-filter">
-					<span class="filter-label">Filter by tag:</span>
-					<div class="tag-links">
-						<a href="/blog/" class="tag-filter-link">All</a>
-						{{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-						{{ $tagURL := printf "/tags/%s/" ($name | urlize) }}
-						<a href="{{ $tagURL }}" class="tag-filter-link{{ if eq $name $.Title }} active{{ end }}">{{ $name }}</a>
-						{{ end }}
-					</div>
-				</nav>
-				{{ end }}
+        {{ if .Site.Taxonomies.tags }}
+        <nav class="blog-tags-filter">
+          <span class="filter-label">Filter by tag:</span>
+          <div class="tag-links">
+            <a href="/blog/" class="tag-filter-link">all</a>
+            {{ range $name, $taxonomy := .Site.Taxonomies.tags }} {{ $tagURL :=
+            printf "/tags/%s/" ($name | urlize) }}
+            <a
+              href="{{ $tagURL }}"
+              class="tag-filter-link{{ if eq $name $.Title }} active{{ end }}"
+              >{{ $name }}</a
+            >
+            {{ end }}
+          </div>
+        </nav>
+        {{ end }}
 
-				<aside class="blog-posts">
-					{{ range .Pages }}
-					{{ .Render "summary" }}
-					{{ end }}
-				</aside>
-			</div>
-		</div>
-	</div>
+        <aside class="blog-posts">
+          {{ range .Pages }} {{ .Render "summary" }} {{ end }}
+        </aside>
+      </div>
+    </div>
+  </div>
 </div>
 {{ end }}

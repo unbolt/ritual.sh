@@ -88,9 +88,10 @@
         <div class="neon-text purple">gear <span>-></span></div>
       </div>
       <div class="gear-grid">
-        {{ $posts := where site.RegularPages "Type" "gear" }} {{ $posts = where
-        $posts "Params.tags" "intersect" (slice "audio") }} {{ range first 5
-        $posts }}
+        <!-- prettier-ignore -->
+        {{ $posts := where site.RegularPages "Type" "gear" }} 
+        {{ $posts = where $posts "Params.gearType" "intersect" (slice "audio") }}
+        {{ range first 5 $posts }}
         <div class="gear-item">
           {{ with .Params.icon }}
           <div class="gear-icon">{{ . }}</div>
