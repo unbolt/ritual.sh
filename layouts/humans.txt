@@ -1,0 +1,30 @@
+/* TEAM */
+Creator: Dan
+Contact: dan [at] unbo.lt
+From: ritual.sh
+
+/* THANKS */
+Hugo - Static site generator
+The IndieWeb community
+Everyone still making personal websites in {{ now.Year }}
+
+/* SITE */
+Last update: {{ .Lastmod.Format "2006/01/02" }}
+Standards: HTML5, CSS3, RSS
+Components: Hugo, YAML, Markdown
+Software: Built with care
+
+/* PHILOSOPHY */
+No tracking
+No analytics
+No AI training data
+No engagement metrics
+No corporate platforms
+Just words on a screen
+
+/* NOTES */
+If you're reading this, you're the kind of person
+who views source. We should be friends.
+
+The robots are blocked (see robots.txt).
+The humans are welcome.

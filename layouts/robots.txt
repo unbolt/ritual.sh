@@ -97,7 +97,6 @@ Disallow:
 Disallow: /
 {{ end }}
 
-# Sitemap location (update with your actual sitemap URL)
 {{ if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production")  }}
 Sitemap: {{ .Site.BaseURL }}sitemap.xml
 {{ end }}
