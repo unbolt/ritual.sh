@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Hugo
 date: 2025-01-15T10:00:00+00:00
-url: /blogs/getting-started-with-hugo/
+url: /blog/getting-started-with-hugo/
 tags:
   - hugo
   - web development

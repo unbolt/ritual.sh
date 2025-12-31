@@ -1,7 +1,7 @@
 ---
 title: Customizing Your Development Environment
 date: 2025-01-20T14:30:00+00:00
-url: /blogs/customizing-your-development-environment/
+url: /blog/customizing-your-development-environment/
 tags:
   - productivity
   - tools

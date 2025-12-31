@@ -1,7 +1,7 @@
 ---
 title: Building Resilient Systems
 date: 2025-01-25T09:15:00+00:00
-url: /blogs/building-resilient-systems/
+url: /blog/building-resilient-systems/
 tags:
   - architecture
   - reliability

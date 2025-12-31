@@ -1,7 +1,7 @@
 ---
 title: "Weekly Update: February 12"
 date: 2025-02-12T08:30:00+00:00
-url: /blogs/weekly-update-february-12/
+url: /blog/weekly-update-february-12/
 tags:
   - weekly
   - updates

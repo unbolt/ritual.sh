@@ -1,7 +1,7 @@
 ---
 title: "{{ replace .TranslationBaseName "-" " " | title }}"
 date: {{ .Date }}
-url: /blogs/{{ .TranslationBaseName }}/
+url: /blog/{{ .TranslationBaseName }}/
 tags:
   -
 draft: true

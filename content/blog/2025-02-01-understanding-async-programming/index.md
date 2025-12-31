@@ -1,7 +1,7 @@
 ---
 title: Understanding Async Programming
 date: 2025-02-01T11:00:00+00:00
-url: /blogs/understanding-async-programming/
+url: /blog/understanding-async-programming/
 tags:
   - programming
   - javascript

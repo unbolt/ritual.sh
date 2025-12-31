@@ -9,7 +9,7 @@
 
 				{{ $tags := slice }}
 				{{ range .Site.RegularPages }}
-					{{ if eq .Section "blogs" }}
+					{{ if eq .Section "blog" }}
 						{{ range .Params.tags }}
 							{{ $tags = $tags | append . }}
 						{{ end }}
@@ -20,7 +20,7 @@
 				<nav class="blog-tags-filter">
 					<span class="filter-label">Filter by tag: (found {{ len $tags }} tags)</span>
 					<div class="tag-links">
-						<a href="/blogs/" class="tag-filter-link active">All</a>
+						<a href="/blog/" class="tag-filter-link active">All</a>
 						{{ range $tags }}
 						{{ $tagURL := printf "/tags/%s/" (. | urlize) }}
 						<a href="{{ $tagURL }}" class="tag-filter-link">{{ . }}</a>

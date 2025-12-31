@@ -1,7 +1,7 @@
 ---
 title: Exploring Terminal Emulators
 date: 2025-02-10T14:20:00+00:00
-url: /blogs/exploring-terminal-emulators/
+url: /blog/exploring-terminal-emulators/
 tags:
   - terminal
   - tools

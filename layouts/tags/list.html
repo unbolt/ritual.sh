@@ -11,7 +11,7 @@
 				<nav class="blog-tags-filter">
 					<span class="filter-label">Filter by tag:</span>
 					<div class="tag-links">
-						<a href="/blogs/" class="tag-filter-link">All</a>
+						<a href="/blog/" class="tag-filter-link">All</a>
 						{{ range $name, $taxonomy := .Site.Taxonomies.tags }}
 						{{ $tagURL := printf "/tags/%s/" ($name | urlize) }}
 						<a href="{{ $tagURL }}" class="tag-filter-link{{ if eq $name $.Title }} active{{ end }}">{{ $name }}</a>

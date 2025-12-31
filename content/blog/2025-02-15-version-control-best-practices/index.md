@@ -1,7 +1,7 @@
 ---
 title: Version Control Best Practices
 date: 2025-02-15T16:45:00+00:00
-url: /blogs/version-control-best-practices/
+url: /blog/version-control-best-practices/
 tags:
   - git
   - workflow
