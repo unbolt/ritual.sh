@@ -20,8 +20,8 @@ frontmatter:
     - date
     - publishDate
 
-disableKinds: ["taxonomy", "term"]
-taxonomies: {}
+taxonomies:
+  tag: tags
 
 params:
   env: production

@@ -18,6 +18,6 @@ you can create a layouts directory, just for that section.
 		</div>
 		{{ end }}
 	</aside>
-	{{ template "_internal/pagination.html" . }}
+	{{ partial "pagination.html" .Paginator }}
 </article>
 {{ end }}

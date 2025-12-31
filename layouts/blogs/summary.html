@@ -1,0 +1,26 @@
+<div class="blog-post-card{{ if not (in .Params.tags "weekly") }} non-weekly{{ end }}">
+	<h1 class="blog-title">
+		{{ if in .Params.tags "weekly" }}
+			{{ .Title }}
+		{{ else }}
+			<a href="{{ .Permalink }}">
+				{{ .Title }}
+			</a>
+		{{ end }}
+		{{ if .Date }}
+		<span class="blog-date">{{ .Date.Format "02/01/2006" }}</span>
+		{{ end }}
+	</h1>
+	{{ if .Params.tags }}
+	<div class="blog-tags">
+		{{ range .Params.tags }}
+		<span class="tag">{{ . }}</span>
+		{{ end }}
+	</div>
+	{{ end }}
+	{{ if in .Params.tags "weekly" }}
+	<div class="blog-summary">
+		{{ .Content }}
+	</div>
+	{{ end }}
+</div>
