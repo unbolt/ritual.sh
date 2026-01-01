@@ -69,4 +69,12 @@ if (window.terminal) {
       window.location.href = "/now/";
     },
   );
+
+    window.terminal.registerCommand(
+    "medialog",
+    "Media that I have enjoyed (or not) recently",
+    () => {
+      window.location.href = "/media/";
+    },
+  );
 }
