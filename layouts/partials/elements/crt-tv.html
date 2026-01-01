@@ -1,0 +1,16 @@
+{{ $url := "/media/" }}
+{{ $text := "MEDIA LOG" }}
+
+{{ if reflect.IsMap . }}
+  {{ $url = .url | default "/media/" }}
+  {{ $text = .text | default "MEDIA LOG" }}
+{{ end }}
+
+<a href="{{ $url }}" class="crt-tv-link">
+  <div class="crt-tv">
+    <div class="crt-tv-screen">
+      <div class="tv-static"></div>
+      <div class="tv-text">{{ $text }}</div>
+    </div>
+  </div>
+</a>

@@ -12,6 +12,7 @@
 @import "partials/floppy";
 @import "partials/lcd-display";
 @import "partials/window";
+@import "partials/crt-tv";
 
 @import "partials/content-screens";
 
@@ -1148,6 +1149,35 @@ body {
   animation: pulse 2.3s ease-in-out infinite;
 }
 
+.wall-monitor-3:hover pre {
+  animation: text-glitch-cycle 3s ease infinite;
+}
+
+@keyframes text-glitch-cycle {
+  0%, 6.67% {
+    text-shadow:
+      -2px 0 #f0f,
+      2px 0 #0ff;
+    transform: translate(0, 0);
+  }
+  13.33% {
+    text-shadow:
+      2px 0 #f0f,
+      -2px 0 #0ff;
+    transform: translate(-3px, 2px);
+  }
+  20% {
+    text-shadow:
+      -1px 0 #f0f,
+      1px 0 #0ff;
+    transform: translate(3px, -2px);
+  }
+  26.67%, 100% {
+    text-shadow: none;
+    transform: translate(0, 0);
+  }
+}
+
 /* Wall-mounted CRT 4 - lower left relative to main */
 .wall-monitor-4 {
   top: 50%;
@@ -1592,39 +1622,6 @@ body {
   height: 12px;
   background: #111;
   border-radius: 1px;
-}
-
-/* Coffee mug */
-.coffee-mug {
-  position: relative;
-  width: 55px;
-  height: 62px;
-  background: linear-gradient(180deg, #4a2a1a 0%, #3a1a0a 100%);
-  border-radius: 15px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
-}
-
-.coffee-mug::before {
-  content: "";
-  position: absolute;
-  top: 24%;
-  right: -33%;
-  width: 28%;
-  height: 42%;
-  border: 3px solid #3a1a0a;
-  border-left: none;
-  border-radius: 0 12px 12px 0;
-}
-
-.coffee-mug::after {
-  content: "";
-  position: absolute;
-  top: 8%;
-  left: 9%;
-  right: 9%;
-  height: 23%;
-  background: radial-gradient(ellipse, #2a1a0a 0%, #1a0a00 100%);
-  border-radius: 50%;
 }
 
 .navigation {
