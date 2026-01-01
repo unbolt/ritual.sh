@@ -2,8 +2,10 @@
 title: "Neon Odin - Allfather"
 date: 2025-01-12
 tags: ["album"]
+format: "stream"
 description: ""
 cover: "cover.jpg"
+rating: 7
 render: never
 build:
   render: never

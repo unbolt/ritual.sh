@@ -1,0 +1,506 @@
+.media-page {
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  background: #0d0d0d;
+
+  @include media-down(lg) {
+    padding: 1rem;
+  }
+
+  // Matrix rain background canvas
+  .matrix-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // Main container - simplified
+  .media-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+
+    @include media-down(lg) {
+      padding: 20px;
+    }
+  }
+
+  // Simplified screen - no CRT effects
+  .media-screen {
+    width: 100%;
+    background: transparent;
+  }
+
+  // Content area - clean typography
+  .media-content {
+    width: 100%;
+    color: #e0e0e0;
+    font-family: "Lato", sans-serif;
+
+    @include media-down(lg) {
+      padding: 0;
+    }
+  }
+
+  // Header - simplified
+  .media-header {
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, transparent, #ff00ff 20%, #00ffff 50%, #ff00ff 80%, transparent) 1;
+    display: flex;
+    justify-content: center;
+
+    pre {
+      background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 16px;
+      line-height: 1.4;
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin: 0;
+
+      @include media-down(lg) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  // Two-column layout
+  .media-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+    margin-bottom: 40px;
+
+    @include media-down(lg) {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+
+  // Media list
+  .media-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    @include media-down(lg) {
+      gap: 25px;
+    }
+
+    // Subtle divider between items
+    .media-item + .media-item {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #333 20%, #333 80%, transparent);
+      }
+    }
+  }
+
+  // Individual media item - clean and readable
+  .media-item {
+    display: flex;
+    gap: 25px;
+    padding: 20px;
+    border: 1px solid #333;
+    background: rgba(0,0,0,0.6);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    @include media-down(lg) {
+      gap: 20px;
+      flex-direction: column;
+    }
+
+    &:hover {
+      border-color: #ff00ff;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+
+      .media-cover {
+        box-shadow: 0 8px 30px rgba(255, 0, 255, 0.3);
+      }
+
+      .media-title {
+        color: #00ffff;
+      }
+    }
+
+    // Media cover - clean with subtle effects
+    .media-cover {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background: #0a0a0a;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+
+      @include media-down(lg) {
+        width: 100%;
+        max-width: 300px;
+        height: 450px;
+        margin: 0 auto;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .no-cover {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #111;
+        border: 2px dashed #333;
+
+        .cover-placeholder {
+          color: #555;
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    // Media info - readable typography
+    .media-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0; // Allow text truncation
+
+      @include media-down(lg) {
+        padding: 0;
+      }
+    }
+
+    .media-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .media-type {
+      font-size: 0.7rem;
+      color: #ff00ff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 12px;
+      background: rgba(255, 0, 255, 0.1);
+      border: 1px solid rgba(255, 0, 255, 0.3);
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .media-format {
+      font-size: 0.7rem;
+      color: #ffa500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 12px;
+      background: rgba(255, 165, 0, 0.1);
+      border: 1px solid rgba(255, 165, 0, 0.3);
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .media-date {
+      font-size: 0.7rem;
+      color: #00ffff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 12px;
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .media-title {
+      font-size: 1.5rem;
+      margin: 0;
+      line-height: 1.3;
+      color: #fff;
+      font-weight: 600;
+      transition: color 0.3s ease;
+
+      @include media-down(lg) {
+        font-size: 1.3rem;
+      }
+    }
+
+    .media-rating {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 1px;
+      font-family: "DSEG7-Classic", monospace;
+      line-height: 1;
+
+      .rating-value {
+        font-size: 1.6rem;
+        color: #00ffff;
+        font-weight: bold;
+        text-shadow:
+          0 0 10px rgba(0, 255, 255, 0.8),
+          0 0 20px rgba(0, 255, 255, 0.4);
+        letter-spacing: 0.1em;
+      }
+
+      .rating-max {
+        font-size: 1rem;
+        color: #555;
+        font-weight: 400;
+        margin-left: 3px;
+      }
+
+      @include media-down(lg) {
+        .rating-value {
+          font-size: 1.3rem;
+        }
+
+        .rating-max {
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+
+  // Pagination styling - clean
+  .pagination {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+    text-align: center;
+
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      flex-wrap: wrap;
+
+      li {
+        a,
+        span {
+          display: block;
+          padding: 10px 16px;
+          background: transparent;
+          border: 1px solid #333;
+          color: #999;
+          text-decoration: none;
+          font-size: 0.9rem;
+          transition: all 0.3s ease;
+          min-width: 45px;
+          text-align: center;
+          border-radius: 4px;
+          font-weight: 500;
+
+          &:hover {
+            border-color: #ff00ff;
+            color: #ff00ff;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+          }
+        }
+
+        &.active span {
+          border-color: #00ffff;
+          color: #00ffff;
+          box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        &.disabled {
+          a,
+          span {
+            opacity: 0.3;
+            cursor: not-allowed;
+
+            &:hover {
+              border-color: #333;
+              color: #999;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Last.fm sidebar
+  .lastfm-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include media-down(lg) {
+      order: -1; // Show above media list on mobile
+    }
+
+    .lastfm-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 15px;
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, #ff00ff, #00ffff) 1;
+
+      h3 {
+        font-size: 1.2rem;
+        margin: 0;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .lastfm-profile-link {
+        font-size: 0.8rem;
+        color: #999;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        white-space: nowrap;
+
+        &:hover {
+          color: #ff00ff;
+        }
+      }
+    }
+
+    .lastfm-tracks {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .lastfm-loading {
+      color: #999;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .lastfm-track {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid #333;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        border-color: #00ffff;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+        background: rgba(0, 255, 255, 0.05);
+
+        .track-name {
+          color: #00ffff;
+        }
+      }
+
+      .track-art {
+        width: 60px;
+        height: 60px;
+        border-radius: 4px;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: #0a0a0a;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        &.no-art {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #111;
+          border: 1px dashed #333;
+
+          &::after {
+            content: "♪";
+            font-size: 1.5rem;
+            color: #555;
+          }
+        }
+      }
+
+      .track-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+
+        .track-name {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #fff;
+          transition: color 0.3s ease;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .track-artist {
+          font-size: 0.8rem;
+          color: #999;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .track-date {
+          font-size: 0.7rem;
+          color: #666;
+          margin-top: auto;
+        }
+      }
+
+      &.now-playing {
+        border-color: #ff00ff;
+        background: rgba(255, 0, 255, 0.05);
+
+        .track-info::before {
+          content: "♫ Now Playing";
+          font-size: 0.65rem;
+          color: #ff00ff;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}

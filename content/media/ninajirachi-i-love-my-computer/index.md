@@ -2,13 +2,15 @@
 title: "Ninajirachi - I Love My Computer"
 date: 2025-12-12
 tags: ["album"]
+format: "stream"
 description: ""
 cover: "cover.jpg"
+rating: 8
 build:
   render: never
 ---
 
-Ninajirachi's _I Love My Computer_ captures something truthful about growing up shaped by screens and bandwidth. The album explores that strange intimacy we developed with our machines - the late nights, the secret discoveries, the way technology became less of a tool and more of a companion.
+Ninajirachi's _I Love My Computer_ captures something truthful about growing up shaped by the digital world. The album explores that strange relationships we developed with our machines - the late nights, the  discoveries, the way technology became less of a tool and more of a companion.
 
 Tracks like "Fuck My Computer" and "iPod Touch" aren't just bangers; they're confessions about a relationship that transcends generations. Whether you learned HTML on Geocities or taught yourself production in GarageBand, there's recognition here.
 
