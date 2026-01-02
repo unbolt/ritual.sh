@@ -1,6 +1,6 @@
 ---
 title: "Neon Odin - Allfather"
-date: 2025-01-12
+date: 2025-12-01
 tags: ["album"]
 format: "stream"
 description: ""
