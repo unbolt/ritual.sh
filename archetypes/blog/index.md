@@ -1,10 +1,27 @@
 ---
-title: "{{ replace .TranslationBaseName "-" " " | title }}"
+title: "{{ replace .File.ContentBaseName "-" " " | title }}"
 date: {{ .Date }}
-url: /blog/{{ .TranslationBaseName }}/
 tags:
-  -
-draft: true
+  - weeknote
+  - weekly update
+draft: false
 ---
 
-Write your blog post content here.
+- Emojii
+- Memeojii
+
+## Links I Found Interesting
+
+- [name](https://url) - desc
+
+## Music
+
+If you like
+
+{{< youtube MxekyGtqcNE >}}
+
+## Next Week
+
+Not necessary
+
+Until next week!
