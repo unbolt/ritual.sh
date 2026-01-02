@@ -110,6 +110,180 @@
     }
   }
 
+  .recent-tracks-container {
+    width: 100%;
+    margin: 0 auto 100px;
+
+    padding-bottom: 15px;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, #ff00ff, #00ffff) 1;
+
+    .audio-sub-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, #00ffff, #ff00ff) 1;
+
+      h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #fff;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .lastfm-link {
+        color: #999;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #ff00ff;
+        }
+      }
+    }
+
+    @include media-down(lg) {
+      width: 100%;
+    }
+
+    .recent-tracks-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+
+      @include media-down(lg) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
+
+      @include media-down(md) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .track-loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: #999;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .recent-track {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #333;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+
+      &:hover {
+        border-color: #00ffff;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        transform: translateY(-5px);
+
+        .track-title {
+          color: #00ffff;
+        }
+      }
+
+      &.now-playing {
+        border-color: #ff00ff;
+        background: rgba(255, 0, 255, 0.1);
+        box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+
+        &::before {
+          content: "♫ NOW PLAYING";
+          position: absolute;
+          top: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 0.65rem;
+          color: #ff00ff;
+          background: #0d0d0d;
+          padding: 4px 10px;
+          border-radius: 10px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: 700;
+          white-space: nowrap;
+          border: 1px solid #ff00ff;
+        }
+
+        .track-cover {
+          box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        }
+      }
+
+      .track-cover {
+        width: 100%;
+        aspect-ratio: 1/1;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #0a0a0a;
+        transition: box-shadow 0.3s ease;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        &.no-art {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px dashed #333;
+
+          .cover-placeholder {
+            font-size: 2rem;
+            color: #555;
+          }
+        }
+      }
+
+      .track-details {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        .track-title {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #fff;
+          transition: color 0.3s ease;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          line-height: 1.3;
+        }
+
+        .track-artist {
+          font-size: 0.8rem;
+          color: #999;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
   .record-shelf-container {
     .shelf {
       display: flex;
@@ -118,6 +292,18 @@
       overflow: visible;
       padding-left: 5%;
       padding-right: 5%;
+
+      .neon-sign {
+        position: absolute;
+        width: 200px;
+        left: -90px;
+        top: 50px;
+
+        > .neon-text {
+          font-size: 3em;
+          line-height: 2.5rem;
+        }
+      }
     }
 
     .shelf::before {
