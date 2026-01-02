@@ -529,6 +529,53 @@
     }
   }
 
+  // Blog image styling
+  .blog-img-container {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin: 1.5em 0;
+  }
+
+  .blog-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 3px solid transparent;
+    background:
+      linear-gradient(#000, #000) padding-box,
+      linear-gradient(180deg, #0f0, #000) border-box;
+    filter: grayscale(100%) contrast(1.2) brightness(0.9) sepia(100%) hue-rotate(60deg) saturate(300%);
+    transition: all 0.3s ease;
+
+    &:hover {
+      filter: grayscale(0%) contrast(1) brightness(1);
+    }
+  }
+
+  .blog-img-caption {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #0f0;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    font-family: monospace;
+    border: 1px solid rgba(0, 255, 0, 0.5);
+    border-radius: 3px;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    backdrop-filter: blur(5px);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .blog-img-container:hover .blog-img-caption {
+    opacity: 0;
+  }
+
   // Navigation styling
   .blog-navigation {
     margin-bottom: 20px;
