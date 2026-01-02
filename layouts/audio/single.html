@@ -33,8 +33,27 @@
       </div>
     </div>
 
+    <div class="recent-tracks-container">
+      <div class="audio-sub-header">
+        <h3>Recently Played</h3>
+        <a
+          href="https://www.last.fm/user/ritualplays"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="lastfm-link"
+          >last.fm →</a
+        >
+      </div>
+      <div class="recent-tracks-list" id="recent-tracks">
+        <div class="track-loading">Loading tracks...</div>
+      </div>
+    </div>
+
     <div class="record-shelf-container">
       <div class="shelf">
+        <div class="neon-sign">
+          <div class="neon-text purple">Album Reviews <span>-></span></div>
+        </div>
         <!-- prettier-ignore -->
         {{ $posts := where site.RegularPages "Type" "media" }} 
         {{ $posts = where $posts "Params.tags" "intersect" (slice "album") }}
