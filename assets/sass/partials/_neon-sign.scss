@@ -1,12 +1,16 @@
 /* Neon sign styling */
 .neon-sign {
-  position: absolute;
-  top: 5%;
-  left: 60%;
-  transform: translateX(-50%) rotate(-10deg);
-  z-index: 1;
   text-align: center;
   line-height: 5rem;
+  transform: rotate(-10deg);
+
+  @include media-up(lg) {
+    position: absolute;
+    top: 5%;
+    left: 60%;
+    transform: translateX(-50%) rotate(-10deg);
+    z-index: 1;
+  }
 
   > .neon-text {
     font-family: "Neonderthaw", cursive;
