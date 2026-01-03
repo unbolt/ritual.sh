@@ -3,23 +3,23 @@
 {{ end }}{{ define "main" }}
 <div class="wall"></div>
 
-<div class="window">{{ partial "elements/window.html" . }}</div>
+<div class="window hidden-lg-down">{{ partial "elements/window.html" . }}</div>
 
 <!-- Neon sign above monitor -->
 {{ partial "elements/neon-sign.html" . }}
 
 <!-- Sticky notes -->
-<div class="sticky-note note1">fix bugs</div>
-<div class="sticky-note note2">pwd:<br />puppies</div>
-<div class="sticky-note note3">finish<br />coffee</div>
-<div class="sticky-note note4">CALL<br />WIFE</div>
+<div class="sticky-note note1 hidden-xl-down">fix bugs</div>
+<div class="sticky-note note2 hidden-xl-down">pwd:<br />puppies</div>
+<div class="sticky-note note3 hidden-xl-down">finish<br />coffee</div>
+<div class="sticky-note note4 hidden-xl-down">CALL<br />WIFE</div>
 
 <!-- Papers pinned to wall -->
 <div class="wall-paper paper1"></div>
 <div class="wall-paper paper2"></div>
 
 <!-- X-Files "I want to believe" poster -->
-<div class="xfiles-poster">
+<div class="xfiles-poster hidden-lg-down">
   <div class="xfiles-content">
     <div class="ufo-illustration">
       <div class="ufo-dome"></div>
@@ -38,7 +38,7 @@
 </div>
 
 <!-- Now playing poster on wall -->
-<div class="poster">
+<div class="poster hidden-xl-down">
   <div class="poster-image" id="posterImage">
     <script src="/js/nowplaying.js"></script>
 
@@ -68,145 +68,75 @@
 <!-- Desk -->
 <div class="desk"></div>
 
-<div class="crt-container">
-  <div class="crt-monitor">
-    <div class="crt-screen">
-      <div class="content crt">
-        <div id="terminal">
-          <div id="output"></div>
-          <div id="input-container" class="input-line hidden">
-            <span class="prompt">></span>
-            <input
-              type="text"
-              id="input"
-              autocomplete="off"
-              spellcheck="false"
-            />
-          </div>
+<div class="homepage-container">
+  <!-- LEFT COLUMN -->
+  <div>
+    <div class="secondary-screen updates-monitor">
+      <div class="screen-display crt">
+        <div class="scroll">
+          > updates -lah<br />
+          {{ range first 10 (where .Site.RegularPages "Type"
+          "updates").ByDate.Reverse }} [<time
+            >{{ .Lastmod.Format "02-01-2006" }}</time
+          >]<br />
+          {{ .Plain }}<br />
+          ---<br />
+          {{ end }}
+
+          <span class="cursor-blink">_</span>
         </div>
       </div>
     </div>
-  </div>
-  <div class="monitor-stand">
-    <div class="stand-neck"></div>
-    <div class="stand-base"></div>
-  </div>
 
-  <!-- Wall-mounted monitors -->
-  <div class="secondary-screen wall-monitor-1 hidden-xl-down">
-    <div class="screen-display crt">
-      <div class="scroll">
-        > updates -lah<br />
-        {{ range first 10 (where .Site.RegularPages "Type"
-        "updates").ByDate.Reverse }} [<time
-          >{{ .Lastmod.Format "02-01-2006" }}</time
-        >]<br />
-        {{ .Plain }}<br />
-        ---<br />
-        {{ end }}
-
+    <div class="secondary-screen wall-monitor-4 hidden-xl-down">
+      <div class="screen-display tiny amber crt">
+        > tail -f /var/log<br />
+        [INFO] Process OK<br />
+        [WARN] High load detected - time for coffee break<br />
+        [INFO] Connected to database (it's in a relationship now)<br />
+        [ERROR] 404: Motivation not found<br />
+        [WARN] Firewall detected actual fire, calling emergency services<br />
+        [INFO] Successfully hacked into mainframe (jk it's just localhost)<br />
+        [ERROR] Keyboard not found. Press F1 to continue.<br />
+        [WARN] Too many open tabs. Browser having existential crisis.<br />
+        [INFO] Ping 127.0.0.1 - there's no place like home<br />
+        [ERROR] SQL injection attempt detected. Nice try, Bobby Tables.<br />
         <span class="cursor-blink">_</span>
       </div>
     </div>
   </div>
-
-  <div class="secondary-screen wall-monitor-2 hidden-xl-down">
-    <div class="screen-display tiny cyan crt">
-      <div class="scroll-text">
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
-        [PKT] 172.16.0.1:22<br />
-        [PKT] 192.168.1.1:443<br />
-        [PKT] 10.0.0.15:8080<br />
+  <!--  END LEFT COLUMN -->
+  <!-- CENTER COLUMN -->
+  <div class="hidden-lg-down">
+    <div class="crt-monitor">
+      <div class="crt-screen">
+        <div class="content crt">
+          <div id="terminal">
+            <div id="output"></div>
+            <div id="input-container" class="input-line hidden">
+              <span class="prompt">></span>
+              <input
+                type="text"
+                id="input"
+                autocomplete="off"
+                spellcheck="false"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="monitor-stand">
+      <div class="stand-neck"></div>
+      <div class="stand-base"></div>
+    </div>
   </div>
-
-  <a
-    href="/blog/"
-    class="secondary-screen wall-monitor-3 hidden-xl-down"
-    style="text-decoration: none !important"
-  >
-    <div
-      class="screen-display crt"
-      style="
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <pre>
+  <!-- END CENTER COLUMN -->
+  <!-- RIGHT COLUMN -->
+  <div>
+    <a href="/blog/" class="secondary-screen blog-monitor">
+      <div class="screen-display crt">
+        <pre>
       ▄▄
  █▄    ██
  ██    ██          ▄▄
@@ -215,26 +145,93 @@
 ▄████▀▄██▄▀███▀ ▀████
                    ██
 ██ NEW! ██▶▶▶    ▀▀▀</pre
-      >
-    </div>
-  </a>
+        >
+      </div>
+    </a>
 
-  <div class="secondary-screen wall-monitor-4 hidden-xl-down">
-    <div class="screen-display tiny amber crt">
-      > tail -f /var/log<br />
-      [INFO] Process OK<br />
-      [WARN] High load detected - time for coffee break<br />
-      [INFO] Connected to database (it's in a relationship now)<br />
-      [ERROR] 404: Motivation not found<br />
-      [WARN] Firewall detected actual fire, calling emergency services<br />
-      [INFO] Successfully hacked into mainframe (jk it's just localhost)<br />
-      [ERROR] Keyboard not found. Press F1 to continue.<br />
-      [WARN] Too many open tabs. Browser having existential crisis.<br />
-      [INFO] Ping 127.0.0.1 - there's no place like home<br />
-      [ERROR] SQL injection attempt detected. Nice try, Bobby Tables.<br />
-      <span class="cursor-blink">_</span>
+    <div class="secondary-screen wall-monitor-2 hidden-xl-down">
+      <div class="screen-display tiny cyan crt">
+        <div class="scroll-text">
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+          [PKT] 172.16.0.1:22<br />
+          [PKT] 192.168.1.1:443<br />
+          [PKT] 10.0.0.15:8080<br />
+        </div>
+      </div>
     </div>
   </div>
+  <!-- END RIGHT COLUMN -->
 </div>
 
 <div class="navigation">
@@ -246,9 +243,7 @@
 
         {{ partial "elements/ipod.html" . }}
 
-        <div class="hidden-md-down">
-          {{ partial "elements/vu-meter.html" . }}
-        </div>
+        <div class="">{{ partial "elements/vu-meter.html" . }}</div>
 
         <div class="notes">
           <div class="note">♪</div>
@@ -270,9 +265,7 @@
     </a>
   </div>
 
-  <div>
-    {{ partial "elements/crt-tv.html" . }}
-  </div>
+  <div>{{ partial "elements/crt-tv.html" . }}</div>
 </div>
 
 {{ range first 1 (where .Site.RegularPages "Type" "updates").ByDate.Reverse }}

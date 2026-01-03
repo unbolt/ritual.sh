@@ -39,7 +39,9 @@
   height: 4px;
   background: #ff0000;
   border-radius: 50%;
-  box-shadow: 0 0 6px #ff0000, 0 0 3px #ff0000;
+  box-shadow:
+    0 0 6px #ff0000,
+    0 0 3px #ff0000;
   animation: pulse 2s ease-in-out infinite;
 }
 
@@ -94,8 +96,10 @@
   width: 100%;
   height: 100%;
   background:
-    repeating-radial-gradient(#000 0 0.0001%, #aaa 0 0.0002%) 50% 0/2500px 2500px,
-    repeating-conic-gradient(#000 0 0.0001%, #999 0 0.0002%) 60% 60%/2500px 2500px;
+    repeating-radial-gradient(#000 0 0.0001%, #aaa 0 0.0002%) 50% 0/2500px
+      2500px,
+    repeating-conic-gradient(#000 0 0.0001%, #999 0 0.0002%) 60% 60%/2500px
+      2500px;
   background-blend-mode: difference;
   transition: opacity 0.3s ease;
   animation: tv-static-noise 0.2s infinite alternate;
@@ -103,7 +107,11 @@
 }
 
 @keyframes tv-static-noise {
-  100% { background-position: 50% 0, 60% 50%; }
+  100% {
+    background-position:
+      50% 0,
+      60% 50%;
+  }
 }
 
 .tv-static::before {
@@ -131,7 +139,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(0deg, transparent 94%, rgba(255,255,255,0.08) 96%, transparent 98%);
+  background: linear-gradient(
+    0deg,
+    transparent 94%,
+    rgba(255, 255, 255, 0.08) 96%,
+    transparent 98%
+  );
   animation: interference-scan 1.5s linear infinite;
   mix-blend-mode: screen;
   z-index: 3;
@@ -163,6 +176,15 @@
   letter-spacing: 1px;
   z-index: 2;
   white-space: nowrap;
+
+  @include media-down(lg) {
+    opacity: 1;
+    z-index: 100;
+    color: #000;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 2px #fff;
+  }
 }
 
 .crt-tv:hover .tv-static {
@@ -172,7 +194,9 @@
 
 .crt-tv:hover .tv-text {
   opacity: 1;
-  animation: glitch-in 0.3s ease forwards, tv-text-glitch-cycle 3s ease 0.3s infinite;
+  animation:
+    glitch-in 0.3s ease forwards,
+    tv-text-glitch-cycle 3s ease 0.3s infinite;
 }
 
 @keyframes glitch-out {
@@ -206,22 +230,30 @@
   0% {
     opacity: 0;
     transform: translate(-50%, -50%) translate(-3px, 2px);
-    text-shadow: -2px 0 #f0f, 2px 0 #0ff;
+    text-shadow:
+      -2px 0 #f0f,
+      2px 0 #0ff;
   }
   20% {
     opacity: 0.3;
     transform: translate(-50%, -50%) translate(2px, -2px);
-    text-shadow: 2px 0 #f0f, -2px 0 #0ff;
+    text-shadow:
+      2px 0 #f0f,
+      -2px 0 #0ff;
   }
   40% {
     opacity: 0.6;
     transform: translate(-50%, -50%) translate(-1px, 1px);
-    text-shadow: 1px 0 #f0f, -1px 0 #0ff;
+    text-shadow:
+      1px 0 #f0f,
+      -1px 0 #0ff;
   }
   60% {
     opacity: 0.8;
     transform: translate(-50%, -50%) translate(1px, -1px);
-    text-shadow: -1px 0 #f0f, 1px 0 #0ff;
+    text-shadow:
+      -1px 0 #f0f,
+      1px 0 #0ff;
   }
   80% {
     opacity: 0.9;
@@ -236,7 +268,8 @@
 }
 
 @keyframes tv-text-glitch-cycle {
-  0%, 6.67% {
+  0%,
+  6.67% {
     text-shadow:
       -2px 0 #f0f,
       2px 0 #0ff,
@@ -260,7 +293,8 @@
       0 0 4px #0f0;
     transform: translate(-50%, -50%) translate(3px, -2px);
   }
-  26.67%, 100% {
+  26.67%,
+  100% {
     text-shadow:
       0 0 8px #0f0,
       0 0 4px #0f0;

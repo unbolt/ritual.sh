@@ -1,7 +1,4 @@
 .music {
-  // position: absolute;
-  // bottom: 15%;
-  // right: 27%;
   cursor: pointer;
   position: relative;
   height: 100px;
@@ -29,7 +26,7 @@
 
   @include media-down(lg) {
     opacity: 1;
-    transform: rotate(0deg);
+    //transform: rotate(0deg);
     bottom: 0;
     font-size: 14px;
   }
