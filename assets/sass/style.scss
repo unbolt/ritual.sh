@@ -1,5 +1,6 @@
 @import "normalize";
 @import "mixins";
+@import "animations";
 
 @import "partials/global-styles";
 
@@ -16,6 +17,7 @@
 
 @import "partials/content-screens";
 
+@import "pages/homepage";
 @import "pages/about";
 @import "pages/audio";
 @import "pages/now";
@@ -58,203 +60,10 @@ body {
   position: relative;
 }
 
-.latest-post {
+#latest-post {
   display: none;
 }
 
-@keyframes flicker {
-  0% {
-    opacity: 0.27861;
-  }
-  5% {
-    opacity: 0.34769;
-  }
-  10% {
-    opacity: 0.23604;
-  }
-  15% {
-    opacity: 0.90626;
-  }
-  20% {
-    opacity: 0.18128;
-  }
-  25% {
-    opacity: 0.83891;
-  }
-  30% {
-    opacity: 0.65583;
-  }
-  35% {
-    opacity: 0.67807;
-  }
-  40% {
-    opacity: 0.26559;
-  }
-  45% {
-    opacity: 0.84693;
-  }
-  50% {
-    opacity: 0.96019;
-  }
-  55% {
-    opacity: 0.08594;
-  }
-  60% {
-    opacity: 0.20313;
-  }
-  65% {
-    opacity: 0.71988;
-  }
-  70% {
-    opacity: 0.53455;
-  }
-  75% {
-    opacity: 0.37288;
-  }
-  80% {
-    opacity: 0.71428;
-  }
-  85% {
-    opacity: 0.70419;
-  }
-  90% {
-    opacity: 0.7003;
-  }
-  95% {
-    opacity: 0.36108;
-  }
-  100% {
-    opacity: 0.24387;
-  }
-}
-@keyframes textShadow {
-  0% {
-    text-shadow:
-      0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
-      -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  5% {
-    text-shadow:
-      2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5),
-      -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  10% {
-    text-shadow:
-      0.02956275843481219px 0 1px rgba(0, 30, 255, 0.5),
-      -0.02956275843481219px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  15% {
-    text-shadow:
-      0.40218538552878136px 0 1px rgba(0, 30, 255, 0.5),
-      -0.40218538552878136px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  20% {
-    text-shadow:
-      3.4794037899852017px 0 1px rgba(0, 30, 255, 0.5),
-      -3.4794037899852017px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  25% {
-    text-shadow:
-      1.6125630401149584px 0 1px rgba(0, 30, 255, 0.5),
-      -1.6125630401149584px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  30% {
-    text-shadow:
-      0.7015590085143956px 0 1px rgba(0, 30, 255, 0.5),
-      -0.7015590085143956px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  35% {
-    text-shadow:
-      3.896914047650351px 0 1px rgba(0, 30, 255, 0.5),
-      -3.896914047650351px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  40% {
-    text-shadow:
-      3.870905614848819px 0 1px rgba(0, 30, 255, 0.5),
-      -3.870905614848819px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  45% {
-    text-shadow:
-      2.231056963361899px 0 1px rgba(0, 30, 255, 0.5),
-      -2.231056963361899px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  50% {
-    text-shadow:
-      0.08084290417898504px 0 1px rgba(0, 30, 255, 0.5),
-      -0.08084290417898504px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  55% {
-    text-shadow:
-      2.3758461067427543px 0 1px rgba(0, 30, 255, 0.5),
-      -2.3758461067427543px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  60% {
-    text-shadow:
-      2.202193051050636px 0 1px rgba(0, 30, 255, 0.5),
-      -2.202193051050636px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  65% {
-    text-shadow:
-      2.8638780614874975px 0 1px rgba(0, 30, 255, 0.5),
-      -2.8638780614874975px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  70% {
-    text-shadow:
-      0.48874025155497314px 0 1px rgba(0, 30, 255, 0.5),
-      -0.48874025155497314px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  75% {
-    text-shadow:
-      1.8948491305757957px 0 1px rgba(0, 30, 255, 0.5),
-      -1.8948491305757957px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  80% {
-    text-shadow:
-      0.0833037308038857px 0 1px rgba(0, 30, 255, 0.5),
-      -0.0833037308038857px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  85% {
-    text-shadow:
-      0.09769827255241735px 0 1px rgba(0, 30, 255, 0.5),
-      -0.09769827255241735px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  90% {
-    text-shadow:
-      3.443339761481782px 0 1px rgba(0, 30, 255, 0.5),
-      -3.443339761481782px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  95% {
-    text-shadow:
-      2.1841838852799786px 0 1px rgba(0, 30, 255, 0.5),
-      -2.1841838852799786px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  100% {
-    text-shadow:
-      2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5),
-      -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-}
 .crt::after {
   content: " ";
   display: block;
@@ -681,33 +490,6 @@ body {
 }
 
 /* CRT Monitor container */
-.crt-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-
-  @include media-down(lg) {
-    position: relative;
-    transform: none;
-    top: auto;
-    left: auto;
-  }
-
-  /* Monitor stand */
-  > .monitor-stand {
-    position: absolute;
-    background: none;
-    box-shadow: none;
-    bottom: -80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 80px;
-    z-index: -1;
-  }
-}
 
 /* CRT Monitor bezel */
 .crt-monitor {
@@ -760,22 +542,6 @@ body {
     0 0 10px #0f0,
     0 0 20px #0f0;
   animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-    box-shadow:
-      0 0 10px #0f0,
-      0 0 20px #0f0;
-  }
-  50% {
-    opacity: 0.5;
-    box-shadow:
-      0 0 5px #0f0,
-      0 0 10px #0f0;
-  }
 }
 
 /* Stand neck */
@@ -1046,7 +812,6 @@ body {
   z-index: 7;
 }
 
-/* Better curved cables using SVG paths */
 .cable-svg {
   position: absolute;
   bottom: 20%;
@@ -1065,149 +830,14 @@ body {
   border-radius: 8px;
   z-index: 6;
   padding: 8px 10px 20px 10px;
+  text-decoration: none !important;
 }
 
 /* Wall-mounted CRT 1 - upper left relative to main */
-.wall-monitor-1 {
-  top: 3%;
-  left: -34%;
-  width: 200px;
-  height: 200px;
-  background: linear-gradient(145deg, #c8c8c0, #a8a898);
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.7),
-    inset 0 2px 4px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
-  padding: 5px 7px 15px 7px;
-}
-
-.wall-monitor-1::after {
-  content: "";
-  position: absolute;
-  bottom: 4px;
-  right: 7px;
-  width: 4px;
-  height: 4px;
-  background: #0f0;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #0f0;
-  animation: pulse 2s ease-in-out infinite;
-}
 
 /* Wall-mounted CRT 2 - upper right, larger, closely stacked */
-.wall-monitor-2 {
-  top: 4%;
-  right: -50%;
-  width: 300px;
-  height: 245px;
-  background: linear-gradient(145deg, #b8b8b0, #989888);
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.7),
-    inset 0 2px 4px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
-  padding: 6px 8px 18px 8px;
-  transform: rotate(-1deg);
-}
-
-.wall-monitor-2::after {
-  content: "";
-  position: absolute;
-  bottom: 5px;
-  right: 8px;
-  width: 5px;
-  height: 5px;
-  background: #0ff;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #0ff;
-  animation: pulse 1.8s ease-in-out infinite;
-}
-
-/* Wall-mounted CRT 3 - lower right, larger, closely aligned to monitor 2 */
-.wall-monitor-3 {
-  top: 57%;
-  right: -33%;
-  width: 195px;
-  height: 140px;
-  background: linear-gradient(145deg, #d8d0b8, #b8b098);
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.7),
-    inset 0 2px 4px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
-  padding: 6px 8px 18px 8px;
-  transform: rotate(1deg);
-}
-
-.wall-monitor-3::after {
-  content: "";
-  position: absolute;
-  bottom: 5px;
-  right: 8px;
-  width: 5px;
-  height: 5px;
-  background: #f00;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #f00;
-  animation: pulse 2.3s ease-in-out infinite;
-}
-
-.wall-monitor-3:hover pre {
-  animation: text-glitch-cycle 3s ease infinite;
-}
-
-@keyframes text-glitch-cycle {
-  0%,
-  6.67% {
-    text-shadow:
-      -2px 0 #f0f,
-      2px 0 #0ff;
-    transform: translate(0, 0);
-  }
-  13.33% {
-    text-shadow:
-      2px 0 #f0f,
-      -2px 0 #0ff;
-    transform: translate(-3px, 2px);
-  }
-  20% {
-    text-shadow:
-      -1px 0 #f0f,
-      1px 0 #0ff;
-    transform: translate(3px, -2px);
-  }
-  26.67%,
-  100% {
-    text-shadow: none;
-    transform: translate(0, 0);
-  }
-}
 
 /* Wall-mounted CRT 4 - lower left relative to main */
-.wall-monitor-4 {
-  top: 50%;
-  left: -53%;
-  width: 300px;
-  height: 225px;
-  background: linear-gradient(145deg, #a8a898, #888878);
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.7),
-    inset 0 2px 4px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
-  padding: 5px 7px 15px 7px;
-  transform: rotate(-1deg);
-}
-
-.wall-monitor-4::after {
-  content: "";
-  position: absolute;
-  bottom: 4px;
-  right: 7px;
-  width: 4px;
-  height: 4px;
-  background: #fa0;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #fa0;
-  animation: pulse 2.1s ease-in-out infinite;
-}
 
 /* Desk-mounted CRT - on desk left side */
 .desk-monitor {
@@ -1558,130 +1188,5 @@ body {
   }
   50% {
     opacity: 0.3;
-  }
-}
-
-/* Desk clutter */
-.desk-item {
-  position: absolute;
-  z-index: 8;
-}
-
-/* Keyboard */
-.keyboard {
-  bottom: 9%;
-  left: 42%;
-  width: 170px;
-  height: 55px;
-  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-  border-radius: 3px;
-  box-shadow:
-    0 3px 10px rgba(0, 0, 0, 0.6),
-    inset 0 1px 2px rgba(255, 255, 255, 0.1);
-}
-
-.keyboard::before {
-  content: "";
-  position: absolute;
-  top: 8px;
-  left: 10px;
-  right: 10px;
-  bottom: 8px;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      #1a1a1a 0px,
-      #1a1a1a 6px,
-      transparent 6px,
-      transparent 8px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      #1a1a1a 0px,
-      #1a1a1a 8px,
-      transparent 8px,
-      transparent 10px
-    );
-}
-
-/* Mouse */
-.mouse {
-  bottom: 8.5%;
-  right: 45%;
-  width: 25px;
-  height: 35px;
-  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  border-radius: 12px 12px 8px 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-.mouse::before {
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 12px;
-  background: #111;
-  border-radius: 1px;
-}
-
-.navigation {
-  position: absolute;
-  bottom: 10%;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  @include media-down(lg) {
-    position: relative;
-  }
-
-  .time-display {
-    width: 150px;
-    z-index: 30;
-    padding: 0.5em;
-    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
-    border: 1px solid #333;
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.5),
-      inset 0 1px 2px rgba(255, 255, 255, 0.1);
-    border-radius: 1em;
-    cursor: pointer;
-
-    &::after {
-      content: "Interests and Tools";
-      position: absolute;
-      width: 150px;
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
-      z-index: 8000;
-      transform: rotate(-10deg);
-      border: 1px solid #0f0;
-      padding: 2px;
-      padding-left: 5px;
-      padding-right: 5px;
-      border-radius: 5px;
-      background-color: rgba(0, 0, 0, 0.7);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      text-align: center;
-
-      @include media-down(lg) {
-        opacity: 1;
-        transform: rotate(0deg);
-        bottom: 0;
-        font-size: 14px;
-      }
-    }
-
-    &:hover::after {
-      opacity: 1;
-    }
   }
 }

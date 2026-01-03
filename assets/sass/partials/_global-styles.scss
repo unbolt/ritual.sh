@@ -12,6 +12,10 @@ footer[role="contentinfo"] {
   border-left: 1px solid #0f0;
   border-top-left-radius: 5px;
 
+  @include media-down(lg) {
+    display: none;
+  }
+
   a {
     color: #0f0;
     text-decoration: none;
