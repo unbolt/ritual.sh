@@ -10,6 +10,7 @@ draft: false
 - 🎆 Happy New Year! Last year went by shockingly fast, and the year ahead is looking very exciting too.
 - 💻 The Thinkpad T480s arrived and has been suitably sticker bombed. I am running Pop!\_OS 24.04 on it and everything so far seems great.
 - 🌐 I setup a dedicated server for this site and migrated off neocities, I am coming up with a plan on how to make sure updates keep getting posted there but redirect here.
+- 📺 There's been a bunch of Taskmaster recently, including Champion of Champions which was good. Traitors is back on so we're up to date on that so far.
 
 {{< img src="thinkpad_t480s.jpg" alt="Thinkpad T480s complete with stickerbomb" width="900x" >}}
 
