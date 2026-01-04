@@ -63,7 +63,7 @@ A few comments[^3] on Hacker News suggested that the rise of GitHub could have b
 
 To check this I grabbed data from the top 100 starred GitHub repositories and tracked issues opened per month. This isn't an ideal metric[^4], but it gives us something to work with.
 
-{{< graph id="stackoverflow-vs-github-issues" type="line" title="StackOverflow vs GitHub Issues" height="500"
+{{< graph id="stackoverflow-vs-github-issues" type="line" title="StackOverflow Questions vs GitHub Issues" height="500"
     csv="stackoverflow_questions_over_time.csv,total_issues_by_date.csv"
     labelColumn="Month"
     dataColumns="Questions,Total Issues"
