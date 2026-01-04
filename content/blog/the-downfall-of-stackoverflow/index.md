@@ -22,7 +22,7 @@ StackOverflow had a hell of a run. From just 4 questions monthly in July 2008 to
 
 Then around 2014-2015, it plateaued. About 170,000-190,000 questions per month, which held steady for a few years before starting to slip. By 2019 we're down to around 150,000 per month. Still solid, but the writing was on the wall.
 
-Then it properly falls off a cliff. January 2023: 97,209 questions. December 2023: 42,601. January 2026: 321. That's a 99.8% drop from the 2020 peak. Three hundred and twenty-one questions. In a month.
+Then it properly falls off a cliff. January 2023: 97,209 questions. December 2023: 42,601. December 2025: 3,862. That's a 98.1% drop from the 2020 peak.
 
 ## Is it AI?
 
@@ -74,7 +74,7 @@ GitHub issues start slow in these specific repositories, but by 2019 we're seein
 
 The timeline doesn't really match StackOverflow's decline either. GitHub issues hit a high in 2018-2019 (when they jumped to 8,000-10,000 per month), but StackOverflow was still holding steady at 150,000+ questions. The platform only started its real nosedive in 2021-2023, while GitHub issues stayed flat.
 
-If GitHub issues were the culprit, you'd expect to see an inverse relationship: as issues go up, questions go down. Instead, both coexisted just fine from 2015-2020. GitHub issues plateaued in 2019 and have stayed relatively constant since, even slightly increasing in 2025. Meanwhile, StackOverflow collapsed by 99.8%.
+If GitHub issues were the culprit, you'd expect to see an inverse relationship: as issues go up, questions go down. Instead, both coexisted just fine from 2015-2020. GitHub issues plateaued in 2019 and have stayed relatively constant since, even slightly increasing in 2025. Meanwhile, StackOverflow collapsed by 98.1%.
 
 So no, I don't believe GitHub issues killed StackOverflow. It may have been a contributing factor, with people going elsewhere to find answers. Developers were using both for years without real conflict though.
 
@@ -98,19 +98,21 @@ The data suggests AI accelerated something that was already happening. A few thi
 
 **The AI acceleration (2023-2025)**: ChatGPT launches November 30, 2022. By March 2023, StackOverflow drops from 123,614 questions to 87,543. AI tools give you instant answers without needing to wade through ten variations of your question that are marked as duplicates and locked.
 
-**The collapse (2025-2026)**: By mid-2025, AI coding tools are just... everywhere. GitHub Copilot, ChatGPT, Claude, all of them baked into every IDE and workflow. The August 2025 peak in "AI coding" searches lines up with StackOverflow hitting 5,885 questions. That's a 96.8% decline from five years earlier.
+**The collapse (2025-2026)**: By mid-2025, AI coding tools are just... everywhere. GitHub Copilot, ChatGPT, Claude, all of them baked into every IDE and workflow. The August 2025 peak in "AI coding" searches lines up with StackOverflow hitting 5,885 questions. That's a 96% decline from five years earlier.
 
 ## The bottom line
 
 AI didn't kill StackOverflow, but it's definitely finishing the job. The platform was already bleeding out when ChatGPT showed up: content saturation, better tooling, the ecosystem maturing. But AI coding tools changed the game completely. Why search through old forum posts when you can just ask?
 
-The inverse relationship is stark: as AI coding interest hits its peak in 2025, StackOverflow craters. By January 2026 we're at 321 questions. That's about the same as August 2008, when it was brand new.
+The inverse relationship is stark: as AI coding interest hits its peak in 2025, StackOverflow craters. By December 2025 we're at 3,862 questions. That's roughly the same as September 2008, just a few months after the platform launched.
 
 Twelve years to build it. Five years to tear it down. And yeah, the last three were almost certainly AI finishing what was already started.
 
 ### Footnote
 
 This is the hardest and longest I have thought about anything in a long time. I was an avid StackOverflow user 10~ years ago, and the graph showing up on Hacker News showing the current state absolutely blew my mind and inspired me to dig a bit deeper.
+
+The CSV data for this post can be found on my [GitHub](https://github.com/unbolt/ritual.sh/tree/main/content/blog/the-downfall-of-stackoverflow).
 
 I hope you found this interesting. Rock on.
 
