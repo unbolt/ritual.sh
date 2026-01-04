@@ -118,6 +118,10 @@ I hope you found this interesting. Rock on.
 
 ---
 
+### Corrections and Updates
+
+- 04/01/2025 - Removed the January 2026 data from all graphs as we're only 4 days in and it made it look weird. Also added some 0 value months to the GitHub data at the start so the graphs line up properly visually.
+
 [^1]: Google Trends data provides relative search interest rather than absolute numbers, which may not capture the full picture.
 
 [^2]: [ChatGPT Launch Announcement](https://openai.com/index/chatgpt/)
@@ -129,3 +133,5 @@ I hope you found this interesting. Rock on.
 [^5]: [Comment](https://news.ycombinator.com/item?id=46482624)
 
 [^6]: In 2013, Tim Schreiber wrote about ["StackOverlords"](https://timschreiber.com/2013/10/30/beware-the-stackoverlords/) who "ruthlessly wield" their privileges against newcomers. By 2018, StackOverflow officially acknowledged the problem in their blog post ["Stack Overflow Isn't Very Welcoming. It's Time for That to Change."](https://stackoverflow.blog/2018/04/26/stack-overflow-isnt-very-welcoming-its-time-for-that-to-change/)
+
+

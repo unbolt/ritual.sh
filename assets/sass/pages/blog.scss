@@ -466,6 +466,14 @@
         }
       }
 
+      // Horizontal rules
+      hr {
+        border: none;
+        border-top: 2px dashed #0f0;
+        margin: 2em 0;
+        opacity: 0.6;
+      }
+
       .read-more {
         display: inline-block;
         margin-top: 10px;
