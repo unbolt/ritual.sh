@@ -271,14 +271,12 @@
         }
       }
 
-      
       .tag-filter-link {
         background: rgba(255, 153, 0, 0.2);
         border-color: rgba(255, 153, 0, 0.5);
         color: #ff9900;
         text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
       }
-    
     }
 
     // Post title
@@ -555,7 +553,8 @@
     background:
       linear-gradient(#000, #000) padding-box,
       linear-gradient(180deg, #0f0, #000) border-box;
-    filter: grayscale(100%) contrast(1.2) brightness(0.9) sepia(100%) hue-rotate(60deg) saturate(300%);
+    filter: grayscale(100%) contrast(1.2) brightness(0.9) sepia(100%)
+      hue-rotate(60deg) saturate(300%);
     transition: all 0.3s ease;
 
     &:hover {

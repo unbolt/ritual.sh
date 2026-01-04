@@ -3,16 +3,11 @@
   <div class="resources-container">
     <div class="whiteboard">
       <div class="whiteboard-header">
-        <h1>{{ .Title }}</h1>
-        <div class="whiteboard-description">
-          {{ .Content }}
-        </div>
+        <div class="whiteboard-description">{{ .Content }}</div>
       </div>
 
       <div class="whiteboard-pins">
-        {{ range .Pages }}
-          {{ .Render "summary" }}
-        {{ end }}
+        {{ range .Pages }} {{ .Render "summary" }} {{ end }}
       </div>
     </div>
   </div>
