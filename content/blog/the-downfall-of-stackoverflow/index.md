@@ -11,7 +11,9 @@ _Quick note: This isn't an "AI bad" rant. AI tools are a useful thing to have in
 
 This post was inspired by a post on [Hacker News](https://news.ycombinator.com/item?id=46482345) that linked to this [StackOverflow data](https://data.stackexchange.com/stackoverflow/query/1926661#graph).
 
-My kneejerk reaction was that the rise in AI and its code analysis capabilities have caused the downfall of StackOverflow. We can see a peak after a gradual decline in early 2020 (COVID bedroom coders?) which then returns to a roughly normal level by 2021, before starting a stark decline into obscurity, very much accelerating at the end of 2022.
+My kneejerk reaction to the data was that the rise in AI and its code analysis capabilities have caused the downfall of StackOverflow, but I needed some data to back it up. 
+
+We can see a peak after a gradual decline in early 2020 (COVID bedroom coders?) which then returns to a roughly normal level by 2021, before starting a stark decline into obscurity, very much accelerating at the end of 2022.
 
 {{< graph id="stackoverflow-trend" type="line" title="Stack Overflow Questions Over Time" height="500" csv="stackoverflow_questions_over_time.csv" labelColumn="Month" dataColumn="" dateFormat="2006-01" >}}
 {{< /graph >}}
