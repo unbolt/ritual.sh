@@ -52,6 +52,10 @@ menu:
       name: gear & edc
       url: /gear/
       weight: 10
+    - identifier: resources
+      name: resources
+      url: /resources/
+      weight: 12
     - identifier: archives
       name: archives
       url: /archives/

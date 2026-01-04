@@ -1,0 +1,549 @@
+// Resources Whiteboard Page
+.resources-page {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+
+  @include media-up(md) {
+    padding: 3rem 2rem;
+  }
+}
+
+.resources-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.whiteboard {
+  background: linear-gradient(135deg, #f5f5f0 0%, #e8e8dd 100%);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.1),
+    inset 0 0 100px rgba(0, 0, 0, 0.02);
+  position: relative;
+
+  // Subtle texture overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.01) 2px, rgba(0, 0, 0, 0.01) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 0, 0, 0.01) 2px, rgba(0, 0, 0, 0.01) 4px);
+    pointer-events: none;
+    border-radius: 8px;
+  }
+}
+
+.whiteboard-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+
+  h1 {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .whiteboard-description {
+    color: #546e7a;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.whiteboard-pins {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+
+  @include media-up(lg) {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+// Resource Pin (Post-it note style)
+.resource-pin {
+  position: relative;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  // Random slight rotations for pins
+  &:nth-child(3n+1) {
+    transform: rotate(-1deg);
+  }
+
+  &:nth-child(3n+2) {
+    transform: rotate(1deg);
+  }
+
+  &:nth-child(3n+3) {
+    transform: rotate(-0.5deg);
+  }
+
+  &:hover {
+    transform: rotate(0deg) translateY(-5px) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+
+    .pin-tack {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Pin tack at the top
+.pin-tack {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #c92a2a);
+  border-radius: 50%;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.3),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  transition: transform 0.3s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+}
+
+// Resource card (the note itself)
+.resource-card {
+  background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%);
+  padding: 2rem 1.5rem 1.5rem;
+  border-radius: 4px;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 -40px 40px -20px rgba(0, 0, 0, 0.05);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  // Vary note colors
+  .resource-pin:nth-child(4n+1) & {
+    background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%); // Yellow
+  }
+
+  .resource-pin:nth-child(4n+2) & {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); // Blue
+  }
+
+  .resource-pin:nth-child(4n+3) & {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); // Green
+  }
+
+  .resource-pin:nth-child(4n+4) & {
+    background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); // Pink
+  }
+}
+
+.resource-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  position: relative;
+
+  // Lavalamp icon
+  &.lavalamp {
+    background: linear-gradient(180deg, transparent 0%, transparent 20%, #9333ea 20%, #7c3aed 100%);
+    border-radius: 10px 10px 40px 40px;
+    border: 3px solid #6b21a8;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(147, 51, 234, 0.3);
+
+    // Lamp base
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 12px;
+      background: #1f2937;
+      border-radius: 4px;
+    }
+
+    // Lava blobs
+    &::after {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      width: 25px;
+      height: 30px;
+      background: radial-gradient(circle, #ec4899 0%, #db2777 100%);
+      border-radius: 50% 50% 40% 60%;
+      opacity: 0.9;
+      animation: float-blob 4s ease-in-out infinite;
+    }
+  }
+
+  // Last.fm stats icon
+  &.lastfm-stats {
+    background: linear-gradient(135deg, #d32323 0%, #b71c1c 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    // Equalizer bars
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 15px;
+      width: 8px;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+    &::before {
+      left: 20px;
+      height: 35px;
+      animation: equalizer-1 0.8s ease-in-out infinite;
+    }
+
+    &::after {
+      left: 35px;
+      height: 25px;
+      animation: equalizer-2 0.8s ease-in-out infinite 0.2s;
+    }
+  }
+}
+
+// Additional lava blob for lavalamp
+.resource-icon.lavalamp {
+  & > span {
+    position: absolute;
+    top: 50%;
+    right: 25%;
+    width: 20px;
+    height: 25px;
+    background: radial-gradient(circle, #f97316 0%, #ea580c 100%);
+    border-radius: 60% 40% 50% 50%;
+    opacity: 0.85;
+    animation: float-blob-2 3.5s ease-in-out infinite;
+  }
+
+  // Create the blob with a pseudo-element instead
+  &:not(:empty)::before {
+    // Override for when we add content
+    animation: float-blob 4s ease-in-out infinite;
+  }
+}
+
+// Last.fm additional bars
+.resource-icon.lastfm-stats {
+  & > span {
+    position: absolute;
+    bottom: 15px;
+    width: 8px;
+    background: #fff;
+    border-radius: 2px;
+
+    &:nth-child(1) {
+      left: 50px;
+      height: 30px;
+      animation: equalizer-3 0.8s ease-in-out infinite 0.4s;
+    }
+  }
+}
+
+@keyframes float-blob {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.1);
+  }
+}
+
+@keyframes float-blob-2 {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(0.9);
+  }
+}
+
+@keyframes equalizer-1 {
+  0%, 100% {
+    height: 35px;
+  }
+  50% {
+    height: 20px;
+  }
+}
+
+@keyframes equalizer-2 {
+  0%, 100% {
+    height: 25px;
+  }
+  50% {
+    height: 40px;
+  }
+}
+
+@keyframes equalizer-3 {
+  0%, 100% {
+    height: 30px;
+  }
+  50% {
+    height: 15px;
+  }
+}
+
+.resource-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: #1f2937;
+    font-weight: 600;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #3b82f6;
+      }
+    }
+  }
+}
+
+.resource-description {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+  flex: 1;
+}
+
+.resource-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  .tag {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #374151;
+    text-decoration: none;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.resource-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+
+  .resource-link {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+
+    &.demo {
+      background: #3b82f6;
+      color: #fff;
+
+      &:hover {
+        background: #2563eb;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+      }
+    }
+
+    &.source {
+      background: #1f2937;
+      color: #fff;
+
+      &:hover {
+        background: #111827;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(31, 41, 55, 0.4);
+      }
+    }
+  }
+}
+
+// Single Resource Page
+.resource-single {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  @include media-up(md) {
+    padding: 3rem 2rem;
+  }
+}
+
+.resource-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  @include media-up(md) {
+    padding: 4rem 3rem;
+  }
+}
+
+.resource-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+
+  h1 {
+    font-size: 2.5rem;
+    color: #1f2937;
+    margin: 1rem 0;
+
+    @include media-up(md) {
+      font-size: 3rem;
+    }
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    color: #6b7280;
+    margin: 1rem 0;
+  }
+}
+
+.resource-icon-large {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+
+  &.lavalamp,
+  &.lastfm-stats {
+    // Inherit styles from smaller icons
+  }
+}
+
+.resource-body {
+  color: #374151;
+  line-height: 1.8;
+  font-size: 1.1rem;
+
+  h2 {
+    color: #1f2937;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  code {
+    background: #f3f4f6;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  pre {
+    background: #1f2937;
+    color: #e5e7eb;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+
+    code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+  }
+}
+
+.resource-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e5e7eb;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .nav-link {
+    padding: 0.75rem 1.5rem;
+    background: #f3f4f6;
+    color: #374151;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #e5e7eb;
+      transform: translateY(-2px);
+    }
+
+    &.back {
+      background: #3b82f6;
+      color: #fff;
+
+      &:hover {
+        background: #2563eb;
+      }
+    }
+
+    &.prev,
+    &.next {
+      flex: 1;
+      min-width: 150px;
+    }
+  }
+}
