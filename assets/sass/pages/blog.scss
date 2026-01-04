@@ -228,6 +228,13 @@
       padding: 15px;
     }
 
+    .blog-tags-filter {
+      border: 0;
+      background: transparent;
+      padding: 0;
+      margin-bottom: 0px;
+    }
+
     &:hover {
       background: rgba(0, 255, 0, 0.1);
       border-color: rgba(0, 255, 0, 0.6);
@@ -264,12 +271,14 @@
         }
       }
 
-      .blog-tags .tag {
+      
+      .tag-filter-link {
         background: rgba(255, 153, 0, 0.2);
         border-color: rgba(255, 153, 0, 0.5);
         color: #ff9900;
         text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
       }
+    
     }
 
     // Post title
