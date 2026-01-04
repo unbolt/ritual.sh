@@ -15,7 +15,21 @@ draft: false
 
 ## Links I Found Interesting
 
-- [name](https://url) - desc
+- [POSSE](https://indieweb.org/POSSE) - I have killed off pretty much all social media, but I might look into posting more on Bluesky or setting up a Mastodon again, and this would be something to keep in mind.
+
+## Weekly Listening Stats
+
+**Total Tracks:** 231
+
+**Top 5 Artists:**
+
+- [Lazerhawk](https://www.last.fm/music/Lazerhawk) - 14 plays
+- [System of a Down](https://www.last.fm/music/System+of+a+Down) - 14 plays
+- [Mystery Skulls](https://www.last.fm/music/Mystery+Skulls) - 8 plays
+- [Carpenter Brut](https://www.last.fm/music/Carpenter+Brut) - 7 plays
+- [Gunship](https://www.last.fm/music/Gunship) - 7 plays
+
+_Note: Not all my devices scrobble, so this is just what I have listened to at a computer._
 
 ## Next Week
 
