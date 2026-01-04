@@ -1,21 +1,22 @@
 <div class="blog-post-card{{ if not (in .Params.tags "weeknote") }} non-weekly{{ end }}">
 	<h1 class="blog-title">
-		{{ if in .Params.tags "weeknote" }}
+
+		<a href="{{ .Permalink }}">
 			{{ .Title }}
-		{{ else }}
-			<a href="{{ .Permalink }}">
-				{{ .Title }}
-			</a>
-		{{ end }}
+		</a>
+	
 		{{ if .Date }}
 		<span class="blog-date">{{ .Date.Format "02-01-2006" }}</span>
 		{{ end }}
 	</h1>
 	{{ if .Params.tags }}
-	<div class="blog-tags">
+	<div class="blog-tags-filter">
+		<div class="tag-links">
 		{{ range .Params.tags }}
-		<span class="tag">{{ . }}</span>
+			{{ $tagURL := printf "/tags/%s/" (. | urlize) }}
+            <a href="{{ $tagURL }}" class="tag-filter-link">{{ . }}</a>
 		{{ end }}
+		</div> 
 	</div>
 	{{ end }}
 	{{ if in .Params.tags "weeknote" }}

@@ -19,7 +19,7 @@ fi
 
 API_BASE="http://ws.audioscrobbler.com/2.0/"
 
-# Get current Unix timestamp
+# Get current timestamp
 NOW=$(date +%s)
 # Get timestamp from 7 days ago
 WEEK_AGO=$((NOW - 604800))
