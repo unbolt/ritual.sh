@@ -18,8 +18,10 @@
     {{ end }} {{ block "favicon" . }} {{ partial "site-favicon.html" . }} {{ end
     }}
 
-    <!-- Chart.js for graphs -->
+    <!-- Chart.js for graphs - only load if page content contains graph shortcode -->
+    {{ if or (findRE "{{<\\s*graph" .RawContent) (findRE "{{%\\s*graph" .RawContent) }}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4" crossorigin="anonymous"></script>
+    {{ end }}
   </head>
 
   <body>
