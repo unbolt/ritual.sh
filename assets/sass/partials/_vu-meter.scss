@@ -1,11 +1,14 @@
 /* VU Meter on desk */
 .vu-meter {
   position: absolute;
-  left: 50%;
   top: 10px;
   width: 120px;
   height: 60px;
   z-index: 8;
+
+  @include media-up(md) {
+    left: 50%;
+  }
 }
 
 .vu-meter-body {

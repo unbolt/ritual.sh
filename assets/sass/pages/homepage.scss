@@ -7,6 +7,12 @@
 
   padding-top: 200px;
 
+  @include media-up(lg) {
+    position: absolute;
+    bottom: 28%;
+    width: 100%;
+  }
+
   > div {
     display: grid;
     align-items: center;
@@ -158,6 +164,7 @@
 
 .navigation {
   position: relative;
+
   z-index: 999;
 
   display: grid;
@@ -165,6 +172,9 @@
 
   @include media-up(lg) {
     grid-template-columns: repeat(4, 1fr);
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
   }
 
   > div {

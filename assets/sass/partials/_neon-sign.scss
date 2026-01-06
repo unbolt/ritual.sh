@@ -1,8 +1,27 @@
+// Function for standard neon glow effect
+@function neon-glow($color) {
+  @return 0 0 5px #fff, 0 0 5px #fff, 0 0 21px $color, 0 0 42px $color,
+    0 0 82px $color, 0 0 92px $color, 0 0 142px $color, 0 0 181px $color;
+}
+
 /* Neon sign styling */
 .neon-sign {
   text-align: center;
   line-height: 5rem;
-  transform: rotate(-10deg);
+
+  .homepage-neon & {
+    transform: rotate(-5deg);
+    width: 90%;
+    margin: auto;
+
+    @include media-up(lg) {
+      position: absolute;
+      top: 5%;
+      left: 60%;
+      transform: translateX(-50%) rotate(-10deg);
+      z-index: 1;
+    }
+  }
 
   @include media-up(lg) {
     position: absolute;
@@ -60,12 +79,6 @@
         0 0 81px #0f0;
     }
   }
-}
-
-// Function for standard neon glow effect
-@function neon-glow($color) {
-  @return 0 0 5px #fff, 0 0 5px #fff, 0 0 21px $color, 0 0 42px $color,
-    0 0 82px $color, 0 0 92px $color, 0 0 142px $color, 0 0 181px $color;
 }
 
 // Mixin for pulse animation - generates keyframes for any color
