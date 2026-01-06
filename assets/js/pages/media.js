@@ -82,39 +82,8 @@ function initMatrixRain() {
   });
 }
 
-// Last.fm API configuration
-const LASTFM_API_URL = "https://ws.audioscrobbler.com/2.0/";
-const LASTFM_USER = "ritualplays";
-const LASTFM_API_KEY = "3a4fef48fecc593d25e0f9a40df1fefe";
-const TRACK_LIMIT = 10;
-
-// Format time difference
-function getTimeAgo(timestamp) {
-  const now = Date.now() / 1000;
-  const diff = now - timestamp;
-
-  if (diff < 60) return "Just now";
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-  if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
-  return `${Math.floor(diff / 604800)}w ago`;
-}
-
-// Fetch recent tracks from Last.fm
-async function fetchRecentTracks() {
-  const url = `${LASTFM_API_URL}?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=${TRACK_LIMIT}`;
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Failed to fetch tracks");
-
-    const data = await response.json();
-    return data.recenttracks.track;
-  } catch (error) {
-    console.error("Error fetching Last.fm data:", error);
-    return null;
-  }
-}
+// Media page configuration
+const TRACK_LIMIT = 12; // Fetch 12 to have enough after filtering
 
 // Render tracks to the DOM
 function renderTracks(tracks) {
@@ -129,7 +98,10 @@ function renderTracks(tracks) {
 
   container.innerHTML = "";
 
-  tracks.forEach((track) => {
+  // Filter and limit tracks to 10 (excluding duplicates of now playing)
+  const tracksToShow = LastFmUtils.filterAndLimitTracks(tracks, 10);
+
+  tracksToShow.forEach((track) => {
     const isNowPlaying = track["@attr"] && track["@attr"].nowplaying;
     const trackElement = document.createElement("a");
     trackElement.href = track.url;
@@ -143,7 +115,7 @@ function renderTracks(tracks) {
 
     // Get timestamp
     const timestamp = track.date ? track.date.uts : null;
-    const timeAgo = timestamp ? getTimeAgo(timestamp) : "";
+    const timeAgo = timestamp ? LastFmUtils.getTimeAgo(timestamp) : "";
 
     trackElement.innerHTML = `
       <div class="track-art ${!hasArt ? "no-art" : ""}">
@@ -162,12 +134,12 @@ function renderTracks(tracks) {
 
 // Initialize Last.fm feed
 async function initLastFmFeed() {
-  const tracks = await fetchRecentTracks();
+  const tracks = await LastFmUtils.fetchRecentTracks(TRACK_LIMIT);
   renderTracks(tracks);
 
   // Update every 30 seconds
   setInterval(async () => {
-    const updatedTracks = await fetchRecentTracks();
+    const updatedTracks = await LastFmUtils.fetchRecentTracks(TRACK_LIMIT);
     renderTracks(updatedTracks);
   }, 30000);
 }

@@ -17,6 +17,7 @@
     width: 100%;
     height: 200px;
     position: absolute;
+    pointer-events: none;
 
     @include media-up(lg) {
       position: absolute;
