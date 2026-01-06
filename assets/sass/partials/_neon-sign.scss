@@ -11,8 +11,12 @@
 
   .homepage-neon & {
     transform: rotate(-5deg);
-    width: 90%;
-    margin: auto;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
 
     @include media-up(lg) {
       position: absolute;
@@ -20,6 +24,9 @@
       left: 60%;
       transform: translateX(-50%) rotate(-10deg);
       z-index: 1;
+      margin-left: auto;
+      overflow: visible;
+      width: 50%;
     }
   }
 
