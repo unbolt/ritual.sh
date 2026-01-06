@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="theme-color" content="#00ff00" />
     <title>
       {{ block "title" . }}{{ .Site.Title }} {{ with .Params.Title }} | {{ .
@@ -19,8 +18,13 @@
     }}
 
     <!-- Chart.js for graphs - only load if page content contains graph shortcode -->
-    {{ if or (findRE "{{<\\s*graph" .RawContent) (findRE "{{%\\s*graph" .RawContent) }}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4" crossorigin="anonymous"></script>
+    {{ if or (findRE "{{<\\s*graph" .RawContent) (findRE "{{%\\s*graph"
+    .RawContent) }}
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+      integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
+      crossorigin="anonymous"
+    ></script>
     {{ end }}
   </head>
 

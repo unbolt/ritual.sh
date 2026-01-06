@@ -37,6 +37,10 @@
     .blog-header {
       text-align: center;
       padding-bottom: 20px;
+
+      @include media-down(lg) {
+        font-size: 0.75rem;
+      }
     }
 
     // Brand on bezel
@@ -607,6 +611,10 @@
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+
+    @include media-down(lg) {
+      text-align: right;
+    }
   }
 
   .blog-post-navigation {
