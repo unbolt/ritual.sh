@@ -103,6 +103,7 @@ body {
   pointer-events: none;
 }
 .crt {
+  position: absolute;
   animation: textShadow 1.6s infinite;
   background: black;
   color: greenyellow;
@@ -813,7 +814,6 @@ body {
   text-decoration: none !important;
 }
 
-
 /* Desk-mounted CRT - on desk left side */
 .desk-monitor {
   bottom: 10%;
@@ -1035,8 +1035,6 @@ body {
     opacity: 0.2;
   }
 }
-
-
 
 @keyframes pulse-slow {
   0%,

@@ -11,7 +11,7 @@ _Quick note: This isn't an "AI bad" rant. AI tools are a useful thing to have in
 
 This post was inspired by a post on [Hacker News](https://news.ycombinator.com/item?id=46482345) that linked to this [StackOverflow data](https://data.stackexchange.com/stackoverflow/query/1926661#graph).
 
-My kneejerk reaction to the data was that the rise in AI and its code analysis capabilities have caused the downfall of StackOverflow, but I needed some data to back it up. 
+My kneejerk reaction to the data was that the rise in AI and its code analysis capabilities have caused the downfall of StackOverflow, but I needed some data to back it up.
 
 We can see a peak after a gradual decline in early 2020 (COVID bedroom coders?) which then returns to a roughly normal level by 2021, before starting a stark decline into obscurity, very much accelerating at the end of 2022.
 
@@ -55,7 +55,7 @@ Zooming in on 2019 onwards makes it clearer:
 
 StackOverflow's real decline starts in 2021, well before anyone gave a shit about AI coding. From January 2021 (140,009 questions) to December 2022 (96,767 questions), it lost 31% of its traffic while "AI coding" searches sat at baseline.
 
-The AI coding surge doesn't really kick off until early 2023, then explodes through 2025, peaking in August. But by then StackOverflow was already down to 5,885 questions per month.
+The AI coding surge doesn't really kick off until early 2023, then explodes through 2025, peaking in August. By then StackOverflow was already down to 5,885 questions per month.
 
 ## Did the rise of GitHub contribute?
 
@@ -90,7 +90,7 @@ Could it be a contributing factor? Absolutely. If you had a choice between askin
 
 To actually test this properly you'd need to pull years of StackOverflow comments and run sentiment analysis to see if moderation got worse over time. That's way more effort than I'm putting into this blog post. Maybe one for another day.
 
-## So what's actually going on?
+## So what's was the actual cause?
 
 The data suggests AI accelerated something that was already happening. A few things probably contributed:
 
@@ -102,13 +102,13 @@ The data suggests AI accelerated something that was already happening. A few thi
 
 **The collapse (2025-2026)**: By mid-2025, AI coding tools are just... everywhere. GitHub Copilot, ChatGPT, Claude, all of them baked into every IDE and workflow. The August 2025 peak in "AI coding" searches lines up with StackOverflow hitting 5,885 questions. That's a 96% decline from five years earlier.
 
-## The bottom line
+## Summary
 
 AI didn't kill StackOverflow, but it's definitely finishing the job. The platform was already bleeding out when ChatGPT showed up: content saturation, better tooling, the ecosystem maturing. But AI coding tools changed the game completely. Why search through old forum posts when you can just ask?
 
 The inverse relationship is stark: as AI coding interest hits its peak in 2025, StackOverflow craters. By December 2025 we're at 3,862 questions. That's roughly the same as September 2008, just a few months after the platform launched.
 
-Twelve years to build it. Five years to tear it down. And yeah, the last three were almost certainly AI finishing what was already started.
+Twelve years to build it. Five years to watch it end. The last three were almost certainly AI finishing what was already started.
 
 ### Footnote
 
@@ -116,7 +116,7 @@ This is the hardest and longest I have thought about anything in a long time. I 
 
 The CSV data for this post can be found on my [GitHub](https://github.com/unbolt/ritual.sh/tree/main/content/blog/the-downfall-of-stackoverflow).
 
-I hope you found this interesting. Rock on.
+I hope you found this interesting. Please get in touch if you have any further insights.
 
 ---
 
@@ -135,5 +135,3 @@ I hope you found this interesting. Rock on.
 [^5]: [Comment](https://news.ycombinator.com/item?id=46482624)
 
 [^6]: In 2013, Tim Schreiber wrote about ["StackOverlords"](https://timschreiber.com/2013/10/30/beware-the-stackoverlords/) who "ruthlessly wield" their privileges against newcomers. By 2018, StackOverflow officially acknowledged the problem in their blog post ["Stack Overflow Isn't Very Welcoming. It's Time for That to Change."](https://stackoverflow.blog/2018/04/26/stack-overflow-isnt-very-welcoming-its-time-for-that-to-change/)
-
-

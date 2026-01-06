@@ -558,6 +558,142 @@
     }
   }
 
+  // Contact section styling
+  .blog-contact-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 4px;
+
+    @include media-down(lg) {
+      margin-top: 30px;
+      padding: 15px;
+    }
+
+    .contact-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: greenyellow;
+      text-shadow: 0 0 10px rgba(173, 255, 47, 0.5);
+
+      @include media-down(lg) {
+        font-size: 1.1rem;
+      }
+    }
+
+    .contact-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-email,
+    .contact-pgp {
+      font-size: 0.95rem;
+      line-height: 1.6;
+
+      @include media-down(lg) {
+        font-size: 0.9rem;
+      }
+    }
+
+    .contact-label {
+      color: greenyellow;
+      font-weight: bold;
+      margin-right: 10px;
+      text-shadow: 0 0 5px rgba(173, 255, 47, 0.5);
+    }
+
+    .contact-email a {
+      color: #0f0;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(0, 255, 0, 0.5);
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-bottom-style: solid;
+        border-bottom-color: rgba(0, 255, 0, 0.8);
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        background: rgba(0, 255, 0, 0.05);
+      }
+    }
+
+    .pgp-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pgp-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 15px;
+      background: rgba(0, 255, 0, 0.1);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+      color: #0f0;
+      text-decoration: none;
+      font-family: monospace;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+      border-radius: 3px;
+
+      @include media-down(lg) {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+
+      .button-icon {
+        font-size: 1.1em;
+        line-height: 1;
+      }
+
+      &:hover {
+        background: rgba(0, 255, 0, 0.2);
+        border-color: rgba(0, 255, 0, 0.6);
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+
+    .copy-feedback {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      padding: 8px 12px;
+      border-radius: 3px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+
+      &.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      &.success {
+        color: #0f0;
+        background: rgba(0, 255, 0, 0.1);
+        border: 1px solid rgba(0, 255, 0, 0.3);
+        text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+      }
+
+      &.error {
+        color: #f00;
+        background: rgba(255, 0, 0, 0.1);
+        border: 1px solid rgba(255, 0, 0, 0.3);
+        text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+      }
+    }
+  }
+
   // Blog image styling
   .blog-img-container {
     position: relative;

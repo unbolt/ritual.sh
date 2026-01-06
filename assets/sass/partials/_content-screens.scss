@@ -6,7 +6,7 @@
   aspect-ratio: 300 / 245;
   background: linear-gradient(145deg, #b8b8b0, #989888);
   box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.7),
+    0 8px 20px #000000b3,
     inset 0 2px 4px rgba(255, 255, 255, 0.3),
     inset 0 -2px 4px rgba(0, 0, 0, 0.3);
   padding: 6px 8px 18px 8px;
@@ -20,7 +20,7 @@
     &::before {
       content: " ";
       display: block;
-      position: fixed;
+      position: absolute;
       top: 6px;
       left: 8px;
       bottom: 18px;
@@ -44,7 +44,7 @@
     &::after {
       content: " ";
       display: block;
-      position: fixed;
+      position: absolute;
       top: 6px;
       left: 8px;
       bottom: 18px;

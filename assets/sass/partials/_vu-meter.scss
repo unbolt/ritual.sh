@@ -43,6 +43,10 @@
   justify-content: space-around;
   height: 100%;
   gap: 2px;
+
+  &.crt {
+    position: relative;
+  }
 }
 
 .vu-bar {

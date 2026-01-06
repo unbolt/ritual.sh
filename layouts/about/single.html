@@ -1,17 +1,15 @@
-{{ define "header" }}{{ partial "page-header.html" . }}{{ end }} {{ define
-"main" }}
+{{ define "main" }}
 <article class="about-page">
   <div class="about-content">
     <div class="content-screen">
       <div class="about-header">{{ partial "elements/lavalamp.html" . }}</div>
       <div class="screen-display crt no-scroll">
-        > about -v <br />
+        > about -s <br />
         <span>Name</span> / <span class="info">Dan (He/Him)</span><br />
         <span>Age</span> / <span class="info">40-something</span><br />
         <span>Location</span> / <span class="info">UK 🇬🇧</span><br /><br />
         <span>Interests</span> /
-        <span class="info">
-          Programming. Music. Movies. Tech. Photography. </span
+        <span class="info"> Programming. Music. Movies. Tech. Photography.</span
         ><br />
         <span class="cursor-blink">_</span>
       </div>
@@ -21,6 +19,16 @@
       {{ $likes := slice "LovingWifex1" "CrazyKidsx3" "labradorsx2" "Linux_User"
       "Developer" "PC_GAMING" "RETRO_TECH" "HOMELABBER"}} {{ range $likes }} {{
       partial "elements/lcd-screen.html" (dict "text" .) }} {{ end }}
+    </div>
+
+    <div class="wide-item">
+      <div class="content-screen">
+        <div class="screen-display crt">
+          > cat manifesto
+
+          <span class="cursor-blink">_</span>
+        </div>
+      </div>
     </div>
 
     <div class="wide-item manifesto-container">
@@ -105,10 +113,96 @@
         ><br />
         Camera / <span class="info">Fuji X-T5</span><br />
         Audio / <span class="info">Hiby R4 EVA, Fiio FT-1</span> <br /><br />
-        More info coming soon...
-        <br /><span class="cursor-blink">_</span>
+        Check out my <a href="/now">/now</a> page to see more hardware and
+        software information. <br /><span class="cursor-blink">_</span>
+      </div>
+    </div>
+
+    <div class="about-music hidden-xxl-down">
+      <div class="music">
+        {{ partial "elements/ipod.html" . }}
+
+        <div class="">{{ partial "elements/vu-meter.html" . }}</div>
+      </div>
+    </div>
+
+    <div class="content-screen wide-item">
+      <div class="screen-display crt">
+        > cat contact_info<br />
+        <div class="about-contact-section">
+          <p>
+            If you have any comments, questions, corrections, or just fancy
+            saying "hello" please feel free to get in touch.
+          </p>
+          <p>
+            I am still debating with myself if I want to put more effort into a
+            mastodon/bluesky type thing, so for now email is the best way to
+            talk to me. PGP is available if that's your kind of thing.
+          </p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-label">Email</span> /
+              <a href="mailto:dan@ritual.sh" class="info">dan@ritual.sh</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">PGP Public Key</span> /
+              <div class="pgp-actions">
+                <a href="/publickey.asc" download class="pgp-button">
+                  <span class="button-icon">↓</span> Download
+                </a>
+                <button id="copy-pgp-key-about" class="pgp-button">
+                  <span class="button-icon">⎘</span> Copy to Clipboard
+                </button>
+              </div>
+            </div>
+            <div id="copy-feedback-about" class="copy-feedback"></div>
+          </div>
+        </div>
+        <pre>
+|     .-.
+|    /   \         .-.
+|   /     \       /   \       .-.     .-.     _   _
++--/-------\-----/-----\-----/---\---/---\---/-\-/-\/\/---
+| /         \   /       \   /     '-'     '-'
+|/           '-'         '-'
+
+        </pre>
+        <span class="cursor-blink">_</span>
       </div>
     </div>
   </div>
 </article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const copyButton = document.getElementById("copy-pgp-key-about");
+    const feedback = document.getElementById("copy-feedback-about");
+
+    if (copyButton) {
+      copyButton.addEventListener("click", async function () {
+        try {
+          const response = await fetch("/publickey.asc");
+          const pgpKey = await response.text();
+
+          await navigator.clipboard.writeText(pgpKey);
+
+          feedback.textContent = "PGP key copied to clipboard!";
+          feedback.classList.add("show", "success");
+
+          setTimeout(() => {
+            feedback.classList.remove("show");
+          }, 3000);
+        } catch (err) {
+          feedback.textContent = "Failed to copy key";
+          feedback.classList.add("show", "error");
+
+          setTimeout(() => {
+            feedback.classList.remove("show");
+          }, 3000);
+        }
+      });
+    }
+  });
+</script>
+
 {{ end }}

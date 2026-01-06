@@ -16,7 +16,7 @@
 .whiteboard {
   background: linear-gradient(135deg, #f5f5f0 0%, #e8e8dd 100%);
   border-radius: 8px;
-  padding: 3rem 2rem;
+
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.1),
     inset 0 0 100px rgba(0, 0, 0, 0.02);
@@ -24,15 +24,27 @@
 
   // Subtle texture overlay
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.01) 2px, rgba(0, 0, 0, 0.01) 4px),
-      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 0, 0, 0.01) 2px, rgba(0, 0, 0, 0.01) 4px);
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.01) 2px,
+        rgba(0, 0, 0, 0.01) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.01) 2px,
+        rgba(0, 0, 0, 0.01) 4px
+      );
     pointer-events: none;
     border-radius: 8px;
   }
@@ -77,18 +89,20 @@
 .resource-pin {
   position: relative;
   transform: rotate(0deg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   // Random slight rotations for pins
-  &:nth-child(3n+1) {
+  &:nth-child(3n + 1) {
     transform: rotate(-1deg);
   }
 
-  &:nth-child(3n+2) {
+  &:nth-child(3n + 2) {
     transform: rotate(1deg);
   }
 
-  &:nth-child(3n+3) {
+  &:nth-child(3n + 3) {
     transform: rotate(-0.5deg);
   }
 
@@ -120,7 +134,7 @@
   transition: transform 0.3s ease;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -147,19 +161,19 @@
   gap: 1rem;
 
   // Vary note colors
-  .resource-pin:nth-child(4n+1) & {
+  .resource-pin:nth-child(4n + 1) & {
     background: linear-gradient(135deg, #fef9c3 0%, #fde68a 100%); // Yellow
   }
 
-  .resource-pin:nth-child(4n+2) & {
+  .resource-pin:nth-child(4n + 2) & {
     background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); // Blue
   }
 
-  .resource-pin:nth-child(4n+3) & {
+  .resource-pin:nth-child(4n + 3) & {
     background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); // Green
   }
 
-  .resource-pin:nth-child(4n+4) & {
+  .resource-pin:nth-child(4n + 4) & {
     background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); // Pink
   }
 }
@@ -172,7 +186,13 @@
 
   // Lavalamp icon
   &.lavalamp {
-    background: linear-gradient(180deg, transparent 0%, transparent 20%, #9333ea 20%, #7c3aed 100%);
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 20%,
+      #9333ea 20%,
+      #7c3aed 100%
+    );
     border-radius: 10px 10px 40px 40px;
     border: 3px solid #6b21a8;
     position: relative;
@@ -180,7 +200,7 @@
 
     // Lamp base
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -8px;
       left: 50%;
@@ -193,7 +213,7 @@
 
     // Lava blobs
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 30%;
       left: 30%;
@@ -219,7 +239,7 @@
     // Equalizer bars
     &::before,
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 15px;
       width: 8px;
@@ -280,7 +300,8 @@
 }
 
 @keyframes float-blob {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
   50% {
@@ -289,7 +310,8 @@
 }
 
 @keyframes float-blob-2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
   50% {
@@ -298,7 +320,8 @@
 }
 
 @keyframes equalizer-1 {
-  0%, 100% {
+  0%,
+  100% {
     height: 35px;
   }
   50% {
@@ -307,7 +330,8 @@
 }
 
 @keyframes equalizer-2 {
-  0%, 100% {
+  0%,
+  100% {
     height: 25px;
   }
   50% {
@@ -316,7 +340,8 @@
 }
 
 @keyframes equalizer-3 {
-  0%, 100% {
+  0%,
+  100% {
     height: 30px;
   }
   50% {

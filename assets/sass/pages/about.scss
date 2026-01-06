@@ -2,6 +2,10 @@
   color: white;
   margin: auto;
 
+  .content-screen {
+    position: relative !important;
+  }
+
   > .about-content {
     width: 50%;
     margin: auto;
@@ -12,6 +16,125 @@
 
     > .wide-item {
       grid-column: 1 / -1;
+    }
+
+    .about-contact-section {
+      margin-top: 1rem;
+
+      p {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .contact-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        @media (min-width: 600px) {
+          flex-direction: row;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+      }
+
+      .contact-label {
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      .info {
+        color: #0f0;
+        text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        text-decoration: none;
+        border-bottom: 1px dotted rgba(0, 255, 0, 0.5);
+        transition: all 0.3s ease;
+
+        &:hover {
+          border-bottom-style: solid;
+          border-bottom-color: rgba(0, 255, 0, 0.8);
+          text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+      }
+
+      .pgp-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-left: 0;
+
+        @media (min-width: 600px) {
+          margin-left: 0.5rem;
+        }
+      }
+
+      .pgp-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        background: rgba(0, 255, 0, 0.1);
+        border: 1px solid rgba(0, 255, 0, 0.3);
+        color: #0f0;
+        text-decoration: none;
+        font-family: monospace;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        border-radius: 3px;
+
+        .button-icon {
+          font-size: 1em;
+          line-height: 1;
+        }
+
+        &:hover {
+          background: rgba(0, 255, 0, 0.2);
+          border-color: rgba(0, 255, 0, 0.6);
+          box-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+          text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+
+        &:active {
+          transform: translateY(1px);
+        }
+      }
+
+      .copy-feedback {
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        padding: 6px 10px;
+        border-radius: 3px;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+
+        &.show {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        &.success {
+          color: #0f0;
+          background: rgba(0, 255, 0, 0.1);
+          border: 1px solid rgba(0, 255, 0, 0.3);
+          text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        &.error {
+          color: #f00;
+          background: rgba(255, 0, 0, 0.1);
+          border: 1px solid rgba(255, 0, 0, 0.3);
+          text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+      }
     }
 
     .about-header {
@@ -37,6 +160,10 @@
       }
     }
 
+    > .about-container {
+      position: relative;
+    }
+
     > .info-badges {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -53,6 +180,23 @@
         top: -20px;
         width: 150px;
         transform: rotate(5deg);
+      }
+    }
+
+    .about-music {
+      pointer-events: none;
+
+      > .music {
+        scale: 1.6;
+
+        .ipod-group {
+          top: 50%;
+          left: 25%;
+        }
+
+        .vu-meter {
+          position: relative;
+        }
       }
     }
   }
