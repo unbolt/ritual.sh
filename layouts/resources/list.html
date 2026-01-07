@@ -1,15 +1,37 @@
 {{ define "main" }}
-<div class="resources-page">
-  <div class="resources-container">
-    <div class="whiteboard">
-      <div class="whiteboard-header">
-        <div class="whiteboard-description">{{ .Content }}</div>
-      </div>
+<div class="resources-page portal-theme">
+  <div class="portal-bg-elements">
+    <div class="aperture-logo"></div>
+    <div class="test-chamber-grid"></div>
+  </div>
 
-      <div class="whiteboard-pins">
-        {{ range .Pages }} {{ .Render "summary" }} {{ end }}
+  <div class="resources-container">
+    <div class="portal-header">
+      <div class="portal-icon blue-portal hidden-lg-down"></div>
+      <h1 class="portal-title">Resources</h1>
+      <div class="portal-icon orange-portal hidden-md-down"></div>
+    </div>
+
+    <div class="portal-sign">
+      <div class="portal-sign-decor">
+        <div class="portal-sign-text">{{ .Content }}</div>
+        <div class="portal-sign-number">06</div>
+        <div class="portal-sign-sub">06/19</div>
+      </div>
+      <div class="portal-sign-lines"></div>
+
+      <div class="portal-sign-content">
+        <div class="portal-sign-header">
+          <div class="portal-description"></div>
+        </div>
+
+        <div class="portal-sign-items">
+          {{ range .Pages }} {{ .Render "summary" }} {{ end }}
+        </div>
       </div>
     </div>
+
+    <div class="companion-cube"></div>
   </div>
 </div>
 {{ end }}

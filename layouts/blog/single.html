@@ -23,36 +23,7 @@
           <div class="blog-summary">{{ .Content }}</div>
         </article>
 
-        <section class="blog-contact-section">
-          <h2 class="contact-title">Contact</h2>
-          <div class="contact-content">
-            <p>
-              If you found this interesting, have any comments, questions,
-              corrections, or just fancy saying "hello" please feel free to get
-              in touch.
-            </p>
-            <div class="contact-email">
-              <span class="contact-label">Email:</span>
-              <a href="mailto:dan@ritual.sh">dan@ritual.sh</a>
-            </div>
-            <div class="contact-pgp">
-              <span class="contact-label">PGP Public Key:</span>
-              <div class="pgp-actions">
-                <a
-                  href="/publickey.asc"
-                  download
-                  class="pgp-button download-key"
-                >
-                  <span class="button-icon">↓</span> Download
-                </a>
-                <button id="copy-pgp-key" class="pgp-button copy-key">
-                  <span class="button-icon">⎘</span> Copy to Clipboard
-                </button>
-              </div>
-              <div id="copy-feedback" class="copy-feedback"></div>
-            </div>
-          </div>
-        </section>
+        {{ partial "contact-section.html" . }}
 
         <nav class="blog-post-navigation">
           <div class="post-nav-links">
@@ -79,37 +50,5 @@
 </div>
 
 <script src="/js/footnote-scroll.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const copyButton = document.getElementById("copy-pgp-key");
-    const feedback = document.getElementById("copy-feedback");
-
-    if (copyButton) {
-      copyButton.addEventListener("click", async function () {
-        try {
-          const response = await fetch("/publickey.asc");
-          const pgpKey = await response.text();
-
-          await navigator.clipboard.writeText(pgpKey);
-
-          feedback.textContent = "PGP key copied to clipboard!";
-          feedback.classList.add("show", "success");
-
-          setTimeout(() => {
-            feedback.classList.remove("show");
-          }, 3000);
-        } catch (err) {
-          feedback.textContent = "Failed to copy key";
-          feedback.classList.add("show", "error");
-
-          setTimeout(() => {
-            feedback.classList.remove("show");
-          }, 3000);
-        }
-      });
-    }
-  });
-</script>
 
 {{ end }}

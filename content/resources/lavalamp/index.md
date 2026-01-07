@@ -1,12 +1,11 @@
 ---
 title: "HTML/CSS Lavalamp"
 date: 2026-01-04
-tags: ["css", "html", "animation"]
 description: "A pure CSS lavalamp animation with floating blobs"
 icon: "lavalamp"
 demo_url: ""
 source_url: ""
-draft: false
+draft: true
 ---
 
 A mesmerizing lavalamp effect created entirely with HTML and CSS. Features smooth floating animations and gradient blobs that rise and fall like a classic lava lamp.

@@ -1,25 +1,8 @@
 <div class="resource-pin" data-icon="{{ .Params.icon }}">
-  <div class="pin-tack"></div>
-  <div class="resource-card">
-    <div class="resource-icon {{ .Params.icon }}"></div>
-    <div class="resource-info">
-      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-      <p class="resource-description">{{ .Params.description }}</p>
-      {{ if .Params.tags }}
-      <div class="resource-tags">
-        {{ range .Params.tags }}
-        <span class="tag">{{ . }}</span>
-        {{ end }}
-      </div>
-      {{ end }}
-      <div class="resource-links">
-        {{ if .Params.demo_url }}
-        <a href="{{ .Params.demo_url }}" class="resource-link demo" target="_blank">Demo</a>
-        {{ end }}
-        {{ if .Params.source_url }}
-        <a href="{{ .Params.source_url }}" class="resource-link source" target="_blank">Source</a>
-        {{ end }}
-      </div>
+  <a href="{{ .Permalink }}">
+    <div class="resource-card">
+      <div class="resource-icon {{ .Params.icon }}"></div>
+      <div class="resource-info">{{ .Title }}</div>
     </div>
-  </div>
+  </a>
 </div>
