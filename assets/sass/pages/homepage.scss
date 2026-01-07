@@ -171,7 +171,7 @@
   grid-template-columns: 1fr 1fr;
 
   @include media-up(lg) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     position: absolute;
     bottom: 5%;
     width: 100%;
@@ -184,6 +184,49 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .nav-cube {
+    width: 106.5px;
+    position: relative;
+
+    &:hover {
+      .nav-cube-text {
+        opacity: 1;
+      }
+    }
+
+    .heart-icon {
+      font-size: 1.5em;
+    }
+
+    .nav-cube-text {
+      position: absolute;
+      display: block;
+      bottom: 0;
+      right: 0;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      z-index: 8000;
+      transform: rotate(-20deg);
+      border: 1px solid #0f0;
+      padding: 2px;
+      padding-left: 5px;
+      padding-right: 5px;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-align: center;
+
+      @include media-down(lg) {
+        opacity: 1;
+        //transform: rotate(0deg);
+        bottom: 0;
+        font-size: 14px;
+      }
+    }
   }
 
   .time-display {
