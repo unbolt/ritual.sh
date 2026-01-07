@@ -1,5 +1,5 @@
 ---
-title: "Last.fm Weekly Stats Script"
+title: "Last.fm Weekly Stats"
 date: 2026-01-04
 tags: ["javascript", "api", "last.fm"]
 description: "Fetch and display your weekly listening stats from Last.fm"
@@ -9,26 +9,115 @@ source_url: ""
 draft: false
 ---
 
-A handy script for pulling your weekly listening statistics from Last.fm's API. Perfect for tracking your music habits and creating weekly listening reports.
+Get your weekly listening statistics from Last.fm's API. Enter your username below to see your top artists and track counts for different time periods.
 
-## Features
+I made this so I could easily add in listening stats to my [weekly posts](/tags/weekly-update/), if you find it useful please let me know.
 
-- Fetches weekly top tracks from Last.fm
-- Displays track count and listening time
-- Formats data in a clean, readable format
-- Easy to integrate into blogs or dashboards
+{{< lastfm-stats-form >}}
 
-## Setup
+## Download the Shell Script
 
-1. Get your Last.fm API key from [Last.fm API](https://www.last.fm/api)
-2. Configure your username in the script
-3. Run the script to fetch your weekly stats
+Want to run this locally or integrate it into your own workflows? Here is a bash script I was using to generate this before I decided to make a web version.
 
-## Output
+```
+#!/bin/bash
 
-The script returns your top tracks for the week, including:
-- Track name and artist
-- Play count
-- Listening duration
+# Last.fm Weekly Stats Script
+# Fetches your Last.fm listening statistics for the past week
+#
+# Requirements:
+#   - curl (for API requests)
+#   - jq (for JSON parsing)
+#
+# Usage: ./lastfm-week.sh
+#
+# Setup:
+#   Create a .env file with:
+#     LASTFM_API_KEY=your_api_key_here
+#     LASTFM_USERNAME=your_username_here
+#
+# Output: Markdown-formatted stats with top artists and track counts
+#
+# Download from: https://ritual.sh/resources/lastfm-stats/
 
-Great for weekly blog posts or personal music tracking!
+# Load environment variables from .env file
+if [ -f .env ]; then
+    export $(cat .env | grep -v '^#' | xargs)
+else
+    echo "Error: .env file not found"
+    exit 1
+fi
+
+# Check required variables
+if [ -z "$LASTFM_API_KEY" ] || [ -z "$LASTFM_USERNAME" ]; then
+    echo "Error: LASTFM_API_KEY and LASTFM_USERNAME must be set in .env file"
+    exit 1
+fi
+
+API_BASE="http://ws.audioscrobbler.com/2.0/"
+
+# Get current timestamp
+NOW=$(date +%s)
+# Get timestamp from 7 days ago
+WEEK_AGO=$((NOW - 604800))
+
+# Fetch top artists for the week
+TOP_ARTISTS=$(curl -s "${API_BASE}?method=user.gettopartists&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json&period=7day&limit=5")
+
+# Fetch recent tracks to count this week's scrobbles
+RECENT_TRACKS=$(curl -s "${API_BASE}?method=user.getrecenttracks&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json&from=${WEEK_AGO}&to=${NOW}&limit=1")
+
+# Get total track count
+TOTAL_TRACKS=$(echo "$RECENT_TRACKS" | jq -r '.recenttracks["@attr"].total')
+
+# Output in markdown format
+echo "## Last.fm Weekly Stats"
+echo ""
+echo "**Total Tracks:** ${TOTAL_TRACKS}"
+echo ""
+echo "**Top 5 Artists:**"
+echo ""
+
+# Parse and display top 5 artists as markdown links
+echo "$TOP_ARTISTS" | jq -r '.topartists.artist[] | "- [\(.name)](\(.url)) - \(.playcount) plays"'
+```
+
+### Shell Script Usage
+
+The script fetches your Last.fm stats and outputs them in markdown format.
+
+**Requirements:**
+
+- `curl` for API requests
+- `jq` for JSON parsing
+
+**Setup:**
+
+1. Create a `.env` file with your credentials:
+
+```bash
+LASTFM_API_KEY=your_api_key_here
+LASTFM_USERNAME=your_username_here
+```
+
+2. Make the script executable:
+
+```bash
+chmod +x lastfm-week.sh
+```
+
+3. Run it:
+
+```bash
+./lastfm-week.sh
+```
+
+**Output:**
+
+The script prints markdown-formatted stats including:
+
+- Total tracks scrobbled this week
+- Top 5 artists with play counts
+- Direct links to artist pages
+
+Enjoy!

@@ -1,8 +1,16 @@
 {{ define "main" }}
 <div class="resource-single">
+  <div class="test-chamber-grid">
+  </div>
+
   <article class="resource-content">
+    <!-- Aperture Science hazard stripes in corners -->
+
+
+    <!-- Animated energy particles -->
+    <div class="energy-particles"></div>
+
     <header class="resource-header">
-      <div class="resource-icon-large {{ .Params.icon }}"></div>
       <h1>{{ .Title }}</h1>
       {{ if .Params.description }}
       <p class="lead">{{ .Params.description }}</p>
@@ -27,6 +35,8 @@
     <div class="resource-body">
       {{ .Content }}
     </div>
+
+    {{ partial "contact-section.html" . }}
 
     <nav class="resource-navigation">
       {{ with .PrevInSection }}
