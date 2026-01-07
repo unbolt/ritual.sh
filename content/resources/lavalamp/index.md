@@ -1,7 +1,6 @@
 ---
 title: "HTML/CSS Lavalamp"
 date: 2026-01-04
-tags: ["css", "html", "animation"]
 description: "A pure CSS lavalamp animation with floating blobs"
 icon: "lavalamp"
 demo_url: ""

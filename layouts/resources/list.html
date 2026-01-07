@@ -12,13 +12,22 @@
       <div class="portal-icon orange-portal hidden-md-down"></div>
     </div>
 
-    <div class="whiteboard">
-      <div class="whiteboard-header">
-        <div class="whiteboard-description">{{ .Content }}</div>
+    <div class="portal-sign">
+      <div class="portal-sign-decor">
+        <div class="portal-sign-text">{{ .Content }}</div>
+        <div class="portal-sign-number">06</div>
+        <div class="portal-sign-sub">06/19</div>
       </div>
+      <div class="portal-sign-lines"></div>
 
-      <div class="whiteboard-pins">
-        {{ range .Pages }} {{ .Render "summary" }} {{ end }}
+      <div class="portal-sign-content">
+        <div class="portal-sign-header">
+          <div class="portal-description"></div>
+        </div>
+
+        <div class="portal-sign-items">
+          {{ range .Pages }} {{ .Render "summary" }} {{ end }}
+        </div>
       </div>
     </div>
 

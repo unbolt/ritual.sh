@@ -1,7 +1,6 @@
 ---
 title: "Last.fm Weekly Stats"
 date: 2026-01-04
-tags: ["javascript", "api", "last.fm"]
 description: "Fetch and display your weekly listening stats from Last.fm"
 icon: "lastfm-stats"
 demo_url: ""
