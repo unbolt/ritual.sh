@@ -9,6 +9,8 @@ draft: true
 
 - ❄️ It's been pretty cold and we've had the lightest sprinkling of snow.
 - 📱 I did a mobile pass on some of the pages on this website, it works a bit better on phones now.
+- 🟠 Added the [resources](/resources) section with a script to pull weekly last.fm stats (see example output below!)
+- 🆒 Started working on an [88x31 button creator](/resources/button-generator/), it's got a decent amount of functionality so far.
 
 ## Links I Found Interesting
 

@@ -33,5 +33,11 @@
     <main role="main">{{ block "main" . }}{{ end }}</main>
     {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }} {{ block
     "scripts" . }}{{ partial "site-scripts.html" . }}{{ end }}
+
+    <!-- Button Generator - only load if page content contains button-generator shortcode -->
+    {{ if or (findRE "{{<\\s*button-generator" .RawContent) (findRE "{{%\\s*button-generator" .RawContent) }}
+    {{ $buttonGenerator := resources.Get "js/button-generator.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $buttonGenerator.RelPermalink }}" integrity="{{ $buttonGenerator.Data.Integrity }}"></script>
+    {{ end }}
   </body>
 </html>

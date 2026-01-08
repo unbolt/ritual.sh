@@ -1,0 +1,503 @@
+@import url(https://fonts.bunny.net/css?family=bebas-neue:400|lato:400,400i,700,700i|montserrat:400,400i,700,700i|open-sans:400,400i,700,700i|oswald:400,700|press-start-2p:400|roboto:400,400i,700,700i|roboto-mono:400,400i,700,700i|vt323:400);
+
+#button-generator-app {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: linear-gradient(
+    145deg,
+    rgba(5, 15, 30, 0.9) 0%,
+    rgba(10, 20, 40, 0.95) 100%
+  );
+  border-radius: 6px;
+  border: 1px solid rgba(0, 150, 255, 0.4);
+  box-shadow:
+    0 0 30px rgba(0, 150, 255, 0.15),
+    0 0 50px rgba(255, 120, 0, 0.08),
+    inset 0 0 60px rgba(0, 100, 200, 0.05);
+  position: relative;
+  overflow: visible;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 150, 255, 0.6),
+      rgba(255, 120, 0, 0.6),
+      transparent
+    );
+  }
+
+  .generator-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .preview-section {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 100, 180, 0.15) 0%,
+      rgba(0, 80, 150, 0.1) 100%
+    );
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 150, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 1rem;
+    align-self: flex-start;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    box-shadow:
+      0 0 20px rgba(0, 150, 255, 0.1),
+      inset 0 0 40px rgba(0, 100, 200, 0.05);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 150, 255, 0.7),
+        rgba(255, 120, 0, 0.5)
+      );
+      border-radius: 6px 0 0 6px;
+    }
+
+    h3 {
+      margin-top: 0;
+      color: #0096ff;
+      font-family: Verdana, "Trebuchet MS", Tahoma, sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 15px rgba(0, 150, 255, 0.5);
+      font-size: 1.2rem;
+    }
+  }
+
+  .presets-container {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid;
+    border-image: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 150, 255, 0.5),
+        transparent
+      )
+      1;
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: rgba(100, 180, 255, 0.9);
+      font-family: Verdana, "Trebuchet MS", Tahoma, sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 10px rgba(0, 150, 255, 0.4);
+      font-size: 1rem;
+    }
+  }
+
+  .preview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .preview-wrapper {
+    background: repeating-conic-gradient(
+        rgba(20, 30, 50, 0.8) 0% 25%,
+        rgba(10, 20, 40, 0.9) 0% 50%
+      )
+      50% / 20px 20px;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 150, 255, 0.2);
+  }
+
+  #button-canvas {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    border: 1px solid rgba(0, 150, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 150, 255, 0.2);
+  }
+
+  .controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .control-group {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 100, 180, 0.15) 0%,
+      rgba(0, 80, 150, 0.1) 100%
+    );
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 150, 255, 0.3);
+    box-shadow:
+      0 0 20px rgba(0, 150, 255, 0.1),
+      inset 0 0 40px rgba(0, 100, 200, 0.05);
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 150, 255, 0.7),
+        rgba(255, 120, 0, 0.5)
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: rgba(100, 180, 255, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(0, 150, 255, 0.4);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      background: rgba(5, 15, 30, 0.7);
+      color: rgba(200, 220, 255, 0.95);
+      transition: all 0.3s ease;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+
+      &:focus {
+        outline: none;
+        border-color: rgba(0, 150, 255, 0.7);
+        box-shadow:
+          0 0 15px rgba(0, 150, 255, 0.3),
+          inset 0 2px 8px rgba(0, 0, 0, 0.4);
+        background: rgba(5, 15, 30, 0.9);
+      }
+    }
+
+    select {
+      cursor: pointer;
+
+      option {
+        background: rgba(5, 15, 30, 0.95);
+        color: rgba(200, 220, 255, 0.95);
+      }
+    }
+
+    // Font preview in dropdowns
+    select#font-family,
+    select#font-family2 {
+      option[value="Lato"] {
+        font-family: "Lato", sans-serif;
+      }
+      option[value="Roboto"] {
+        font-family: "Roboto", sans-serif;
+      }
+      option[value="Open Sans"] {
+        font-family: "Open Sans", sans-serif;
+      }
+      option[value="Montserrat"] {
+        font-family: "Montserrat", sans-serif;
+      }
+      option[value="Oswald"] {
+        font-family: "Oswald", sans-serif;
+      }
+      option[value="Bebas Neue"] {
+        font-family: "Bebas Neue", display;
+      }
+      option[value="Roboto Mono"] {
+        font-family: "Roboto Mono", monospace;
+      }
+      option[value="VT323"] {
+        font-family: "VT323", monospace;
+      }
+      option[value="Press Start 2P"] {
+        font-family: "Press Start 2P", display;
+      }
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-top: 0.25rem;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(0, 100, 180, 0.2);
+      border-radius: 4px;
+      height: 6px;
+      outline: none;
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        background: linear-gradient(135deg, #0096ff, #66ccff);
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 150, 255, 0.6);
+        border: 2px solid rgba(0, 150, 255, 0.8);
+      }
+
+      &::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        background: linear-gradient(135deg, #0096ff, #66ccff);
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 150, 255, 0.6);
+        border: 2px solid rgba(0, 150, 255, 0.8);
+      }
+    }
+
+    input[type="color"] {
+      width: 100%;
+      height: 50px;
+      border: 1px solid rgba(0, 150, 255, 0.4);
+      border-radius: 4px;
+      cursor: pointer;
+      background: rgba(5, 15, 30, 0.7);
+      padding: 4px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: rgba(0, 150, 255, 0.7);
+        box-shadow: 0 0 15px rgba(0, 150, 255, 0.3);
+      }
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      accent-color: #0096ff;
+    }
+  }
+
+  .control-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid;
+    border-image: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 150, 255, 0.5),
+        transparent
+      )
+      1;
+    margin-bottom: 1rem;
+    color: rgba(100, 180, 255, 0.9);
+    font-family: Verdana, "Trebuchet MS", Tahoma, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #66ccff;
+      text-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+    }
+  }
+
+  .toggle-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    color: rgba(0, 150, 255, 0.8);
+
+    .control-group.collapsed & {
+      transform: rotate(180deg);
+    }
+  }
+
+  .control-group-content {
+    overflow: hidden;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.3s ease;
+
+    .control-group.collapsed & {
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .checkbox-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin: 0;
+    color: rgba(100, 180, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #66ccff;
+    }
+
+    input[type="checkbox"] {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    span {
+      user-select: none;
+    }
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 150, 255, 0.5);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 150, 255, 0.3),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+
+    &:hover::before {
+      left: 100%;
+    }
+  }
+
+  .btn-primary {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 120, 200, 0.3) 0%,
+      rgba(0, 100, 180, 0.2) 100%
+    );
+    color: #66ccff;
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 150, 255, 0.4) 0%,
+        rgba(255, 100, 0, 0.3) 100%
+      );
+      border-color: rgba(0, 150, 255, 0.8);
+      box-shadow:
+        0 0 20px rgba(0, 150, 255, 0.4),
+        0 0 30px rgba(255, 120, 0, 0.2);
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0, 150, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .btn-secondary {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 100, 180, 0.2) 0%,
+      rgba(0, 80, 150, 0.15) 100%
+    );
+    color: #66ccff;
+    margin-top: 0.5rem;
+
+    &:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 120, 200, 0.3) 0%,
+        rgba(255, 100, 0, 0.2) 100%
+      );
+      border-color: rgba(0, 150, 255, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 150, 255, 0.3);
+      color: #fff;
+      text-shadow: 0 0 8px rgba(0, 150, 255, 0.5);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
