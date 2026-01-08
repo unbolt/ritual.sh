@@ -10,7 +10,7 @@ draft: false
 
 Welcome to my 88x31 button creator, this is a pretty rough and ready implementation so it could be buggy, please let me know if you find any issues.
 
-Currently this only supports static images and exports as png due to the basic `canvas` tag limitations. I have approximate plans for how to make this export gifs and potentially make animated buttons, please look forward to it.
+This supports gif despite the basic `canvas` tag limitation courtesy of [gif.js](https://github.com/jnordberg/gif.js) - none of this would be possible without that project.
 
 Big thanks to [neonaut's 88x31 archive](https://neonaut.neocities.org/cyber/88x31) and everyone who made the buttons that appear there. You should check it out if you need inspiration for your button!
 

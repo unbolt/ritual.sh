@@ -143,7 +143,7 @@
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
-    border: 1px solid rgba(0, 150, 255, 0.4);
+    //border: 1px solid rgba(0, 150, 255, 0.4);
     box-shadow: 0 0 15px rgba(0, 150, 255, 0.2);
   }
 
@@ -159,7 +159,7 @@
       rgba(0, 100, 180, 0.15) 0%,
       rgba(0, 80, 150, 0.1) 100%
     );
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 6px;
     border: 1px solid rgba(0, 150, 255, 0.3);
     box-shadow:
@@ -358,23 +358,48 @@
     font-weight: bold;
     transition: transform 0.3s ease;
     color: rgba(0, 150, 255, 0.8);
+  }
 
-    .control-group.collapsed & {
-      transform: rotate(180deg);
-    }
+  .control-group.collapsed .toggle-icon {
+    transform: rotate(180deg);
   }
 
   .control-group-content {
     overflow: hidden;
+    max-height: 2000px;
     transition:
       max-height 0.3s ease,
       opacity 0.3s ease;
+  }
 
-    .control-group.collapsed & {
-      max-height: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
+  .control-group.collapsed .control-group-content {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .info-text {
+    font-size: 0.85rem;
+    color: rgba(150, 200, 255, 0.7);
+    font-style: italic;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: rgba(0, 100, 180, 0.1);
+    border-left: 3px solid rgba(0, 150, 255, 0.5);
+    border-radius: 2px;
+  }
+
+  h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: rgba(100, 180, 255, 0.85);
+    font-family: Verdana, "Trebuchet MS", Tahoma, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 150, 255, 0.3);
   }
 
   .checkbox-row {

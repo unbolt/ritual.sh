@@ -703,26 +703,26 @@
     &::before {
       content: "";
       position: absolute;
-      left: -4rem;
+      left: -2rem;
       top: 50%;
       transform: translateY(-50%);
       width: 3rem;
       height: 3px;
       background: linear-gradient(90deg, transparent, #0096ff);
-      box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
+      //box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
     }
 
     // Orange line on the right
     &::after {
       content: "";
       position: absolute;
-      right: -4rem;
+      right: -2rem;
       top: 50%;
       transform: translateY(-50%);
       width: 3rem;
       height: 3px;
       background: linear-gradient(90deg, #ff7800, transparent);
-      box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
+      //box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
     }
 
     @include media-up(md) {
@@ -730,15 +730,15 @@
 
       &::before,
       &::after {
-        width: 5rem;
+        width: 6rem;
       }
 
       &::before {
-        left: -6rem;
+        left: -2rem;
       }
 
       &::after {
-        right: -6rem;
+        right: -2rem;
       }
     }
   }
