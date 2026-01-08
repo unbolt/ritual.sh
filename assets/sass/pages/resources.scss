@@ -393,6 +393,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1em;
+
+  @include media-down(md) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .resource-pin a {
