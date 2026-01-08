@@ -84,7 +84,7 @@
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 // Portal Header with portals on either side
@@ -97,7 +97,7 @@
   position: relative;
 
   .portal-title {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-family: Verdana, "Trebuchet MS", Tahoma, sans-serif;
     font-weight: 700;
     text-transform: uppercase;
@@ -108,11 +108,13 @@
       0 0 40px rgba(255, 255, 255, 0.4),
       0 2px 4px rgba(0, 0, 0, 0.3);
     margin: 0;
+    margin-top: 50px;
     position: relative;
     z-index: 2;
 
     @include media-up(md) {
       font-size: 4rem;
+      margin-top: 0;
     }
   }
 
@@ -192,7 +194,7 @@
   left: 5%;
   bottom: 5%;
   width: 150px;
-  z-index: -1;
+  z-index: 1;
 
   .heart-icon {
     font-size: 2em;
@@ -257,6 +259,7 @@
 .portal-sign {
   position: relative;
   padding: 3rem 2rem;
+  z-index: 10;
 
   border: 10px solid black;
   background: white;
@@ -479,6 +482,38 @@
     }
   }
 
+  &.button-generator {
+    background: #000;
+    height: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 90%;
+      height: 30%;
+      top: 15%;
+      left: 5%;
+      background: #fff;
+      animation: button 2s ease-in-out infinite;
+    }
+
+    &::after {
+      bottom: 15%;
+      top: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      animation: button 1.2s ease-in-out infinite;
+    }
+  }
+
   // Last.fm stats icon
   &.lastfm-stats {
     background: black;
@@ -503,13 +538,13 @@
     &::before {
       left: 20px;
       height: 35px;
-      animation: equalizer-1 0.8s ease-in-out infinite;
+      animation: equalizer-1 3s ease-in-out infinite;
     }
 
     &::after {
       left: 35px;
       height: 25px;
-      animation: equalizer-2 0.8s ease-in-out infinite 0.2s;
+      animation: equalizer-2 1s ease-in-out infinite 0.2s;
     }
   }
 }
@@ -521,6 +556,16 @@
   }
   50% {
     transform: translateY(-15px) scale(1.1);
+  }
+}
+
+@keyframes button {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 0.95;
   }
 }
 
@@ -579,7 +624,8 @@
     inset 0 0 100px rgba(0, 100, 200, 0.05),
     0 8px 32px rgba(0, 0, 0, 0.4);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 10;
 
   // Subtle tech panel grid pattern
   &::before {
@@ -699,26 +745,26 @@
     &::before {
       content: "";
       position: absolute;
-      left: -4rem;
+      left: -2rem;
       top: 50%;
       transform: translateY(-50%);
       width: 3rem;
       height: 3px;
       background: linear-gradient(90deg, transparent, #0096ff);
-      box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
+      //box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
     }
 
     // Orange line on the right
     &::after {
       content: "";
       position: absolute;
-      right: -4rem;
+      right: -2rem;
       top: 50%;
       transform: translateY(-50%);
       width: 3rem;
       height: 3px;
       background: linear-gradient(90deg, #ff7800, transparent);
-      box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
+      //box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
     }
 
     @include media-up(md) {
@@ -726,15 +772,15 @@
 
       &::before,
       &::after {
-        width: 5rem;
+        width: 6rem;
       }
 
       &::before {
-        left: -6rem;
+        left: -2rem;
       }
 
       &::after {
-        right: -6rem;
+        right: -2rem;
       }
     }
   }
