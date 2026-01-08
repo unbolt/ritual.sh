@@ -482,6 +482,38 @@
     }
   }
 
+  &.button-generator {
+    background: #000;
+    height: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 90%;
+      height: 30%;
+      top: 15%;
+      left: 5%;
+      background: #fff;
+      animation: button 2s ease-in-out infinite;
+    }
+
+    &::after {
+      bottom: 15%;
+      top: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      animation: button 1.2s ease-in-out infinite;
+    }
+  }
+
   // Last.fm stats icon
   &.lastfm-stats {
     background: black;
@@ -506,13 +538,13 @@
     &::before {
       left: 20px;
       height: 35px;
-      animation: equalizer-1 0.8s ease-in-out infinite;
+      animation: equalizer-1 3s ease-in-out infinite;
     }
 
     &::after {
       left: 35px;
       height: 25px;
-      animation: equalizer-2 0.8s ease-in-out infinite 0.2s;
+      animation: equalizer-2 1s ease-in-out infinite 0.2s;
     }
   }
 }
@@ -524,6 +556,16 @@
   }
   50% {
     transform: translateY(-15px) scale(1.1);
+  }
+}
+
+@keyframes button {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 0.95;
   }
 }
 

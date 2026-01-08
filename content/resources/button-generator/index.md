@@ -2,7 +2,7 @@
 title: "88x31 Button Creator"
 date: 2026-01-08
 description: "Make custom 88x31 pixel buttons with text, colors, gradients, and textures"
-icon: "button"
+icon: "button-generator"
 demo_url: ""
 source_url: ""
 draft: false
