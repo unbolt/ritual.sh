@@ -627,6 +627,11 @@
   overflow: visible;
   z-index: 10;
 
+  @include media-down(md) {
+    padding: 0;
+    padding-bottom: 2rem;
+  }
+
   // Subtle tech panel grid pattern
   &::before {
     content: "";
@@ -765,6 +770,12 @@
       height: 3px;
       background: linear-gradient(90deg, #ff7800, transparent);
       //box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
+    }
+
+    @include media-down(md) {
+      &::before, &::after {
+        content: none;
+      }
     }
 
     @include media-up(md) {
