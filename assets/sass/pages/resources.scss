@@ -187,12 +187,12 @@
 }
 
 .background-cube {
-  position: absolute;
-  left: 10%;
-  bottom: 10%;
+  width: 300px;
+  position: fixed;
+  left: 5%;
+  bottom: 5%;
   width: 150px;
   z-index: -1;
-  transform: rotate(5deg);
 
   .heart-icon {
     font-size: 2em;

@@ -16,7 +16,12 @@
     transform: translateX(-50%);
     width: 250%;
     height: 50%;
-    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 40%, transparent 70%);
+    background: radial-gradient(
+      ellipse,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.5) 40%,
+      transparent 70%
+    );
     border-radius: 50%;
     filter: blur(8px);
     z-index: -1;
@@ -33,6 +38,43 @@
   }
 }
 
+.cube-one,
+.cube-two {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  z-index: 30;
+
+  .companion-cube-face {
+    animation: dropCycle 24s cubic-bezier(0.68, -0.1, 0.265, 1.1) infinite;
+  }
+}
+
+.cube-two .companion-cube-face {
+  animation-delay: -12s;
+}
+
+@keyframes dropCycle {
+  0% {
+    transform: translateY(-150%);
+  }
+  12.5% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  62.5% {
+    transform: translateY(150%);
+  }
+  62.51%,
+  100% {
+    transform: translateY(-150%);
+  }
+}
 
 .companion-cube-face {
   width: 100%;
@@ -46,32 +88,24 @@
   box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
 
   clip-path: polygon(
-    /* Top left corner */
-    0% 0%,
+    /* Top left corner */ 0% 0%,
     0% 35%,
-    /* Left indent */
-    6% 37.5%,
+    /* Left indent */ 6% 37.5%,
     6% 62.5%,
     0% 65%,
-    /* Bottom left corner */
-    0% 100%,
+    /* Bottom left corner */ 0% 100%,
     35% 100%,
-    /* Bottom indent */
-    37.5% 94%,
+    /* Bottom indent */ 37.5% 94%,
     62.5% 94%,
     65% 100%,
-    /* Bottom right corner */
-    100% 100%,
+    /* Bottom right corner */ 100% 100%,
     100% 65%,
-    /* Right indent */
-    94% 62.5%,
+    /* Right indent */ 94% 62.5%,
     94% 37.5%,
     100% 35%,
-    /* Top right corner */
-    100% 0%,
+    /* Top right corner */ 100% 0%,
     65% 0%,
-    /* Top indent */
-    62.5% 6%,
+    /* Top indent */ 62.5% 6%,
     37.5% 6%,
     35% 0%
   );
@@ -111,32 +145,38 @@
   position: absolute;
   background-color: #5a5a5a;
 
-  &.horizontal-top, &.horizontal-bottom {
+  &.horizontal-top,
+  &.horizontal-bottom {
     height: 2.5%;
   }
 
-  &.vertical-left, &.vertical-right {
+  &.vertical-left,
+  &.vertical-right {
     width: 2.5%;
   }
 
   &.horizontal-top {
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
     top: 37.5%;
   }
 
   &.horizontal-bottom {
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
     bottom: 37.5%;
   }
 
   &.vertical-left {
     left: 37.5%;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
   }
 
-    &.vertical-right {
+  &.vertical-right {
     right: 37.5%;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
   }
 }
 
@@ -146,7 +186,8 @@
   background: #ff80bf;
 
   &.vertical {
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 5%;
@@ -154,11 +195,11 @@
 
   &.horizontal {
     top: 50%;
-    right: 0; left: 0;
+    right: 0;
+    left: 0;
     transform: translateY(-50%);
     height: 5%;
   }
-
 }
 
 .heart-icon {
@@ -184,9 +225,91 @@
   }
 }
 
+.portal-icon {
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+
+  .portal {
+    content: "";
+    position: absolute;
+
+    transform: translateX(-10%) scaleY(0);
+    width: 120%;
+    height: 20%;
+
+    border-radius: 50%;
+    border: 8px solid;
+
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.85) 60%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+
+    @include media-down(lg) {
+      border-width: 6px;
+    }
+
+    @include media-down(md) {
+      border-width: 4px;
+    }
+
+    @include media-down(sm) {
+      border-width: 2px;
+    }
+  }
+
+  .blue-portal {
+    bottom: -10%;
+    z-index: 20;
+
+    border-color: #0096ff;
+    box-shadow:
+      inset 0 0 40px rgba(0, 150, 255, 0.3),
+      inset 0 0 20px rgba(0, 150, 255, 0.5);
+    animation: portalCycle 24s cubic-bezier(0.68, -0.1, 0.265, 1.1) infinite;
+  }
+
+  .orange-portal {
+    top: -10%;
+    z-index: 40;
+    border-color: #ff7800;
+    box-shadow:
+      0 0 30px 8px rgba(255, 120, 0, 0.8),
+      0 0 60px 12px rgba(255, 120, 0, 0.5),
+      inset 0 0 30px rgba(255, 120, 0, 0.6);
+    animation: portalCycle 24s cubic-bezier(0.68, -0.1, 0.265, 1.1) infinite;
+    animation-delay: 0.2s;
+  }
+}
+
+@keyframes portalCycle {
+  0%,
+  12% {
+    transform: translateX(-10%) scaleY(1);
+  }
+  12.5%,
+  48% {
+    transform: translateX(-10%) scaleY(0);
+  }
+  49%,
+  60.5% {
+    transform: translateX(-10%) scaleY(1);
+  }
+  61%,
+  100% {
+    transform: translateX(-10%) scaleY(0);
+  }
+}
+
 // Pulsing heart animation
 @keyframes heartPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
@@ -195,4 +318,3 @@
     opacity: 0.85;
   }
 }
-
