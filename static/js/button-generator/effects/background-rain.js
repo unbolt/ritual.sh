@@ -42,10 +42,10 @@ export class RainBackgroundEffect extends ButtonEffect {
         id: 'rain-speed',
         type: 'range',
         label: 'Rain Speed',
-        defaultValue: 1.5,
-        min: 0.5,
+        defaultValue: 2,
+        min: 1,
         max: 3,
-        step: 0.1,
+        step: 1,
         showWhen: 'animate-rain',
         description: 'Speed of falling rain'
       },
@@ -71,15 +71,27 @@ export class RainBackgroundEffect extends ButtonEffect {
     const speed = controlValues['rain-speed'] || 1.5;
     const color = controlValues['rain-color'] || '#6ba3ff';
 
-    // Initialize raindrops on first frame
+    // Initialize raindrop base properties (seed values for deterministic animation)
     if (!this.initialized || this.raindrops.length !== density) {
       this.raindrops = [];
       for (let i = 0; i < density; i++) {
+        // Use multiple large prime seeds for better distribution
+        const seed1 = i * 2654435761; // Large prime multiplier
+        const seed2 = i * 2246822519 + 3141592653;
+        const seed3 = i * 3266489917 + 1618033988;
+        const seed4 = i * 374761393 + 2718281828;
+
+        // Hash-like function for better pseudo-random distribution
+        const hash = (s) => {
+          const x = Math.sin(s * 0.0001) * 10000;
+          return x - Math.floor(x);
+        };
+
         this.raindrops.push({
-          x: Math.random() * renderData.width,
-          y: Math.random() * renderData.height,
-          length: 2 + Math.random() * 4,
-          speedMultiplier: 0.8 + Math.random() * 0.4
+          xOffset: hash(seed1), // 0 to 1
+          startY: hash(seed2), // 0 to 1 (initial Y position within loop)
+          length: 2 + hash(seed3) * 4,
+          speedMultiplier: 0.8 + hash(seed4) * 0.4
         });
       }
       this.initialized = true;
@@ -91,20 +103,30 @@ export class RainBackgroundEffect extends ButtonEffect {
     context.lineCap = 'round';
 
     this.raindrops.forEach(drop => {
-      // Update position
-      drop.y += speed * drop.speedMultiplier;
+      // Calculate position based on current frame for perfect looping
+      const totalDistance = renderData.height + drop.length * 2;
 
-      // Reset to top when reaching bottom
-      if (drop.y > renderData.height + drop.length) {
-        drop.y = -drop.length;
-        drop.x = Math.random() * renderData.width;
-      }
+      // Progress through the animation (0 to 1)
+      const progress = animState.progress; // 0 at frame 0, ~0.975 at frame 39
+
+      // All drops complete the same number of cycles (based on speed)
+      // startY provides the offset for varied starting positions
+      // Round speed to nearest 0.5 to ensure clean cycles
+      const cycles = Math.round(speed * 2) / 2; // e.g., 1.5 -> 1.5, 1.7 -> 1.5, 2.3 -> 2.5
+      const cycleProgress = (progress * cycles + drop.startY) % 1.0;
+      const y = cycleProgress * totalDistance - drop.length;
+
+      // X position remains constant throughout the loop
+      const x = drop.xOffset * renderData.width;
+
+      // Vary opacity slightly for depth effect (using speedMultiplier for variation)
+      const opacity = 0.4 + drop.speedMultiplier * 0.3; // 0.64 to 0.76
 
       // Draw raindrop
-      context.globalAlpha = 0.6;
+      context.globalAlpha = opacity;
       context.beginPath();
-      context.moveTo(drop.x, drop.y);
-      context.lineTo(drop.x, drop.y + drop.length);
+      context.moveTo(x, y);
+      context.lineTo(x, y + drop.length);
       context.stroke();
       context.globalAlpha = 1.0;
     });
