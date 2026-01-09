@@ -1,4 +1,4 @@
-import { ButtonEffect } from '../effect-base.js';
+import { ButtonEffect } from "../effect-base.js";
 
 /**
  * Solid color background effect
@@ -6,46 +6,46 @@ import { ButtonEffect } from '../effect-base.js';
 export class SolidBackgroundEffect extends ButtonEffect {
   constructor() {
     super({
-      id: 'bg-solid',
-      name: 'Solid Background',
-      type: 'background',
-      category: 'Background',
-      renderOrder: 1
+      id: "bg-solid",
+      name: "Solid Background",
+      type: "background",
+      category: "Background",
+      renderOrder: 1,
     });
   }
 
   defineControls() {
     return [
       {
-        id: 'bg-type',
-        type: 'select',
-        label: 'Background Type',
-        defaultValue: 'solid',
+        id: "bg-type",
+        type: "select",
+        label: "Background Type",
+        defaultValue: "solid",
         options: [
-          { value: 'solid', label: 'Solid Color' },
-          { value: 'gradient', label: 'Gradient' },
-          { value: 'texture', label: 'Texture' },
-          { value: 'emoji-wallpaper', label: 'Emoji Wallpaper' },
-          { value: 'external-image', label: 'External Image' }
-        ]
+          { value: "solid", label: "Solid Color" },
+          { value: "gradient", label: "Gradient" },
+          { value: "texture", label: "Texture" },
+          { value: "emoji-wallpaper", label: "Emoji Wallpaper" },
+          // { value: 'external-image', label: 'External Image' }
+        ],
       },
       {
-        id: 'bg-color',
-        type: 'color',
-        label: 'Background Color',
-        defaultValue: '#4a90e2',
-        showWhen: 'bg-type',
-        description: 'Solid background color'
-      }
+        id: "bg-color",
+        type: "color",
+        label: "Background Color",
+        defaultValue: "#4a90e2",
+        showWhen: "bg-type",
+        description: "Solid background color",
+      },
     ];
   }
 
   isEnabled(controlValues) {
-    return controlValues['bg-type'] === 'solid';
+    return controlValues["bg-type"] === "solid";
   }
 
   apply(context, controlValues, animState, renderData) {
-    const color = controlValues['bg-color'] || '#4a90e2';
+    const color = controlValues["bg-color"] || "#4a90e2";
     context.fillStyle = color;
     context.fillRect(0, 0, renderData.width, renderData.height);
   }
