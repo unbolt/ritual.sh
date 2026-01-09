@@ -9,9 +9,9 @@ export class FireEffect extends ButtonEffect {
     super({
       id: "bg-fire",
       name: "Fire",
-      type: "general",
+      type: "background-animation",
       category: "Background Animations",
-      renderOrder: 55,
+      renderOrder: 10,
     });
 
     this.particles = [];

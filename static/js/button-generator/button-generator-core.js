@@ -186,8 +186,8 @@ export class ButtonGenerator {
       centerY: this.canvas.height / 2
     };
 
-    // Apply effects in order: transform -> background -> border -> text/text2 -> general
-    const renderOrder = ['transform', 'background', 'border', 'text', 'text2', 'general'];
+    // Apply effects in order: transform -> background -> background-animation -> text/text2 -> border -> general
+    const renderOrder = ['transform', 'background', 'background-animation', 'text', 'text2', 'border', 'general'];
 
     // Save context once before transforms
     this.ctx.save();

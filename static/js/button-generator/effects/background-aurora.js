@@ -9,9 +9,9 @@ export class AuroraEffect extends ButtonEffect {
     super({
       id: "bg-aurora",
       name: "Aurora",
-      type: "general",
+      type: "background-animation",
       category: "Background Animations",
-      renderOrder: 55,
+      renderOrder: 10,
     });
   }
 

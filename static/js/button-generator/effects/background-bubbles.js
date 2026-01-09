@@ -9,9 +9,9 @@ export class BubblesEffect extends ButtonEffect {
     super({
       id: "bg-bubbles",
       name: "Bubbles",
-      type: "general",
+      type: "background-animation",
       category: "Background Animations",
-      renderOrder: 55,
+      renderOrder: 10,
     });
 
     this.bubbles = [];

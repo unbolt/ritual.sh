@@ -9,9 +9,9 @@ export class StarfieldEffect extends ButtonEffect {
     super({
       id: "bg-starfield",
       name: "Starfield",
-      type: "general",
+      type: "background-animation",
       category: "Background Animations",
-      renderOrder: 55,
+      renderOrder: 10,
     });
 
     this.stars = [];
@@ -42,7 +42,7 @@ export class StarfieldEffect extends ButtonEffect {
         type: "range",
         label: "Twinkle Speed",
         defaultValue: 1,
-        min: 0.1,
+        min: 1,
         max: 3,
         step: 0.1,
         showWhen: "animate-starfield",

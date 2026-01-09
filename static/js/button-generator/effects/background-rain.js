@@ -9,9 +9,9 @@ export class RainBackgroundEffect extends ButtonEffect {
     super({
       id: 'bg-rain',
       name: 'Rain Effect',
-      type: 'general',
+      type: 'background-animation',
       category: 'Background Animations',
-      renderOrder: 55 // After background, before other effects
+      renderOrder: 10
     });
 
     // Initialize raindrop positions (persistent across frames)
