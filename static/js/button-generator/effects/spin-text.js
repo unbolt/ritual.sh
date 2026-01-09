@@ -63,7 +63,7 @@ export class SpinTextEffect extends ButtonEffect {
     const suffix = this.textLineNumber === 1 ? "" : "2";
     const text = controlValues[`button-text${suffix}`] || "";
 
-    if (!text || !controlValues[`text${suffix}-enabled`]) return;
+    if (!text || text.trim() === '') return;
     if (!animState) return;
 
     const speed = controlValues[`spin-speed${suffix}`] || 1;

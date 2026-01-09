@@ -90,9 +90,9 @@ export class TextShadowEffect extends ButtonEffect {
 
   isEnabled(controlValues) {
     const suffix = this.textLineNumber === 1 ? "" : "2";
-    const textEnabled = controlValues[`text${suffix}-enabled`];
+    const text = controlValues[`button-text${suffix}`];
     const shadowEnabled = controlValues[`text${suffix}-shadow-enabled`];
-    return textEnabled && shadowEnabled;
+    return text && text.trim() !== "" && shadowEnabled;
   }
 
   apply(context, controlValues, animState, renderData) {

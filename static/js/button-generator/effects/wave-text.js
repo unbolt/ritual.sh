@@ -65,8 +65,7 @@ export class WaveTextEffect extends ButtonEffect {
 
     // Get text configuration
     const text = controlValues[`button-text${suffix}`] || '';
-    const enabled = controlValues[`text${suffix}-enabled`];
-    if (!text || !enabled) return;
+    if (!text || text.trim() === '') return;
 
     const fontSize = controlValues[`font-size${suffix}`] || 12;
     const fontWeight = controlValues[`font-bold${suffix}`] ? 'bold' : 'normal';

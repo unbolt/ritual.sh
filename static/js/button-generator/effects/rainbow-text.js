@@ -54,8 +54,7 @@ export class RainbowTextEffect extends ButtonEffect {
 
     // Get text configuration
     const text = controlValues[`button-text${suffix}`] || '';
-    const enabled = controlValues[`text${suffix}-enabled`];
-    if (!text || !enabled) return;
+    if (!text || text.trim() === '') return;
 
     // Check if wave is also enabled - if so, skip (wave will handle rainbow)
     if (controlValues[`animate-text-wave${suffix}`]) return;

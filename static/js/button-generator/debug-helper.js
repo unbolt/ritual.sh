@@ -7,7 +7,6 @@ export function debugControlValues(generator) {
   // Text controls
   console.log('Text controls:');
   console.log('  button-text:', values['button-text']);
-  console.log('  text-enabled:', values['text-enabled']);
   console.log('  font-size:', values['font-size']);
   console.log('  text-x:', values['text-x']);
   console.log('  text-y:', values['text-y']);
