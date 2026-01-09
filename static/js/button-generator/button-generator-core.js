@@ -1,5 +1,7 @@
 import { ButtonEffect } from './effect-base.js';
 
+import { ColorQuantizer } from './color-quantizer.js';
+
 /**
  * Animation state class - passed to effects for frame-based rendering
  */
@@ -7,7 +9,7 @@ export class AnimationState {
   constructor(frameNumber = 0, totalFrames = 40, fps = 20) {
     this.frame = frameNumber;
     this.totalFrames = totalFrames;
-    this.progress = frameNumber / totalFrames; // 0 to 1
+    this.progress = totalFrames > 1 ? frameNumber / (totalFrames - 1) : 0; // 0 to 1, inclusive of last frame
     this.fps = fps;
     this.time = (frameNumber / fps) * 1000; // milliseconds
   }
@@ -37,6 +39,13 @@ export class ButtonGenerator {
       get totalFrames() {
         return this.fps * this.duration;
       }
+    };
+
+    // GIF export configuration
+    this.gifConfig = {
+      quality: config.gifQuality || 1, // 1-30, lower is better quality quantization
+      dither: config.gifDither || false, // false, 'FloydSteinberg', 'FalseFloydSteinberg', 'Stucki', 'Atkinson'
+      colorCount: config.gifColorCount || 256, // 2-256, number of colors to reduce to (custom quantization)
     };
 
     // Effect registry organized by type
@@ -250,6 +259,7 @@ export class ButtonGenerator {
           this.animConfig.fps
         );
         this.draw(animState);
+        this.applyPreviewQuantization();
 
         frameNum = (frameNum + 1) % this.animConfig.totalFrames;
         lastFrameTime = currentTime - (elapsed % frameDelay);
@@ -280,15 +290,31 @@ export class ButtonGenerator {
     } else {
       this.stopAnimatedPreview();
       this.draw();
+      this.applyPreviewQuantization();
+    }
+  }
+
+  /**
+   * Apply color quantization to preview if enabled
+   */
+  applyPreviewQuantization() {
+    const colorCount = this.gifConfig.colorCount;
+    if (colorCount < 256) {
+      const quantizedData = ColorQuantizer.quantize(this.canvas, colorCount, 'floyd-steinberg');
+      this.ctx.putImageData(quantizedData, 0, 0);
     }
   }
 
   /**
    * Export as animated GIF
    * @param {Function} progressCallback - Called with progress (0-1)
+   * @param {Object} options - Export options
+   * @param {number} options.quality - Quality (1-30, lower is better, default: 10)
+   * @param {boolean|string} options.dither - Dithering algorithm for gif.js
+   * @param {number} options.colorCount - Number of colors (2-256, default: 256) - uses custom quantization
    * @returns {Promise<Blob>}
    */
-  async exportAsGif(progressCallback = null) {
+  async exportAsGif(progressCallback = null, options = {}) {
     return new Promise((resolve, reject) => {
       try {
         // Create temporary canvas for frame generation
@@ -297,14 +323,30 @@ export class ButtonGenerator {
         frameCanvas.height = this.canvas.height;
         const frameCtx = frameCanvas.getContext('2d');
 
+        // Merge options with defaults
+        const quality = options.quality !== undefined ? options.quality : this.gifConfig.quality;
+        const gifDither = options.dither !== undefined ? options.dither : this.gifConfig.dither;
+        const colorCount = options.colorCount !== undefined ? options.colorCount : this.gifConfig.colorCount;
+
+        // Determine if we need custom quantization
+        const useCustomQuantization = colorCount < 256;
+        const customDither = useCustomQuantization ? 'floyd-steinberg' : false;
+
         // Initialize gif.js
-        const gif = new GIF({
+        const gifOptions = {
           workers: 2,
-          quality: 10,
+          quality: quality,
           workerScript: '/js/gif.worker.js',
           width: this.canvas.width,
           height: this.canvas.height
-        });
+        };
+
+        // Add gif.js dither option if specified (only when not using custom quantization)
+        if (!useCustomQuantization && gifDither !== false) {
+          gifOptions.dither = gifDither;
+        }
+
+        const gif = new GIF(gifOptions);
 
         // Generate frames
         const totalFrames = this.animConfig.totalFrames;
@@ -327,6 +369,12 @@ export class ButtonGenerator {
             });
 
             tempGenerator.draw(animState);
+
+            // Apply custom color quantization if needed
+            if (useCustomQuantization) {
+              const quantizedData = ColorQuantizer.quantize(frameCanvas, colorCount, customDither);
+              frameCtx.putImageData(quantizedData, 0, 0);
+            }
 
             gif.addFrame(frameCtx, {
               delay: 1000 / this.animConfig.fps,
