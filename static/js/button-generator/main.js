@@ -13,6 +13,7 @@ import * as solidBg from "./effects/background-solid.js";
 import * as gradientBg from "./effects/background-gradient.js";
 import * as textureBg from "./effects/background-texture.js";
 import * as emojiWallpaper from "./effects/background-emoji-wallpaper.js";
+import * as externalImage from "./effects/background-external-image.js";
 import * as rainbowBg from "./effects/background-rainbow.js";
 import * as rain from "./effects/background-rain.js";
 import * as starfield from "./effects/background-starfield.js";
@@ -88,6 +89,7 @@ async function setupApp() {
   gradientBg.register(generator);
   textureBg.register(generator);
   emojiWallpaper.register(generator);
+  externalImage.register(generator);
   rainbowBg.register(generator);
   rain.register(generator);
   starfield.register(generator);

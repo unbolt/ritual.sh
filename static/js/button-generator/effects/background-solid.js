@@ -25,7 +25,8 @@ export class SolidBackgroundEffect extends ButtonEffect {
           { value: 'solid', label: 'Solid Color' },
           { value: 'gradient', label: 'Gradient' },
           { value: 'texture', label: 'Texture' },
-          { value: 'emoji-wallpaper', label: 'Emoji Wallpaper' }
+          { value: 'emoji-wallpaper', label: 'Emoji Wallpaper' },
+          { value: 'external-image', label: 'External Image' }
         ]
       },
       {

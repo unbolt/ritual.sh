@@ -418,7 +418,11 @@ export class UIBuilder {
     input.type = 'text';
     input.id = id;
     input.value = defaultValue || '';
-    input.maxLength = 20;
+
+    // Only set maxLength for text inputs that aren't URLs
+    if (id !== 'bg-image-url') {
+      input.maxLength = 20;
+    }
 
     container.appendChild(labelEl);
     container.appendChild(input);
@@ -464,6 +468,8 @@ export class UIBuilder {
                 control.style.display = triggerControl.value === 'texture' ? 'block' : 'none';
               } else if (controlId && (controlId.startsWith('emoji-') || controlId === 'emoji-text')) {
                 control.style.display = triggerControl.value === 'emoji-wallpaper' ? 'block' : 'none';
+              } else if (controlId && (controlId.startsWith('bg-image-') || controlId === 'bg-image-url' || controlId === 'bg-image-fit' || controlId === 'bg-image-opacity')) {
+                control.style.display = triggerControl.value === 'external-image' ? 'block' : 'none';
               }
             }
             // For text color controls
