@@ -15,7 +15,6 @@ export class StarfieldEffect extends ButtonEffect {
     });
 
     this.stars = [];
-    this.shootingStars = [];
     this.initialized = false;
   }
 
@@ -25,8 +24,6 @@ export class StarfieldEffect extends ButtonEffect {
         id: "animate-starfield",
         type: "checkbox",
         label: "Starfield Effect",
-        description:
-          "This  might look a bit different when exported, work in  progress!",
         defaultValue: false,
       },
       {
@@ -82,16 +79,31 @@ export class StarfieldEffect extends ButtonEffect {
     const shootingEnabled = controlValues["star-shooting-enabled"] !== false;
     const starColor = controlValues["star-color"] || "#ffffff";
 
-    // Initialize stars on first frame or density change
+    // Initialize stars with deterministic positions (seed-based)
     if (!this.initialized || this.stars.length !== density) {
       this.stars = [];
       for (let i = 0; i < density; i++) {
+        // Use density as part of the seed so pattern changes with density
+        // Use multiple large prime seeds for better distribution
+        const densitySeed = density * 97531; // Density affects all stars
+        const seed1 = (i * 2654435761) + densitySeed;
+        const seed2 = (i * 2246822519) + 3141592653 + densitySeed;
+        const seed3 = (i * 3266489917) + 1618033988 + densitySeed;
+        const seed4 = (i * 374761393) + 2718281828 + densitySeed;
+        const seed5 = (i * 1103515245) + 12345 + densitySeed;
+
+        // Hash-like function for better pseudo-random distribution
+        const hash = (s) => {
+          const x = Math.sin(s * 0.0001) * 10000;
+          return x - Math.floor(x);
+        };
+
         this.stars.push({
-          x: Math.random() * renderData.width,
-          y: Math.random() * renderData.height,
-          size: 0.5 + Math.random() * 1.5,
-          twinkleOffset: Math.random() * Math.PI * 2,
-          twinkleSpeed: 0.5 + Math.random() * 1.5,
+          x: hash(seed1) * renderData.width,
+          y: hash(seed2) * renderData.height,
+          size: 0.5 + hash(seed3) * 1.5,
+          twinkleOffset: hash(seed4) * Math.PI * 2,
+          twinkleSpeed: 0.5 + hash(seed5) * 1.5,
         });
       }
       this.initialized = true;
@@ -116,46 +128,55 @@ export class StarfieldEffect extends ButtonEffect {
       context.globalAlpha = 1.0;
     });
 
-    // Shooting stars
+    // Shooting stars - deterministic based on frame number
     if (shootingEnabled) {
-      // Randomly spawn shooting stars
-      if (Math.random() < 0.02 && this.shootingStars.length < 3) {
-        this.shootingStars.push({
-          x: Math.random() * renderData.width,
-          y: -10,
-          vx: (Math.random() - 0.5) * 2,
-          vy: 3 + Math.random() * 2,
-          life: 1.0,
-        });
-      }
+      // Define shooting star spawn schedule (deterministic)
+      const shootingStarSpawns = [
+        { startFrame: 5, seed: 12345 },
+        { startFrame: 18, seed: 67890 },
+        { startFrame: 31, seed: 24680 },
+      ];
 
-      // Update and draw shooting stars
-      this.shootingStars = this.shootingStars.filter((star) => {
-        star.x += star.vx;
-        star.y += star.vy;
-        star.life -= 0.02;
+      shootingStarSpawns.forEach((spawn) => {
+        const framesSinceSpawn = animState.frame - spawn.startFrame;
+        const duration = 25; // Frames the shooting star is visible
 
-        if (star.life > 0) {
-          // Draw shooting star trail
-          const gradient = context.createLinearGradient(
-            star.x,
-            star.y,
-            star.x - star.vx * 5,
-            star.y - star.vy * 5,
-          );
-          gradient.addColorStop(0, `rgba(255, 255, 255, ${star.life * 0.8})`);
-          gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+        if (framesSinceSpawn >= 0 && framesSinceSpawn < duration) {
+          // Calculate deterministic properties from seed
+          const hash = (s) => {
+            const x = Math.sin(s * 0.0001) * 10000;
+            return x - Math.floor(x);
+          };
 
-          context.strokeStyle = gradient;
-          context.lineWidth = 2;
-          context.beginPath();
-          context.moveTo(star.x, star.y);
-          context.lineTo(star.x - star.vx * 5, star.y - star.vy * 5);
-          context.stroke();
+          const startX = hash(spawn.seed * 1) * renderData.width;
+          const startY = -10;
+          const vx = (hash(spawn.seed * 2) - 0.5) * 2;
+          const vy = 3 + hash(spawn.seed * 3) * 2;
 
-          return true;
+          // Calculate position based on frames elapsed
+          const x = startX + vx * framesSinceSpawn;
+          const y = startY + vy * framesSinceSpawn;
+          const life = 1.0 - framesSinceSpawn / duration;
+
+          if (life > 0) {
+            // Draw shooting star trail
+            const gradient = context.createLinearGradient(
+              x,
+              y,
+              x - vx * 5,
+              y - vy * 5,
+            );
+            gradient.addColorStop(0, `rgba(255, 255, 255, ${life * 0.8})`);
+            gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+            context.strokeStyle = gradient;
+            context.lineWidth = 2;
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(x - vx * 5, y - vy * 5);
+            context.stroke();
+          }
         }
-        return false;
       });
     }
   }
