@@ -24,4 +24,4 @@ Big thanks to [neonaut's 88x31 archive](https://neonaut.neocities.org/cyber/88x3
 
 - 07/01/2025 - Initial release.
 - 08/01/2025 - Total refactor to be modular, added many more effects.
-- 09/01/2025 - Rewrote the bevel inset and outset border code so they look a lot nicer at the corners. Updates throughout so that multibit (emoji!) characters should work.
+- 09/01/2025 - Rewrote the bevel inset and outset border code so they look a lot nicer at the corners. Updates throughout so that multibyte (emoji!) characters should work.
