@@ -37,8 +37,7 @@
     <!-- Button Generator - only load if page content contains button-generator shortcode -->
     {{ if or (findRE "{{<\\s*button-generator" .RawContent) (findRE "{{%\\s*button-generator" .RawContent) }}
     <script src="{{ "js/gif.js" | relURL }}"></script>
-    {{ $buttonGenerator := resources.Get "js/button-generator.js" | resources.Minify | resources.Fingerprint }}
-    <script src="{{ $buttonGenerator.RelPermalink }}" integrity="{{ $buttonGenerator.Data.Integrity }}"></script>
+    <script type="module" src="{{ "js/button-generator/main.js" | relURL }}"></script>
     {{ end }}
   </body>
 </html>
