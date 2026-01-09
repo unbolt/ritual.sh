@@ -89,7 +89,7 @@ async function setupApp() {
   gradientBg.register(generator);
   textureBg.register(generator);
   emojiWallpaper.register(generator);
-  //externalImage.register(generator);
+  externalImage.register(generator);
   rainbowBg.register(generator);
   rain.register(generator);
   starfield.register(generator);

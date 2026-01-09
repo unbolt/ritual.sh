@@ -261,6 +261,9 @@ export class UIBuilder {
       case 'text':
         return this.createTextInput(id, label, defaultValue, showWhen, description);
 
+      case 'file':
+        return this.createFileInput(id, label, defaultValue, showWhen, description, controlDef.accept);
+
       default:
         console.warn(`Unknown control type: ${type}`);
         return null;
@@ -439,6 +442,57 @@ export class UIBuilder {
   }
 
   /**
+   * Create a file input control
+   */
+  createFileInput(id, label, defaultValue, showWhen, description, accept) {
+    const container = document.createElement('div');
+
+    const labelEl = document.createElement('label');
+    labelEl.htmlFor = id;
+    labelEl.textContent = label;
+
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.id = id;
+    if (accept) {
+      input.accept = accept;
+    }
+
+    // Store the file data on the input element
+    input.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        // Create a blob URL for the file
+        const blobUrl = URL.createObjectURL(file);
+        // Store file metadata on the input element
+        input.dataset.fileName = file.name;
+        input.dataset.blobUrl = blobUrl;
+        input.dataset.fileSize = file.size;
+        input.dataset.fileType = file.type;
+      } else {
+        // Clear the data if no file is selected
+        delete input.dataset.fileName;
+        delete input.dataset.blobUrl;
+        delete input.dataset.fileSize;
+        delete input.dataset.fileType;
+      }
+    });
+
+    container.appendChild(labelEl);
+    container.appendChild(input);
+
+    if (showWhen) {
+      container.style.display = 'none';
+      container.dataset.showWhen = showWhen;
+    }
+
+    // Add tooltip handlers to the label
+    this.addTooltipHandlers(labelEl, description);
+
+    return container;
+  }
+
+  /**
    * Setup conditional visibility for controls
    * Should be called after all controls are created
    */
@@ -468,8 +522,14 @@ export class UIBuilder {
                 control.style.display = triggerControl.value === 'texture' ? 'block' : 'none';
               } else if (controlId && (controlId.startsWith('emoji-') || controlId === 'emoji-text')) {
                 control.style.display = triggerControl.value === 'emoji-wallpaper' ? 'block' : 'none';
-              } else if (controlId && (controlId.startsWith('bg-image-') || controlId === 'bg-image-url' || controlId === 'bg-image-fit' || controlId === 'bg-image-opacity')) {
+              } else if (controlId && (controlId.startsWith('bg-image-') || controlId === 'bg-image-file' || controlId === 'bg-image-fit' || controlId === 'bg-image-opacity')) {
                 control.style.display = triggerControl.value === 'external-image' ? 'block' : 'none';
+              }
+            }
+            // For image fit controls (zoom and position only show when manual mode)
+            else if (triggerControlId === 'bg-image-fit') {
+              if (controlId && (controlId === 'bg-image-zoom' || controlId === 'bg-image-offset-x' || controlId === 'bg-image-offset-y')) {
+                control.style.display = triggerControl.value === 'manual' ? 'block' : 'none';
               }
             }
             // For text color controls

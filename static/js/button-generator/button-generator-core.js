@@ -149,6 +149,18 @@ export class ButtonGenerator {
           values[id] = element.checked;
         } else if (element.type === 'range' || element.type === 'number') {
           values[id] = parseFloat(element.value);
+        } else if (element.type === 'file') {
+          // For file inputs, return an object with file metadata and blob URL
+          if (element.dataset.blobUrl) {
+            values[id] = {
+              fileName: element.dataset.fileName,
+              blobUrl: element.dataset.blobUrl,
+              fileSize: parseInt(element.dataset.fileSize),
+              fileType: element.dataset.fileType
+            };
+          } else {
+            values[id] = null;
+          }
         } else {
           values[id] = element.value;
         }
