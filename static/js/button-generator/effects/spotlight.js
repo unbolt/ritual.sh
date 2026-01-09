@@ -70,10 +70,10 @@ export class SpotlightEffect extends ButtonEffect {
         id: "spotlight-darkness",
         type: "range",
         label: "Darkness",
-        defaultValue: 0.5,
+        defaultValue: 1,
         min: 0,
         max: 1,
-        step: 0.05,
+        step: 0.1,
         showWhen: "animate-spotlight",
         description: "How dark the non-spotlight area should be",
       },
@@ -84,9 +84,9 @@ export class SpotlightEffect extends ButtonEffect {
         type: "range",
         label: "Movement Speed",
         defaultValue: 1,
-        min: 0.1,
+        min: 1,
         max: 3,
-        step: 0.1,
+        step: 1,
         showWhen: "animate-spotlight",
         description: "Speed of spotlight movement",
       },
@@ -150,16 +150,6 @@ export class SpotlightEffect extends ButtonEffect {
     context.beginPath();
     context.arc(spotX, spotY, 2, 0, Math.PI * 2);
     context.fill();
-  }
-
-  /**
-   * Optional: Override canApply for more complex logic
-   * By default, it just checks isEnabled()
-   */
-  canApply(controlValues) {
-    // Example: Only apply if text is also enabled
-    const textEnabled = controlValues["textEnabled"];
-    return this.isEnabled(controlValues) && textEnabled;
   }
 
   /**

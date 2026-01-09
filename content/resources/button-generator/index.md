@@ -14,10 +14,14 @@ This supports gif despite the basic `canvas` tag limitation courtesy of [gif.js]
 
 Big thanks to [neonaut's 88x31 archive](https://neonaut.neocities.org/cyber/88x31) and everyone who made the buttons that appear there. You should check it out if you need inspiration for your button!
 
+**Important note:** Some effects and animations stack, some don't. Some work better with certain lengths of text or variables depending on text length. Experiment, see what happens.
+
 {{< button-generator >}}
 
 ---
 
 ### Changelog
 
-- 08/01/2025 - Initial release.
+- 07/01/2025 - Initial release.
+- 08/01/2025 - Total refactor to be modular, added many more effects.
+- 09/01/2025 - Rewrote the bevel inset and outset border code so they look a lot nicer at the corners. Updates throughout so that multibit (emoji!) characters should work.

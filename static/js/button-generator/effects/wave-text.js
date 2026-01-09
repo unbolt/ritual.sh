@@ -87,18 +87,29 @@ export class WaveTextEffect extends ButtonEffect {
     // Get colors
     const colors = this.getTextColors(context, controlValues, text, baseX, baseY, fontSize, animState);
 
+    // Split text into grapheme clusters (handles emojis properly)
+    // Use Intl.Segmenter if available, otherwise fall back to spread operator
+    let chars;
+    if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+      const segmenter = new Intl.Segmenter('en', { granularity: 'grapheme' });
+      chars = Array.from(segmenter.segment(text), s => s.segment);
+    } else {
+      // Fallback: spread operator handles basic emoji
+      chars = [...text];
+    }
+
     // Measure total width for centering
     const totalWidth = context.measureText(text).width;
     let currentX = baseX - totalWidth / 2;
 
     // Draw each character with wave offset
-    for (let i = 0; i < text.length; i++) {
-      const char = text[i];
+    for (let i = 0; i < chars.length; i++) {
+      const char = chars[i];
       const charWidth = context.measureText(char).width;
 
       // Calculate wave offset for this character
       const phase = animState.getPhase(speed);
-      const charOffset = i / text.length;
+      const charOffset = i / chars.length;
       const waveY = Math.sin(phase + charOffset * Math.PI * 2) * amplitude;
 
       const charX = currentX + charWidth / 2;

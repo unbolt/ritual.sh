@@ -15,8 +15,13 @@ import * as textureBg from "./effects/background-texture.js";
 import * as emojiWallpaper from "./effects/background-emoji-wallpaper.js";
 import * as rainbowBg from "./effects/background-rainbow.js";
 import * as rain from "./effects/background-rain.js";
+import * as starfield from "./effects/background-starfield.js";
+//import * as bubbles from "./effects/background-bubbles.js";
+import * as aurora from "./effects/background-aurora.js";
+import * as fire from "./effects/background-fire.js";
 import * as border from "./effects/border.js";
 import * as standardText from "./effects/text-standard.js";
+import * as textShadow from "./effects/text-shadow.js";
 import * as waveText from "./effects/wave-text.js";
 import * as rainbowText from "./effects/rainbow-text.js";
 import * as spinText from "./effects/spin-text.js";
@@ -63,6 +68,7 @@ async function setupApp() {
     fps: 20,
     duration: 2,
     fonts: [
+      "Arial",
       "Lato",
       "Roboto",
       "Open Sans",
@@ -84,8 +90,13 @@ async function setupApp() {
   emojiWallpaper.register(generator);
   rainbowBg.register(generator);
   rain.register(generator);
+  starfield.register(generator);
+  //bubbles.register(generator);
+  aurora.register(generator);
+  fire.register(generator);
   border.register(generator);
   standardText.register(generator);
+  textShadow.register(generator);
   waveText.register(generator);
   rainbowText.register(generator);
   spinText.register(generator);
