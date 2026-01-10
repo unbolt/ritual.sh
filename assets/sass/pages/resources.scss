@@ -754,12 +754,12 @@
     &::before {
       content: "";
       position: absolute;
-      left: -2rem;
+      left: -1rem;
       top: 50%;
       transform: translateY(-50%);
-      width: 3rem;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #0096ff);
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #0096ff, transparent);
       //box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
     }
 
@@ -767,12 +767,12 @@
     &::after {
       content: "";
       position: absolute;
-      right: -2rem;
+      right: -1rem;
       top: 50%;
       transform: translateY(-50%);
-      width: 3rem;
-      height: 3px;
-      background: linear-gradient(90deg, #ff7800, transparent);
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #ff7800, transparent);
       //box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
     }
 
@@ -785,19 +785,6 @@
 
     @include media-up(md) {
       font-size: 3rem;
-
-      &::before,
-      &::after {
-        width: 6rem;
-      }
-
-      &::before {
-        left: -2rem;
-      }
-
-      &::after {
-        right: -2rem;
-      }
     }
   }
 

@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lava Lamp Adoptable - Demo Examples</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem;
+        color: #fff;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .subtitle {
+        text-align: center;
+        margin-bottom: 3rem;
+        opacity: 0.9;
+        font-size: 1.1rem;
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .demo-item {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .demo-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .lamp-container {
+        background-image:
+          linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+          linear-gradient(
+            -45deg,
+            rgba(255, 255, 255, 0.1) 25%,
+            transparent 25%
+          ),
+          linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%),
+          linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+        background-size: 20px 20px;
+        background-position:
+          0 0,
+          0 10px,
+          10px -10px,
+          -10px 0px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        padding: 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .code-section {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-top: 2rem;
+      }
+
+      .code-section h2 {
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+      }
+
+      pre {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      code {
+        color: #ffd700;
+      }
+
+      .size-label {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        opacity: 0.8;
+      }
+
+      @media (max-width: 768px) {
+        .demo-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🌋 Lava Lamp Adoptable Demo</h1>
+      <p class="subtitle">
+        See the lava lamp in action at various sizes and color schemes!
+      </p>
+
+      <div class="demo-grid">
+        <!-- Classic Orange -->
+        <div class="demo-item">
+          <div class="demo-title">Classic Orange</div>
+          <div class="lamp-container" style="width: 150px; height: 280px">
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#F8E45C"
+              data-bg-color-2="#FF7800"
+              data-blob-color-1="#FF4500"
+              data-blob-color-2="#FF6347"
+              data-case-color="#333333"
+              data-blob-count="6"
+              data-speed="1.0"
+              data-blob-size="1.0"
+            ></script>
+          </div>
+          <div class="size-label">150px × 280px</div>
+        </div>
+
+        <!-- Purple Dreams -->
+        <div class="demo-item">
+          <div class="demo-title">Purple Dreams</div>
+          <div class="lamp-container" style="width: 120px; height: 250px">
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#9D50BB"
+              data-bg-color-2="#6E48AA"
+              data-blob-color-1="#DA22FF"
+              data-blob-color-2="#9733EE"
+              data-case-color="#1a0033"
+              data-blob-count="5"
+              data-speed="0.8"
+              data-blob-size="1.2"
+            ></script>
+          </div>
+          <div class="size-label">120px × 250px</div>
+        </div>
+
+        <!-- Ocean Blue -->
+        <div class="demo-item">
+          <div class="demo-title">Ocean Blue</div>
+          <div class="lamp-container" style="width: 100px; height: 200px">
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#4facfe"
+              data-bg-color-2="#00f2fe"
+              data-blob-color-1="#0066ff"
+              data-blob-color-2="#00ccff"
+              data-case-color="#001a33"
+              data-blob-count="8"
+              data-speed="1.2"
+              data-blob-size="0.8"
+            ></script>
+          </div>
+          <div class="size-label">100px × 200px</div>
+        </div>
+
+        <!-- Lava Red -->
+        <div class="demo-item">
+          <div class="demo-title">Lava Red</div>
+          <div class="lamp-container" style="width: 180px; height: 320px">
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#ff5858"
+              data-bg-color-2="#c9184a"
+              data-blob-color-1="#ff0000"
+              data-blob-color-2="#cc0000"
+              data-case-color="#2d0a0a"
+              data-blob-count="7"
+              data-speed="0.9"
+              data-blob-size="1.3"
+            ></script>
+          </div>
+          <div class="size-label">180px × 320px</div>
+        </div>
+
+        <!-- Mint Fresh -->
+        <div class="demo-item">
+          <div class="demo-title">Mint Fresh</div>
+          <div class="lamp-container" style="width: 140px; height: 260px">
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#a8edea"
+              data-bg-color-2="#fed6e3"
+              data-blob-color-1="#00d4aa"
+              data-blob-color-2="#00aacc"
+              data-case-color="#0d3d3d"
+              data-blob-count="6"
+              data-speed="1.1"
+              data-blob-size="1.0"
+            ></script>
+          </div>
+          <div class="size-label">140px × 260px</div>
+        </div>
+
+        <!-- Sunset Glow -->
+        <div class="demo-item">
+          <div class="demo-title">Sunset Glow</div>
+          <div class="lamp-container" style="width: 110px; height: 220px">
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#ffeaa7"
+              data-bg-color-2="#fd79a8"
+              data-blob-color-1="#ff6b6b"
+              data-blob-color-2="#feca57"
+              data-case-color="#2d3436"
+              data-blob-count="5"
+              data-speed="0.7"
+              data-blob-size="1.5"
+            ></script>
+          </div>
+          <div class="size-label">110px × 220px</div>
+        </div>
+
+        <!-- Cyber Green (Pixelated) -->
+        <div class="demo-item">
+          <div class="demo-title">Cyber Green (Pixelated)</div>
+          <div class="lamp-container" style="width: 160px; height: 300px">
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#38ef7d"
+              data-bg-color-2="#11998e"
+              data-blob-color-1="#00ff00"
+              data-blob-color-2="#00cc66"
+              data-case-color="#0a0a0a"
+              data-blob-count="9"
+              data-speed="1.3"
+              data-blob-size="0.7"
+              data-pixelate="true"
+              data-pixel-size="6"
+            ></script>
+          </div>
+          <div class="size-label">160px × 300px (6px pixels)</div>
+        </div>
+
+        <!-- Pink Bubble (Pixelated) -->
+        <div class="demo-item">
+          <div class="demo-title">Pink Bubble (Pixelated)</div>
+          <div class="lamp-container" style="width: 130px; height: 240px">
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#ffeef8"
+              data-bg-color-2="#ffb3d9"
+              data-blob-color-1="#ff1493"
+              data-blob-color-2="#ff69b4"
+              data-case-color="#4d1933"
+              data-blob-count="4"
+              data-speed="0.6"
+              data-blob-size="1.8"
+              data-pixelate="true"
+              data-pixel-size="3"
+            ></script>
+          </div>
+          <div class="size-label">130px × 240px (3px pixels)</div>
+        </div>
+
+        <!-- Tiny (Pixelated) -->
+        <div class="demo-item">
+          <div class="demo-title">Tiny Retro (Pixelated)</div>
+          <div
+            class="lamp-container"
+            style="width: 40px; height: 80px; padding: 1px"
+          >
+            <script
+              src="/js/adoptables/lavalamp.js"
+              data-bg-color-1="#00d9ff"
+              data-bg-color-2="#0099cc"
+              data-blob-color-1="#ffcc00"
+              data-blob-color-2="#ffcc00"
+              data-case-color="#1a1a1a"
+              data-blob-count="4"
+              data-speed="1.5"
+              data-blob-size="1.5"
+              data-pixelate="true"
+              data-pixel-size="3"
+            ></script>
+          </div>
+          <div class="size-label">40px × 80px (3px pixels)</div>
+        </div>
+      </div>
+
+      <div class="code-section">
+        <h2>How to Use</h2>
+        <p style="margin-bottom: 1rem">
+          Simply copy and paste this code into your website. The lava lamp will
+          scale to fit any container size you specify!
+        </p>
+        <pre><code>&lt;div style="width: 200px; height: 350px;"&gt;
+  &lt;script src="https://ritual.sh/js/adoptables/lavalamp.js"
+          data-bg-color-1="#F8E45C"
+          data-bg-color-2="#FF7800"
+          data-blob-color-1="#FF4500"
+          data-blob-color-2="#FF6347"
+          data-case-color="#333333"
+          data-blob-count="6"
+          data-speed="1.0"
+          data-blob-size="1.0"&gt;&lt;/script&gt;
+&lt;/div&gt;</code></pre>
+
+        <h2 style="margin-top: 2rem">Customization Options</h2>
+        <ul style="line-height: 2; margin-top: 1rem; margin-left: 1.5rem">
+          <li>
+            <code>data-bg-color-1</code> & <code>data-bg-color-2</code>:
+            Background gradient colors
+          </li>
+          <li>
+            <code>data-blob-color-1</code> & <code>data-blob-color-2</code>:
+            Blob gradient colors
+          </li>
+          <li>
+            <code>data-case-color</code>: Color for the top cap and bottom base
+          </li>
+          <li><code>data-blob-count</code>: Number of blobs (3-12)</li>
+          <li>
+            <code>data-speed</code>: Animation speed multiplier (0.5-1.5x)
+          </li>
+          <li><code>data-blob-size</code>: Blob size multiplier (0.5-2.0x)</li>
+        </ul>
+
+        <p style="margin-top: 2rem; text-align: center; opacity: 0.8">
+          🌟 Create your own custom lava lamp at
+          <a
+            href="/resources/adoptables/"
+            style="color: #ffd700; text-decoration: none"
+            >ritual.sh/resources/adoptables</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

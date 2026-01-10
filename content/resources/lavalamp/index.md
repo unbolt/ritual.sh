@@ -5,22 +5,23 @@ description: "A pure CSS lavalamp animation with floating blobs"
 icon: "lavalamp"
 demo_url: ""
 source_url: ""
-draft: true
+draft: false
 ---
 
-A mesmerizing lavalamp effect created entirely with HTML and CSS. Features smooth floating animations and gradient blobs that rise and fall like a classic lava lamp.
+A mesmerizing lavalamp effect created with HTML, CSS, and JavaScript. Features smooth floating animations and gradient blobs that rise and fall like a classic lava lamp.
+
+## Want Your Own Customizable Lava Lamp?
+
+Check out the [Adoptables page](/resources/adoptables/) where you can customize your own lava lamp with your choice of colors, blob count, and animation speed - then get the embed code to add it to your own website!
 
 ## Features
 
-- Pure CSS animation (no JavaScript required)
-- Customizable colors and blob shapes
 - Smooth, organic floating motion
+- Customizable colors and blob shapes
+- Adjustable animation speed and blob count
 - Responsive design
+- Self-contained embed code
 
 ## How It Works
 
-The animation uses CSS keyframes to create the illusion of blobs floating up and down. Multiple blob elements with different animation delays create a realistic lava lamp effect.
-
-## Usage
-
-Simply copy the HTML and CSS into your project. You can customize the colors by changing the gradient values and adjust the animation speed by modifying the animation duration.
+The animation uses CSS keyframes to create the illusion of blobs floating up and down. Multiple blob elements with different animation delays and paths create a realistic lava lamp effect. An SVG filter creates the "goo" effect that makes the blobs merge together smoothly.
