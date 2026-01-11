@@ -70,6 +70,13 @@
 .preview-100 {
   width: 100px;
   height: 200px;
+
+  @include media-down(md) {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 900;
+  }
 }
 
 .preview-200 {
@@ -185,12 +192,10 @@
     transform: translate(var(--start-x), var(--start-y)) scale(1);
   }
   25% {
-    transform: translate(var(--mid1-x), var(--mid1-y))
-      scale(var(--scale1, 1.1));
+    transform: translate(var(--mid1-x), var(--mid1-y)) scale(var(--scale1, 1.1));
   }
   50% {
-    transform: translate(var(--mid2-x), var(--mid2-y))
-      scale(var(--scale2, 0.9));
+    transform: translate(var(--mid2-x), var(--mid2-y)) scale(var(--scale2, 0.9));
   }
   75% {
     transform: translate(var(--mid3-x), var(--mid3-y))

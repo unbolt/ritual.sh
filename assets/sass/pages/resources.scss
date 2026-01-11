@@ -811,7 +811,6 @@
       width: 5px;
       height: 100%;
       background: linear-gradient(180deg, transparent, #0096ff, transparent);
-      //box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
     }
 
     // Orange line on the right
@@ -824,7 +823,6 @@
       width: 5px;
       height: 100%;
       background: linear-gradient(180deg, transparent, #ff7800, transparent);
-      //box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
     }
 
     @include media-down(md) {
