@@ -551,6 +551,45 @@
       animation: equalizer-2 1s ease-in-out infinite 0.2s;
     }
   }
+
+  // Adoptables icon - gift box style
+  &.adoptables {
+    background: #000;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+    border: 3px solid #fff;
+
+    // Ribbon vertical stripe
+    &::before {
+      content: "";
+      position: absolute;
+      top: -3px;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20%;
+      background: #fff;
+    }
+
+    // Bow on top
+    &::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 35px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50% 50% 0 0;
+      box-shadow: -12px 0 0 #fff, 12px 0 0 #fff;
+      animation: bow-sparkle 3s ease-in-out infinite;
+    }
+  }
 }
 
 @keyframes float-blob {
@@ -590,6 +629,18 @@
   }
   50% {
     height: 40px;
+  }
+}
+
+@keyframes bow-sparkle {
+  0%,
+  100% {
+    filter: brightness(1);
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    filter: brightness(1.2);
+    transform: translateX(-50%) scale(1.05);
   }
 }
 
@@ -754,12 +805,12 @@
     &::before {
       content: "";
       position: absolute;
-      left: -2rem;
+      left: -1rem;
       top: 50%;
       transform: translateY(-50%);
-      width: 3rem;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #0096ff);
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #0096ff, transparent);
       //box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
     }
 
@@ -767,12 +818,12 @@
     &::after {
       content: "";
       position: absolute;
-      right: -2rem;
+      right: -1rem;
       top: 50%;
       transform: translateY(-50%);
-      width: 3rem;
-      height: 3px;
-      background: linear-gradient(90deg, #ff7800, transparent);
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #ff7800, transparent);
       //box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
     }
 
@@ -785,19 +836,6 @@
 
     @include media-up(md) {
       font-size: 3rem;
-
-      &::before,
-      &::after {
-        width: 6rem;
-      }
-
-      &::before {
-        left: -2rem;
-      }
-
-      &::after {
-        right: -2rem;
-      }
     }
   }
 
@@ -1398,133 +1436,7 @@
   }
 }
 
-.stats-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  position: relative;
-  z-index: 1;
-
-  @include media-up(md) {
-    flex-direction: row;
-    align-items: flex-end;
-  }
-
-  .form-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    label {
-      font-weight: 600;
-      color: #66ccff;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      text-shadow: 0 0 8px rgba(0, 150, 255, 0.4);
-    }
-
-    input,
-    select {
-      padding: 0.75rem 1rem;
-      border: 1px solid rgba(0, 150, 255, 0.4);
-      border-radius: 4px;
-      font-size: 1rem;
-      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      background: rgba(5, 15, 30, 0.7);
-      color: rgba(200, 220, 255, 0.95);
-      transition: all 0.3s ease;
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
-
-      &:focus {
-        outline: none;
-        border-color: rgba(0, 150, 255, 0.7);
-        box-shadow:
-          0 0 15px rgba(0, 150, 255, 0.3),
-          inset 0 2px 8px rgba(0, 0, 0, 0.4);
-        background: rgba(5, 15, 30, 0.9);
-      }
-
-      &::placeholder {
-        color: rgba(100, 150, 200, 0.5);
-      }
-    }
-
-    select {
-      cursor: pointer;
-
-      option {
-        background: rgba(5, 15, 30, 0.95);
-        color: rgba(200, 220, 255, 0.95);
-      }
-    }
-  }
-
-  .btn-primary {
-    padding: 0.75rem 2rem;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 120, 200, 0.3) 0%,
-      rgba(0, 100, 180, 0.2) 100%
-    );
-    color: #66ccff;
-    border: 1px solid rgba(0, 150, 255, 0.5);
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    align-self: flex-end;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 150, 255, 0.3),
-        transparent
-      );
-      transition: left 0.5s ease;
-    }
-
-    &:hover {
-      background: linear-gradient(
-        135deg,
-        rgba(0, 150, 255, 0.4) 0%,
-        rgba(255, 100, 0, 0.3) 100%
-      );
-      border-color: rgba(0, 150, 255, 0.8);
-      box-shadow:
-        0 0 20px rgba(0, 150, 255, 0.4),
-        0 0 30px rgba(255, 120, 0, 0.2);
-      color: #fff;
-      text-shadow: 0 0 10px rgba(0, 150, 255, 0.6);
-      transform: translateY(-2px);
-
-      &::before {
-        left: 100%;
-      }
-    }
-
-    &:active {
-      transform: translateY(0);
-      box-shadow: 0 0 15px rgba(0, 150, 255, 0.3);
-    }
-  }
-}
+// Stats form styles are now in partials/form-controls.scss
 
 .stats-results {
   position: relative;

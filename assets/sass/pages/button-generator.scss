@@ -324,12 +324,6 @@
       }
     }
 
-    input[type="checkbox"] {
-      width: auto;
-      margin-left: 0.5rem;
-      cursor: pointer;
-      accent-color: #0096ff;
-    }
 
     // Custom file input styling
     input[type="file"] {
@@ -486,123 +480,15 @@
     margin-top: 0.75rem;
   }
 
-  .checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    font-size: 0.85rem;
-    cursor: pointer;
-    margin: 0;
-    color: rgba(100, 180, 255, 0.8);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: color 0.3s ease;
-
-    &:hover {
-      color: #66ccff;
-    }
-
-    input[type="checkbox"] {
-      margin: 0;
-      cursor: pointer;
-      margin-right: 0.25em;
-    }
-
-    span {
-      user-select: none;
-    }
-  }
-
+  // Button styles are now in partials/form-controls.scss
+  // Only page-specific overrides here
   .btn-primary,
   .btn-secondary {
     width: 100%;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: 1px solid rgba(0, 150, 255, 0.5);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 150, 255, 0.3),
-        transparent
-      );
-      transition: left 0.5s ease;
-    }
-
-    &:hover::before {
-      left: 100%;
-    }
-  }
-
-  .btn-primary {
-    background: linear-gradient(
-      135deg,
-      rgba(0, 120, 200, 0.3) 0%,
-      rgba(0, 100, 180, 0.2) 100%
-    );
-    color: #66ccff;
-
-    &:hover {
-      background: linear-gradient(
-        135deg,
-        rgba(0, 150, 255, 0.4) 0%,
-        rgba(255, 100, 0, 0.3) 100%
-      );
-      border-color: rgba(0, 150, 255, 0.8);
-      box-shadow:
-        0 0 20px rgba(0, 150, 255, 0.4),
-        0 0 30px rgba(255, 120, 0, 0.2);
-      color: #fff;
-      text-shadow: 0 0 10px rgba(0, 150, 255, 0.6);
-      transform: translateY(-2px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
   }
 
   .btn-secondary {
-    background: linear-gradient(
-      135deg,
-      rgba(0, 100, 180, 0.2) 0%,
-      rgba(0, 80, 150, 0.15) 100%
-    );
-    color: #66ccff;
     margin-top: 0.5rem;
-
-    &:hover {
-      background: linear-gradient(
-        135deg,
-        rgba(0, 120, 200, 0.3) 0%,
-        rgba(255, 100, 0, 0.2) 100%
-      );
-      border-color: rgba(0, 150, 255, 0.6);
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(0, 150, 255, 0.3);
-      color: #fff;
-      text-shadow: 0 0 8px rgba(0, 150, 255, 0.5);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
   }
 
   // Custom tooltip styles

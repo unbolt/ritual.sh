@@ -39,5 +39,11 @@
     <script src="{{ "js/gif.js" | relURL }}"></script>
     <script type="module" src="{{ "js/button-generator/main.js" | relURL }}"></script>
     {{ end }}
+
+    <!-- Lava Lamp Adoptable - only load if page content contains lavalamp-adoptable shortcode -->
+    {{ if or (findRE "{{<\\s*lavalamp-adoptable" .RawContent) (findRE "{{%\\s*lavalamp-adoptable" .RawContent) }}
+    {{ $lavalampAdoptable := resources.Get "js/adoptables/lavalamp-adoptable.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $lavalampAdoptable.RelPermalink }}" integrity="{{ $lavalampAdoptable.Data.Integrity }}"></script>
+    {{ end }}
   </body>
 </html>
