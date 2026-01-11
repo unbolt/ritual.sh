@@ -7,7 +7,7 @@
 {{ $filtered := slice }}
 {{ range $remaining }}
   {{ $path := .RelPermalink }}
-  {{ if and (not (strings.Contains $path "/terminal.js")) (not (strings.Contains $path "/init.js")) (not (strings.Contains $path "/button-generator.js")) (not (strings.Contains $path "/adoptables/")) }}
+  {{ if and (not (strings.Contains $path "/terminal.js")) (not (strings.Contains $path "/init.js")) (not (strings.Contains $path "/button-generator.js")) (not (strings.Contains $path "/adoptables/")) (not (strings.Contains $path "/guestbook.js")) }}
     {{ $filtered = $filtered | append . }}
   {{ end }}
 {{ end }}

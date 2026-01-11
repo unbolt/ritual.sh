@@ -45,5 +45,11 @@
     {{ $lavalampAdoptable := resources.Get "js/adoptables/lavalamp-adoptable.js" | resources.Minify | resources.Fingerprint }}
     <script src="{{ $lavalampAdoptable.RelPermalink }}" integrity="{{ $lavalampAdoptable.Data.Integrity }}"></script>
     {{ end }}
+
+    <!-- Guestbook - only load on guestbook page -->
+    {{ if eq .Type "guestbook" }}
+    {{ $guestbook := resources.Get "js/guestbook.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $guestbook.RelPermalink }}" integrity="{{ $guestbook.Data.Integrity }}"></script>
+    {{ end }}
   </body>
 </html>
