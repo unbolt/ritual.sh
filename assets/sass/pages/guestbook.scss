@@ -1,0 +1,336 @@
+@import "../mixins";
+
+.guestbook-page {
+  color: white;
+  margin: auto;
+
+  .content-screen {
+    position: relative !important;
+  }
+
+  > .guestbook-content {
+    width: 50%;
+    margin: auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+
+    @include media-down(lg) {
+      width: 100%;
+      grid-template-columns: 1fr;
+    }
+    > .wide-item {
+      grid-column: 1 / -1;
+    }
+
+    .guestbook-floppy {
+      margin: auto;
+      padding: 2rem;
+      width: 90%;
+      max-width: 300px;
+      transform: rotate(5deg);
+    }
+  }
+}
+
+// Terminal output styling
+.terminal-output {
+  font-family: monospace;
+  line-height: 1.6;
+
+  .info {
+    color: #0f0;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  }
+
+  .dim {
+    opacity: 0.7;
+  }
+
+  .warning {
+    color: #ff9900;
+    text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+  }
+
+  .error-text {
+    color: #ff0000;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+}
+
+// Guestbook Form
+.guestbook-form {
+  margin-top: 0.5rem;
+
+  .form-row {
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    label {
+      font-family: monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+      font-size: 0.85rem;
+    }
+
+    input,
+    textarea {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+      color: #0f0;
+      padding: 0.4rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      text-shadow: 0 0 3px rgba(0, 255, 0, 0.3);
+      border-radius: 2px;
+      outline: none;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: rgba(0, 255, 0, 0.4);
+        text-shadow: none;
+      }
+
+      &:focus {
+        border-color: rgba(0, 255, 0, 0.6);
+        box-shadow:
+          0 0 10px rgba(0, 255, 0, 0.3),
+          inset 0 0 10px rgba(0, 255, 0, 0.1);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+  }
+
+  .form-feedback {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    display: none;
+
+    &.success {
+      display: block;
+      background: rgba(0, 255, 0, 0.1);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+      color: #0f0;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    }
+
+    &.error {
+      display: block;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      color: #ff0000;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    }
+
+    &.pending {
+      display: block;
+      background: rgba(255, 153, 0, 0.1);
+      border: 1px solid rgba(255, 153, 0, 0.3);
+      color: #ff9900;
+      text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+    }
+  }
+
+  .terminal-button {
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid rgba(0, 255, 0, 0.4);
+    color: #0f0;
+    padding: 0.5rem 1rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    transition: all 0.3s ease;
+    border-radius: 3px;
+    letter-spacing: 2px;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 255, 0, 0.2);
+      border-color: rgba(0, 255, 0, 0.7);
+      box-shadow:
+        0 0 15px rgba(0, 255, 0, 0.4),
+        inset 0 0 10px rgba(0, 255, 0, 0.2);
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-color: rgba(0, 255, 0, 0.2);
+    }
+  }
+}
+
+// Entries List
+.entries-list {
+  margin-top: 1rem;
+
+  .entry {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+    font-family: monospace;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .entry-header {
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: baseline;
+
+      .entry-name {
+        color: #0f0;
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+
+        a {
+          color: #0f0;
+          text-decoration: none;
+          border-bottom: 1px dotted rgba(0, 255, 0, 0.5);
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-bottom-style: solid;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+          }
+        }
+      }
+
+      .entry-website {
+        color: rgba(0, 255, 0, 0.6);
+        font-size: 0.85rem;
+        font-style: italic;
+      }
+
+      .entry-separator {
+        color: rgba(0, 255, 0, 0.4);
+      }
+
+      .entry-date {
+        color: rgba(0, 255, 0, 0.6);
+        font-size: 0.85rem;
+        margin-left: auto;
+      }
+    }
+
+    .entry-message {
+      color: #0f0;
+      line-height: 1.6;
+      opacity: 0.9;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  }
+}
+
+// Loading state
+.loading-state {
+  padding: 2rem;
+  text-align: center;
+  font-family: monospace;
+
+  .loading-text {
+    color: #0f0;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  }
+
+  .loading-dots {
+    color: #0f0;
+    animation: loading-blink 1.5s infinite;
+  }
+}
+
+@keyframes loading-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+// Error state
+.error-state {
+  padding: 2rem;
+  text-align: center;
+  font-family: monospace;
+}
+
+// Pagination
+.pagination {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 255, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: monospace;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .pagination-info {
+    color: rgba(0, 255, 0, 0.7);
+    font-size: 0.85rem;
+  }
+
+  .pagination-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .pagination-button {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    color: #0f0;
+    padding: 0.5rem 1rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 255, 0, 0.2);
+      border-color: rgba(0, 255, 0, 0.5);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    &.active {
+      background: rgba(0, 255, 0, 0.3);
+      border-color: rgba(0, 255, 0, 0.6);
+      font-weight: bold;
+    }
+  }
+}
+
+// Scrollbar customization for entries container
+.guestbook-entries-container .screen-display {
+  @include scrollbar-custom(#0f0, 5px);
+}

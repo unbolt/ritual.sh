@@ -268,12 +268,22 @@
   <div>
     <a href="/resources/">
       <div class="nav-cube">
-          {{ partial "elements/companion-cube.html" . }}
-          <div class="nav-cube-text">Experiments &amp; Resources</div>
+        {{ partial "elements/companion-cube.html" . }}
+        <div class="nav-cube-text">Experiments &amp; Resources</div>
       </div>
     </a>
   </div>
 
+  <div>
+    <div class="nav-floppy">
+      <a href="/guestbook/">
+        {{ partial "elements/floppy.html" (dict "title" "Guestbook" "lines"
+        (slice "" "" "DO NOT DELETE" "" "") "bgColor" "#1a4d8f" "bgColorDark"
+        "#0d2747") }}
+        <div class="nav-floppy-text">Guestbook</div>
+      </a>
+    </div>
+  </div>
 
   <div>{{ partial "elements/crt-tv.html" . }}</div>
 </div>
