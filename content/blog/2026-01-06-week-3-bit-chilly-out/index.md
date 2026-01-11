@@ -4,7 +4,7 @@ date: 2026-01-11
 tags:
   - weeknote
   - weekly update
-draft: true
+draft: false
 ---
 
 - ❄️ It's been pretty cold and we've had the lightest sprinkling of snow.
