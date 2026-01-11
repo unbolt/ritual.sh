@@ -1,0 +1,199 @@
+// Lava Lamp Adoptable Generator Page Styles
+// Namespaced to avoid conflicts with existing navigation lava lamp styles
+
+.adoptable-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+
+  @include media-down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.preview-section {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  @include media-down(lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.preview-wrapper {
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 1rem;
+  background-image:
+    linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(-45deg, #ccc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0px;
+  background-color: #fff;
+}
+
+.preview-flexible {
+  width: 40px;
+  height: 75px;
+  padding: 3px;
+}
+
+.preview-100 {
+  width: 100px;
+  height: 200px;
+}
+
+.preview-200 {
+  width: 200px;
+  height: 350px;
+}
+
+.preview-label {
+  font-size: 0.875rem;
+  color: #666;
+  text-align: center;
+}
+
+.lavalamp-preview-container {
+  width: 100%;
+  height: 100%;
+}
+
+.controls-section {
+  h3 {
+    margin-top: 0;
+  }
+}
+
+// Page-specific overrides - make buttons full width in this layout
+#lavalamp-adoptable-app .control-group button {
+  width: 100%;
+}
+
+// Adoptable Lava Lamp Component Styles
+// Namespaced under .lavalamp-adoptable to avoid conflicts with navigation lava lamp
+.lavalamp-adoptable {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .lamp-cap {
+    width: 60%;
+    height: 8%;
+    flex-shrink: 0;
+    border-radius: 50% 50% 0 0;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 10;
+  }
+
+  .lamp-body {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    clip-path: polygon(20% 0, 80% 0, 100% 101%, 0% 101%);
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 20%,
+        rgba(255, 255, 255, 0.05) 40%,
+        transparent 60%
+      );
+      pointer-events: none;
+    }
+  }
+
+  .blobs-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    animation: lavalamp-float var(--duration) ease-in-out infinite;
+    opacity: 0.95;
+    mix-blend-mode: normal;
+    z-index: 3;
+  }
+
+  .lamp-base {
+    width: 100%;
+    height: 15%;
+    flex-shrink: 0;
+    border-radius: 0 0 50% 50%;
+    box-shadow:
+      inset 0 2px 5% rgba(255, 255, 255, 0.2),
+      inset 0 -2px 5% rgba(0, 0, 0, 0.5);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// Animation for adoptable lava lamp blobs (different from navigation lava lamp)
+@keyframes lavalamp-float {
+  0%,
+  100% {
+    transform: translate(var(--start-x), var(--start-y)) scale(1);
+  }
+  25% {
+    transform: translate(var(--mid1-x), var(--mid1-y))
+      scale(var(--scale1, 1.1));
+  }
+  50% {
+    transform: translate(var(--mid2-x), var(--mid2-y))
+      scale(var(--scale2, 0.9));
+  }
+  75% {
+    transform: translate(var(--mid3-x), var(--mid3-y))
+      scale(var(--scale3, 1.05));
+  }
+}
