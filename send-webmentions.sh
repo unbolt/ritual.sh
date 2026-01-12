@@ -69,9 +69,9 @@ jq -c '.[]' "$WEBMENTIONS_FILE" | while read -r mention; do
             -d "{\"auth\":\"$API_KEY\",\"source\":\"$source\",\"target\":\"$target\"}")
         
         http_code=$(echo "$response" | tail -n1)
-        
-        # If successful, add to cache
-        if [ "$http_code" = "200" ] || [ "$http_code" = "202" ]; then
+
+        # If successful (200, 201, or 202), add to cache
+        if [ "$http_code" = "200" ] || [ "$http_code" = "201" ] || [ "$http_code" = "202" ]; then
             echo "$key" >> "$SENT_CACHE"
             echo "✓ Sent successfully"
         else
