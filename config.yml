@@ -6,6 +6,15 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 
+outputs:
+  home: ["HTML", "RSS", "webmentions"]
+
+outputFormats:
+  webmentions:
+    mediaType: "application/json"
+    baseName: "webmentions"
+    isPlainText: true
+
 pagination:
   pagerSize: 5
 

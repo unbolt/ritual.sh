@@ -7,10 +7,10 @@ order: 4
 
 **Software:**
 
-- **Browser** - [Zen](https://zen-browser.app/) 
+- **Browser** - [Zen](https://zen-browser.app/)
 - **Code Editor** - VS Code
 - **Audio** - High Tide & Turntable
-- **Password Manager** - 1password
+- **Password Manager** - [Proton Pass](https://pr.tn/ref/MNB13JYX)
 
 **Hardware:**
 
