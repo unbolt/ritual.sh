@@ -25,3 +25,16 @@ Big thanks to [neonaut's 88x31 archive](https://neonaut.neocities.org/cyber/88x3
 - 07/01/2025 - Initial release.
 - 08/01/2025 - Total refactor to be modular, added many more effects.
 - 09/01/2025 - Rewrote the bevel inset and outset border code so they look a lot nicer at the corners. Updates throughout so that multibyte (emoji!) characters should work.
+
+---
+
+### Cool People Who Have Linked To This Project
+
+[tdh.se](https://tdh.se/2026/01/88x31-pixlar-retroknapp/),
+[rknight.me](https://rknight.me/blog/88x31-button-curios/),
+[fyr.io](https://fyr.io/scrap/2026-01-09),
+[brennan.day](https://brennan.day/resources-for-the-personal-web-a-follow-up-guide/),
+[kuemmerle.name](https://kuemmerle.name/bastelglueck/),
+[craney.uk](https://craney.uk/posts/stuff-this-week-74)
+
+Am I missing you? Email me or send a webmention!
