@@ -14,49 +14,63 @@
  ▀██▀     ▀██▄▄▀█▄▄▄▄█▀███▄██▄▀█▄██   ████████▄▀███▀ ▀████
                                                         ██
                                                       ▀▀▀
-</pre>
+</pre
+          >
         </div>
 
         <div class="media-layout">
           <div class="media-list">
+            <h3>Recent Media</h3>
             {{ range .Paginator.Pages }}
-              <div class="media-item" data-type="{{ index .Params.tags 0 }}">
-                <div class="media-cover">
-                  {{ with .Resources.GetMatch "cover.*" }}
-                    {{ $image := .Resize "320x webp q85" }}
-                    <img src="{{ $image.RelPermalink }}" alt="{{ $.Title }}" loading="lazy" width="{{ $image.Width }}" height="{{ $image.Height }}">
-                  {{ else }}
-                    <div class="no-cover">
-                      <span class="cover-placeholder">NO COVER</span>
-                    </div>
-                  {{ end }}
+            <div class="media-item" data-type="{{ index .Params.tags 0 }}">
+              <div class="media-cover">
+                {{ with .Resources.GetMatch "cover.*" }} {{ $image := .Resize
+                "320x webp q85" }}
+                <img
+                  src="{{ $image.RelPermalink }}"
+                  alt="{{ $.Title }}"
+                  loading="lazy"
+                  width="{{ $image.Width }}"
+                  height="{{ $image.Height }}"
+                />
+                {{ else }}
+                <div class="no-cover">
+                  <span class="cover-placeholder">NO COVER</span>
                 </div>
-                <div class="media-info">
-                  <div class="media-meta">
-                    <div class="media-type">{{ index .Params.tags 0 | upper }}</div>
-                    {{ if .Params.format }}
-                      <div class="media-format">{{ .Params.format | upper }}</div>
-                    {{ end }}
-                    <div class="media-date">{{ .Date.Format "02-01-2006" }}</div>
-                  </div>
-                  <h3 class="media-title">{{ .Title }}</h3>
-                  {{ if .Params.rating }}
-                    <div class="media-rating">
-                      <span class="rating-value">{{ .Params.rating }}</span>
-                      <span class="rating-max">/10</span>
-                    </div>
-                  {{ end }}
-                </div>
+                {{ end }}
               </div>
-            {{ end }}
-
-            {{ partial "pagination.html" .Paginator }}
+              <div class="media-info">
+                <div class="media-meta">
+                  <div class="media-type">
+                    {{ index .Params.tags 0 | upper }}
+                  </div>
+                  {{ if .Params.format }}
+                  <div class="media-format">{{ .Params.format | upper }}</div>
+                  {{ end }}
+                  <div class="media-date">{{ .Date.Format "02-01-2006" }}</div>
+                </div>
+                <h3 class="media-title">{{ .Title }}</h3>
+                {{ if .Params.rating }}
+                <div class="media-rating">
+                  <span class="rating-value">{{ .Params.rating }}</span>
+                  <span class="rating-max">/10</span>
+                </div>
+                {{ end }}
+              </div>
+            </div>
+            {{ end }} {{ partial "pagination.html" .Paginator }}
           </div>
 
           <div class="lastfm-sidebar">
             <div class="lastfm-header">
               <h3>Recently Listened</h3>
-              <a href="https://www.last.fm/user/ritualplays" target="_blank" rel="noopener noreferrer" class="lastfm-profile-link">last.fm →</a>
+              <a
+                href="https://www.last.fm/user/ritualplays"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="lastfm-profile-link"
+                >last.fm →</a
+              >
             </div>
             <div class="lastfm-tracks" id="lastfm-tracks">
               <div class="lastfm-loading">Loading tracks...</div>
@@ -67,6 +81,4 @@
     </div>
   </div>
 </div>
-
-<script src="/js/pages/media.js"></script>
 {{ end }}

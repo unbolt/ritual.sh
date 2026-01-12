@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="theme-color" content="#00ff00" />
+    <link rel="webmention" href="https://api.ritual.sh/webmention" />
     <title>
       {{ block "title" . }}{{ .Site.Title }} {{ with .Params.Title }} | {{ .
       }}{{ end }}{{ end }}
@@ -17,6 +17,16 @@
     <link rel="stylesheet" href="{{ relURL ($.Site.BaseURL) }}{{ . }}" />
     {{ end }} {{ block "favicon" . }} {{ partial "site-favicon.html" . }} {{ end
     }}
+
+    <!-- Chart.js for graphs - only load if page content contains graph shortcode -->
+    {{ if or (findRE "{{<\\s*graph" .RawContent) (findRE "{{%\\s*graph"
+    .RawContent) }}
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+      integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
+      crossorigin="anonymous"
+    ></script>
+    {{ end }}
   </head>
 
   <body>
@@ -24,5 +34,23 @@
     <main role="main">{{ block "main" . }}{{ end }}</main>
     {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }} {{ block
     "scripts" . }}{{ partial "site-scripts.html" . }}{{ end }}
+
+    <!-- Button Generator - only load if page content contains button-generator shortcode -->
+    {{ if or (findRE "{{<\\s*button-generator" .RawContent) (findRE "{{%\\s*button-generator" .RawContent) }}
+    <script src="{{ "js/gif.js" | relURL }}"></script>
+    <script type="module" src="{{ "js/button-generator/main.js" | relURL }}"></script>
+    {{ end }}
+
+    <!-- Lava Lamp Adoptable - only load if page content contains lavalamp-adoptable shortcode -->
+    {{ if or (findRE "{{<\\s*lavalamp-adoptable" .RawContent) (findRE "{{%\\s*lavalamp-adoptable" .RawContent) }}
+    {{ $lavalampAdoptable := resources.Get "js/adoptables/lavalamp-adoptable.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $lavalampAdoptable.RelPermalink }}" integrity="{{ $lavalampAdoptable.Data.Integrity }}"></script>
+    {{ end }}
+
+    <!-- Guestbook - only load on guestbook page -->
+    {{ if eq .Type "guestbook" }}
+    {{ $guestbook := resources.Get "js/guestbook.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $guestbook.RelPermalink }}" integrity="{{ $guestbook.Data.Integrity }}"></script>
+    {{ end }}
   </body>
 </html>

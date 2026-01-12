@@ -6,7 +6,7 @@
 <div class="window hidden-lg-down">{{ partial "elements/window.html" . }}</div>
 
 <!-- Neon sign above monitor -->
-{{ partial "elements/neon-sign.html" . }}
+<div class="homepage-neon">{{ partial "elements/neon-sign.html" . }}</div>
 
 <!-- Sticky notes -->
 <div class="sticky-note note1 hidden-xl-down">fix bugs</div>
@@ -89,18 +89,8 @@
     </div>
 
     <div class="secondary-screen wall-monitor-4 hidden-xl-down">
-      <div class="screen-display tiny amber crt">
+      <div class="screen-display amber crt" id="crt-logs">
         > tail -f /var/log<br />
-        [INFO] Process OK<br />
-        [WARN] High load detected - time for coffee break<br />
-        [INFO] Connected to database (it's in a relationship now)<br />
-        [ERROR] 404: Motivation not found<br />
-        [WARN] Firewall detected actual fire, calling emergency services<br />
-        [INFO] Successfully hacked into mainframe (jk it's just localhost)<br />
-        [ERROR] Keyboard not found. Press F1 to continue.<br />
-        [WARN] Too many open tabs. Browser having existential crisis.<br />
-        [INFO] Ping 127.0.0.1 - there's no place like home<br />
-        [ERROR] SQL injection attempt detected. Nice try, Bobby Tables.<br />
         <span class="cursor-blink">_</span>
       </div>
     </div>
@@ -239,7 +229,7 @@
   <div>
     <a href="/audio/">
       <div class="music">
-        <div class="music-text">MUSIC &amp; AUDIO GEAR</div>
+        <div class="music-text">Music &amp; Audio Gear</div>
 
         {{ partial "elements/ipod.html" . }}
 
@@ -263,6 +253,26 @@
         "placeholder" "00:00:00") }}
       </div>
     </a>
+  </div>
+
+  <div>
+    <a href="/resources/">
+      <div class="nav-cube">
+        {{ partial "elements/companion-cube.html" . }}
+        <div class="nav-cube-text">Experiments &amp; Resources</div>
+      </div>
+    </a>
+  </div>
+
+  <div>
+    <div class="nav-floppy">
+      <a href="/guestbook/">
+        {{ partial "elements/floppy.html" (dict "title" "Guestbook" "lines"
+        (slice "" "" "DO NOT DELETE" "" "") "bgColor" "#1a4d8f" "bgColorDark"
+        "#0d2747") }}
+        <div class="nav-floppy-text">Guestbook</div>
+      </a>
+    </div>
   </div>
 
   <div>{{ partial "elements/crt-tv.html" . }}</div>

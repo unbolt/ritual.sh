@@ -54,11 +54,19 @@
     margin-bottom: 50px;
     padding-bottom: 20px;
     border-bottom: 2px solid transparent;
-    border-image: linear-gradient(90deg, transparent, #ff00ff 20%, #00ffff 50%, #ff00ff 80%, transparent) 1;
+    border-image: linear-gradient(
+        90deg,
+        transparent,
+        #ff00ff 20%,
+        #00ffff 50%,
+        #ff00ff 80%,
+        transparent
+      )
+      1;
     display: flex;
     justify-content: center;
 
-    pre {
+    > pre {
       background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
       -webkit-background-clip: text;
       background-clip: text;
@@ -70,7 +78,7 @@
       margin: 0;
 
       @include media-down(lg) {
-        font-size: 12px;
+        font-size: 0.5rem;
       }
     }
   }
@@ -98,6 +106,16 @@
       gap: 25px;
     }
 
+    > h3 {
+      display: none;
+      padding-bottom: 15px;
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, #ff00ff, #00ffff) 1;
+      @include media-down(lg) {
+        display: block;
+      }
+    }
+
     // Subtle divider between items
     .media-item + .media-item {
       position: relative;
@@ -109,7 +127,13 @@
         left: 0;
         right: 0;
         height: 1px;
-        background: linear-gradient(90deg, transparent, #333 20%, #333 80%, transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #333 20%,
+          #333 80%,
+          transparent
+        );
       }
     }
   }
@@ -120,13 +144,16 @@
     gap: 25px;
     padding: 20px;
     border: 1px solid #333;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     border-radius: 8px;
     transition: all 0.3s ease;
 
     @include media-down(lg) {
       gap: 20px;
       flex-direction: column;
+
+      display: grid;
+      grid-template-columns: auto 1fr;
     }
 
     &:hover {
@@ -154,9 +181,9 @@
       transition: all 0.3s ease;
 
       @include media-down(lg) {
-        width: 100%;
-        max-width: 300px;
-        height: 450px;
+        max-width: 100px;
+        max-height: 100px;
+        height: auto;
         margin: 0 auto;
       }
 
@@ -394,6 +421,12 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
+
+      @include media-down(lg) {
+        .lastfm-track:nth-child(n + 4) {
+          display: none;
+        }
+      }
     }
 
     .lastfm-loading {

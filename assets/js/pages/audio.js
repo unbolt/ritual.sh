@@ -83,26 +83,7 @@ if (document.getElementById("starfield")) {
   const container = document.getElementById("recent-tracks");
   if (!container) return;
 
-  const AUDIO_LASTFM_API_URL = "https://ws.audioscrobbler.com/2.0/";
-  const AUDIO_LASTFM_USER = "ritualplays";
-  const AUDIO_LASTFM_API_KEY = "3a4fef48fecc593d25e0f9a40df1fefe";
   const AUDIO_TRACK_LIMIT = 6; // Fetch 6 to have enough after filtering
-
-  // Fetch recent tracks from Last.fm for audio page
-  async function fetchAudioRecentTracks() {
-    const url = `${AUDIO_LASTFM_API_URL}?method=user.getrecenttracks&user=${AUDIO_LASTFM_USER}&api_key=${AUDIO_LASTFM_API_KEY}&format=json&limit=${AUDIO_TRACK_LIMIT}`;
-
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Failed to fetch tracks");
-
-      const data = await response.json();
-      return data.recenttracks.track;
-    } catch (error) {
-      console.error("Error fetching Last.fm data:", error);
-      return null;
-    }
-  }
 
   // Render recent tracks for audio page (horizontal layout)
   function renderRecentTracks(tracks) {
@@ -114,27 +95,8 @@ if (document.getElementById("starfield")) {
 
     container.innerHTML = "";
 
-    // Check if first track is now playing
-    const hasNowPlaying = tracks[0] && tracks[0]["@attr"] && tracks[0]["@attr"].nowplaying;
-
-    // Filter and limit tracks
-    let tracksToShow;
-    if (hasNowPlaying) {
-      // Show now playing + 4 latest (excluding duplicates of now playing)
-      const nowPlayingTrack = tracks[0];
-      const nowPlayingId = `${nowPlayingTrack.name}-${nowPlayingTrack.artist["#text"]}`;
-
-      // Get remaining tracks, excluding duplicates of now playing
-      const remainingTracks = tracks.slice(1).filter(track => {
-        const trackId = `${track.name}-${track.artist["#text"]}`;
-        return trackId !== nowPlayingId;
-      });
-
-      tracksToShow = [nowPlayingTrack, ...remainingTracks.slice(0, 4)];
-    } else {
-      // No now playing, show 5 latest
-      tracksToShow = tracks.slice(0, 5);
-    }
+    // Filter and limit tracks to 5 (excluding duplicates)
+    const tracksToShow = LastFmUtils.filterAndLimitTracks(tracks, 5);
 
     tracksToShow.forEach((track) => {
       const isNowPlaying = track["@attr"] && track["@attr"].nowplaying;
@@ -164,12 +126,12 @@ if (document.getElementById("starfield")) {
 
   // Initialize Last.fm feed for audio page
   async function initAudioRecentTracks() {
-    const tracks = await fetchAudioRecentTracks();
+    const tracks = await LastFmUtils.fetchRecentTracks(AUDIO_TRACK_LIMIT);
     renderRecentTracks(tracks);
 
     // Update every 30 seconds
     setInterval(async () => {
-      const updatedTracks = await fetchAudioRecentTracks();
+      const updatedTracks = await LastFmUtils.fetchRecentTracks(AUDIO_TRACK_LIMIT);
       renderRecentTracks(updatedTracks);
     }, 30000);
   }

@@ -1,0 +1,350 @@
+{{- $id := .Get "id" | default (printf "chart-%d" now.UnixNano) -}}
+{{- $type := .Get "type" | default "line" -}}
+{{- $title := .Get "title" | default "" -}}
+{{- $height := .Get "height" | default "400" -}}
+{{- $csvFile := .Get "csv" -}}
+{{- $labelCol := .Get "labelColumn" | default "Month" -}}
+{{- $dataCol := .Get "dataColumn" | default "Questions" -}}
+{{- $dataColumns := .Get "dataColumns" | default "" -}}
+{{- $datasetLabels := .Get "datasetLabels" | default "" -}}
+{{- $yAxisIDs := .Get "yAxisIDs" | default "" -}}
+{{- $dateFormat := .Get "dateFormat" | default "2006-01" -}}
+{{- $skipRows := .Get "skipRows" | default 0 | int -}}
+{{- $maxRows := .Get "maxRows" | default 0 | int -}}
+
+{{- $chartData := dict -}}
+
+{{- if $csvFile -}}
+  {{/* CSV file mode - supports multiple CSV files */}}
+  {{- $csvFiles := strings.Split $csvFile "," -}}
+  {{- $dataColsList := slice -}}
+  {{- if ne $dataColumns "" -}}
+    {{- $dataColsList = strings.Split $dataColumns "," -}}
+  {{- end -}}
+  {{- $labelsList := slice -}}
+  {{- if ne $datasetLabels "" -}}
+    {{- $labelsList = strings.Split $datasetLabels "," -}}
+  {{- end -}}
+  {{- $yAxisList := slice -}}
+  {{- if ne $yAxisIDs "" -}}
+    {{- $yAxisList = strings.Split $yAxisIDs "," -}}
+  {{- end -}}
+
+  {{- $labels := slice -}}
+  {{- $datasets := slice -}}
+
+  {{/* Process each CSV file */}}
+  {{- range $fileIdx, $csvFileName := $csvFiles -}}
+    {{- $csvFileName = strings.TrimSpace $csvFileName -}}
+    {{- $csvResource := $.Page.Resources.GetMatch $csvFileName -}}
+    {{- if not $csvResource -}}
+      {{- errorf "CSV file '%s' not found in page bundle for %s. Make sure the file exists in the same directory as index.md" $csvFileName $.Page.File.Path -}}
+    {{- end -}}
+
+    {{- $csvData := $csvResource | transform.Unmarshal -}}
+    {{- $data := slice -}}
+
+    {{/* Determine which data column to use */}}
+    {{- $currentDataCol := $dataCol -}}
+    {{- if ge $fileIdx (len $dataColsList) -}}
+      {{- $currentDataCol = $dataCol -}}
+    {{- else -}}
+      {{- $currentDataCol = strings.TrimSpace (index $dataColsList $fileIdx) -}}
+    {{- end -}}
+
+    {{/* Determine dataset label */}}
+    {{- $datasetLabel := $currentDataCol -}}
+    {{- if lt $fileIdx (len $labelsList) -}}
+      {{- $datasetLabel = strings.TrimSpace (index $labelsList $fileIdx) -}}
+    {{- end -}}
+
+    {{/* Determine Y-axis ID */}}
+    {{- $yAxisID := "y" -}}
+    {{- if lt $fileIdx (len $yAxisList) -}}
+      {{- $yAxisID = strings.TrimSpace (index $yAxisList $fileIdx) -}}
+    {{- end -}}
+
+    {{/* Process CSV rows */}}
+    {{- range $idx, $row := $csvData -}}
+      {{- if gt $idx $skipRows -}}
+        {{- if or (eq $maxRows 0) (le (len $data) $maxRows) -}}
+          {{/* Only set labels once from the first CSV file */}}
+          {{- if eq $fileIdx 0 -}}
+            {{/* Get label value */}}
+            {{- $labelRaw := "" -}}
+            {{- if reflect.IsMap $row -}}
+              {{- $labelRaw = index $row $labelCol -}}
+            {{- else -}}
+              {{/* Handle as slice/array - first column is label */}}
+              {{- $labelRaw = index $row 0 -}}
+            {{- end -}}
+
+            {{- $label := $labelRaw -}}
+
+            {{/* Try to parse and format date if it looks like a timestamp */}}
+            {{- $labelStr := printf "%v" $labelRaw -}}
+            {{- if strings.Contains $labelStr " 00:00:00" -}}
+              {{- $parsedTime := time.AsTime $labelStr -}}
+              {{- $label = $parsedTime.Format $dateFormat -}}
+            {{- end -}}
+
+            {{- $labels = $labels | append $label -}}
+          {{- end -}}
+
+          {{/* Get data value */}}
+          {{- $dataValue := 0 -}}
+          {{- if reflect.IsMap $row -}}
+            {{- $dataValue = index $row $currentDataCol | int -}}
+          {{- else -}}
+            {{/* Handle as slice/array - second column is data */}}
+            {{- $dataValue = index $row 1 | int -}}
+          {{- end -}}
+
+          {{- $data = $data | append $dataValue -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{/* Add this dataset to the datasets array */}}
+    {{- $datasets = $datasets | append (dict "label" $datasetLabel "data" $data "yAxisID" $yAxisID) -}}
+  {{- end -}}
+
+  {{- $chartData = dict "labels" $labels "datasets" $datasets -}}
+{{- else -}}
+  {{/* JSON inline mode */}}
+  {{- if .Inner -}}
+    {{- $chartData = .Inner | transform.Unmarshal -}}
+  {{- else -}}
+    {{- errorf "Graph shortcode requires either CSV file or inline JSON data" -}}
+  {{- end -}}
+{{- end -}}
+
+<div class="graph-container" style="height: {{ $height }}px;">
+  {{- if $title -}}
+  <h3 class="graph-title">{{ $title }}</h3>
+  {{- end -}}
+  <canvas id="{{ $id }}"></canvas>
+</div>
+
+<script>
+(function() {
+  // Wait for Chart.js to load
+  function initChart() {
+    if (typeof Chart === 'undefined') {
+      setTimeout(initChart, 100);
+      return;
+    }
+
+    const ctx = document.getElementById('{{ $id }}').getContext('2d');
+
+    // Site color scheme - green, blue, amber
+    const colors = {
+      primary: 'rgb(0, 255, 0)',         // green
+      secondary: 'rgb(0, 191, 255)',     // blue/cyan
+      tertiary: 'rgb(255, 153, 0)',      // amber/orange
+      quaternary: 'rgb(173, 255, 47)',   // greenyellow
+      background: 'rgba(0, 255, 0, 0.1)',
+      grid: 'rgba(0, 255, 0, 0.2)',
+      text: 'rgb(0, 255, 0)'
+    };
+
+    const chartData = {{ $chartData | jsonify | safeJS }};
+
+    console.log('Chart ID: {{ $id }}');
+    console.log('Chart data:', chartData);
+    console.log('Labels count:', chartData.labels ? chartData.labels.length : 0);
+    console.log('Data count:', chartData.datasets && chartData.datasets[0] ? chartData.datasets[0].data.length : 0);
+
+    // Validate data
+    if (!chartData || !chartData.datasets || chartData.datasets.length === 0) {
+      console.error('Invalid chart data - no datasets found');
+      return;
+    }
+
+    // Check if any dataset uses the y1 axis
+    const usesY1Axis = chartData.datasets.some(dataset => dataset.yAxisID === 'y1');
+
+    // Apply terminal styling to datasets
+    if (chartData.datasets) {
+      chartData.datasets.forEach((dataset, idx) => {
+        const colorOptions = [colors.primary, colors.secondary, colors.tertiary, colors.quaternary];
+        const baseColor = colorOptions[idx % colorOptions.length];
+
+        console.log('Dataset', idx, 'using color:', baseColor);
+
+        if (!dataset.borderColor) {
+          dataset.borderColor = baseColor;
+        }
+        if (!dataset.backgroundColor && '{{ $type }}' === 'line') {
+          dataset.backgroundColor = baseColor.replace('rgb', 'rgba').replace(')', ', 0.1)');
+        } else if (!dataset.backgroundColor) {
+          dataset.backgroundColor = baseColor.replace('rgb', 'rgba').replace(')', ', 0.6)');
+        }
+        if (dataset.borderWidth === undefined) {
+          dataset.borderWidth = 2;
+        }
+        if (dataset.tension === undefined && '{{ $type }}' === 'line') {
+          dataset.tension = 0.1;
+        }
+        if (dataset.pointBackgroundColor === undefined && '{{ $type }}' === 'line') {
+          dataset.pointBackgroundColor = baseColor;
+        }
+        if (dataset.pointBorderColor === undefined && '{{ $type }}' === 'line') {
+          dataset.pointBorderColor = '#000';
+        }
+        if (dataset.pointRadius === undefined && '{{ $type }}' === 'line') {
+          dataset.pointRadius = 2;
+        }
+        if (dataset.pointHoverRadius === undefined && '{{ $type }}' === 'line') {
+          dataset.pointHoverRadius = 4;
+        }
+      });
+    }
+
+    // Build scales configuration
+    const scales = {
+      x: {
+        offset: true,
+        grid: {
+          color: colors.grid,
+          drawBorder: true,
+          borderColor: colors.secondary,
+          borderWidth: 2
+        },
+        ticks: {
+          color: colors.text,
+          font: {
+            family: 'monospace',
+            size: 10
+          },
+          maxRotation: 45,
+          minRotation: 45,
+          autoSkip: true,
+          maxTicksLimit: 30,
+          padding: 8
+        },
+        afterFit: function(scale) {
+          scale.paddingBottom = 20; // Extra space for rotated labels
+        }
+      },
+      y: {
+        type: 'linear',
+        position: 'left',
+        grid: {
+          color: colors.grid,
+          drawBorder: true,
+          borderColor: colors.secondary,
+          borderWidth: 2
+        },
+        ticks: {
+          color: colors.text,
+          font: {
+            family: 'monospace',
+            size: 11
+          },
+          padding: 5
+        }
+      }
+    };
+
+    // Only add y1 axis if it's actually used by any dataset
+    if (usesY1Axis) {
+      scales.y1 = {
+        type: 'linear',
+        position: 'right',
+        grid: {
+          drawOnChartArea: false, // Don't draw grid lines for secondary axis
+          drawBorder: true,
+          borderColor: colors.tertiary,
+          borderWidth: 2
+        },
+        ticks: {
+          color: colors.text,
+          font: {
+            family: 'monospace',
+            size: 11
+          },
+          padding: 5
+        }
+      };
+    }
+
+    const config = {
+      type: '{{ $type }}',
+      data: chartData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            bottom: 30,
+            left: 10,
+            right: 10
+          }
+        },
+        plugins: {
+          legend: {
+            display: chartData.datasets && chartData.datasets.length > 1,
+            labels: {
+              color: colors.text,
+              font: {
+                family: 'monospace',
+                size: 12
+              },
+              boxWidth: 15,
+              padding: 10,
+              generateLabels: function(chart) {
+                const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                labels.forEach(label => {
+                  label.fillStyle = label.strokeStyle;
+                });
+                return labels;
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            titleColor: colors.primary,
+            bodyColor: colors.text,
+            borderColor: colors.secondary,
+            borderWidth: 1,
+            titleFont: {
+              family: 'monospace',
+              size: 14,
+              weight: 'bold'
+            },
+            bodyFont: {
+              family: 'monospace',
+              size: 12
+            },
+            padding: 12,
+            displayColors: true,
+            callbacks: {
+              labelColor: function(context) {
+                return {
+                  borderColor: context.dataset.borderColor,
+                  backgroundColor: context.dataset.borderColor
+                };
+              }
+            }
+          }
+        },
+        scales: scales,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutQuart'
+        }
+      }
+    };
+
+    new Chart(ctx, config);
+    console.log('Chart initialized successfully');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChart);
+  } else {
+    initChart();
+  }
+})();
+</script>

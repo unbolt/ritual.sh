@@ -6,6 +6,15 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 
+outputs:
+  home: ["HTML", "RSS", "webmentions"]
+
+outputFormats:
+  webmentions:
+    mediaType: "application/json"
+    baseName: "webmentions"
+    isPlainText: true
+
 pagination:
   pagerSize: 5
 
@@ -41,29 +50,6 @@ params:
     minMatchCharLength: 0
     limit: 10
     keys: ["title", "permalink", "summary", "content"]
-
-menu:
-  main:
-    - identifier: about
-      name: about
-      url: /about/
-      weight: 5
-    - identifier: gear
-      name: gear & edc
-      url: /gear/
-      weight: 10
-    - identifier: resources
-      name: resources
-      url: /resources/
-      weight: 12
-    - identifier: archives
-      name: archives
-      url: /archives/
-      weight: 15
-    - identifier: tags
-      name: tags
-      url: /tags/
-      weight: 20
 
 markup:
   highlight:

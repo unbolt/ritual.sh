@@ -1,0 +1,36 @@
+{{- $links := slice -}}
+{{- $excludeDomains := slice "ritual.sh" "last.fm" "www.last.fm" "amazon.co.uk" "www.amazon.co.uk" "amazon.com" "www.amazon.com" -}}
+
+{{- range .Site.RegularPages -}}
+  {{- $postUrl := .Permalink -}}
+  {{- $content := .Content -}}
+  
+  {{- /* Extract all hrefs from content */ -}}
+  {{- $hrefs := findRE `href="([^"]+)"` $content -}}
+  
+  {{- range $hrefs -}}
+    {{- $href := . | replaceRE `href="([^"]+)"` "$1" -}}
+    
+    {{- /* Only external links */ -}}
+    {{- if hasPrefix $href "http" -}}
+      {{- $shouldExclude := false -}}
+      
+      {{- /* Check if href contains any excluded domain */ -}}
+      {{- range $excludeDomains -}}
+        {{- if in $href . -}}
+          {{- $shouldExclude = true -}}
+        {{- end -}}
+      {{- end -}}
+      
+      {{- if not $shouldExclude -}}
+        {{- $links = $links | append (dict "source" $postUrl "target" $href) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+[
+{{ range $i, $link := $links -}}
+{{ if $i }},
+{{ end }}  {"source":"{{ $link.source }}","target":"{{ $link.target }}"}
+{{ end -}}
+]

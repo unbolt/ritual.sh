@@ -23,6 +23,8 @@
           <div class="blog-summary">{{ .Content }}</div>
         </article>
 
+        {{ partial "contact-section.html" . }}
+
         <nav class="blog-post-navigation">
           <div class="post-nav-links">
             {{ with .PrevInSection }}
@@ -46,4 +48,7 @@
     <div class="blogs-lavalamp">{{ partial "elements/lavalamp.html" . }}</div>
   </div>
 </div>
+
+<script src="/js/footnote-scroll.js"></script>
+
 {{ end }}

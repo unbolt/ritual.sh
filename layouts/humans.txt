@@ -1,6 +1,6 @@
 /* TEAM */
-Creator: Dan
-Contact: dan [at] unbo.lt
+Creator: Dan Baker
+Contact: dan [at] ritual.sh
 From: ritual.sh
 
 /* THANKS */
@@ -16,7 +16,6 @@ Software: Built with care
 
 /* PHILOSOPHY */
 No tracking
-No analytics
 No AI training data
 No engagement metrics
 No corporate platforms

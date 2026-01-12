@@ -1,0 +1,112 @@
+{{ define "main" }}
+<article class="guestbook-page">
+  <div class="guestbook-content">
+    <!-- Header Section -->
+    <div>
+      <div class="guestbook-header content-screen">
+        <div class="screen-display crt">
+          <div class="terminal-output">
+            > guestbook --info<br />
+            <span class="info">{{ .Content }}</span><br />
+            <br />
+            <span class="cursor-blink">_</span>
+          </div>
+        </div>
+      </div>
+      <div class="guestbook-floppy">
+        {{ partial "elements/floppy.html" (dict "title" "Guestbook Entries"
+        "lines" (slice "" "" "DO NOT DELETE" "" "") "bgColor" "#1a4d8f"
+        "bgColorDark" "#0d2747") }}
+      </div>
+    </div>
+
+    <!-- Guestbook Form -->
+    <div class="guestbook-form-container content-screen">
+      <div class="screen-display crt">
+        <div class="terminal-output">> new-entry --interactive<br /></div>
+        <form id="guestbook-form" class="guestbook-form">
+          <div class="form-row">
+            <label for="gb-name">> Name:</label>
+            <input
+              type="text"
+              id="gb-name"
+              name="name"
+              required
+              maxlength="50"
+              placeholder="Your name"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="gb-email">> Email:</label>
+            <input
+              type="email"
+              id="gb-email"
+              name="email"
+              placeholder="your@email.com (optional)"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="gb-website">> Website:</label>
+            <input
+              type="url"
+              id="gb-website"
+              name="website"
+              placeholder="https://yoursite.com (optional)"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="gb-message">> Message:</label>
+            <textarea
+              id="gb-message"
+              name="message"
+              required
+              maxlength="500"
+              rows="3"
+              placeholder="Your message..."
+            ></textarea>
+          </div>
+
+          <div id="form-feedback" class="form-feedback"></div>
+
+          <button type="submit" id="submit-btn" class="terminal-button">
+            <span class="button-text">[ SUBMIT ]</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Guestbook Entries -->
+    <div class="guestbook-entries-container content-screen wide-item">
+      <div class="screen-display crt">
+        <div class="terminal-output">
+          > list-entries --all<br />
+          <br />
+        </div>
+
+        <div id="entries-loading" class="loading-state">
+          <span class="loading-text">Loading entries</span
+          ><span class="loading-dots">...</span>
+          <span class="cursor-blink">_</span>
+        </div>
+
+        <div id="entries-error" class="error-state" style="display: none">
+          <span class="error-text">ERROR: Failed to load entries</span><br />
+          <span class="dim">Please try again later.</span><br />
+          <span class="cursor-blink">_</span>
+        </div>
+
+        <div id="entries-list" class="entries-list" style="display: none">
+          <!-- Entries will be dynamically inserted here -->
+        </div>
+
+        <div id="pagination" class="pagination" style="display: none">
+          <!-- Pagination controls will be inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+{{ end }}

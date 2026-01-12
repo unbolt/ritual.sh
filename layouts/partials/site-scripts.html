@@ -7,11 +7,18 @@
 {{ $filtered := slice }}
 {{ range $remaining }}
   {{ $path := .RelPermalink }}
-  {{ if and (not (strings.Contains $path "/terminal.js")) (not (strings.Contains $path "/init.js")) }}
+  {{ if and (not (strings.Contains $path "/terminal.js")) (not (strings.Contains $path "/init.js")) (not (strings.Contains $path "/button-generator.js")) (not (strings.Contains $path "/adoptables/")) (not (strings.Contains $path "/guestbook.js")) }}
     {{ $filtered = $filtered | append . }}
   {{ end }}
 {{ end }}
-{{ $allFiles := slice $terminalShell | append $filtered | append $init | append $commandFiles | append $subfolderFiles }}
+{{ $filteredSubfolders := slice }}
+{{ range $subfolderFiles }}
+  {{ $path := .RelPermalink }}
+  {{ if not (strings.Contains $path "/adoptables/") }}
+    {{ $filteredSubfolders = $filteredSubfolders | append . }}
+  {{ end }}
+{{ end }}
+{{ $allFiles := slice $terminalShell | append $filtered | append $init | append $commandFiles | append $filteredSubfolders }}
 {{ $terminalBundle := $allFiles | resources.Concat "js/terminal-bundle.js" | resources.Minify | resources.Fingerprint }}
 <!-- prettier-ignore-end -->
 <script

@@ -3,6 +3,7 @@
 @import "animations";
 
 @import "partials/global-styles";
+@import "partials/form-controls";
 
 @import "partials/neon-sign";
 @import "partials/music";
@@ -14,6 +15,8 @@
 @import "partials/lcd-display";
 @import "partials/window";
 @import "partials/crt-tv";
+@import "partials/graphs";
+@import "partials/companion-cube";
 
 @import "partials/content-screens";
 
@@ -24,8 +27,11 @@
 @import "pages/blog";
 @import "pages/media";
 @import "pages/resources";
+@import "pages/button-generator";
+@import "pages/lavalamp-adoptable";
+@import "pages/guestbook";
 
-@import url("https://fonts.bunny.net/css2?family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Neonderthaw&display=swap");
+@import url(https://fonts.bunny.net/css?family=abel:400|barlow-condensed:400,500|caveat:400|lato:300,300i,400,400i|neonderthaw:400);
 
 @font-face {
   font-family: "DSEG7-Classic";
@@ -102,6 +108,7 @@ body {
   pointer-events: none;
 }
 .crt {
+  position: absolute;
   animation: textShadow 1.6s infinite;
   background: black;
   color: greenyellow;
@@ -812,7 +819,6 @@ body {
   text-decoration: none !important;
 }
 
-
 /* Desk-mounted CRT - on desk left side */
 .desk-monitor {
   bottom: 10%;
@@ -1034,8 +1040,6 @@ body {
     opacity: 0.2;
   }
 }
-
-
 
 @keyframes pulse-slow {
   0%,

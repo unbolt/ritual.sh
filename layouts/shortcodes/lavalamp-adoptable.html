@@ -1,0 +1,124 @@
+<div id="lavalamp-adoptable-app">
+  <div class="adoptable-container">
+    <div class="preview-section">
+      <h3 class="hidden-md-down">Preview</h3>
+      <div class="preview-grid">
+        <div class="preview-item hidden-md-down">
+          <div class="preview-wrapper preview-flexible">
+            <div
+              id="lavalamp-preview-flex"
+              class="lavalamp-preview-container"
+            ></div>
+          </div>
+          <span class="preview-label">40px × 60px</span>
+        </div>
+        <div class="preview-item">
+          <div class="preview-wrapper preview-100">
+            <div
+              id="lavalamp-preview-100"
+              class="lavalamp-preview-container"
+            ></div>
+          </div>
+          <span class="preview-label hidden-md-down">100px × 200px</span>
+        </div>
+        <div class="preview-item hidden-md-down">
+          <div class="preview-wrapper preview-200">
+            <div
+              id="lavalamp-preview-200"
+              class="lavalamp-preview-container"
+            ></div>
+          </div>
+          <span class="preview-label">200px × 350px</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-section">
+      <h3>Customize Your Lava Lamp</h3>
+
+      <div class="control-group">
+        <label for="bg-color-1">Background Color 1</label>
+        <input type="color" id="bg-color-1" value="#F8E45C" />
+      </div>
+
+      <div class="control-group">
+        <label for="bg-color-2">Background Color 2</label>
+        <input type="color" id="bg-color-2" value="#FF7800" />
+      </div>
+
+      <div class="control-group">
+        <label for="blob-color-1">Blob Color 1</label>
+        <input type="color" id="blob-color-1" value="#FF4500" />
+      </div>
+
+      <div class="control-group">
+        <label for="blob-color-2">Blob Color 2</label>
+        <input type="color" id="blob-color-2" value="#FF6347" />
+      </div>
+
+      <div class="control-group">
+        <label for="case-color">Case Color</label>
+        <input type="color" id="case-color" value="#333333" />
+      </div>
+
+      <div class="control-group">
+        <label for="blob-count"
+          >Number of Blobs: <span id="blob-count-value">6</span></label
+        >
+        <input type="range" id="blob-count" min="3" max="12" value="6" />
+      </div>
+
+      <div class="control-group">
+        <label for="blob-size"
+          >Blob Size: <span id="blob-size-value">1.0</span>x</label
+        >
+        <input
+          type="range"
+          id="blob-size"
+          min="0.5"
+          max="2.0"
+          step="0.1"
+          value="1.0"
+        />
+      </div>
+
+      <div class="control-group">
+        <label for="speed">Speed: <span id="speed-value">1.0</span>x</label>
+        <input
+          type="range"
+          id="speed"
+          min="0.5"
+          max="1.5"
+          step="0.1"
+          value="1.0"
+        />
+      </div>
+
+      <div class="control-group">
+        <label>
+          <input type="checkbox" id="pixelate" />
+          Pixelate
+        </label>
+      </div>
+
+      <div class="control-group" id="pixel-size-group" style="display: none">
+        <label for="pixel-size"
+          >Pixel Size: <span id="pixel-size-value">4</span>px</label
+        >
+        <input type="range" id="pixel-size" min="2" max="10" value="4" />
+      </div>
+
+      <div class="control-group">
+        <button id="get-code-btn" class="btn-primary">Get Embed Code</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="embed-code-section" style="display: none; margin-top: 2rem">
+    <h3>Embed Code</h3>
+    <p>Copy this code and paste it anywhere on your website:</p>
+    <div class="highlight">
+      <pre><code id="embed-code-display" class="language-html" data-lang="html"></code></pre>
+    </div>
+  </div>
+</div>
