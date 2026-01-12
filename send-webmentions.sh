@@ -65,9 +65,8 @@ jq -c '.[]' "$WEBMENTIONS_FILE" | while read -r mention; do
         
         # Send to your API
         response=$(curl -s -w "\n%{http_code}" -X POST "$API_ENDPOINT" \
-            -H "Authorization: Bearer $API_KEY" \
             -H "Content-Type: application/json" \
-            -d "$mention")
+            -d "{\"auth\":\"$API_KEY\",\"source\":\"$source\",\"target\":\"$target\"}")
         
         http_code=$(echo "$response" | tail -n1)
         
