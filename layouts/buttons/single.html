@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="buttons-container">
+  <div class="wall"></div>
+  <div class="desk"></div>
+
+  <div class="button-lavalamp">
+    <script
+      src="https://ritual.sh/js/adoptables/lavalamp.js"
+      data-bg-color-1="#62a0ea"
+      data-bg-color-2="#1c71d8"
+      data-blob-color-1="#f8e45c"
+      data-blob-color-2="#f6d32d"
+      data-case-color="#c0bfbc"
+      data-blob-count="6"
+      data-speed="1.0"
+      data-blob-size="1.4"
+    ></script>
+  </div>
+
+  <article class="buttons-page">
+    <header>
+      <div class="buttons-header">
+        {{ partial "elements/lcd-screen.html" (dict "text" "Buttons"
+        "placeholder" "") }}
+      </div>
+    </header>
+
+    <div class="laptop-container">
+      <div class="laptop-lid" id="laptop-lid">
+        <div class="laptop-lid-bezel"></div>
+        {{ range .Params.buttons }}
+        <a
+          href="{{ .url }}"
+          class="button-sticker"
+          title="{{ .name }}"
+          data-name="{{ .name }}"
+        >
+          <img src="{{ .Page.File.Dir }}{{ .image }}" alt="{{ .name }}" />
+        </a>
+        {{ end }}
+      </div>
+    </div>
+
+    <section class="buttons-content">{{ .Content }}</section>
+  </article>
+</div>
+{{ end }}

@@ -52,5 +52,11 @@
     {{ $guestbook := resources.Get "js/guestbook.js" | resources.Minify | resources.Fingerprint }}
     <script src="{{ $guestbook.RelPermalink }}" integrity="{{ $guestbook.Data.Integrity }}"></script>
     {{ end }}
+
+    <!-- Buttons - only load on buttons page -->
+    {{ if eq .Type "buttons" }}
+    {{ $buttons := resources.Get "js/buttons.js" | resources.Minify | resources.Fingerprint }}
+    <script src="{{ $buttons.RelPermalink }}" integrity="{{ $buttons.Data.Integrity }}"></script>
+    {{ end }}
   </body>
 </html>
