@@ -9,7 +9,11 @@
       }}{{ end }}{{ end }}
     </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1" />
-    {{ hugo.Generator }} {{ $sass := resources.Get "sass/style.scss" }} {{
+    {{ range .AlternativeOutputFormats }}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .RelPermalink }}">
+    {{ end }}
+
+     {{ $sass := resources.Get "sass/style.scss" }} {{
     $style := $sass | css.Sass | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 
