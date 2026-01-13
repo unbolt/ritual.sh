@@ -1,0 +1,58 @@
+---
+title: "Button Collection"
+description: "A collection of 88x31 IndieWeb buttons collected from around the web"
+layout: buttons
+buttons:
+  - name: "32bit Cafe"
+    url: "https://32bit.cafe/"
+    image: "32bitcafe.gif"
+  - name: "Robb Knight"
+    url: "https://rknight.me/"
+    image: "robbknight.gif"
+  - name: "Brennan Day"
+    url: "https://brennan.day/"
+    image: "brennanday.gif"
+  - name: "Bazzite"
+    url: "https://bazzite.gg/"
+    image: "bazzite.gif"
+  - name: "Battlestar Galactica"
+    image: "bsgbutton.png"
+  - name: "Divergent Rays"
+    url: "https://divergentrays.com"
+    image: "drbutton2.png"
+  - name: "I dream in HTML"
+    image: "htmldream.gif"
+  - name: "DANDADAN"
+    url: "https://dandadan.i-heart-you.net/"
+    image: "dandadan.gif"
+  - name: "Get Flash"
+    image: "getflash.gif"
+  - name: "Minecraft"
+    image: "minecraft.gif"
+  - name: "Ubuntu"
+    image: "ubuntu.gif"
+  - name: "Under Construction"
+    image: "undercon.gif"
+  - name: "Linux Online"
+    image: "linuxonline.gif"
+  - name: "Half Life"
+    image: "hl.gif"
+  - name: "Smile"
+    image: "hasmile.gif"
+  - name: "Jigglypuff"
+    image: "jigglypuff.gif"
+  - name: "Fuck Google"
+    image: "fckgoogle.gif"
+  - name: "Ritual.sh"
+    image: "ritual_1.gif"
+  - name: "Ritual.sh"
+    image: "ritual_2.gif"
+  - name: "Ritual.sh"
+    image: "ritual_4.gif"
+---
+
+Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
+
+If you want to appear on my laptop, leave me a message on my [guestbook](/guestbook) and I will add you!
+
+Here are some ~stickers~ buttons... feel free to take one!

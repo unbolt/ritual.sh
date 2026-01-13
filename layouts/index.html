@@ -265,12 +265,20 @@
   </div>
 
   <div>
-    <div class="nav-floppy">
+    <div class="nav-floppy top">
       <a href="/guestbook/">
         {{ partial "elements/floppy.html" (dict "title" "Guestbook" "lines"
         (slice "" "" "DO NOT DELETE" "" "") "bgColor" "#1a4d8f" "bgColorDark"
         "#0d2747") }}
         <div class="nav-floppy-text">Guestbook</div>
+      </a>
+    </div>
+    <div class="nav-floppy bottom">
+      <a href="/buttons/">
+        {{ partial "elements/floppy.html" (dict "title" "Buttons" "lines" (slice
+        "" "" "NOT STICKERS" "" "") "bgColor" "#85112e" "bgColorDark" "#660a21")
+        }}
+        <div class="nav-floppy-text">Buttons &amp; Links</div>
       </a>
     </div>
   </div>

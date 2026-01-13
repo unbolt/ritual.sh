@@ -88,7 +88,13 @@ $breakpoints: (
   }
 }
 
-// Usage
-.scrollable-child {
-  @include scrollbar-custom(greenyellow, 10px);
+@mixin enhance-3d-transform {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Optional: Force GPU acceleration */
+  will-change: transform;
 }

@@ -1,0 +1,52 @@
+{{ define "main" }}
+<div class="buttons-container">
+  <div class="wall"></div>
+  <div class="desk"></div>
+
+  <div class="buttons-window hidden-lg-down">
+    {{ partial "elements/window.html" . }}
+  </div>
+
+  <article class="buttons-page">
+    <header>
+      <div class="buttons-header">
+        {{ partial "elements/lcd-screen.html" (dict "text" .Title "placeholder"
+        "") }}
+      </div>
+    </header>
+
+    <div class="laptop-container">
+      <div class="laptop-lid" id="laptop-lid">
+        <div class="laptop-lid-bezel"></div>
+        {{ range .Params.buttons }}
+        <a
+          href="{{ .url }}"
+          class="button-sticker"
+          title="{{ .name }}"
+          data-name="{{ .name }}"
+        >
+          <img src="{{ .Page.File.Dir }}{{ .image }}" alt="{{ .name }}" />
+        </a>
+        {{ end }}
+      </div>
+    </div>
+
+    <section class="buttons-content handwritten-wrap">
+      <div class="buttons-paper">
+        {{ .Content }}
+        <div class="link-me-buttons">
+          <img src="ritual_1.gif" style="--rotation: 3deg" />
+          <img src="ritual_2.gif" style="--rotation: -2deg" />
+          <img src="ritual_3.gif" style="--rotation: 1deg" />
+          <img src="ritual_4.gif" style="--rotation: 2deg" />
+        </div>
+      </div>
+      <div>
+        <!-- prettier-ignore -->
+        {{ partial "responsive-image.html" (dict "src"
+        "images/misc/thinkpad_t480s.jpg" "alt" "My Thinkpad T480s with stickerbomb" "width" "900x" "page" .) }}
+      </div>
+    </section>
+  </article>
+</div>
+{{ end }}

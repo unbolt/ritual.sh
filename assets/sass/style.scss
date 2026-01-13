@@ -1,6 +1,7 @@
 @import "normalize";
 @import "mixins";
 @import "animations";
+@import "handwritten";
 
 @import "partials/global-styles";
 @import "partials/form-controls";
@@ -30,6 +31,7 @@
 @import "pages/button-generator";
 @import "pages/lavalamp-adoptable";
 @import "pages/guestbook";
+@import "pages/buttons";
 
 @import url(https://fonts.bunny.net/css?family=abel:400|barlow-condensed:400,500|caveat:400|lato:300,300i,400,400i|neonderthaw:400);
 
