@@ -63,6 +63,18 @@ export class WaveTextEffect extends ButtonEffect {
 
     const suffix = this.textLineNumber === 1 ? '' : '2';
 
+    // Check if ticker is active - if so, ticker handles rendering
+    const tickerActive = controlValues[`animate-text-ticker${suffix}`];
+    if (tickerActive) {
+      return;
+    }
+
+    // Check flash visibility - if flash is active and text is invisible, don't render
+    const flashActive = controlValues[`animate-text-flash${suffix}`];
+    if (flashActive && renderData[`textFlashVisible${suffix}`] === false) {
+      return;
+    }
+
     // Get text configuration
     const text = controlValues[`button-text${suffix}`] || '';
     if (!text || text.trim() === '') return;

@@ -174,6 +174,14 @@ export class ButtonGenerator {
           values[id] = element.value;
         }
       }
+
+      // For range-dual controls, also check for -start and -end suffixed elements
+      const startElement = document.getElementById(`${id}-start`);
+      const endElement = document.getElementById(`${id}-end`);
+      if (startElement && endElement) {
+        values[`${id}-start`] = parseFloat(startElement.value);
+        values[`${id}-end`] = parseFloat(endElement.value);
+      }
     });
 
     return values;

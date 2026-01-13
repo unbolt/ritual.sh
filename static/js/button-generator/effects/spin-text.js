@@ -61,6 +61,19 @@ export class SpinTextEffect extends ButtonEffect {
 
   apply(context, controlValues, animState, renderData) {
     const suffix = this.textLineNumber === 1 ? "" : "2";
+
+    // Check if ticker is active - if so, ticker handles rendering
+    const tickerActive = controlValues[`animate-text-ticker${suffix}`];
+    if (tickerActive) {
+      return;
+    }
+
+    // Check flash visibility - if flash is active and text is invisible, don't render
+    const flashActive = controlValues[`animate-text-flash${suffix}`];
+    if (flashActive && renderData[`textFlashVisible${suffix}`] === false) {
+      return;
+    }
+
     const text = controlValues[`button-text${suffix}`] || "";
 
     if (!text || text.trim() === '') return;
