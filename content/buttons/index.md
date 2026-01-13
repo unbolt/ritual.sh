@@ -1,5 +1,5 @@
 ---
-title: "88x31 Buttons"
+title: "Button Collection"
 description: "A collection of 88x31 IndieWeb buttons collected from around the web"
 layout: buttons
 buttons:

@@ -20,8 +20,8 @@
   <article class="buttons-page">
     <header>
       <div class="buttons-header">
-        {{ partial "elements/lcd-screen.html" (dict "text" "Buttons"
-        "placeholder" "") }}
+        {{ partial "elements/lcd-screen.html" (dict "text" .Title "placeholder"
+        "") }}
       </div>
     </header>
 
@@ -41,7 +41,9 @@
       </div>
     </div>
 
-    <section class="buttons-content">{{ .Content }}</section>
+    <section class="buttons-content">
+      <div class="buttons-paper">{{ .Content }}</div>
+    </section>
   </article>
 </div>
 {{ end }}
