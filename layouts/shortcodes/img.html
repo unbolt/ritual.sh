@@ -1,16 +1,1 @@
-<!-- prettier-ignore -->
-{{ $src := .Get "src" }}
-{{ $alt := .Get "alt" | default "" }}
-{{ $width := .Get "width" | default "800x" }}
-
-<figure class="blog-img-container">
-{{ with .Page.Resources.GetMatch $src }}
-  {{ $resized := .Resize $width }}
-  <img src="{{ $resized.RelPermalink }}" alt="{{ $alt }}" loading="lazy" class="blog-img" />
-{{ else }}
-  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" class="blog-img" />
-{{ end }}
-{{ if $alt }}
-  <figcaption class="blog-img-caption">{{ $alt }}</figcaption>
-{{ end }}
-</figure>
+{{ partial "responsive-image.html" (dict "src" (.Get "src") "alt" (.Get "alt") "width" (.Get "width") "page" .Page) }}

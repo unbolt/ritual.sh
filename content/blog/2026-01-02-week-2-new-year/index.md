@@ -12,7 +12,7 @@ draft: false
 - 🌐 I setup a dedicated server for this site and migrated off neocities, I am coming up with a plan on how to make sure updates keep getting posted there but redirect here.
 - 📺 There's been a bunch of Taskmaster recently, including Champion of Champions which was good. Traitors is back on so we're up to date on that so far.
 
-{{< img src="thinkpad_t480s.jpg" alt="Thinkpad T480s complete with stickerbomb" width="900x" >}}
+{{< img src="images/misc/thinkpad_t480s.jpg" alt="Thinkpad T480s complete with stickerbomb" width="900x" >}}
 
 ## Links I Found Interesting
 

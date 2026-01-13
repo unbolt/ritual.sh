@@ -1,0 +1,21 @@
+<!-- prettier-ignore -->
+{{ $src := .src }}
+{{ $alt := .alt | default "" }}
+{{ $width := .width | default "800x" }}
+
+<figure class="blog-img-container">
+{{ with .page.Resources.GetMatch $src }}
+  {{ $resized := .Resize $width }}
+  <img src="{{ $resized.RelPermalink }}" alt="{{ $alt }}" loading="lazy" class="blog-img" />
+{{ else }}
+  {{ with resources.Get $src }}
+    {{ $resized := .Resize $width }}
+    <img src="{{ $resized.RelPermalink }}" alt="{{ $alt }}" loading="lazy" class="blog-img" />
+  {{ else }}
+    <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" class="blog-img" />
+  {{ end }}
+{{ end }}
+{{ if $alt }}
+  <figcaption class="blog-img-caption">{{ $alt }}</figcaption>
+{{ end }}
+</figure>

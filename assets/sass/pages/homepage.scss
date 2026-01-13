@@ -188,8 +188,26 @@
 
   .nav-floppy {
     width: 44%;
+    max-width: 100px;
     transform: rotate(5deg);
     position: relative;
+
+    &.top {
+      transform: rotate(-5deg);
+      left: -20px;
+
+      .nav-floppy-text {
+        transform: rotate(7deg);
+      }
+    }
+
+    &.bottom {
+      left: 20px;
+
+      .nav-floppy-text {
+        transform: rotate(-7deg);
+      }
+    }
 
     &:hover {
       .nav-floppy-text {

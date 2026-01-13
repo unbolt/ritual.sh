@@ -43,6 +43,16 @@ buttons:
     image: "jigglypuff.gif"
   - name: "Fuck Google"
     image: "fckgoogle.gif"
+  - name: "Ritual.sh"
+    image: "ritual_1.gif"
+  - name: "Ritual.sh"
+    image: "ritual_2.gif"
+  - name: "Ritual.sh"
+    image: "ritual_4.gif"
 ---
 
-People and things I like, stuck on my laptop - just like in real life!
+Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
+
+If you want to appear on my laptop, leave me a message on my [guestbook](/guestbook) and I will add you!
+
+Here are some ~stickers~ buttons... feel free to take one!

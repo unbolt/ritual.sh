@@ -3,18 +3,8 @@
   <div class="wall"></div>
   <div class="desk"></div>
 
-  <div class="button-lavalamp">
-    <script
-      src="https://ritual.sh/js/adoptables/lavalamp.js"
-      data-bg-color-1="#62a0ea"
-      data-bg-color-2="#1c71d8"
-      data-blob-color-1="#f8e45c"
-      data-blob-color-2="#f6d32d"
-      data-case-color="#c0bfbc"
-      data-blob-count="6"
-      data-speed="1.0"
-      data-blob-size="1.4"
-    ></script>
+  <div class="buttons-window hidden-lg-down">
+    {{ partial "elements/window.html" . }}
   </div>
 
   <article class="buttons-page">
@@ -41,8 +31,21 @@
       </div>
     </div>
 
-    <section class="buttons-content">
-      <div class="buttons-paper">{{ .Content }}</div>
+    <section class="buttons-content handwritten-wrap">
+      <div class="buttons-paper">
+        {{ .Content }}
+        <div class="link-me-buttons">
+          <img src="ritual_1.gif" style="--rotation: 3deg" />
+          <img src="ritual_2.gif" style="--rotation: -2deg" />
+          <img src="ritual_3.gif" style="--rotation: 1deg" />
+          <img src="ritual_4.gif" style="--rotation: 2deg" />
+        </div>
+      </div>
+      <div>
+        <!-- prettier-ignore -->
+        {{ partial "responsive-image.html" (dict "src"
+        "images/misc/thinkpad_t480s.jpg" "alt" "My Thinkpad T480s with stickerbomb" "width" "900x" "page" .) }}
+      </div>
     </section>
   </article>
 </div>

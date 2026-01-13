@@ -21,14 +21,32 @@
   }
 }
 
+.buttons-window {
+  position: absolute;
+  top: 0;
+  aspect-ratio: 16/9;
+  width: 50%;
+  left: 70%;
+  transform: translate(-50%, -20%);
+  border: 5px solid #c4b89a;
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-top-color: rgb(196, 184, 154);
+  border-top: 0;
+}
+
 .buttons-container {
+  position: relative;
+  min-height: 100vh;
+
   > .wall {
     position: fixed !important;
     width: 100vw !important;
     height: 100vh !important;
     top: 0 !important;
     left: 0 !important;
-    background: repeating-linear-gradient(
+    background:
+      repeating-linear-gradient(
         90deg,
         #2a2a2a 0px,
         #2a2a2a 100px,
@@ -44,7 +62,12 @@
   }
 
   > .desk {
-    height: 37%;
+    position: absolute;
+    top: 50vh;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-height: calc(100% - 50vh);
   }
 
   .button-lavalamp {
@@ -68,6 +91,10 @@
       transform: translateX(-50%);
       filter: blur(8px);
       z-index: -1;
+    }
+
+    @include media-down(lg) {
+      display: none;
     }
   }
 
@@ -109,6 +136,8 @@
   align-items: center;
   perspective: 2000px;
   margin: 4rem 0;
+  margin-top: 10%;
+  margin-bottom: 0;
   min-height: 570px;
   padding: 2rem;
   position: relative;
@@ -121,7 +150,8 @@
   height: 50px;
   background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
   border-radius: 0 0 15px 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
     inset 0 1px 2px rgba(255, 255, 255, 0.05);
   z-index: 1;
   bottom: 0;
@@ -137,7 +167,8 @@
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%) translateZ(0px);
-  background: repeating-linear-gradient(
+  background:
+    repeating-linear-gradient(
       90deg,
       #2a2a2a 0,
       #2a2a2a 12px,
@@ -163,7 +194,8 @@
   height: 480px;
   background: linear-gradient(135deg, #d4d4d4 0%, #c0c0c0 40%, #b0b0b0 100%);
   border-radius: 20px 20px 0 0;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4),
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.4),
     inset 0 1px 2px rgba(255, 255, 255, 0.5),
     inset 0 -3px 8px rgba(0, 0, 0, 0.08);
   transform: rotateX(25deg) translateZ(20px);
@@ -273,48 +305,122 @@
 .buttons-content {
   max-width: 800px;
   margin: 4rem auto 0;
+  margin-top: 0;
   padding: 2rem;
-  perspective: 400px;
+  perspective: 1000px;
 
   // Show as a grid with 2 colums
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 
+  font-weight: bold;
+  font-size: 1.5em;
+
+  .link-me-buttons {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5em;
+
+    > img {
+      // Apply a random rotation
+      transform: rotate(var(--rotation, 0deg));
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+      border: 4px solid white;
+      border-radius: 2px;
+
+      &:hover {
+        transform: rotateY(-10deg) scale(1.2);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+        border: 4px solid transparent;
+      }
+    }
+  }
+
   .buttons-paper {
     position: relative;
     // Paper-like background
-    background: #f9f9f9;
-    padding: 1.5rem;
+    background: #d7d9cf;
+    padding: 0.5em;
+    padding-top: 1.6em;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid #e0e0e0;
-    // Lined background
+    // Lined background - matches the 1.6 line-height of paragraphs with 1.5em font-size = 2.4em
     background-image: linear-gradient(
       to bottom,
-      #f9f9f9 0%,
-      #f9f9f9 95%,
-      #e0e0e0 95%,
-      #e0e0e0 100%
+      #d1d4cc 0%,
+      #d1d4cc 97%,
+      #5c6f90 97%,
+      #5c6f90 100%
     );
-    background-size: 100% 24px;
-    // Add a slight perspective so it looks like its on the table
+    background-size: 100% 1.6em;
+  }
+
+  // Target the parent div that contains the image
+  > div {
     transform: rotateX(25deg) translateZ(20px);
     transform-style: preserve-3d;
     transform-origin: bottom center;
+    @include enhance-3d-transform;
+  }
+
+  .blog-img-container {
+    width: 80%;
+    margin: auto;
+    background-color: #fdfaf5;
+    padding: 0.5em;
+    padding-bottom: 1em;
+    transform: rotate(-2deg);
+    box-shadow:
+      0 0 1px rgba(255, 255, 255, 0.5),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+      0 10px 30px rgba(0, 0, 0, 0.2),
+      0 10px 30px rgba(0, 0, 0, 0.7);
+    @include enhance-3d-transform;
+
+    img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+
+      // Vintage Polaroid filter effects
+      filter: contrast(1.3) saturate(0.65) brightness(1.05) sepia(0.3);
+
+      border: 1px solid rgba(0, 0, 0, 0.7);
+    }
+
+    figcaption {
+      text-align: center;
+      transform: rotate(-3deg);
+      padding-top: 1em;
+      pointer-events: none;
+    }
   }
 
   p {
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    color: #828282;
+    margin-bottom: 1.6em;
+    line-height: 1.6em;
+    color: #2f2f2f;
   }
 }
 
 // Responsive adjustments
 @media (max-width: 900px) {
+  .buttons-container {
+    > .desk {
+      top: 20vh;
+      height: 120vh;
+    }
+  }
+
   .laptop-container {
-    min-height: 500px;
+    min-height: 100px;
   }
 
   .laptop-container::before {
@@ -331,6 +437,17 @@
   .laptop-lid {
     width: 600px;
     height: 375px;
+
+    &:after {
+      display: none;
+    }
+
+    &:before {
+      left: 35px;
+      top: 30px;
+      transform: none;
+      font-size: 2em;
+    }
   }
 
   .button-sticker {
@@ -340,6 +457,18 @@
     &:hover {
       transform: rotateX(-25deg) rotate(0deg) scale(1.3) translateZ(30px);
     }
+  }
+
+  .buttons-content {
+    grid-template-columns: 1fr;
+
+    img {
+      margin: auto;
+    }
+  }
+
+  .blog-img-container {
+    max-width: 300px;
   }
 }
 
@@ -355,29 +484,49 @@
       }
     }
   }
+  .buttons-content {
+    perspective: none;
+    .link-me-buttons {
+      grid-template-columns: 1fr;
+    }
+  }
 
   .laptop-container {
     perspective: 800px;
-    min-height: 400px;
+    min-height: 50px;
   }
 
   .laptop-container::before {
-    width: 100%;
-    max-width: 400px;
-    height: 30px;
+    display: none;
   }
 
   .laptop-container::after {
-    width: 370px;
-    height: 18px;
-    bottom: 6px;
+    display: none;
   }
 
   .laptop-lid {
     width: 100%;
     max-width: 400px;
     height: 250px;
-    transform: rotateX(25deg) translateZ(20px);
+    transform: rotateX(0) translateZ(0);
+    border-width: 1px;
+    padding: 2px;
+    border-radius: 10px;
+
+    &:after {
+      display: none;
+    }
+
+    &:before {
+      left: 25px;
+      top: 20px;
+      transform: none;
+      font-size: 1em;
+    }
+
+    .laptop-lid-bezel {
+      inset: 6px;
+    }
   }
 
   .button-sticker {
