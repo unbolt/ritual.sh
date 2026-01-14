@@ -117,17 +117,18 @@
         z-index: 3;
       }
 
-      /* Page layers (stack effect) */
+      /* Page layers stack kinda*/
       .page-layer {
         position: absolute;
         width: 100%;
         height: 100%;
         background: var(--paper-color);
         border-radius: var(--internal-border-radius);
+        box-shadow: inset 1px 0 1px rgba(0, 0, 0, 0.2);
       }
 
       .page-stack-left .page-layer:nth-child(1) {
-        transform: translateX(-3px);
+        transform: translateX(-5px);
         filter: brightness(0.85);
         z-index: 1;
       }
@@ -145,7 +146,7 @@
       }
 
       .page-stack-right .page-layer:nth-child(2) {
-        transform: translateX(3px);
+        transform: translateX(5px);
         filter: brightness(0.85);
         z-index: 1;
       }
