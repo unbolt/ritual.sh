@@ -49,6 +49,9 @@ buttons:
     image: "ritual_2.gif"
   - name: "Ritual.sh"
     image: "ritual_4.gif"
+  - name: "Moxie Moshpit"
+    url: "https://moxiemoshpit.com/"
+    image: "mm06.webp"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
