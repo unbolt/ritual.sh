@@ -16,6 +16,8 @@ draft: false
 
 - [iCloud Photos Downloader](https://github.com/icloud-photos-downloader/icloud_photos_downloader) and [Photos Backup Anywhere](https://photosbackup.app/) - Two useful looking things for backing up my Photos library
 
+- [Zootopia 2](https://blog.yiningkarlli.com/2025/12/zootopia-2.html) - CG Engineer from Walt Disney Studios talks about some of the technical stuff from making Zootopia 2.
+
 ## Music
 
 - 📺 [Mortal Kombat x Rhythm is a Dancer](https://www.youtube.com/watch?v=vKxn6P947PE)
