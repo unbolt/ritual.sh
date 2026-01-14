@@ -9,13 +9,18 @@ draft: false
 
 - 🗨️ Added the ability to send and receive [webmentions](https://indieweb.org/Webmention) to the blog. Haven't automated displaying of received ones yet, but I'll get there.
 - 🧰 Setup a little personal API to handle the guestbook, visitor counter, and aforementioned webmentions.
-- 📺 Setup a little dashboard on my homelab for monitoring all of the above!
+- 📺 Setup a dashboard on my homelab for monitoring all of the above.
+- 🛜 Added an RSS feed for the blog. I've made my full posts available via RSS so you can consume them however you please.
 
 ## Links I Found Interesting
 
 - [iCloud Photos Downloader](https://github.com/icloud-photos-downloader/icloud_photos_downloader) and [Photos Backup Anywhere](https://photosbackup.app/) - Two useful looking things for backing up my Photos library
 
+- [Zootopia 2](https://blog.yiningkarlli.com/2025/12/zootopia-2.html) - CG Engineer from Walt Disney Studios talks about some of the technical stuff from making Zootopia 2.
+
 ## Music
+
+- 📺 [Mortal Kombat x Rhythm is a Dancer](https://www.youtube.com/watch?v=vKxn6P947PE)
 
 ## Next Week
 

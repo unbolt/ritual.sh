@@ -35,7 +35,7 @@ export class SolidBackgroundEffect extends ButtonEffect {
         label: "Background Color",
         defaultValue: "#4a90e2",
         showWhen: "bg-type",
-        description: "Solid background color",
+        description: "Background color (also used behind images)",
       },
     ];
   }

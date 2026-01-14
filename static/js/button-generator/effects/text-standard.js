@@ -150,12 +150,19 @@ export class StandardTextEffect extends ButtonEffect {
     const waveActive = controlValues[`animate-text-wave${suffix}`];
     const rainbowActive = controlValues[`animate-text-rainbow${suffix}`];
     const spinActive = controlValues[`animate-text-spin${suffix}`];
+    const tickerActive = controlValues[`animate-text-ticker${suffix}`];
 
-    return text && text.trim() !== "" && !waveActive && !rainbowActive && !spinActive;
+    return text && text.trim() !== "" && !waveActive && !rainbowActive && !spinActive && !tickerActive;
   }
 
   apply(context, controlValues, animState, renderData) {
     const suffix = this.textLineNumber === 1 ? "" : "2";
+
+    // Check flash visibility - if flash is active and text is invisible, don't render
+    const flashActive = controlValues[`animate-text-flash${suffix}`];
+    if (flashActive && renderData[`textFlashVisible${suffix}`] === false) {
+      return;
+    }
 
     const text = controlValues[`button-text${suffix}`];
     if (!text) return;

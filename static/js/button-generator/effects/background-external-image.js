@@ -245,11 +245,16 @@ export class ExternalImageBackgroundEffect extends ButtonEffect {
 
   apply(context, controlValues, animState, renderData) {
     const file = controlValues['bg-image-file'];
+    const bgColor = controlValues['bg-color'] || '#FFFFFF';
     const fitMode = controlValues['bg-image-fit'] || 'cover';
     const opacity = controlValues['bg-image-opacity'] ?? 1;
     const zoom = controlValues['bg-image-zoom'] ?? 100;
     const offsetX = controlValues['bg-image-offset-x'] ?? 50;
     const offsetY = controlValues['bg-image-offset-y'] ?? 50;
+
+    // Draw background color first (always, for all states)
+    context.fillStyle = bgColor;
+    context.fillRect(0, 0, renderData.width, renderData.height);
 
     // If no file selected, fill with a placeholder color
     if (!file || !file.blobUrl) {

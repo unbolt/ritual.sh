@@ -14,6 +14,11 @@ outputFormats:
     mediaType: "application/json"
     baseName: "webmentions"
     isPlainText: true
+  RSS:
+    mediaType: application/rss+xml
+    baseName: feed
+    isPlainText: false
+    rel: alternate
 
 pagination:
   pagerSize: 5
@@ -40,16 +45,6 @@ params:
     icon: /images/android-chrome-512x512.png
     iconImageHeight: 35
     iconHeight: 70
-
-  fuseOpts:
-    isCaseSensitive: false
-    shouldSort: true
-    location: 0
-    distance: 1000
-    threshold: 0.4
-    minMatchCharLength: 0
-    limit: 10
-    keys: ["title", "permalink", "summary", "content"]
 
 markup:
   highlight:

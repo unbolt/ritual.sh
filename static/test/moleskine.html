@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moleskine Notebook</title>
+    <style>
+      :root {
+        --page-width: 500px;
+        --page-height: calc(var(--page-width) * 1.618);
+        --binding-width: 1px;
+        --total-width: calc(var(--page-width) * 2 + var(--binding-width));
+        --border-radius: 30px;
+
+        --paper-color: #fff8dc;
+        --cover-color-top: #be8f32;
+        --cover-color-bottom: #846f24;
+        --line-color: rgba(135, 180, 210, 0.25);
+
+        --internal-border-radius: calc(var(--border-radius) * 0.9);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        font-family: "Georgia", serif;
+        padding: 40px 20px;
+      }
+
+      .notebook-container {
+        position: relative;
+        width: var(--total-width);
+        height: var(--page-height);
+        display: flex;
+        align-items: stretch;
+        filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+      }
+
+      /* Covers */
+      .cover {
+        position: absolute;
+        width: 40px;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--cover-color-top) 0%,
+          var(--cover-color-bottom) 100%
+        );
+        z-index: 1;
+        border-radius: var(--border-radius);
+      }
+
+      .cover-left {
+        left: -10px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 30%,
+            rgba(160, 130, 90, 0.4) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 70%,
+            rgba(70, 50, 30, 0.3) 0%,
+            transparent 60%
+          ),
+          linear-gradient(
+            135deg,
+            var(--cover-color-top) 0%,
+            var(--cover-color-top) 100%
+          );
+        box-shadow:
+          inset -2px 0 8px rgba(0, 0, 0, 0.4),
+          inset 2px 2px 4px rgba(160, 130, 90, 0.3);
+      }
+
+      .cover-right {
+        right: -10px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        background:
+          radial-gradient(
+            ellipse at 80% 30%,
+            rgba(160, 130, 90, 0.4) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 20% 70%,
+            rgba(70, 50, 30, 0.3) 0%,
+            transparent 60%
+          ),
+          linear-gradient(
+            225deg,
+            var(--cover-color-top) 0%,
+            var(--cover-color-bottom) 100%
+          );
+        box-shadow:
+          inset 2px 0 8px rgba(0, 0, 0, 0.4),
+          inset -2px 2px 4px rgba(160, 130, 90, 0.3);
+      }
+
+      /* Page stacks */
+      .page-stack {
+        position: relative;
+        width: var(--page-width);
+        height: 100%;
+        display: flex;
+        align-items: stretch;
+      }
+
+      .page-stack-left {
+        z-index: 3;
+      }
+
+      .page-stack-right {
+        z-index: 3;
+      }
+
+      /* Page layers stack kinda*/
+      .page-layer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: var(--paper-color);
+        border-radius: var(--internal-border-radius);
+        box-shadow: inset 1px 0 1px rgba(0, 0, 0, 0.2);
+      }
+
+      .page-stack-left .page-layer:nth-child(1) {
+        transform: translateX(-5px);
+        filter: brightness(0.85);
+        z-index: 1;
+      }
+
+      .page-stack-left .page-layer:nth-child(2) {
+        transform: translateX(-2px);
+        filter: brightness(0.9);
+        z-index: 2;
+      }
+
+      .page-stack-left .page-layer:nth-child(3) {
+        transform: translateX(-1px);
+        filter: brightness(0.95);
+        z-index: 3;
+      }
+
+      .page-stack-right .page-layer:nth-child(2) {
+        transform: translateX(5px);
+        filter: brightness(0.85);
+        z-index: 1;
+      }
+
+      .page-stack-right .page-layer:nth-child(3) {
+        transform: translateX(2px);
+        filter: brightness(0.9);
+        z-index: 2;
+      }
+
+      .page-stack-right .page-layer:nth-child(4) {
+        transform: translateX(1px);
+        filter: brightness(0.95);
+        z-index: 3;
+      }
+
+      /* Main pages */
+      .page {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        background: var(--paper-color);
+        border-radius: var(--internal-border-radius);
+        z-index: 4;
+        box-shadow:
+          inset 0 2px 4px rgba(255, 255, 255, 0.3),
+          inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+      }
+
+      .page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(
+            ellipse at 30% 20%,
+            rgba(255, 255, 255, 0.5) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            ellipse at 70% 80%,
+            rgba(0, 0, 0, 0.02) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        border-radius: var(--internal-border-radius);
+      }
+
+      .page-left {
+        border-top-left-radius: var(--internal-border-radius);
+        border-bottom-left-radius: var(--internal-border-radius);
+      }
+
+      .page-right {
+        border-top-right-radius: var(--internal-border-radius);
+        border-bottom-right-radius: var(--internal-border-radius);
+      }
+
+      /** Shadow for the binding effect **/
+      .page-left::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 10px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        pointer-events: none;
+      }
+
+      .page-right::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 10px;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.1) 0%,
+          transparent 100%
+        );
+        pointer-events: none;
+      }
+
+      /* Page lines */
+      .page-lines {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 40px;
+        background: repeating-linear-gradient(
+          180deg,
+          transparent 0px,
+          transparent 27px,
+          var(--line-color) 27px,
+          var(--line-color) 28px
+        );
+        pointer-events: none;
+      }
+
+      /* Central binding */
+      .binding {
+        position: absolute;
+        left: 49.95%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: var(--binding-width);
+        height: calc((var(--page-height) - (var(--border-radius) * 1.5)));
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.05) 0%,
+          rgba(0, 0, 0, 0.15) 50%,
+          rgba(0, 0, 0, 0.05) 100%
+        );
+        z-index: 5;
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .page-content {
+        padding: 2rem;
+        padding-top: 3.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="notebook-container">
+      <!-- Left cover -->
+      <div class="cover cover-left"></div>
+
+      <!-- Left page stack -->
+      <div class="page-stack page-stack-left">
+        <div class="page-layer"></div>
+        <div class="page-layer"></div>
+        <div class="page-layer"></div>
+        <div class="page page-left">
+          <div class="page-lines"></div>
+          <div class="page-content left">
+            <p>This is where the left page content goes</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center binding -->
+      <div class="binding"></div>
+
+      <!-- Right page stack -->
+      <div class="page-stack page-stack-right">
+        <div class="page page-right">
+          <div class="page-lines"></div>
+          <div class="page-content right">
+            <p>This is where the right page content goes</p>
+          </div>
+        </div>
+        <div class="page-layer"></div>
+        <div class="page-layer"></div>
+        <div class="page-layer"></div>
+      </div>
+
+      <!-- Right cover -->
+      <div class="cover cover-right"></div>
+    </div>
+  </body>
+</html>

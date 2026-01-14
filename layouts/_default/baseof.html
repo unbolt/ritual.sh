@@ -9,7 +9,13 @@
       }}{{ end }}{{ end }}
     </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1" />
-    {{ hugo.Generator }} {{ $sass := resources.Get "sass/style.scss" }} {{
+    <link rel="me" href="https://indieweb.social/@ritual" /> 
+    <meta name="fediverse:creator" content="@ritual@indieweb.social">
+    {{ range .AlternativeOutputFormats }}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .RelPermalink }}">
+    {{ end }}
+
+     {{ $sass := resources.Get "sass/style.scss" }} {{
     $style := $sass | css.Sass | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 

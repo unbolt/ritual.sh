@@ -216,6 +216,23 @@
       line-height: 1.6;
       margin-bottom: 1rem;
     }
+
+    a {
+      color: greenyellow;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      border-bottom: 1px dotted rgba(173, 255, 47, 0.5);
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px rgba(173, 255, 47, 0.3);
+
+      &:hover {
+        border-bottom-style: solid;
+        border-bottom-color: rgba(173, 255, 47, 0.8);
+        text-shadow: 0 0 10px rgba(173, 255, 47, 0.8);
+        background: rgba(173, 255, 47, 0.05);
+      }
+    }
   }
 
   // Blog posts listing
@@ -277,10 +294,43 @@
         a {
           color: #ff9900;
           text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+          border-bottom: 1px dotted rgba(255, 200, 47, 0.5);
 
           &::after {
             background: #ff9900;
             box-shadow: 0 0 10px #ff9900;
+          }
+        }
+      }
+
+      .blog-summary,
+      .blogs-content {
+        color: #ff9900;
+        text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+
+        a {
+          color: #ffb13d;
+          text-shadow: 0 0 5px rgba(255, 162, 23, 0.5);
+          border-bottom: 1px dotted rgba(255, 200, 47, 0.5);
+
+          &:hover {
+            border-bottom-color: orange;
+            text-shadow: 0 0 10px rgba(255, 217, 47, 0.8);
+          }
+
+          &::after {
+            background: #ff9900;
+            box-shadow: 0 0 10px #ff9900;
+          }
+        }
+
+        > .read-more {
+          color: #ff9900;
+          text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+
+          &:after {
+            background: #ff9900;
+            box-shadow: 0 0 10px rgb(255, 213, 47);
           }
         }
       }
@@ -290,6 +340,13 @@
         border-color: rgba(255, 153, 0, 0.5);
         color: #ff9900;
         text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+
+        &:hover {
+          background: rgba(255, 153, 0, 0.2);
+          border-color: rgba(255, 177, 60, 0.828);
+          box-shadow: 0 0 10px rgba(255, 164, 29, 0.4);
+          text-shadow: 0 0 10px rgba(255, 169, 39, 0.8);
+        }
       }
     }
 
@@ -371,6 +428,7 @@
       line-height: 1.6;
       opacity: 0.9;
       color: #0f0;
+      margin-top: 1rem;
 
       @include media-down(lg) {
         font-size: 0.9rem;
@@ -503,6 +561,13 @@
           width: 100%;
         }
       }
+    }
+
+    .blog-footer {
+      text-align: center;
+      padding: 1rem;
+      margin: auto;
+      font-size: 1rem;
     }
   }
 
@@ -811,6 +876,7 @@
     transition: all 0.3s ease;
     text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
     border-radius: 3px;
+    line-height: 2.2rem;
 
     &:hover:not(.disabled) {
       background: rgba(0, 255, 0, 0.2);
