@@ -23,5 +23,14 @@
 	<div class="blog-summary">
 		{{ .Content }}
 	</div>
+	{{ else }}
+	<div class="blog-summary">
+		{{ .Summary }}
+
+		<div class="read-more" >
+			<a href="{{ .Permalink }}">Read More</a>
+		</div>
+		
+	</div>
 	{{ end }}
 </div>

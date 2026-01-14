@@ -18,6 +18,8 @@ draft: false
 
 ## Music
 
+- 📺 [Mortal Kombat x Rhythm is a Dancer](https://www.youtube.com/watch?v=vKxn6P947PE)
+
 ## Next Week
 
 Not necessary
