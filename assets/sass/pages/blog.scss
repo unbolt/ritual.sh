@@ -340,6 +340,13 @@
         border-color: rgba(255, 153, 0, 0.5);
         color: #ff9900;
         text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+
+        &:hover {
+          background: rgba(255, 153, 0, 0.2);
+          border-color: rgba(255, 177, 60, 0.828);
+          box-shadow: 0 0 10px rgba(255, 164, 29, 0.4);
+          text-shadow: 0 0 10px rgba(255, 169, 39, 0.8);
+        }
       }
     }
 

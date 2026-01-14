@@ -2,6 +2,7 @@
 title: "App Defaults - 2026"
 date: 2026-01-13T18:27:20Z
 tags:
+  - meta
 draft: false
 ---
 
