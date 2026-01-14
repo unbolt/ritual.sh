@@ -13,7 +13,8 @@
         --border-radius: 30px;
 
         --paper-color: #fff8dc;
-        --leather-color: #8b6f47;
+        --cover-color-top: #be8f32;
+        --cover-color-bottom: #846f24;
         --line-color: rgba(135, 180, 210, 0.25);
 
         --internal-border-radius: calc(var(--border-radius) * 0.9);
@@ -51,8 +52,8 @@
         height: 100%;
         background: linear-gradient(
           135deg,
-          var(--leather-color) 0%,
-          #6d5638 100%
+          var(--cover-color-top) 0%,
+          var(--cover-color-bottom) 100%
         );
         z-index: 1;
         border-radius: var(--border-radius);
@@ -73,7 +74,11 @@
             rgba(70, 50, 30, 0.3) 0%,
             transparent 60%
           ),
-          linear-gradient(135deg, var(--leather-color) 0%, #6d5638 100%);
+          linear-gradient(
+            135deg,
+            var(--cover-color-top) 0%,
+            var(--cover-color-top) 100%
+          );
         box-shadow:
           inset -2px 0 8px rgba(0, 0, 0, 0.4),
           inset 2px 2px 4px rgba(160, 130, 90, 0.3);
@@ -94,7 +99,11 @@
             rgba(70, 50, 30, 0.3) 0%,
             transparent 60%
           ),
-          linear-gradient(225deg, var(--leather-color) 0%, #6d5638 100%);
+          linear-gradient(
+            225deg,
+            var(--cover-color-top) 0%,
+            var(--cover-color-bottom) 100%
+          );
         box-shadow:
           inset 2px 0 8px rgba(0, 0, 0, 0.4),
           inset -2px 2px 4px rgba(160, 130, 90, 0.3);
