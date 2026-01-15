@@ -94,17 +94,99 @@ class WebmentionUtils {
   }
 
   /**
-   * Auto-initialize elements with data-webmention-list attribute
+   * Auto-initialize all webmention elements
    */
-  autoInit() {
-    const elements = document.querySelectorAll("[data-webmention-list]");
+  async autoInit() {
+    // Group elements by target URL to avoid duplicate API calls
+    const targetGroups = new Map();
 
-    elements.forEach(async (element) => {
-      const targetUrl =
-        element.dataset.webmentionList || window.location.href;
-      const mentions = await this.fetch(targetUrl);
-      element.innerHTML = this.asCommaSeparatedList(mentions);
+    const selectors = [
+      "[data-webmention-list]",
+      "[data-webmention-show]",
+      "[data-webmention-hide]",
+      "[data-webmention-text]",
+    ];
+
+    selectors.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((element) => {
+        const targetUrl = this.getTargetUrl(element) || window.location.href;
+        if (!targetGroups.has(targetUrl)) {
+          targetGroups.set(targetUrl, []);
+        }
+        targetGroups.get(targetUrl).push(element);
+      });
     });
+
+    // Fetch and process each target URL
+    for (const [targetUrl, elements] of targetGroups) {
+      const mentions = await this.fetch(targetUrl);
+      const hasMentions = mentions.length > 0;
+
+      elements.forEach((element) => {
+        this.processElement(element, mentions, hasMentions);
+      });
+    }
+  }
+
+  /**
+   * Get the target URL from an element's data attributes or parent container
+   */
+  getTargetUrl(element) {
+    // First check the element's own attributes for a non-empty value
+    const ownUrl =
+      element.dataset.webmentionList ||
+      element.dataset.webmentionShow ||
+      element.dataset.webmentionHide ||
+      element.dataset.webmentionText ||
+      "";
+
+    if (ownUrl) {
+      return ownUrl;
+    }
+
+    // Check for parent container with data-webmention-target
+    const container = element.closest("[data-webmention-target]");
+    if (container) {
+      return container.dataset.webmentionTarget;
+    }
+
+    return "";
+  }
+
+  /**
+   * Process a single element based on its data attributes
+   */
+  processElement(element, mentions, hasMentions) {
+    // Handle data-webmention-list
+    if (element.hasAttribute("data-webmention-list")) {
+      element.innerHTML = this.asCommaSeparatedList(mentions);
+    }
+
+    // Handle data-webmention-show (visible only if mentions exist)
+    if (element.hasAttribute("data-webmention-show")) {
+      element.style.display = hasMentions ? "" : "none";
+    }
+
+    // Handle data-webmention-hide (hidden if mentions exist)
+    if (element.hasAttribute("data-webmention-hide")) {
+      element.style.display = hasMentions ? "none" : "";
+    }
+
+    // Handle data-webmention-text (different text based on count)
+    if (element.hasAttribute("data-webmention-text")) {
+      const textConfig = element.dataset.webmentionText;
+      // Format: "none text|single text|plural text" or just check for pipe
+      if (textConfig.includes("|")) {
+        const parts = textConfig.split("|");
+        if (mentions.length === 0) {
+          element.textContent = parts[0] || "";
+        } else if (mentions.length === 1) {
+          element.textContent = parts[1] || parts[0] || "";
+        } else {
+          element.textContent = parts[2] || parts[1] || parts[0] || "";
+        }
+      }
+    }
   }
 }
 
