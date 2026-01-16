@@ -35,18 +35,13 @@ class TerminalShell {
       "",
       "NERV OS v2.015 - MAGI System Interface",
       "Initializing A.T. Field protocols...",
-      "CASPER... ONLINE",
-      "BALTHASAR... ONLINE",
-      "MELCHIOR... ONLINE",
+      "CASPER: ONLINE / BALTHASAR: ONLINE / MELCHIOR: ONLINE",
       "Synchronization ratio: 41.3%... 67.8%... 89.2%... OK",
       "Loading Evangelion Unit-01 core drivers... OK",
-      "Mounting LCL interface... OK",
       "Neural connection established... OK",
-      "",
       "Running pattern analysis... PATTERN BLUE",
       "",
       "All systems optimal.",
-      "",
       "",
     ];
 
@@ -65,6 +60,12 @@ class TerminalShell {
     // Remove the skip boot listener
     document.removeEventListener("keydown", skipBootListener);
 
+    this.printHTML("&nbsp;");
+
+    let postGraph = document.getElementsByClassName("posting-graph")[0];
+    this.printHTML("Retrieving post activity...");
+    this.printHTML("&nbsp;");
+    this.printHTML(postGraph.innerHTML);
     this.printHTML("&nbsp;");
 
     // Get latest post info

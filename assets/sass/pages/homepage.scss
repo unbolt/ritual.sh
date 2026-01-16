@@ -160,6 +160,49 @@
       animation: text-glitch-cycle 3s ease infinite;
     }
   }
+
+  .post-graph-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .post-graph-info {
+    min-height: 2em;
+    color: #888;
+    font-size: 12px;
+  }
+  .post-graph-info.active {
+    color: #4caf50;
+  }
+  .weeks-container {
+    display: flex;
+    gap: 3px;
+    margin-left: 1em;
+  }
+  .week-column {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .day-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    position: relative;
+    color: #555;
+    user-select: none;
+  }
+  .day-block.has-posts {
+    color: #4caf50;
+    cursor: pointer;
+  }
+  .day-block.multiple-posts {
+    color: #2196f3;
+  }
+  .day-block.active {
+    background: rgba(76, 175, 80, 0.2);
+  }
 }
 
 .navigation {

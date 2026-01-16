@@ -287,19 +287,61 @@
   <div>{{ partial "elements/crt-tv.html" . }}</div>
 </div>
 
-
 <!-- prettier-ignore -->
 {{ range first 1 (union (where .Site.RegularPages "Type" "updates") (where .Site.RegularPages "Type" "blog")).ByDate.Reverse }}
 <div id="latest-post">
   <div id="latest-post-link">{{ .Permalink }}</div>
   <div id="latest-post-title">
-    {{ if eq .Type "blog" }} 
-      New blog post: {{ .Title }}
-    {{ else }} 
-      {{ .Plain }}
+    {{ if eq .Type "blog" }} New blog post: {{ .Title }} {{ else }} {{ .Plain }}
     {{ end }}
   </div>
   <div id="latest-post-date">{{ .Lastmod.Format "Jan 2, 2006" }}</div>
 </div>
 {{ end }}
+
+<!-- GitHub-style posting graph -->
+<div class="posting-graph" style="display: none">
+  <!-- Blog posts data as JSON -->
+  <script id="blog-posts-data" type="application/json">
+    {
+      {{ $oneYearAgo := now.AddDate -1 0 0 }}
+      {{ $allBlogPosts := where .Site.RegularPages "Type" "blog" }}
+      {{ $recentBlogPosts := slice }}
+      {{ range $allBlogPosts }}
+        {{ if ge .Date.Unix $oneYearAgo.Unix }}
+          {{ $recentBlogPosts = $recentBlogPosts | append . }}
+        {{ end }}
+      {{ end }}
+      {{ $postsByDate := dict }}
+      {{ range $recentBlogPosts }}
+        {{ $dateKey := .Date.Format "2006-01-02" }}
+        {{ $existing := index $postsByDate $dateKey }}
+        {{ if $existing }}
+          {{ $postsByDate = merge $postsByDate (dict $dateKey ($existing | append .)) }}
+        {{ else }}
+          {{ $postsByDate = merge $postsByDate (dict $dateKey (slice .)) }}
+        {{ end }}
+      {{ end }}
+      {{ range $date, $posts := $postsByDate }}
+        "{{ $date }}": [
+          {{ range $index, $post := $posts }}
+            {{ if $index }},{{ end }}
+            {
+              "title": {{ $post.Title | jsonify }},
+              "url": "{{ $post.Permalink }}"
+            }
+          {{ end }}
+        ]{{ if ne $date (index (last 1 (slice ($postsByDate | collections.KeyVals))) 0).Key }},{{ end }}
+      {{ end }}
+    }
+  </script>
+
+  <div class="post-graph-container">
+    <div id="post-graph-info" class="post-graph-info">
+      Hover over a day to see posts
+    </div>
+    <div id="weeks-container" class="weeks-container"></div>
+  </div>
+</div>
+
 {{ end }}
