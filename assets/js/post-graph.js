@@ -1,8 +1,10 @@
 (function () {
+  // Check if required elements exist
+  const blogPostsDataElement = document.getElementById("blog-posts-data");
+  if (!blogPostsDataElement) return;
+
   // Parse the blog posts data
-  const postsData = JSON.parse(
-    document.getElementById("blog-posts-data").textContent,
-  );
+  const postsData = JSON.parse(blogPostsDataElement.textContent);
   const weeksContainer = document.getElementById("weeks-container");
   const infoDiv = document.getElementById("post-graph-info");
 
