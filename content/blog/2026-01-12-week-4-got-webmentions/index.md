@@ -8,7 +8,7 @@ draft: false
 ---
 
 - 🗨️ Added the ability to send and receive [webmentions](https://indieweb.org/Webmention) to the blog.
-- ✉️ Received an actual real life email from [Dan](https://danq.me/) to let me know he had sent the first one and it wasn't showing up, so I actually had to rush out the code to display webmentions, too!
+- ✉️ Received an actual real life email from [Dan](https://danq.me/) to let me know he had sent the first one and it wasn't showing up, so I had to rush out the code to actually display webmentions, too!
 - 🧰 Setup a little personal API to handle the guestbook, visitor counter, and aforementioned webmentions.
 - 📺 Setup a dashboard on my homelab for monitoring all of the above.
 - 🛜 Added an RSS feed for the blog. I've made my full posts available via RSS so you can consume them however you please.
@@ -29,6 +29,7 @@ draft: false
 ## Music
 
 - 📺 [Mortal Kombat x Rhythm is a Dancer](https://www.youtube.com/watch?v=vKxn6P947PE)
+- 🦄 [GWAR cover “Pink Pony Club” by Chappell Roan](https://www.youtube.com/watch?v=I5XR48KLE8I)
 
 ## Next Week
 
