@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div class="log-page-container">
+  <div class="log-header">
+    <pre>
+                                               
+  ▄▄▄  ▄▄                                   ▄▄ 
+ █▀██  ██           █▄       █▄             ██ 
+   ██  ██           ██      ▄██▄            ██ 
+   ██  ██  ████▄ ▄████ ▄▀▀█▄ ██ ▄█▀█▄ ▄██▀█ ██ 
+   ██  ██  ██ ██ ██ ██ ▄█▀██ ██ ██▄█▀ ▀███▄    
+   ▀█████▄▄████▀▄█▀███▄▀█▄██▄██▄▀█▄▄▄█▄▄██▀ ██ 
+           ██                                  
+              ▀                                       
+</pre
+    >
+  </div>
+  <div class="log-content">
+    <div class="crt-monitor">
+      <div class="crt-screen">
+        <div class="content crt">
+          <div id="terminal">
+            <p>
+              Here are the latest updates to
+              <a href="https://ritual.sh">ritual.sh</a> for my friends on
+              Neocities as the site is no longer actually hosted there!
+            </p>
+            <p>🟢</p>
+
+            <div class="log-updates">
+              {{ range first 10 (union (where .Site.RegularPages "Type"
+              "updates") (where .Site.RegularPages "Type"
+              "blog")).ByDate.Reverse }}
+
+              <div class="log-date">{{ .Lastmod.Format "Jan 2, 2006" }}</div>
+              <div>❇️</div>
+              <div>
+                {{ if eq .Type "blog" }} New blog post:
+                <a href="{{ .Permalink }}">{{ .Title }}</a> {{ else }} {{ .Plain
+                }} {{ end }}
+              </div>
+
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -35,12 +35,49 @@ fi
 
 echo -e "${GREEN}✓ Hugo build successful!${NC}"
 
-# Remove the updates section list page (we only want individual update pages)
-if [ -d "public/updates" ]; then
-    echo -e "${BLUE}Removing updates section list page...${NC}"
-    rm -rf public/updates
-    echo -e "${GREEN}✓ Updates folder removed!${NC}"
-fi
+# Remove folders that shouldn't be uploaded to Neocities
+FOLDERS_TO_REMOVE=(
+    "about"
+    "archives"
+    "audio"
+    "blog"
+    "buttons"
+    "gear"
+    "guestbook"
+    "media"
+    "now"
+    "resources"
+    "tags"
+    "test"
+    "updates"
+    "uses"
+    "fonts"
+    "images"
+)
+
+echo -e "${BLUE}Removing excluded folders from public...${NC}"
+for folder in "${FOLDERS_TO_REMOVE[@]}"; do
+    if [ -d "public/$folder" ]; then
+        rm -rf "public/$folder"
+        echo -e "  ${GREEN}✓${NC} Removed $folder/"
+    fi
+done
+echo -e "${GREEN}✓ Folder cleanup complete!${NC}"
+
+# Remove specific files that shouldn't be uploaded
+FILES_TO_REMOVE=(
+    "index.html"
+    "404.html"
+)
+
+echo -e "${BLUE}Removing excluded files from public...${NC}"
+for file in "${FILES_TO_REMOVE[@]}"; do
+    if [ -f "public/$file" ]; then
+        rm -f "public/$file"
+        echo -e "  ${GREEN}✓${NC} Removed $file"
+    fi
+done
+echo -e "${GREEN}✓ File cleanup complete!${NC}"
 
 echo ""
 
