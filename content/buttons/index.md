@@ -52,6 +52,9 @@ buttons:
   - name: "Moxie Moshpit"
     url: "https://moxiemoshpit.com/"
     image: "mm06.webp"
+  - name: "Aywren's Nook"
+    url: "https://aywren.com"
+    image: "aywrenbutton.gif"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
