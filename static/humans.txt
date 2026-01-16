@@ -6,10 +6,9 @@ From: ritual.sh
 /* THANKS */
 Hugo - Static site generator
 The IndieWeb community
-Everyone still making personal websites in {{ now.Year }}
+Everyone still making personal websites in 2026
 
 /* SITE */
-Last update: {{ .Lastmod.Format "2006/01/02" }}
 Standards: HTML5, CSS3, RSS
 Components: Hugo, YAML, Markdown
 Software: Built with care

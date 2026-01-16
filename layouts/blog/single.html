@@ -22,7 +22,19 @@
           {{ end }}
           <div class="blog-summary">{{ .Content }}</div>
           <div class="blog-footer">
-            🛜 <a href="/blog/feed.xml">Available via RSS</a>
+            🛜 <a href="/blog/feed.xml">Available via RSS</a> <br /><br />
+            You can respond to this post via
+            <a
+              href="https://indieweb.org/Webmention"
+              target="_blank"
+              rel="noopener noreferrer"
+              >webmentions</a
+            >. <br /><br />
+            <div data-webmention-target>
+              <span data-webmention-show>
+                Mentioned by: <span data-webmention-list></span
+              ></span>
+            </div>
           </div>
         </article>
 

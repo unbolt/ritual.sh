@@ -36,6 +36,6 @@ Big thanks to [neonaut's 88x31 archive](https://neonaut.neocities.org/cyber/88x3
 [fyr.io](https://fyr.io/scrap/2026-01-09),
 [brennan.day](https://brennan.day/resources-for-the-personal-web-a-follow-up-guide/),
 [kuemmerle.name](https://kuemmerle.name/bastelglueck/),
-[craney.uk](https://craney.uk/posts/stuff-this-week-74)
+[craney.uk](https://craney.uk/posts/stuff-this-week-74), <span data-webmention-list></span>
 
 Am I missing you? Email me or send a webmention!
