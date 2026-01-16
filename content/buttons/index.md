@@ -55,6 +55,9 @@ buttons:
   - name: "Aywren's Nook"
     url: "https://aywren.com"
     image: "aywrenbutton.gif"
+  - name: "Azure Tom"
+    url: "https://azuretom.neocities.org"
+    image: "azuretom.gif"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
