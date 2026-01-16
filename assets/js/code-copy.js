@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
   codeBlocks.forEach((codeBlock) => {
     const pre = codeBlock.parentElement;
 
+    // Skip if data-lang is "nocopy"
+    if (codeBlock.dataset.lang === "nocopy") {
+      return;
+    }
+
     // Create wrapper for positioning
     const wrapper = document.createElement("div");
     wrapper.style.position = "relative";
