@@ -75,12 +75,13 @@
       <div class="screen-display crt">
         <div class="scroll">
           > updates -lah<br />
-          {{ range first 10 (where .Site.RegularPages "Type"
-          "updates").ByDate.Reverse }} [<time
+          {{ range first 10 (union (where .Site.RegularPages "Type" "updates")
+          (where .Site.RegularPages "Type" "blog")).ByDate.Reverse }} [<time
             >{{ .Lastmod.Format "02-01-2006" }}</time
           >]<br />
-          {{ .Plain }}<br />
-          ---<br />
+          {{ if eq .Type "blog" }} New blog post: {{ .Title }}<br />
+          {{ else }} {{ .Plain }}<br />
+          {{ end }} ---<br />
           {{ end }}
 
           <span class="cursor-blink">_</span>
@@ -286,10 +287,19 @@
   <div>{{ partial "elements/crt-tv.html" . }}</div>
 </div>
 
-{{ range first 1 (where .Site.RegularPages "Type" "updates").ByDate.Reverse }}
+
+<!-- prettier-ignore -->
+{{ range first 1 (union (where .Site.RegularPages "Type" "updates") (where .Site.RegularPages "Type" "blog")).ByDate.Reverse }}
 <div id="latest-post">
   <div id="latest-post-link">{{ .Permalink }}</div>
-  <div id="latest-post-title">{{ .Plain }}</div>
+  <div id="latest-post-title">
+    {{ if eq .Type "blog" }} 
+      New blog post: {{ .Title }}
+    {{ else }} 
+      {{ .Plain }}
+    {{ end }}
+  </div>
   <div id="latest-post-date">{{ .Lastmod.Format "Jan 2, 2006" }}</div>
 </div>
-{{ end }} {{ end }}
+{{ end }}
+{{ end }}
