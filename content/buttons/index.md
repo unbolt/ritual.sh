@@ -70,6 +70,9 @@ buttons:
   - name: "Underwhite"
     url: "https://underwhite.neocities.org/"
     image: "underwhite.gif"
+  - name: "BeaniePines"
+    url: "https://beaniepines.neocities.org/"
+    image: "beaniepines.gif"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
