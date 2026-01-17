@@ -73,6 +73,9 @@ buttons:
   - name: "BeaniePines"
     url: "https://beaniepines.neocities.org/"
     image: "beaniepines.gif"
+  - name: "The Swamp"
+    url: "https://lindentea.neocities.org"
+    image: "lindentea_button.png"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
