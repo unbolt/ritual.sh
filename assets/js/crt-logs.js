@@ -9,7 +9,7 @@ function initCRTLogs() {
   }
 
   const fakeLogs = [
-    "[WARN] High load detected - time for coffee break",
+    "[WARN] High load detected - time for coffee.",
     "[ERROR] 404: Motivation not found",
     "[WARN] Firewall detected actual fire.",
     "[ERROR] Keyboard not found. Press F1 to continue.",
@@ -47,7 +47,7 @@ function initCRTLogs() {
           );
         } else if (i === 6) {
           logs.push(
-            `[STATS] Unique vistors 24 hrs: ${stats.uniqueVisitors.toLocaleString()}`,
+            `[STATS] Unique visitors past 24h: ${stats.uniqueVisitors.toLocaleString()}`,
           );
         } else if (i === 9 && stats.lastUpdated) {
           logs.push(`[STATS] Last updated: ${formatDate(stats.lastUpdated)}`);
