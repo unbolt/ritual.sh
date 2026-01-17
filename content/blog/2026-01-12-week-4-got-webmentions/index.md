@@ -14,7 +14,7 @@ draft: false
 - 🛜 Added an RSS feed for the blog. I've made my full posts available via RSS so you can consume them however you please.
 - 💏 Made some significant progress towards our plans for moving house, and life in general!
 - 🎁 Found some awesome little bits of tech and my wife kindly agreed to get them for my birthday next month, they will absolutely be showing up on the blog some time after that.
-- 🧑‍💻 Wrote a script that can take a video with subtitles and a string of text, and return the gif of the clip. I wrote a blog post about it, and it's on my GitHub.
+- 🧑‍💻 Wrote a script that can take a video with subtitles and a string of text, and return the gif of the clip. I wrote a [blog post about it](/blog/video-to-gif-converter/), and it's on [GitHub](https://github.com/unbolt/VidToSubGif).
 
 ## Links I Found Interesting
 
@@ -31,8 +31,20 @@ draft: false
 - 📺 [Mortal Kombat x Rhythm is a Dancer](https://www.youtube.com/watch?v=vKxn6P947PE)
 - 🦄 [GWAR cover “Pink Pony Club” by Chappell Roan](https://www.youtube.com/watch?v=I5XR48KLE8I)
 
+## Weekly Listening Stats
+
+**Total Tracks:** 230
+
+**Top 5 Artists:**
+
+- [blink-182](https://www.last.fm/music/blink-182) - 19 plays
+- [Kavinsky](https://www.last.fm/music/Kavinsky) - 13 plays
+- [Linkin Park](https://www.last.fm/music/Linkin+Park) - 13 plays
+- [Carpenter Brut](https://www.last.fm/music/Carpenter+Brut) - 12 plays
+- [Lazerhawk](https://www.last.fm/music/Lazerhawk) - 12 plays
+
 ## Next Week
 
-Not necessary
+This week I want to make a start on a choose your own adventure style story that can be played in the terminal on my homepage. That should keep me out of trouble for a bit. I also have some plans to do the balancing pass on my idle/clicker game and find a way to export it and get a section on the site for that. The Godot export was over 100mb which GitHub didn't enjoy, so I need to work on that.
 
 Until next week!
