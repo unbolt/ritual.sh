@@ -67,6 +67,9 @@ buttons:
   - name: "Pumpkin Kitten"
     url: "https://pumpkinkitten.neocities.org/"
     image: "pumpkinkitten.gif"
+  - name: "Underwhite"
+    url: "https://underwhite.neocities.org/"
+    image: "underwhite.gif"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
