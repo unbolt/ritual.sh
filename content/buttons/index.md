@@ -64,6 +64,9 @@ buttons:
   - name: "A Haunted Rose"
     url: "https://hauntedrose.com/"
     image: "hauntedrose.png"
+  - name: "Pumpkin Kitten"
+    url: "https://pumpkinkitten.neocities.org/"
+    image: "pumpkinkitten.gif"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
