@@ -61,6 +61,9 @@ buttons:
   - name: "TabF5"
     url: "https://tabf5.com"
     image: "tabf5.gif"
+  - name: "A Haunted Rose"
+    url: "https://hauntedrose.com/"
+    image: "hauntedrose.png"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
