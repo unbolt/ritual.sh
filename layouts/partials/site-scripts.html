@@ -3,6 +3,7 @@
 {{ $init := resources.Get "js/init.js" }}
 {{ $commandFiles := resources.Match "js/commands/*.js" }}
 {{ $subfolderFiles := resources.Match "js/*/*.js" }}
+{{ $deepSubfolderFiles := resources.Match "js/*/*/*.js" }}
 {{ $remaining := resources.Match "js/*.js" }}
 {{ $filtered := slice }}
 {{ range $remaining }}
@@ -18,7 +19,14 @@
     {{ $filteredSubfolders = $filteredSubfolders | append . }}
   {{ end }}
 {{ end }}
-{{ $allFiles := slice $terminalShell | append $filtered | append $init | append $commandFiles | append $filteredSubfolders }}
+{{ $filteredDeepSubfolders := slice }}
+{{ range $deepSubfolderFiles }}
+  {{ $path := .RelPermalink }}
+  {{ if not (strings.Contains $path "/adoptables/") }}
+    {{ $filteredDeepSubfolders = $filteredDeepSubfolders | append . }}
+  {{ end }}
+{{ end }}
+{{ $allFiles := slice $terminalShell | append $filtered | append $init | append $commandFiles | append $filteredSubfolders | append $filteredDeepSubfolders }}
 {{ $terminalBundle := $allFiles | resources.Concat "js/terminal-bundle.js" | resources.Minify | resources.Fingerprint }}
 <!-- prettier-ignore-end -->
 <script
