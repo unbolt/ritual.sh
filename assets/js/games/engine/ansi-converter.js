@@ -1,21 +1,33 @@
-// ANSI to HTML Converter
-// Converts ANSI escape sequences (256-color) to HTML spans with inline styles
-// Supports: 38;5;N (foreground), 48;5;N (background), and standard reset codes
-
+// ANSI to HTML Converter (256-color + bold, persistent spans)
 const AnsiConverter = {
-  // 256-color palette - standard xterm colors
+  // Standard + 256-color palette
   palette: [
-    // Standard colors (0-15)
-    "#000000", "#800000", "#008000", "#808000", "#000080", "#800080", "#008080", "#c0c0c0",
-    "#808080", "#ff0000", "#00ff00", "#ffff00", "#0000ff", "#ff00ff", "#00ffff", "#ffffff",
-    // 216 color cube (16-231)
+    "#000000",
+    "#800000",
+    "#008000",
+    "#808000",
+    "#000080",
+    "#800080",
+    "#008080",
+    "#c0c0c0",
+    "#808080",
+    "#ff0000",
+    "#00ff00",
+    "#ffff00",
+    "#0000ff",
+    "#ff00ff",
+    "#00ffff",
+    "#ffffff",
+    // 216-color cube (16-231)
     ...(() => {
       const colors = [];
       const levels = [0, 95, 135, 175, 215, 255];
       for (let r = 0; r < 6; r++) {
         for (let g = 0; g < 6; g++) {
           for (let b = 0; b < 6; b++) {
-            colors.push(`#${levels[r].toString(16).padStart(2, "0")}${levels[g].toString(16).padStart(2, "0")}${levels[b].toString(16).padStart(2, "0")}`);
+            colors.push(
+              `#${levels[r].toString(16).padStart(2, "0")}${levels[g].toString(16).padStart(2, "0")}${levels[b].toString(16).padStart(2, "0")}`,
+            );
           }
         }
       }
@@ -33,164 +45,14 @@ const AnsiConverter = {
     })(),
   ],
 
-  // Get color from palette by index
-  getColor(index) {
-    if (index >= 0 && index < this.palette.length) {
-      return this.palette[index];
-    }
+  // Convert 256-color index to hex
+  ansi256ToHex(index) {
+    index = Number(index);
+    if (index < this.palette.length) return this.palette[index];
     return null;
   },
 
-  // Parse ANSI escape sequence and return style object
-  parseEscapeCode(code) {
-    const style = {};
-    const parts = code.split(";");
-
-    let i = 0;
-    while (i < parts.length) {
-      const num = parseInt(parts[i], 10);
-
-      // Reset
-      if (num === 0 || num === "m" || isNaN(num)) {
-        style.reset = true;
-        i++;
-        continue;
-      }
-
-      // 256-color foreground: 38;5;N
-      if (num === 38 && parts[i + 1] === "5") {
-        const colorIndex = parseInt(parts[i + 2], 10);
-        const color = this.getColor(colorIndex);
-        if (color) {
-          style.fg = color;
-        }
-        i += 3;
-        continue;
-      }
-
-      // 256-color background: 48;5;N
-      if (num === 48 && parts[i + 1] === "5") {
-        const colorIndex = parseInt(parts[i + 2], 10);
-        const color = this.getColor(colorIndex);
-        if (color) {
-          style.bg = color;
-        }
-        i += 3;
-        continue;
-      }
-
-      // Standard foreground colors (30-37)
-      if (num >= 30 && num <= 37) {
-        style.fg = this.palette[num - 30];
-        i++;
-        continue;
-      }
-
-      // Bright foreground colors (90-97)
-      if (num >= 90 && num <= 97) {
-        style.fg = this.palette[num - 90 + 8];
-        i++;
-        continue;
-      }
-
-      // Standard background colors (40-47)
-      if (num >= 40 && num <= 47) {
-        style.bg = this.palette[num - 40];
-        i++;
-        continue;
-      }
-
-      // Bright background colors (100-107)
-      if (num >= 100 && num <= 107) {
-        style.bg = this.palette[num - 100 + 8];
-        i++;
-        continue;
-      }
-
-      // Bold (1) - we'll treat as bright
-      if (num === 1) {
-        style.bold = true;
-        i++;
-        continue;
-      }
-
-      i++;
-    }
-
-    return style;
-  },
-
-  // Convert ANSI string to HTML
-  convert(ansiString) {
-    // Regex to match ANSI escape sequences
-    // Matches: \e[...m or \x1b[...m or actual escape character
-    const ansiRegex = /(?:\x1b|\u001b|\\e|\\x1b)\[([0-9;]*)m/g;
-
-    let html = "";
-    let currentFg = null;
-    let currentBg = null;
-    let lastIndex = 0;
-    let spanOpen = false;
-
-    // Replace escaped representations with actual escape character for easier processing
-    let processed = ansiString
-      .replace(/\\e/g, "\x1b")
-      .replace(/\\x1b/g, "\x1b");
-
-    let match;
-    while ((match = ansiRegex.exec(processed)) !== null) {
-      // Add text before this escape sequence
-      const textBefore = processed.slice(lastIndex, match.index);
-      if (textBefore) {
-        html += this.escapeHtml(textBefore);
-      }
-
-      // Parse the escape code
-      const style = this.parseEscapeCode(match[1]);
-
-      // Close previous span if needed
-      if (spanOpen) {
-        html += "</span>";
-        spanOpen = false;
-      }
-
-      // Handle reset
-      if (style.reset) {
-        currentFg = null;
-        currentBg = null;
-      }
-
-      // Update current colors
-      if (style.fg) currentFg = style.fg;
-      if (style.bg) currentBg = style.bg;
-
-      // Open new span if we have colors
-      if (currentFg || currentBg) {
-        const styles = [];
-        if (currentFg) styles.push(`color:${currentFg}`);
-        if (currentBg) styles.push(`background-color:${currentBg}`);
-        html += `<span style="${styles.join(";")}">`;
-        spanOpen = true;
-      }
-
-      lastIndex = match.index + match[0].length;
-    }
-
-    // Add remaining text
-    const remaining = processed.slice(lastIndex);
-    if (remaining) {
-      html += this.escapeHtml(remaining);
-    }
-
-    // Close any open span
-    if (spanOpen) {
-      html += "</span>";
-    }
-
-    return html;
-  },
-
-  // Escape HTML special characters (but preserve our spans)
+  // Escape HTML special characters
   escapeHtml(text) {
     return text
       .replace(/&/g, "&amp;")
@@ -199,14 +61,134 @@ const AnsiConverter = {
       .replace(/"/g, "&quot;");
   },
 
-  // Convert and wrap in a pre-formatted container for proper display
+  // Convert style object to CSS string
+  styleToCss(style) {
+    const css = [];
+    if (style.color) css.push(`color:${style.color}`);
+    if (style.backgroundColor)
+      css.push(`background-color:${style.backgroundColor}`);
+    if (style.bold) css.push("font-weight:bold");
+    return css.join(";");
+  },
+
+  // Convert ANSI string to HTML
+  convert(ansiString) {
+    // Normalize escapes (\e and \x1b)
+    let processed = ansiString
+      .replace(/\\e/g, "\x1b")
+      .replace(/\\x1b/g, "\x1b");
+
+    // Regex to match ANSI SGR sequences
+    const ansiRegex = /\x1b\[([0-9;]*)m/g;
+
+    let html = "";
+    let lastIndex = 0;
+    let spanOpen = false;
+    let currentStyle = {};
+
+    let match;
+    while ((match = ansiRegex.exec(processed)) !== null) {
+      // Append text before escape sequence
+      const textBefore = processed.slice(lastIndex, match.index);
+      if (textBefore) html += this.escapeHtml(textBefore);
+
+      // Parse SGR codes
+      const codes = match[1].split(";").map((s) => (s === "" ? 0 : Number(s)));
+      let styleChanged = false;
+
+      for (let i = 0; i < codes.length; i++) {
+        const code = codes[i];
+
+        // Reset
+        if (code === 0) {
+          currentStyle = {};
+          styleChanged = true;
+          continue;
+        }
+
+        // Bold
+        if (code === 1) {
+          currentStyle.bold = true;
+          styleChanged = true;
+          continue;
+        }
+
+        // Foreground 30-37
+        if (code >= 30 && code <= 37) {
+          currentStyle.color = this.palette[code - 30];
+          styleChanged = true;
+          continue;
+        }
+
+        // Bright foreground 90-97
+        if (code >= 90 && code <= 97) {
+          currentStyle.color = this.palette[code - 90 + 8];
+          styleChanged = true;
+          continue;
+        }
+
+        // Background 40-47
+        if (code >= 40 && code <= 47) {
+          currentStyle.backgroundColor = this.palette[code - 40];
+          styleChanged = true;
+          continue;
+        }
+
+        // Bright background 100-107
+        if (code >= 100 && code <= 107) {
+          currentStyle.backgroundColor = this.palette[code - 100 + 8];
+          styleChanged = true;
+          continue;
+        }
+
+        // 256-color foreground: 38;5;N
+        if (code === 38 && codes[i + 1] === 5) {
+          currentStyle.color = this.ansi256ToHex(codes[i + 2]);
+          i += 2;
+          styleChanged = true;
+          continue;
+        }
+
+        // 256-color background: 48;5;N
+        if (code === 48 && codes[i + 1] === 5) {
+          currentStyle.backgroundColor = this.ansi256ToHex(codes[i + 2]);
+          i += 2;
+          styleChanged = true;
+          continue;
+        }
+      }
+
+      // Update span if style changed
+      if (styleChanged) {
+        if (spanOpen) html += "</span>";
+        const css = this.styleToCss(currentStyle);
+        if (css) {
+          html += `<span style="${css}">`;
+          spanOpen = true;
+        } else {
+          spanOpen = false;
+        }
+      }
+
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Append remaining text
+    const remaining = processed.slice(lastIndex);
+    if (remaining) html += this.escapeHtml(remaining);
+
+    // Close final span
+    if (spanOpen) html += "</span>";
+
+    return html;
+  },
+
+  // Wrap in <pre> for proper display
   convertToBlock(ansiString, className = "ansi-art") {
-    const html = this.convert(ansiString);
-    return `<pre class="${className}">${html}</pre>`;
+    console.log("AnsiConverter.convertToBlock called");
+    return `<pre class="${className}">${this.convert(ansiString)}</pre>`;
   },
 };
 
-// Export for use in other modules
-if (typeof window !== "undefined") {
-  window.AnsiConverter = AnsiConverter;
-}
+// Export for browser
+if (typeof window !== "undefined") window.AnsiConverter = AnsiConverter;
