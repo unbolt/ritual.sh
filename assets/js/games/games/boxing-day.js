@@ -2,13 +2,7 @@
 // A BBS-themed mystery game
 
 // ASCII Art Constants
-const BOXING_DAY_TITLE = `
-    ____  _____  ___  __ ____  _   __________   ____  _____ __  __
-   / __ )/ __ \\ \\/ / / // / / / | / / ____/ /  / __ \\/ ___// / / /
-  / __  / / / /\\  / / // /_/ /  |/ / / __/ /  / / / /\\__ \\/ /_/ /
- / /_/ / /_/ / / / /__  __/ /|  / /_/ / /___/ /_/ /___/ / __  /
-/_____/\\____/ /_/    /_/ /_/ |_/\\____/_____/_____//____/_/ /_/
-`;
+const BOXING_DAY_TITLE = ``;
 
 const DARK_TOWER_HEADER = `
 \x1b[48;5;0m   \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m \x1b[38;5;235;48;5;0m▄\x1b[38;5;0;48;5;0m▄▄▄▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m  \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄\x1b[38;5;17;48;5;0m▄\x1b[38;5;0;48;5;0m▄▄\x1b[48;5;0m    \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m  \x1b[38;5;232;48;5;0m▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m    \x1b[38;5;0;48;5;0m▄▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m  \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m  \x1b[38;5;0;48;5;0m▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄▄\x1b[48;5;0m \x1b[38;5;0;48;5;0m▄▄▄▄▄▄▄▄▄▄▄\x1b[38;5;17;48;5;0m▄\x1b[38;5;19;48;5;0m▄\x1b[38;5;17;48;5;0m▄▄\x1b[38;5;0;48;5;0m▄▄▄▄▄▄▄▄▄▄\x1b[m
@@ -159,8 +153,13 @@ const boxingDayGame = {
     dark_tower_main: {
       clear: true,
       content: [
-        { type: "ansi", art: DARK_TOWER_HEADER, className: "game-ansi-art" },
+        {
+          type: "ansi",
+          art: DARK_TOWER_HEADER,
+          className: "game-ansi-art center",
+        },
         "",
+        { text: "B B S  -  E S T .  1 9 9 6", className: "info center" },
         { text: "SysOp: NightWatchman", className: "info" },
         { text: "Users Online: 3", className: "info" },
         { text: "Local Time: 11:52 PM", className: "info" },
