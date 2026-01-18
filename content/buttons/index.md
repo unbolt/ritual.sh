@@ -76,6 +76,9 @@ buttons:
   - name: "The Swamp"
     url: "https://lindentea.neocities.org"
     image: "lindentea_button.png"
+  - name: "Mosaic of Mags"
+    url: "https://lamusica-queer-remix.neocities.org/"
+    image: "mosaicofmags.png"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.
