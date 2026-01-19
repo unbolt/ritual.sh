@@ -8,26 +8,32 @@ class TerminalAdapter {
   // Output methods - delegate to terminal
   print(text, className = "") {
     this.terminal.print(text, className);
+    this.scrollToBottom();
   }
 
   printHTML(html, className = "") {
     this.terminal.printHTML(html, className);
+    this.scrollToBottom();
   }
 
   printError(text) {
     this.terminal.printError(text);
+    this.scrollToBottom();
   }
 
   printSuccess(text) {
     this.terminal.printSuccess(text);
+    this.scrollToBottom();
   }
 
   printInfo(text) {
     this.terminal.printInfo(text);
+    this.scrollToBottom();
   }
 
   printWarning(text) {
     this.terminal.printWarning(text);
+    this.scrollToBottom();
   }
 
   clear() {
