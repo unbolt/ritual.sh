@@ -86,8 +86,8 @@ const END_SCREEN = `
 `;
 
 const boxingDayGame = {
-  id: "boxing-day",
-  name: "Boxing Day",
+  id: "system-shutdown-1999-part-1",
+  name: "System Shutdown: 1999 - Part 1",
   command: "dial",
   description: "Connect to Dark Tower BBS - December 26, 1999",
 
@@ -190,9 +190,14 @@ const boxingDayGame = {
           className: "game-ansi-art center",
         },
         "",
-        { text: "B B S  -  E S T .  1 9 9 6", className: "info center" },
-        { text: "SysOp: NightWatchman", className: "info" },
-        { text: "Users Online: 3", className: "info" },
+        {
+          text: "---=[  B B S  -  E S T.  1 9 9 5  ]=---",
+          className: "info center",
+        },
+        {
+          text: "[ Users Online - 3 ] - [ SysOp - NightWatchman ]",
+          className: "info center",
+        },
         { text: "Local Time: 11:52 PM", className: "info" },
         "",
         // New message notification (only if not read)
@@ -212,7 +217,7 @@ const boxingDayGame = {
           content: { text: "[Returning to main menu]", className: "info" },
         },
       ],
-      onEnter: [{ set: "visited.dark_tower_main", value: true }],
+      onAfterRender: [{ set: "visited.dark_tower_main", value: true }],
       prompt: "Select:",
       options: [
         {

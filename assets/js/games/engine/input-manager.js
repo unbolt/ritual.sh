@@ -16,6 +16,10 @@ class InputManager {
     this.keydownHandler = (e) => {
       if (this.mode !== "options") return;
 
+      // Check if terminal input has text - if so, let user submit commands like "quit"
+      const terminalInput = document.getElementById("input");
+      const hasInputText = terminalInput && terminalInput.value.trim().length > 0;
+
       if (e.key === "ArrowUp") {
         e.preventDefault();
         e.stopPropagation();
@@ -25,10 +29,14 @@ class InputManager {
         e.stopPropagation();
         this._selectNext();
       } else if (e.key === "Enter") {
+        // If user has typed something, let it through to submit the command
+        if (hasInputText) return;
         e.preventDefault();
         e.stopPropagation();
         this._confirmSelection();
       } else if (/^[1-9]$/.test(e.key)) {
+        // Only intercept if input is empty (user isn't typing a command)
+        if (hasInputText) return;
         const index = parseInt(e.key) - 1;
         if (index < this.options.length) {
           e.preventDefault();

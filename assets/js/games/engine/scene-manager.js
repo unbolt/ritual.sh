@@ -75,6 +75,11 @@ class SceneManager {
       await this._renderContent(scene.content);
     }
 
+    // Execute onAfterRender actions (after content, before options)
+    if (scene.onAfterRender) {
+      await this._executeActions(scene.onAfterRender);
+    }
+
     // Handle navigation
     if (scene.options) {
       await this._handleOptions(scene);
