@@ -143,6 +143,13 @@ class GameEngine {
         return;
       }
 
+      // Check for debug scene skip command (goto <sceneName>)
+      if (cmd.startsWith("goto ")) {
+        const sceneName = commandString.trim().substring(5).trim();
+        self._debugGoToScene(sceneName);
+        return;
+      }
+
       // Pass to input manager if in text mode
       if (self.input.getMode() === "text") {
         self.input.handleTextInput(commandString);
@@ -193,6 +200,23 @@ class GameEngine {
       tempState.reset();
     }
     this.terminal.printSuccess(`${this.definition.name} progress has been reset.`);
+  }
+
+  // Debug command to skip to a specific scene
+  async _debugGoToScene(sceneName) {
+    const scene = this.scenes.getScene(sceneName);
+    if (!scene) {
+      this.adapter.printError(`Scene not found: ${sceneName}`);
+      this.adapter.print("");
+      this.adapter.printInfo("Available scenes:");
+      const sceneNames = Object.keys(this.definition.scenes).sort();
+      for (const name of sceneNames) {
+        this.adapter.print(`  ${name}`);
+      }
+      return;
+    }
+    this.adapter.printWarning(`[DEBUG] Skipping to scene: ${sceneName}`);
+    await this.scenes.goTo(sceneName);
   }
 
   // Check if game is currently running

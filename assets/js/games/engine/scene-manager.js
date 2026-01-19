@@ -149,9 +149,13 @@ class SceneManager {
         continue;
       }
 
-      // Text with optional className
+      // Text with optional className (supports html: true for HTML content)
       if (block.text !== undefined) {
-        this._printText(block.text, block.className || "");
+        if (block.html) {
+          this._printHTML(block.text, block.className || "");
+        } else {
+          this._printText(block.text, block.className || "");
+        }
         continue;
       }
     }
@@ -169,6 +173,21 @@ class SceneManager {
       this.adapter.print(interpolated, className);
     } else {
       this.adapter.print(interpolated);
+    }
+  }
+
+  // Print HTML with variable interpolation
+  _printHTML(html, className = "") {
+    // Support ${path} interpolation
+    const interpolated = html.replace(/\$\{([^}]+)\}/g, (match, path) => {
+      const value = this.state.get(path);
+      return value !== undefined ? String(value) : match;
+    });
+
+    if (className) {
+      this.adapter.printHTML(`<span class="${className}">${interpolated}</span>`);
+    } else {
+      this.adapter.printHTML(interpolated);
     }
   }
 
