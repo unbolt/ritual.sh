@@ -201,29 +201,24 @@ const boxingDayGame = {
     read_messages: {
       title: "Private Messages",
       content: [
-        "┌──────────────────────────────────────────────┐",
-        "│          D A R K   T O W E R   B B S         │",
-        "├──────────────────────────────────────────────┤",
-        "│        Private Mail for: 0BSERVER0           │",
-        "├──────────────────────────────────────────────┤",
-        "│ #    FROM      TO         DATE        STATUS │",
-        "├──────────────────────────────────────────────┤",
-        {
-          text: "| 23  [UNKNOWN]  0BSERVER0  25/12       NEW    |",
-          className: "warning",
-        },
-        {
-          text: "| 22  NIGHTWAT.  0BSERVER0  12/12       READ   |",
-        },
-        {
-          text: "| 21  0BSERVER0  NIGHTWAT.  11/12       SENT   |",
-        },
-        {
-          text: "| 22  NIGHTWAT.  0BSERVER0  10/12       READ   |",
-        },
-        "└──────────────────────────────────────────────┘",
-        "",
-        "",
+        ...TableHelper.table({
+          title: "Private Messages for 0BSERVER0",
+          headers: ["#", "FROM", "TO", "DATE", "STATUS"],
+          rows: [
+            [
+              "23",
+              "[UNKNOWN]",
+              "0BSERVER0",
+              "25/12",
+              { text: "NEW", className: "warning" },
+            ],
+            ["22", "NIGHTWATCHER", "0BSERVER0", "12/12", "READ"],
+            ["21", "0BSERVER0", "NIGHTWATCHER", "11/12", "SENT"],
+            ["22", "NIGHTWATCHER", "0BSERVER0", "10/12", "READ"],
+          ],
+          widths: [4, 12, 12, 8, 8],
+          align: ["right", "left", "left", "left", "left"],
+        }),
       ],
       options: [
         { text: "Open unread message", next: "new_message" },
@@ -308,6 +303,43 @@ const boxingDayGame = {
     message_archive: {
       title: "Message Archive",
       content: [
+        {
+          type: "table",
+          title: "Private Messages for ${username}", // Supports interpolation
+          headers: ["#", "FROM", "TO", "DATE", "STATUS"],
+          rows: [
+            // Simple array row (always shown)
+            ["22", "NIGHTWAT.", "0BSERVER0", "12/12", "READ"],
+
+            // Conditional row - only shown if condition is true
+            {
+              condition: { not: "read_new_message" },
+              cells: ["23", "[UNKNOWN]", "0BSERVER0", "25/12", "NEW"],
+              className: "warning", // Applied to all cells in row
+            },
+
+            // Row with per-cell styling
+            {
+              cells: [
+                "21",
+                "0BSERVER0",
+                { text: "DELETED", className: "error" },
+                "11/12",
+                "SENT",
+              ],
+            },
+
+            // Conditional with complex logic
+            {
+              condition: { and: ["has_secret", { not: "revealed_secret" }] },
+              cells: ["99", "???", "???", "??/??", "HIDDEN"],
+              className: "error",
+            },
+          ],
+          widths: [4, 12, 12, 8, 8],
+          align: ["right", "left", "left", "left", "left"],
+          style: "single", // "single", "double", or "ascii"
+        },
         "═══ ARCHIVED MESSAGES ═══",
         "",
         {

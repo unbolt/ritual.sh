@@ -149,6 +149,11 @@ class SceneManager {
         continue;
       }
 
+      if (block.type === "table") {
+        await this._renderTable(block);
+        continue;
+      }
+
       // Text with optional className (supports html: true for HTML content)
       if (block.text !== undefined) {
         if (block.html) {
@@ -377,6 +382,64 @@ class SceneManager {
 
   _sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  // Render a dynamic table with conditional row support
+  async _renderTable(block) {
+    // Filter rows based on conditions
+    const filteredRows = [];
+    for (const row of block.rows || []) {
+      // Row can be: array of cells, or object with { cells, condition, className }
+      if (Array.isArray(row)) {
+        // Simple row - array of cells
+        filteredRows.push(row);
+      } else if (row.condition !== undefined) {
+        // Conditional row
+        if (this.state.evaluate(row.condition)) {
+          filteredRows.push(this._processTableRow(row));
+        }
+      } else if (row.cells) {
+        // Object row without condition
+        filteredRows.push(this._processTableRow(row));
+      }
+    }
+
+    // Build table using TableHelper
+    const tableOutput = TableHelper.table({
+      title: block.title ? this._interpolateText(block.title) : undefined,
+      headers: block.headers,
+      rows: filteredRows,
+      widths: block.widths,
+      align: block.align,
+      style: block.style || "single",
+      padding: block.padding,
+    });
+
+    // Render each line of the table
+    for (const line of tableOutput) {
+      if (typeof line === "string") {
+        this._printText(line);
+      } else if (line.text) {
+        this._printText(line.text, line.className || "");
+      }
+    }
+  }
+
+  // Process a table row object into cell array format for TableHelper
+  _processTableRow(row) {
+    // If row has className, apply it to cells that don't have their own
+    const cells = row.cells.map((cell) => {
+      if (typeof cell === "string" && row.className) {
+        return { text: this._interpolateText(cell), className: row.className };
+      } else if (typeof cell === "object" && cell.text) {
+        return {
+          text: this._interpolateText(cell.text),
+          className: cell.className || row.className,
+        };
+      }
+      return typeof cell === "string" ? this._interpolateText(cell) : cell;
+    });
+    return cells;
   }
 
   // Get current scene ID
