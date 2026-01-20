@@ -383,3 +383,58 @@
     }
   }
 }
+
+body.game-in-progress {
+  .wall,
+  .window,
+  .homepage-neon,
+  .sticky-note,
+  .wall-paper,
+  .xfiles-poster,
+  .poster,
+  .desk {
+    filter: blur(4px) brightness(50%);
+    pointer-events: none;
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+
+  .homepage-container {
+    // First and last child div
+    > div:first-child,
+    > div:last-child {
+      filter: blur(4px);
+      pointer-events: none;
+      user-select: none;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    bottom: 10%;
+    transition: all 0.3s ease;
+  }
+
+  .crt-monitor {
+    font-size: 1.2rem;
+    width: 990px;
+    height: 750px;
+    .content {
+      padding: 1em;
+    }
+  }
+
+  .monitor-stand {
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .navigation {
+    filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+}

@@ -16,7 +16,10 @@ class GameEngine {
   // Register this game as a terminal command
   register() {
     if (!window.terminal) {
-      console.warn("Terminal not available, cannot register game:", this.definition.id);
+      console.warn(
+        "Terminal not available, cannot register game:",
+        this.definition.id,
+      );
       return;
     }
 
@@ -48,6 +51,10 @@ class GameEngine {
       return;
     }
 
+    // Update the global HTML to add the game in progress details
+    document.body.classList.add("game-in-progress");
+    console.log(document.body.classList);
+
     this.isRunning = true;
 
     // Initialize components
@@ -60,7 +67,12 @@ class GameEngine {
       this.sound = new SoundManager(this.adapter);
     }
 
-    this.scenes = new SceneManager(this.adapter, this.state, this.input, this.sound);
+    this.scenes = new SceneManager(
+      this.adapter,
+      this.state,
+      this.input,
+      this.sound,
+    );
 
     // Initialize state
     this.state.init(this.definition.initialState || {});
@@ -83,7 +95,9 @@ class GameEngine {
       // Ask if player wants to continue
       this.adapter.clear();
       this.adapter.printInfo("A saved game was found.");
-      const shouldContinue = await this.input.awaitConfirm("Continue from where you left off?");
+      const shouldContinue = await this.input.awaitConfirm(
+        "Continue from where you left off?",
+      );
 
       if (!shouldContinue) {
         this.state.reset();
@@ -95,7 +109,8 @@ class GameEngine {
     }
 
     // Go to start scene (or last scene if continuing)
-    const startScene = this.state.get("_currentScene") || this.definition.startScene || "start";
+    const startScene =
+      this.state.get("_currentScene") || this.definition.startScene || "start";
     await this.scenes.goTo(startScene);
   }
 
@@ -128,7 +143,9 @@ class GameEngine {
 
   _hookInput() {
     // Store original executeCommand
-    this.originalExecuteCommand = this.terminal.executeCommand.bind(this.terminal);
+    this.originalExecuteCommand = this.terminal.executeCommand.bind(
+      this.terminal,
+    );
 
     // Override to intercept input
     const self = this;
@@ -178,6 +195,9 @@ class GameEngine {
     // Save progress before stopping
     this._saveProgress();
 
+    // Update the global HTML to remove the game in progress details
+    document.body.classList.remove("game-in-progress");
+
     this.isRunning = false;
 
     // Cleanup sound manager
@@ -211,7 +231,9 @@ class GameEngine {
       const tempState = new StateManager(this.definition.id);
       tempState.reset();
     }
-    this.terminal.printSuccess(`${this.definition.name} progress has been reset.`);
+    this.terminal.printSuccess(
+      `${this.definition.name} progress has been reset.`,
+    );
   }
 
   // Debug command to skip to a specific scene
