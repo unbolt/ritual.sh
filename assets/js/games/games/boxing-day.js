@@ -1,22 +1,6 @@
 // Boxing Day - Day 1: December 26, 1999
 // A BBS-themed mystery game
 
-// ASCII Art Constants
-
-// const LIGHTHOUSE_HEADER = `
-//               .
-//              /|\\
-//             / | \\
-//            /  |  \\
-//           /   |   \\
-//          /    |    \\
-//         /  .--+--.  \\
-//        /__/   |   \\__\\
-//       [__]    |    [__]
-//               |
-//      ~~~~~~~~~|~~~~~~~~~
-// `;
-
 const GLITCH_ART = `
     ▓▓▓▒▒░░ E̸̢R̷̨R̵̢O̸̧R̷̨ ░░▒▒▓▓▓
     ░▒▓█ D̶̨A̷̧T̸̢Ą̵ C̷̢Ǫ̸Ŗ̵R̷̨U̸̢P̵̧T̷̨ █▓▒░
@@ -51,7 +35,7 @@ const boxingDayGame = {
     found_number: false,
     dialed_lighthouse: false,
 
-    // rm -rf deletion flags (persist across sessions)
+    // deletion flags (this needs to persist across game sessions somehow... TBD)
     archives_deleted: false,
     corrupted_file_deleted: false,
 
@@ -62,19 +46,23 @@ const boxingDayGame = {
   intro: [
     { type: "ansi", art: BOXING_DAY_TITLE, className: "game-ansi-art center" },
     "",
-    { text: "December 26, 1999", className: "info" },
-    { text: "11:47 PM", className: "info" },
+    { text: "December 26, 1999 - 10:47 PM", className: "info" },
     "",
     { type: "delay", ms: 600 },
     "Five days until the millennium.",
-    { type: "delay", ms: 400 },
+    { type: "delay", ms: 1500 },
     "Five days until everything might change.",
     "",
-    { type: "delay", ms: 600 },
+    { type: "delay", ms: 1000 },
     "Your 56k modem hums quietly in the dark.",
     "The house is silent. Everyone else is asleep.",
     "",
     { type: "delay", ms: 400 },
+    {
+      text: "<strong>This game occasionally plays sounds, mute your tab now if that offends you.</strong>",
+      html: true,
+      className: "warning",
+    },
     { text: 'Type "quit" at any time to save and exit.', className: "info" },
   ],
 
@@ -87,39 +75,48 @@ const boxingDayGame = {
 
     connect_prompt: {
       content: [
-        "Your terminal awaits a command.",
-        "",
-        { text: "The familiar glow illuminates your face.", className: "info" },
+        {
+          text: "<em>Your terminal awaits a command.</em>",
+          html: true,
+          className: "info",
+        },
+        {
+          text: "<em>The familiar glow illuminates your face.</em>",
+          html: true,
+          className: "info",
+        },
       ],
       options: [{ text: "Connect to Dark Tower BBS", next: "modem_connect" }],
     },
 
     modem_connect: {
       clear: true,
+      // Preload sounds for this scene
+      sounds: [{ id: "modem_connect", url: "/audio/modem-connect.mp3" }],
       content: [
         { type: "typewriter", text: "ATDT 555-0199", speed: 80 },
-        { type: "delay", ms: 800 },
         "",
+        // Play modem dial sound
+        { type: "sound", id: "modem_connect", volume: 0.6 },
+        { type: "delay", ms: 400 },
         { text: "DIALING...", className: "info" },
-        { type: "delay", ms: 600 },
-        "",
-        { text: "RING", className: "warning" },
-        { type: "delay", ms: 800 },
-        { text: "RING", className: "warning" },
-        { type: "delay", ms: 600 },
+        { type: "delay", ms: 3000 },
         "",
         {
           type: "typewriter",
-          text: "~~ eEe ~~ EEE ~~ eee ~~ CONNECT 56000",
+          text: "~~ eEe ~~ EEE ~~ eee ~~",
           speed: 35,
+          italic: true,
         },
-        { type: "delay", ms: 400 },
+        { type: "delay", ms: 3000 },
+        "CONNECT 56000",
         "",
         { text: "Carrier detected.", className: "success" },
-        { type: "delay", ms: 300 },
-        { text: "Negotiating protocol...", className: "info" },
-        { type: "delay", ms: 500 },
+        { type: "delay", ms: 4500 },
+        "Negotiating protocol...",
+        { type: "delay", ms: 4500 },
         { text: "Connection established.", className: "success" },
+        { type: "delay", ms: 2000 },
       ],
       next: "dark_tower_main",
       delay: 1200,
@@ -139,16 +136,16 @@ const boxingDayGame = {
         },
         "",
         {
-          text: "---=[  B B S  -  E S T.  1 9 9 5  ]=---",
+          text: "---=[ D A R K   T O W E R   B B S  -  E S T.  1 9 9 5  ]=---",
           className: "info center",
         },
         {
-          text: "[ Users Online - 3 ] - [ SysOp - NightWatchman ]",
+          text: "[ Users Connected - 3 ] - [ SysOp - NightWatchman ]",
           className: "info center",
         },
-        { text: "[ Local Time: 11:52 PM ]", className: "info center" },
+        { text: "[ Local Time: 10:52 PM ]", className: "info center" },
         "",
-        // New message notification (only if not read)
+        // New message notification if not read
         {
           condition: { not: "read_new_message" },
           content: [
@@ -158,15 +155,6 @@ const boxingDayGame = {
             },
             "",
           ],
-        },
-        // Return visitor message
-        {
-          condition: "visited.dark_tower_main",
-          content: {
-            text: "<em>Returning to main menu...</em>",
-            html: true,
-            className: "info",
-          },
         },
       ],
       onAfterRender: [{ set: "visited.dark_tower_main", value: true }],
@@ -199,7 +187,6 @@ const boxingDayGame = {
     // ==========================================
 
     read_messages: {
-      title: "Private Messages",
       content: [
         ...TableHelper.table({
           title: "Private Messages for 0BSERVER0",
@@ -209,7 +196,7 @@ const boxingDayGame = {
               "23",
               "[UNKNOWN]",
               "0BSERVER0",
-              "25/12",
+              "24/12",
               { text: "NEW", className: "warning" },
             ],
             ["22", "NIGHTWATCHER", "0BSERVER0", "12/12", "READ"],
@@ -227,7 +214,6 @@ const boxingDayGame = {
     },
 
     new_message: {
-      title: "Reading Message...",
       content: [
         { type: "delay", ms: 300 },
         "─── BEGIN MESSAGE ───",
@@ -276,6 +262,11 @@ const boxingDayGame = {
         { type: "delay", ms: 800 },
         "",
       ],
+      /**
+       * Update variables for read messages and found number
+       *
+       * The option the user takes here determines the path taken for this chapter
+       */
       onEnter: [
         { set: "read_new_message", value: true },
         { set: "found_number", value: true },
@@ -301,35 +292,28 @@ const boxingDayGame = {
     },
 
     message_archive: {
-      title: "Message Archive",
       content: [
         {
           type: "table",
-          title: "Private Messages for ${username}", // Supports interpolation
+          title: "Private Messages for 0BSERVER0",
           headers: ["#", "FROM", "TO", "DATE", "STATUS"],
           rows: [
-            // Simple array row (always shown)
-            ["22", "NIGHTWAT.", "0BSERVER0", "12/12", "READ"],
-
-            // Conditional row - only shown if condition is true
+            // Conditionally display watcher message as  read or not
             {
               condition: { not: "read_new_message" },
-              cells: ["23", "[UNKNOWN]", "0BSERVER0", "25/12", "NEW"],
-              className: "warning", // Applied to all cells in row
+              cells: ["23", "[UNKNOWN]", "0BSERVER0", "24/12", "NEW"],
+              className: "warning",
             },
-
-            // Row with per-cell styling
             {
-              cells: [
-                "21",
-                "0BSERVER0",
-                { text: "DELETED", className: "error" },
-                "11/12",
-                "SENT",
-              ],
+              condition: "read_new_message",
+              cells: ["23", "[UNKNOWN]", "0BSERVER0", "24/12", "READ"],
             },
 
-            // Conditional with complex logic
+            ["22", "NIGHTWATCHER", "0BSERVER0", "12/12", "READ"],
+            ["21", "0BSERVER0", "NIGHTWATCHER", "11/12", "SENT"],
+            ["22", "NIGHTWATCHER", "0BSERVER0", "10/12", "READ"],
+
+            // Testing the advanced condition stuff...
             {
               condition: { and: ["has_secret", { not: "revealed_secret" }] },
               cells: ["99", "???", "???", "??/??", "HIDDEN"],
@@ -338,19 +322,20 @@ const boxingDayGame = {
           ],
           widths: [4, 12, 12, 8, 8],
           align: ["right", "left", "left", "left", "left"],
-          style: "single", // "single", "double", or "ascii"
+          style: "single",
         },
-        "═══ ARCHIVED MESSAGES ═══",
-        "",
+        { text: "<em>No new messages.</em>", html: true, className: "info" },
         {
           condition: "read_new_message",
           content: [
-            "  1. [SENDER UNKNOWN] - For your eyes only",
-            { text: "     (The number: 555-0237)", className: "info" },
+            {
+              text: "<em>Just the number... 555-0237...</em>",
+              html: true,
+              className: "warning",
+            },
           ],
         },
         "",
-        { text: "No other messages.", className: "info" },
       ],
       options: [{ text: "Back", next: "dark_tower_main" }],
     },
@@ -362,18 +347,49 @@ const boxingDayGame = {
     choice_immediate: {
       clear: true,
       content: [
-        "Your fingers move before doubt can settle.",
+        {
+          type: "text",
+          text: "<em>Your fingers move before doubt can settle.</em>",
+          html: true,
+          className: "info",
+        },
         "",
         { type: "typewriter", text: "ATH0", speed: 100 },
         { type: "delay", ms: 400 },
         { text: "NO CARRIER", className: "warning" },
         { type: "delay", ms: 600 },
         "",
-        "You disconnect from Dark Tower.",
-        "The silence of your room feels heavier now.",
+        {
+          text: "<em>You disconnect from Dark Tower.</em>",
+          html: true,
+          className: "info",
+        },
+        {
+          text: "<em>The silence of your room feels heavier now.</em>",
+          html: true,
+          className: "info",
+        },
+        "",
+        "",
         "",
         { type: "delay", ms: 500 },
-        { text: "Something compels you forward.", className: "info" },
+        //{ text: "Something compels you forward.", className: "info" },
+        {
+          type: "typewriter",
+          text: "Something compels you forward...",
+          italic: true,
+          speed: 100,
+          className: "info",
+        },
+        { type: "delay", ms: 1500 },
+        {
+          type: "typewriter",
+          text: "...555-0237",
+          italic: true,
+          speed: 100,
+          className: "info",
+        },
+        { type: "delay", ms: 2000 },
       ],
       next: "dial_lighthouse",
       delay: 1000,
@@ -395,28 +411,28 @@ const boxingDayGame = {
         "The number fades from memory.",
         "Just another piece of BBS spam, you tell yourself.",
         "",
-        { type: "delay", ms: 800 },
+        { type: "delay", ms: 2000 },
         "You browse Dark Tower for another hour.",
-        "Download some wallpapers. Chat about nothing.",
+        "Download some wallpapers.",
         "",
-        { type: "delay", ms: 800 },
-        "At 11:47 PM, you disconnect.",
+        { type: "delay", ms: 2000 },
+        "At 11:57 PM, you disconnect.",
         "",
-        { type: "delay", ms: 800 },
+        { type: "delay", ms: 2000 },
         "Five days later, the millennium arrives.",
         "Fireworks. Champagne. Relief.",
         "",
         { type: "delay", ms: 600 },
         "Nothing happens.",
         "",
-        { type: "delay", ms: 1000 },
+        { type: "delay", ms: 2000 },
         { text: "Or does it?", className: "warning" },
         "",
-        { type: "delay", ms: 800 },
+        { type: "delay", ms: 2000 },
         "You never find out what cascade.exe would have done.",
         "The lighthouse keeper's message was never meant for you.",
         "",
-        { type: "delay", ms: 600 },
+        { type: "delay", ms: 1000 },
         { text: "Perhaps that's for the best.", className: "info" },
         "",
         { type: "delay", ms: 1000 },
@@ -448,52 +464,89 @@ const boxingDayGame = {
     // ==========================================
 
     browse_boards: {
-      title: "Message Boards",
       content: [
-        "═══ DARK TOWER MESSAGE BOARDS ═══",
-        "",
-        "  [1] General Discussion     (47 new)",
-        "  [2] Tech Support           (12 new)",
-        // Archives conditionally shown
         {
-          condition: { not: "archives_deleted" },
-          content: "  [3] The Archives           (3 new)",
+          type: "table",
+          title: "DARK TOWER / MESSAGE BOARDS",
+          headers: ["#", "NAME", "NEW MSG", "LAST"],
+          rows: [
+            ["1", "General Discussion", "8", "24/12"],
+            ["2", "Tech Support", "1", "25/12"],
+            ["3", "File Updates", "3", "23/12"],
+
+            // Display the archives or have them deleted
+            // depending on progress.
+            // Not sure if people will be able to go back from lighthouse to tower at this stage
+            // Leaving it in just incase I want to do this later...
+            {
+              condition: { not: "archives_deleted" },
+              cells: ["4", "ARCHIVED", "-", "-"],
+            },
+            {
+              condition: "archives_deleted",
+              cells: ["4", "<BOARD REMOVED>", "-", "-"],
+              className: "error",
+            },
+          ],
+          widths: [4, 20, 10, 8],
+          align: ["right", "left", "left", "left"],
+          style: "single",
         },
         {
           condition: "archives_deleted",
-          content: { text: "  [3] <BOARD REMOVED>", className: "error" },
+          content: {
+            type: "typewriter",
+            italic: true,
+            text: "The archived messages are just... gone...",
+            speed: 80,
+            className: "info",
+          },
         },
-        "  [4] File Announcements     (8 new)",
-        "",
       ],
       prompt: "Select board:",
       options: [
         { text: "General Discussion", next: "board_general" },
         { text: "Tech Support", next: "board_tech" },
+        { text: "File Updates", next: "board_files" },
         {
-          text: "The Archives",
+          text: "ARCHIVED",
           next: "board_archives",
           condition: { not: "archives_deleted" },
         },
-        { text: "File Announcements", next: "board_files" },
         { text: "Back to main menu", next: "dark_tower_main" },
       ],
     },
 
     board_general: {
-      title: "General Discussion",
       content: [
-        "═══ GENERAL DISCUSSION ═══",
-        "",
-        "  [HOT] Y2K Preparation Thread - 234 replies",
-        "  [NEW] Anyone else getting weird messages? - 12 replies",
-        "  [NEW] Happy Boxing Day everyone! - 8 replies",
-        "       Best BBS games? - 45 replies",
-        "       New user intro thread - 67 replies",
-        "",
         {
-          text: "The usual chatter. Nothing about lighthouses.",
+          type: "table",
+          title: "GENERAL DISCUSSION",
+          headers: ["#", "SUBJECT", "MSG", "LAST"],
+          rows: [
+            ["1", "2K Preparation Thread", "243", "25/12"],
+            ["2", "Anyone else getting weird messages?", "3", "25/12"],
+            ["3", "Happy Boxing Day everyone!", "5", "25/12"],
+            ["4", "Best BBS games?", "43", "23/12"],
+            ["5", "New user intro thread", "67", "20/12"],
+          ],
+          widths: [4, 40, 6, 8],
+          align: ["right", "left", "right", "left"],
+          style: "single",
+        },
+        {
+          text: "The usual chatter.",
+          italic: true,
           className: "info",
+        },
+        {
+          condition: "found_number",
+          content: {
+            type: "text",
+            italic: true,
+            text: "Nothing about lighthouses...",
+            className: "info",
+          },
         },
       ],
       options: [
@@ -503,14 +556,20 @@ const boxingDayGame = {
     },
 
     thread_weird: {
-      title: "Thread: Anyone else getting weird messages?",
+      // title: "Thread: Anyone else getting weird messages?",
       content: [
-        "═══ Anyone else getting weird messages? ═══",
-        "",
-        { text: "Posted by: Static_User", className: "info" },
-        "Got a strange PM last night. No sender listed.",
-        "Just a phone number and something about a 'cascade'.",
-        "Probably spam, but creepy timing with Y2K coming up.",
+        {
+          type: "table",
+          title: "Anyone else getting weird messages?",
+          headers: ["FROM", "TO", "DATE"],
+          rows: [["Static_User", "All", "25/12/99"]],
+          widths: [20, 20, 10],
+          align: ["left", "left", "left"],
+          style: "single",
+        },
+        " Got a strange PM last night. No sender listed.",
+        " Just a phone number and something about a 'cascade'.",
+        " Probably spam, but creepy timing with Y2K coming up.",
         "",
         "---",
         { text: "Reply from: NightWatchman [SYSOP]", className: "warning" },
@@ -519,14 +578,15 @@ const boxingDayGame = {
         "",
         "---",
         { text: "Reply from: [DELETED USER]", className: "error" },
-        "[This post has been removed]",
+        "[This post cannot be accessed]",
         "",
-        { type: "delay", ms: 300 },
+        { type: "delay", ms: 1000 },
         {
           condition: "found_number",
           content: {
-            text: "You notice your message was similar...",
-            className: "warning",
+            text: "<br /><br /><em>You notice your message was similar...</em>",
+            html: true,
+            className: "info",
           },
         },
       ],
@@ -534,17 +594,26 @@ const boxingDayGame = {
     },
 
     board_tech: {
-      title: "Tech Support",
+      // title: "Tech Support",
       content: [
-        "═══ TECH SUPPORT ═══",
-        "",
-        "  [STICKY] READ FIRST: Y2K Compliance Guide",
-        "  [NEW] Modem dropping connection at midnight?",
-        "       Best virus scanner for 1999?",
-        "       How to increase download speeds",
-        "",
+        {
+          type: "table",
+          title: "TECH SUPPORT",
+          headers: ["#", "SUBJECT", "MSG", "LAST"],
+          rows: [
+            ["1", "READ FIRST: Y2K Compliance Guide", "152", "25/12"],
+            ["2", "Modem dropping connection at midnight?", "3", "25/12"],
+            ["3", "How to increase download speeds", "98", "25/12"],
+            ["4", "We are migrating to TELNET/IP on 01/04/00", "429", "11/12"],
+            ["5", "Inputs not registering", "2", "29/11"],
+          ],
+          widths: [4, 45, 6, 8],
+          align: ["right", "left", "right", "left"],
+          style: "single",
+        },
         {
           text: "Standard tech questions. Nothing unusual.",
+          italic: true,
           className: "info",
         },
       ],
@@ -668,46 +737,79 @@ const boxingDayGame = {
     },
 
     board_files: {
-      title: "File Announcements",
+      // title: "File Announcements",
       content: [
-        "═══ FILE ANNOUNCEMENTS ═══",
-        "",
-        "  [NEW] Y2K_FIX.ZIP - Y2K compliance patches",
-        "  [NEW] DOOM_WAD.ZIP - New Doom levels",
-        "       FONTS99.ZIP - Cool fonts collection",
-        "",
-        { text: "Nothing about cascades here.", className: "info" },
+        {
+          type: "table",
+          title: "FILE ANNOUNCEMENTS",
+          headers: ["#", "SUBJECT", "MSG", "LAST"],
+          rows: [
+            ["1", "1001FONTS.ZIP - Font Collection", "1", "25/12"],
+            ["2", "Y2K_FIX.ZIP - Y2K compliance patches", "4", "23/12"],
+            ["3", "DOOM_WAD.ZIP - New Doom Levels", "3", "11/12"],
+            ["4", "BRUCE.JPEG - Just my dog :-)", "15", "20/11"],
+            ["5", "CATS.GIF - All your base are belong to us", "1", "01/11"],
+          ],
+          widths: [4, 45, 6, 8],
+          align: ["right", "left", "right", "left"],
+          style: "single",
+        },
+        {
+          text: "<em>New fonts... At last...</em>",
+          html: true,
+          className: "info",
+        },
+        {
+          text: "<em>Can't get distracted just yet.</em>",
+          html: true,
+          className: "info",
+        },
       ],
       options: [{ text: "Back to boards", next: "browse_boards" }],
     },
 
     dark_tower_files: {
-      title: "File Library",
+      //title: "File Library",
       content: [
-        "═══ DARK TOWER FILE LIBRARY ═══",
-        "",
-        "  /games    - 234 files",
-        "  /utils    - 156 files",
-        "  /images   - 89 files",
-        "  /music    - 67 files",
-        "",
-        { text: "Standard BBS fare. Nothing unusual.", className: "info" },
+        {
+          type: "table",
+          title: "FILE LIBRARY",
+          headers: ["#", "DIR", "QTY", "UPDATED"],
+          rows: [
+            ["1", "/IMAGES", "234", "25/12"],
+            ["2", "/GAMES", "67", "12/12"],
+            ["3", "/MUSIC", "89", "30/11"],
+            ["4", "/UTILS", "156", "23/11"],
+            ["5", "/MISC", "13", "09/10"],
+          ],
+          widths: [4, 25, 6, 8],
+          align: ["right", "left", "right", "left"],
+          style: "single",
+        },
+        {
+          text: "<em>Standard BBS fare. Nothing unusual.</em>",
+          html: true,
+          className: "info",
+        },
       ],
       options: [{ text: "Back to main menu", next: "dark_tower_main" }],
     },
 
     whos_online: {
-      title: "Who's Online",
+      //title: "Who's Online",
       content: [
-        "═══ USERS ONLINE ═══",
-        "",
-        "  0BSERVER0 (you)     - Main Menu",
-        "  NightWatchman       - SysOp Console",
-        "  Static_User         - Message Boards",
-        "",
         {
-          text: "Last login: Signal_Lost - March 23, 1999",
-          className: "warning",
+          type: "table",
+          title: "CONNECTED USERS",
+          headers: ["#", "USER", "LOC", "UPDATED"],
+          rows: [
+            ["1", "0BSERVER0", "Main Menu", "10:54 PM"],
+            ["2", "Static_User", "Message Boards", "10:39 PM"],
+            ["3", "NightWatchman", "SysOp Console", "10:12 PM"],
+          ],
+          widths: [4, 15, 15, 8],
+          align: ["right", "left", "right", "left"],
+          style: "single",
         },
       ],
       options: [{ text: "Back", next: "dark_tower_main" }],
@@ -875,20 +977,27 @@ const boxingDayGame = {
       clear: true,
       content: [
         {
-          type: "ansi",
+          type: "ascii",
           art: LIGHTHOUSE_HEADER,
-          className: "game-ansi-art center",
+          className: "game-ascii",
         },
         "",
-        { text: "T H E   L I G H T H O U S E", className: "game-scene-title" },
-        { text: "Last updated: 12/24/1999 23:59:59", className: "info" },
-        { text: "Users online: 1 (you)", className: "warning" },
+        { text: "T H E   L I G H T H O U S E", className: "center" },
+        { text: "Last updated: 24/12/1999 23:59:59", className: "center" },
         "",
         {
           condition: { not: "visited.lighthouse_main" },
           content: [
-            { text: "Something feels wrong here.", className: "warning" },
-            { text: "The BBS feels... frozen. Abandoned.", className: "info" },
+            {
+              text: "Something feels wrong here.",
+              italic: true,
+              className: "info",
+            },
+            {
+              text: "The BBS feels... frozen. Abandoned.",
+              italic: true,
+              className: "info",
+            },
             "",
           ],
         },
@@ -903,7 +1012,7 @@ const boxingDayGame = {
           ],
         },
       ],
-      onEnter: [{ set: "visited.lighthouse_main", value: true }],
+      onAfterRender: [{ set: "visited.lighthouse_main", value: true }],
       prompt: "Navigate:",
       options: [
         { text: "The Keeper's Log", next: "lighthouse_log" },
@@ -921,30 +1030,42 @@ const boxingDayGame = {
     },
 
     lighthouse_log: {
-      title: "The Keeper's Log",
+      //title: "The Keeper's Log",
       content: [
         "═══ THE KEEPER'S LOG ═══",
         "",
-        { text: "Entry 1 - November 3, 1998", className: "info" },
-        "I've found something. In the static between radio stations.",
-        "Patterns. Structures. A language, maybe.",
+        {
+          text: "Entry 1 - November 3, 1998<br /><br />",
+          html: true,
+          className: "info",
+        },
+        "  I've found something. In the static between radio stations.",
+        "  Patterns. Structures. A language, maybe.",
+        {
+          text: "<br  />Entry 7 - December 12, 1998<br /><br />",
+          html: true,
+          className: "info",
+        },
+        "  The patterns are getting clearer. They want to be understood.",
+        "  They want to SPREAD.",
+        {
+          text: "<br />Entry 15 - March 19, 1999<br /><br />",
+          html: true,
+          className: "info",
+        },
+        "  CASCADE.EXE is complete. A translator. A carrier. A key.",
+        "      When run at the right moment, it will open the door.",
+        {
+          text: "<br />Entry 23 - December 24, 1999<br /><br />",
+          html: true,
+          className: "info",
+        },
+        "  The alignment approaches.",
+        "  Seven days until the millennium.",
+        "  I can hear them now. Always.",
         "",
-        { text: "Entry 7 - December 12, 1998", className: "info" },
-        "The patterns are getting clearer.",
-        "They want to be understood.",
-        "They want to SPREAD.",
-        "",
-        { text: "Entry 15 - March 19, 1999", className: "info" },
-        "CASCADE.EXE is complete.",
-        "A translator. A carrier. A key.",
-        "When run at the right moment, it will open the door.",
-        "",
-        { text: "Entry 23 - December 24, 1999", className: "warning" },
-        "The alignment approaches.",
-        "Seven days until the millennium.",
-        "I can hear them now. Always.",
-        "",
-        { type: "typewriter", text: "They are beautiful.", speed: 60 },
+        { type: "typewriter", text: "  They are beautiful...", speed: 100 },
+        { type: "delay", ms: 2000 },
       ],
       options: [{ text: "Back", next: "lighthouse_main" }],
     },
@@ -1113,7 +1234,7 @@ const boxingDayGame = {
       ],
       onEnter: [
         { set: "downloaded_cascade", value: true },
-        { set: "archives_deleted", value: true }, // rm -rf effect
+        { set: "archives_deleted", value: true }, // Archives are removed
       ],
       next: "post_download",
       delay: 1500,
@@ -1172,6 +1293,10 @@ const boxingDayGame = {
     choice_corrupted: {
       title: "Accessing SHADOW.DAT...",
       clear: true,
+      // sounds: [
+      //   { id: "static", url: "/assets/audio/static.mp3" },
+      //   { id: "glitch", url: "/assets/audio/glitch.mp3" },
+      // ],
       content: [
         { type: "typewriter", text: "ATTEMPTING TO READ FILE...", speed: 50 },
         { type: "delay", ms: 1000 },
@@ -1183,6 +1308,8 @@ const boxingDayGame = {
         { text: "ERROR: ????????????????????", className: "error" },
         { type: "delay", ms: 800 },
         "",
+        // Play glitch sound effect
+        //{ type: "sound", id: "glitch", volume: 0.5 },
         { type: "ascii", art: GLITCH_ART, className: "error" },
         { type: "delay", ms: 1000 },
         "",
@@ -1190,6 +1317,8 @@ const boxingDayGame = {
         "",
         { type: "delay", ms: 600 },
         { text: "A sound from your speakers.", className: "warning" },
+        // Play eerie static with voice
+        //{ type: "sound", id: "static", volume: 0.4, duration: 3000, fade: true },
         {
           text: "A voice, maybe. Or static shaped like words:",
           className: "info",

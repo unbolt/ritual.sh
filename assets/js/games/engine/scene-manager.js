@@ -1,12 +1,14 @@
 // Scene Manager - Handles scene definitions, rendering, and transitions
 class SceneManager {
-  constructor(adapter, stateManager, inputManager) {
+  constructor(adapter, stateManager, inputManager, soundManager = null) {
     this.adapter = adapter;
     this.state = stateManager;
     this.input = inputManager;
+    this.sound = soundManager;
     this.scenes = {};
     this.currentScene = null;
     this.sceneHistory = [];
+    this.activeSounds = new Map(); // Track sounds started in current scene
   }
 
   // Register scenes from game definition
@@ -34,7 +36,15 @@ class SceneManager {
       this.sceneHistory.push(this.currentScene.id);
     }
 
+    // Stop scene-specific sounds from previous scene
+    await this._cleanupSceneSounds();
+
     this.currentScene = scene;
+
+    // Preload sounds for this scene
+    if (this.sound && scene.sounds) {
+      await this._preloadSceneSounds(scene.sounds);
+    }
 
     // Execute onEnter actions
     if (scene.onEnter) {
@@ -145,7 +155,11 @@ class SceneManager {
       }
 
       if (block.type === "typewriter") {
-        await this._typewriter(block.text, block.speed || 50);
+        await this._typewriter(block.text, block.speed || 50, {
+          bold: block.bold,
+          italic: block.italic,
+          className: block.className,
+        });
         continue;
       }
 
@@ -154,12 +168,20 @@ class SceneManager {
         continue;
       }
 
+      if (block.type === "sound") {
+        await this._handleSound(block);
+        continue;
+      }
+
       // Text with optional className (supports html: true for HTML content)
       if (block.text !== undefined) {
         if (block.html) {
           this._printHTML(block.text, block.className || "");
         } else {
-          this._printText(block.text, block.className || "");
+          this._printText(block.text, block.className || "", {
+            bold: block.bold,
+            italic: block.italic,
+          });
         }
         continue;
       }
@@ -167,15 +189,22 @@ class SceneManager {
   }
 
   // Print text with variable interpolation
-  _printText(text, className = "") {
+  _printText(text, className = "", options = {}) {
     // Support ${path} interpolation
     const interpolated = text.replace(/\$\{([^}]+)\}/g, (match, path) => {
       const value = this.state.get(path);
       return value !== undefined ? String(value) : match;
     });
 
-    if (className) {
-      this.adapter.print(interpolated, className);
+    // Build style classes based on options
+    let styleClasses = className;
+    if (options.bold)
+      styleClasses += (styleClasses ? " " : "") + "typewriter-bold";
+    if (options.italic)
+      styleClasses += (styleClasses ? " " : "") + "typewriter-italic";
+
+    if (styleClasses) {
+      this.adapter.print(interpolated, styleClasses);
     } else {
       this.adapter.print(interpolated);
     }
@@ -190,7 +219,9 @@ class SceneManager {
     });
 
     if (className) {
-      this.adapter.printHTML(`<span class="${className}">${interpolated}</span>`);
+      this.adapter.printHTML(
+        `<span class="${className}">${interpolated}</span>`,
+      );
     } else {
       this.adapter.printHTML(interpolated);
     }
@@ -350,9 +381,15 @@ class SceneManager {
   }
 
   // Typewriter effect
-  async _typewriter(text, speed) {
+  async _typewriter(text, speed, options = {}) {
     const interpolated = this._interpolateText(text);
     let output = "";
+
+    // Build style classes based on options
+    let styleClasses = "typewriter-line";
+    if (options.bold) styleClasses += " typewriter-bold";
+    if (options.italic) styleClasses += " typewriter-italic";
+    if (options.className) styleClasses += " " + options.className;
 
     for (const char of interpolated) {
       output += char;
@@ -364,7 +401,7 @@ class SceneManager {
         typewriterSpan.textContent = output;
       } else {
         this.adapter.printHTML(
-          `<span class="typewriter-line">${output}</span>`,
+          `<span class="${styleClasses}">${output}</span>`,
         );
       }
 
@@ -450,5 +487,128 @@ class SceneManager {
   // Reset scene history
   resetHistory() {
     this.sceneHistory = [];
+  }
+
+  // Preload sounds for a scene
+  async _preloadSceneSounds(sounds) {
+    if (!this.sound) return;
+
+    const soundList = Array.isArray(sounds) ? sounds : [sounds];
+    let hasShownLoading = false;
+
+    for (const soundDef of soundList) {
+      const soundId = soundDef.id;
+      const url = soundDef.url || soundDef.src;
+
+      if (!soundId || !url) {
+        console.warn("Invalid sound definition:", soundDef);
+        continue;
+      }
+
+      // Skip if already loaded
+      if (this.sound.isLoaded(soundId)) {
+        continue;
+      }
+
+      // Show loading indicator if not shown yet
+      if (!hasShownLoading) {
+        this.adapter.printHTML(
+          '<span class="sound-loading info">Loading audio...</span>',
+        );
+        hasShownLoading = true;
+      }
+
+      try {
+        await this.sound.preload(soundId, url);
+      } catch (error) {
+        console.error(`Failed to preload sound ${soundId}:`, error);
+        // Continue loading other sounds even if one fails
+      }
+    }
+
+    // Remove loading indicator
+    if (hasShownLoading) {
+      const indicator =
+        this.adapter.terminal.output.querySelector(".sound-loading");
+      if (indicator) {
+        indicator.remove();
+      }
+    }
+  }
+
+  // Handle sound playback in content blocks
+  async _handleSound(block) {
+    if (!this.sound) {
+      console.warn("Sound manager not available");
+      return;
+    }
+
+    const action = block.action || "play"; // play, stop, stopAll
+    const soundId = block.id || block.sound;
+
+    try {
+      if (action === "play") {
+        const options = {
+          loop: block.loop || false,
+          volume: block.volume !== undefined ? block.volume : 1.0,
+          fade: block.fade || false,
+          fadeDuration: block.fadeDuration || 1000,
+        };
+
+        const controller = await this.sound.play(soundId, options);
+
+        // Store reference for cleanup unless it's a one-shot sound
+        if (block.loop || block.persist) {
+          this.activeSounds.set(soundId, controller);
+        }
+
+        // Auto-stop after duration if specified
+        if (block.duration) {
+          setTimeout(() => {
+            if (block.fadeOut !== false) {
+              controller.fadeOut(block.fadeDuration || 1000);
+            } else {
+              controller.stop();
+            }
+          }, block.duration);
+        }
+      } else if (action === "stop") {
+        const controller = this.activeSounds.get(soundId);
+        if (controller) {
+          if (block.fadeOut !== false) {
+            await controller.fadeOut(block.fadeDuration || 1000);
+          } else {
+            controller.stop();
+          }
+          this.activeSounds.delete(soundId);
+        }
+      } else if (action === "stopAll") {
+        await this._cleanupSceneSounds();
+      }
+    } catch (error) {
+      console.error(`Sound error (${action} ${soundId}):`, error);
+      // Don't show error to user, just log it
+    }
+  }
+
+  // Clean up sounds when leaving a scene
+  async _cleanupSceneSounds() {
+    if (!this.sound) return;
+
+    const fadePromises = [];
+
+    for (const [, controller] of this.activeSounds) {
+      if (controller.fadeOut) {
+        fadePromises.push(
+          controller.fadeOut(500).catch((e) => console.error("Fade error:", e)),
+        );
+      } else {
+        controller.stop();
+      }
+    }
+
+    // Wait for all fades to complete
+    await Promise.all(fadePromises);
+    this.activeSounds.clear();
   }
 }

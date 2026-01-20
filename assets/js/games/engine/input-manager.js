@@ -18,7 +18,8 @@ class InputManager {
 
       // Check if terminal input has text - if so, let user submit commands like "quit"
       const terminalInput = document.getElementById("input");
-      const hasInputText = terminalInput && terminalInput.value.trim().length > 0;
+      const hasInputText =
+        terminalInput && terminalInput.value.trim().length > 0;
 
       if (e.key === "ArrowUp") {
         e.preventDefault();
@@ -85,6 +86,7 @@ class InputManager {
 
       if (prompt) {
         this.adapter.print("");
+        this.adapter.printInfo("------------------");
         this.adapter.printInfo(prompt);
       }
       this.adapter.print("");

@@ -6,6 +6,7 @@ class GameEngine {
     this.adapter = null;
     this.state = null;
     this.input = null;
+    this.sound = null;
     this.scenes = null;
 
     this.isRunning = false;
@@ -53,7 +54,13 @@ class GameEngine {
     this.adapter = new TerminalAdapter(this.terminal);
     this.state = new StateManager(this.definition.id);
     this.input = new InputManager(this.adapter);
-    this.scenes = new SceneManager(this.adapter, this.state, this.input);
+
+    // Initialize sound manager if SoundManager is available
+    if (window.SoundManager) {
+      this.sound = new SoundManager(this.adapter);
+    }
+
+    this.scenes = new SceneManager(this.adapter, this.state, this.input, this.sound);
 
     // Initialize state
     this.state.init(this.definition.initialState || {});
@@ -172,6 +179,11 @@ class GameEngine {
     this._saveProgress();
 
     this.isRunning = false;
+
+    // Cleanup sound manager
+    if (this.sound) {
+      this.sound.stopAll();
+    }
 
     // Cleanup input manager
     if (this.input) {
