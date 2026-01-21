@@ -34,6 +34,7 @@ const boxingDayGame = {
     read_new_message: false,
     found_number: false,
     dialed_lighthouse: false,
+    seen_archive_glitch: false,
 
     // deletion flags (this needs to persist across game sessions somehow... TBD)
     archives_deleted: false,
@@ -573,12 +574,12 @@ const boxingDayGame = {
         "",
         "---",
         { text: "Reply from: NightWatchman [SYSOP]", className: "warning" },
-        "Looking into it. Please forward any suspicious messages.",
-        "And don't dial any numbers you don't recognize.",
+        " Looking into it. Please forward any suspicious messages.",
+        " And don't dial any numbers you don't recognize.",
         "",
         "---",
         { text: "Reply from: [DELETED USER]", className: "error" },
-        "[This post cannot be accessed]",
+        " [This post cannot be accessed]",
         "",
         { type: "delay", ms: 1000 },
         {
@@ -621,15 +622,26 @@ const boxingDayGame = {
     },
 
     board_archives: {
-      title: "The Archives",
+      // title: "The Archives",
       content: [
-        "═══ THE ARCHIVES ═══",
-        { text: "Historical posts - Read only", className: "info" },
-        "",
-        "  [1998] The Lighthouse Project - NightWatchman",
-        "  [1999] Frequencies and Patterns - Signal_Lost",
-        "  [1999] RE: Has anyone heard from Keeper? - Anonymous",
-        "",
+        {
+          type: "table",
+          title: "THE ARCHIVES",
+          headers: ["#", "SUBJECT", "OP", "LAST"],
+          rows: [
+            ["1", "The Lighthouse Project", "NightWatchman", "1998"],
+            ["2", "Frequencies and Patterns", "Signal_Lost", "1999"],
+            ["3", "RE: Has anyone heard from Keeper?", "[UNKNOWN]", "1999"],
+          ],
+          widths: [4, 35, 16, 8],
+          align: ["right", "left", "right", "left"],
+          style: "single",
+        },
+        {
+          text: "Historical posts, read only...",
+          italic: true,
+          className: "info",
+        },
         {
           condition: { not: "visited.archive_warning" },
           content: [
@@ -655,14 +667,17 @@ const boxingDayGame = {
     },
 
     archive_lighthouse: {
-      title: "The Lighthouse Project",
+      //title: "The Lighthouse Project",
       content: [
-        "═══ The Lighthouse Project ═══",
         {
-          text: "Posted by: NightWatchman - November 15, 1998",
-          className: "info",
+          type: "table",
+          title: "The Lighthouse Project",
+          headers: ["FROM", "TO", "DATE"],
+          rows: [["NightWatchman [SYSOP]", "All", "15/11/98"]],
+          widths: [25, 15, 10],
+          align: ["left", "left", "left"],
+          style: "single",
         },
-        "",
         "Some of you have asked about the secondary BBS.",
         "Yes, it exists. No, I can't give you the number.",
         "",
@@ -670,14 +685,13 @@ const boxingDayGame = {
         "He said he found something in the noise between stations.",
         "Patterns that shouldn't exist.",
         "",
-        "I hosted his board as a favor.",
+        "I set up his board as a favor.",
         "Then one day, he stopped logging in.",
         "",
         "The board is still there. Still running.",
         "I check it sometimes. The files he left behind...",
         "",
         "Some doors are better left closed.",
-        "",
         { text: "- NW", className: "info" },
       ],
       options: [{ text: "Back", next: "board_archives" }],
@@ -710,10 +724,17 @@ const boxingDayGame = {
     },
 
     archive_keeper: {
-      title: "RE: Has anyone heard from Keeper?",
+      //title: "RE: Has anyone heard from Keeper?",
       content: [
-        "═══ RE: Has anyone heard from Keeper? ═══",
-        { text: "Posted by: Anonymous - December 20, 1999", className: "info" },
+        {
+          type: "table",
+          title: "RE: Has anyone heard from Keeper?",
+          headers: ["FROM", "TO", "DATE"],
+          rows: [["[UNKNOWN]", "All", "20/12/99"]],
+          widths: [25, 15, 10],
+          align: ["left", "left", "left"],
+          style: "single",
+        },
         "",
         "He's still there.",
         "In The Lighthouse.",
@@ -722,17 +743,61 @@ const boxingDayGame = {
         "The cascade is ready.",
         "It just needs carriers.",
         "",
-        "555-0237",
+        {
+          type: "glitch",
+          text: "ERROR: MEMORY FAULT AT 0x555f0237",
+          intensity: 0.7,
+          spread: 0,
+          speed: 200,
+          duration: 2000,
+          className: "error glitch-text",
+        },
         "",
         "Before midnight on the 31st.",
         "The alignment only happens once.",
         "",
+
         {
           text: "[This post was flagged for removal but persists]",
           className: "error",
         },
+        {
+          html: true,
+          text: "<br /><br />",
+        },
+        {
+          condition: { not: "seen_archive_glitch" },
+          content: [
+            {
+              text: "What the hell was that...",
+              italic: true,
+              className: "info",
+            },
+          ],
+          else: [
+            {
+              text: "The glitch persists...",
+              italic: true,
+              className: "info",
+            },
+          ],
+        },
+        {
+          condition: "found_number",
+          content: {
+            text: "The memory location looks oddly like the phone number... 555-0237",
+            italic: true,
+            className: "warning",
+          },
+        },
       ],
-      onEnter: [{ set: "found_number", value: true }],
+      onAfterRender: [
+        // Decided to move the phone number out of discovery here..
+        // Not sure if it should be found in two places
+        // Message should be enough, surely?
+        // { set: "found_number", value: true },
+        { set: "seen_archive_glitch", value: true },
+      ],
       options: [{ text: "Back", next: "board_archives" }],
     },
 

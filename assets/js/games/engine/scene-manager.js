@@ -173,6 +173,11 @@ class SceneManager {
         continue;
       }
 
+      if (block.type === "glitch") {
+        await this._renderGlitch(block);
+        continue;
+      }
+
       // Text with optional className (supports html: true for HTML content)
       if (block.text !== undefined) {
         if (block.html) {
@@ -610,5 +615,127 @@ class SceneManager {
     // Wait for all fades to complete
     await Promise.all(fadePromises);
     this.activeSounds.clear();
+  }
+
+  // Render glitching text effect
+  async _renderGlitch(block) {
+    const text = this._interpolateText(block.text || "");
+    const intensity = block.intensity || 0.3; // How much glitch (0-1)
+    const spread = block.spread || 2; // How many lines above/below to infect
+    const speed = block.speed || 50; // Animation speed in ms
+    const duration = block.duration || 2000; // How long the glitch lasts
+    const className = block.className || "glitch-text";
+
+    // Glitch character pool - mix of unicode, symbols, and corrupted chars
+    const glitchChars = [
+      "▓", "▒", "░", "█", "▀", "▄", "▌", "▐", "║", "╬", "╣", "╠",
+      "¡", "¿", "‽", "※", "§", "¶", "†", "‡", "∞", "≈", "≠", "±",
+      "░", "▒", "▓", "█", "▀", "▄", "▌", "▐", "╔", "╗", "╚", "╝",
+      "Ω", "∑", "∏", "∫", "√", "∂", "∆", "∇", "∈", "∉", "∩", "∪",
+      "̴", "̵", "̶", "̷", "̸", "̡", "̢", "̧", "̨", "̛", "̖", "̗",
+      "É", "È", "Ê", "Ë", "Á", "À", "Â", "Ã", "Ä", "Å", "Æ", "Ç",
+      "Ñ", "Õ", "Ö", "Ø", "Ú", "Ù", "Û", "Ü", "Ý", "Þ", "ß", "ð",
+      "!", "@", "#", "$", "%", "^", "&", "*", "?", "~", "`", "|"
+    ];
+
+    // Generate the glitched text
+    const generateGlitch = (baseText, glitchAmount) => {
+      let result = "";
+      for (let i = 0; i < baseText.length; i++) {
+        if (Math.random() < glitchAmount && baseText[i] !== " ") {
+          // Replace character with glitch
+          result += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        } else {
+          result += baseText[i];
+        }
+      }
+      return result;
+    };
+
+    // Generate random glitch lines that "infect" surrounding area
+    const generateInfectionLines = (baseLength) => {
+      const lines = [];
+      for (let i = 0; i < spread; i++) {
+        const lineLength = Math.floor(baseLength * Math.random() * 0.7);
+        const offset = Math.floor(Math.random() * baseLength * 0.3);
+        const glitchLine = " ".repeat(offset) +
+          Array.from({ length: lineLength }, () =>
+            glitchChars[Math.floor(Math.random() * glitchChars.length)]
+          ).join("");
+        lines.push(glitchLine);
+      }
+      return lines;
+    };
+
+    // Create container for animated glitch
+    const containerId = `glitch-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+    this.adapter.printHTML(
+      `<div id="${containerId}" class="${className}"></div>`
+    );
+
+    const container = this.adapter.terminal.output.querySelector(`#${containerId}`);
+    if (!container) return;
+
+    // Animation loop
+    const startTime = Date.now();
+    let finalLinesAbove = [];
+    let finalLinesBelow = [];
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+
+      if (elapsed >= duration) {
+        // Final state - show original text with minimal glitch, keep infection lines
+        const finalGlitch = generateGlitch(text, intensity * 0.1);
+
+        let output = "";
+        finalLinesAbove.forEach(line => {
+          output += `<div class="glitch-line glitch-above">${line}</div>`;
+        });
+        output += `<div class="glitch-line glitch-main">${finalGlitch}</div>`;
+        finalLinesBelow.forEach(line => {
+          output += `<div class="glitch-line glitch-below">${line}</div>`;
+        });
+
+        container.innerHTML = output;
+        return;
+      }
+
+      // Current glitch intensity (ramps up then down)
+      const progress = elapsed / duration;
+      const currentIntensity = intensity * Math.sin(progress * Math.PI);
+
+      // Generate infected lines above
+      const linesAbove = generateInfectionLines(text.length);
+      const linesBelow = generateInfectionLines(text.length);
+
+      // Store for final state
+      finalLinesAbove = linesAbove;
+      finalLinesBelow = linesBelow;
+
+      // Generate glitched main text
+      const glitchedText = generateGlitch(text, currentIntensity);
+
+      // Build output
+      let output = "";
+      linesAbove.forEach(line => {
+        output += `<div class="glitch-line glitch-above">${line}</div>`;
+      });
+      output += `<div class="glitch-line glitch-main">${glitchedText}</div>`;
+      linesBelow.forEach(line => {
+        output += `<div class="glitch-line glitch-below">${line}</div>`;
+      });
+
+      container.innerHTML = output;
+
+      // Continue animation
+      setTimeout(animate, speed);
+    };
+
+    // Start animation
+    animate();
+
+    // Wait for animation to complete
+    await this._sleep(duration);
   }
 }
