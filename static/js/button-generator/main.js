@@ -37,6 +37,11 @@ import * as noise from "./effects/noise.js";
 import * as rotate from "./effects/rotate.js";
 import * as hologram from "./effects/hologram.js";
 import * as spotlight from "./effects/spotlight.js";
+import * as sparkle from "./effects/background-sparkle.js";
+import * as textGlow from "./effects/text-glow.js";
+import * as plasma from "./effects/background-plasma.js";
+import * as emboss from "./effects/emboss.js";
+import * as bounceText from "./effects/text-bounce.js";
 
 /**
  * Initialize the button generator application
@@ -115,6 +120,11 @@ async function setupApp() {
   rotate.register(generator);
   hologram.register(generator);
   spotlight.register(generator);
+  sparkle.register(generator);
+  textGlow.register(generator);
+  plasma.register(generator);
+  emboss.register(generator);
+  bounceText.register(generator);
 
   console.log(`Registered ${generator.getAllEffects().length} effects`);
 

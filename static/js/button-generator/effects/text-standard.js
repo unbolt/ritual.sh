@@ -151,8 +151,10 @@ export class StandardTextEffect extends ButtonEffect {
     const rainbowActive = controlValues[`animate-text-rainbow${suffix}`];
     const spinActive = controlValues[`animate-text-spin${suffix}`];
     const tickerActive = controlValues[`animate-text-ticker${suffix}`];
+    const bounceActive = controlValues[`animate-text-bounce${suffix}`];
+    const glowActive = controlValues[`animate-text-glow${suffix}`];
 
-    return text && text.trim() !== "" && !waveActive && !rainbowActive && !spinActive && !tickerActive;
+    return text && text.trim() !== "" && !waveActive && !rainbowActive && !spinActive && !tickerActive && !bounceActive && !glowActive;
   }
 
   apply(context, controlValues, animState, renderData) {
