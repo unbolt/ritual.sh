@@ -1,7 +1,8 @@
 // State Manager - Manages game state with persistence and conditions
 class StateManager {
-  constructor(gameId) {
+  constructor(gameId, sharedState = null) {
     this.gameId = gameId;
+    this.sharedState = sharedState; // Optional SharedStateManager for series games
     this.state = {};
     this.storageKey = `game_${gameId}_state`;
   }
@@ -13,18 +14,38 @@ class StateManager {
   }
 
   // Get value using dot notation path (e.g., "inventory.sword")
+  // Checks local state first, then falls back to shared state if available
   get(path, defaultValue = undefined) {
+    // First check local state
+    const localValue = this._getFromState(this.state, path);
+    if (localValue !== undefined) {
+      return localValue;
+    }
+
+    // Fall back to shared state if available
+    if (this.sharedState) {
+      const sharedValue = this.sharedState.get(path);
+      if (sharedValue !== undefined) {
+        return sharedValue;
+      }
+    }
+
+    return defaultValue;
+  }
+
+  // Internal helper to get value from a specific state object
+  _getFromState(stateObj, path) {
     const parts = path.split(".");
-    let current = this.state;
+    let current = stateObj;
 
     for (const part of parts) {
       if (current === undefined || current === null) {
-        return defaultValue;
+        return undefined;
       }
       current = current[part];
     }
 
-    return current !== undefined ? current : defaultValue;
+    return current;
   }
 
   // Set value using dot notation path
@@ -78,6 +99,25 @@ class StateManager {
   hasItem(path, item) {
     const arr = this.get(path, []);
     return arr.includes(item);
+  }
+
+  // Set value in shared state (for series games)
+  setShared(path, value) {
+    if (!this.sharedState) {
+      console.warn("No shared state manager - setting locally instead");
+      return this.set(path, value);
+    }
+    this.sharedState.set(path, value);
+  }
+
+  // Check if path exists in shared state
+  hasShared(path) {
+    return this.sharedState?.get(path) !== undefined;
+  }
+
+  // Get reference to shared state manager
+  getSharedState() {
+    return this.sharedState;
   }
 
   // Evaluate a condition against current state

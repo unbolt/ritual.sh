@@ -5,12 +5,17 @@ class GameEngine {
     this.terminal = null;
     this.adapter = null;
     this.state = null;
+    this.sharedState = null; // For series games
     this.input = null;
     this.sound = null;
     this.scenes = null;
 
     this.isRunning = false;
     this.originalExecuteCommand = null;
+
+    // Series support
+    this.seriesId = gameDefinition.seriesId || null;
+    this.chapterNumber = gameDefinition.chapterNumber || null;
   }
 
   // Register this game as a terminal command
@@ -35,6 +40,10 @@ class GameEngine {
           self._reset();
           return;
         }
+        if (args[0] === "reset-series" && self.seriesId) {
+          self._resetSeries();
+          return;
+        }
         if (args[0] === "continue" || args[0] === "resume") {
           await self.start(true);
           return;
@@ -51,6 +60,23 @@ class GameEngine {
       return;
     }
 
+    // Initialize shared state for series games (do this early for chapter check)
+    if (this.seriesId && window.SharedStateManager) {
+      this.sharedState = new SharedStateManager(this.seriesId);
+      this.sharedState.init(this.definition.sharedStateDefaults || {});
+
+      // Check if this chapter can be played (sequential unlock)
+      if (this.chapterNumber && this.chapterNumber > 1) {
+        if (!this.sharedState.canPlayChapter(this.chapterNumber)) {
+          const prevChapter = this.chapterNumber - 1;
+          this.terminal.printError(
+            `You must complete Chapter ${prevChapter} before playing Chapter ${this.chapterNumber}.`,
+          );
+          return;
+        }
+      }
+    }
+
     // Update the global HTML to add the game in progress details
     document.body.classList.add("game-in-progress");
     console.log(document.body.classList);
@@ -59,7 +85,7 @@ class GameEngine {
 
     // Initialize components
     this.adapter = new TerminalAdapter(this.terminal);
-    this.state = new StateManager(this.definition.id);
+    this.state = new StateManager(this.definition.id, this.sharedState);
     this.input = new InputManager(this.adapter);
 
     // Initialize sound manager if SoundManager is available
@@ -77,8 +103,11 @@ class GameEngine {
     // Initialize state
     this.state.init(this.definition.initialState || {});
 
+    // Load and merge external scenes if defined
+    const mergedScenes = this._getMergedScenes();
+
     // Register scenes
-    this.scenes.registerScenes(this.definition.scenes);
+    this.scenes.registerScenes(mergedScenes);
 
     // Hook into terminal input
     this._hookInput();
@@ -234,6 +263,66 @@ class GameEngine {
     this.terminal.printSuccess(
       `${this.definition.name} progress has been reset.`,
     );
+  }
+
+  // Reset entire series progress (for series games)
+  _resetSeries() {
+    // Reset chapter state
+    this._reset();
+
+    // Reset shared state
+    if (this.seriesId) {
+      const sharedState = new SharedStateManager(this.seriesId);
+      sharedState.reset();
+      this.terminal.printSuccess(
+        `All ${this.definition.name} series progress has been reset.`,
+      );
+    }
+  }
+
+  // Create context for scene factories
+  _createSceneContext() {
+    return {
+      chapterNumber: this.chapterNumber || 1,
+      seriesId: this.seriesId,
+      sharedState: this.sharedState,
+      art: this.definition.art || {},
+      additionalOptions: this.definition.additionalHubOptions || [],
+    };
+  }
+
+  // Load external scenes and merge with inline scenes
+  _getMergedScenes() {
+    const inlineScenes = this.definition.scenes || {};
+
+    // If no external scenes defined, just return inline scenes
+    if (
+      !this.definition.externalScenes ||
+      this.definition.externalScenes.length === 0
+    ) {
+      return inlineScenes;
+    }
+
+    // Load external scenes from registered factories
+    const externalScenes = {};
+    const context = this._createSceneContext();
+
+    for (const sceneRef of this.definition.externalScenes) {
+      const factory = window.SceneFactories?.[sceneRef];
+      if (factory) {
+        try {
+          const scenes = factory(context);
+          Object.assign(externalScenes, scenes);
+        } catch (e) {
+          console.error(`Failed to load external scenes from ${sceneRef}:`, e);
+        }
+      } else {
+        console.warn(`Scene factory not found: ${sceneRef}`);
+      }
+    }
+
+    // Inline scenes override external scenes (allows chapter-specific overrides)
+    return { ...externalScenes, ...inlineScenes };
   }
 
   // Debug command to skip to a specific scene

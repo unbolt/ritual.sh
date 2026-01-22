@@ -322,6 +322,19 @@ class SceneManager {
         this.state.set(action.set, action.value);
       }
 
+      // Set value in shared state (for series games)
+      if (action.setShared !== undefined) {
+        this.state.setShared(action.setShared, action.value);
+      }
+
+      // Mark a chapter as complete in shared state
+      if (action.markChapterComplete !== undefined) {
+        const sharedState = this.state.getSharedState();
+        if (sharedState) {
+          sharedState.markChapterComplete(action.markChapterComplete);
+        }
+      }
+
       if (action.increment !== undefined) {
         this.state.increment(action.increment, action.amount || 1);
       }
