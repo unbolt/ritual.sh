@@ -1,6 +1,6 @@
-import { ButtonEffect } from './effect-base.js';
+import { ButtonEffect } from "./effect-base.js";
 
-import { ColorQuantizer } from './color-quantizer.js';
+import { ColorQuantizer } from "./color-quantizer.js";
 
 /**
  * Animation state class - passed to effects for frame-based rendering
@@ -30,7 +30,7 @@ export class AnimationState {
 export class ButtonGenerator {
   constructor(canvas, config = {}) {
     this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
+    this.ctx = canvas.getContext("2d");
 
     // Animation configuration
     this.animConfig = {
@@ -38,7 +38,7 @@ export class ButtonGenerator {
       duration: config.duration || 2, // seconds
       get totalFrames() {
         return this.fps * this.duration;
-      }
+      },
     };
 
     // GIF export configuration
@@ -55,7 +55,7 @@ export class ButtonGenerator {
       border: [],
       text: [],
       text2: [],
-      general: []
+      general: [],
     };
 
     // Registered effects by ID for quick lookup
@@ -69,8 +69,20 @@ export class ButtonGenerator {
 
     // Font list for preloading
     this.fonts = config.fonts || [
-      'Lato', 'Roboto', 'Open Sans', 'Montserrat', 'Oswald',
-      'Bebas Neue', 'Roboto Mono', 'VT323', 'Press Start 2P', 'DSEG7-Classic'
+      "Lato",
+      "Roboto",
+      "Open Sans",
+      "Montserrat",
+      "Oswald",
+      "Bebas Neue",
+      "Roboto Mono",
+      "VT323",
+      "Press Start 2P",
+      "DSEG7-Classic",
+      "Pixelify Sans",
+      "Bungee Spice",
+      "Creepster",
+      "Barrio",
     ];
   }
 
@@ -80,11 +92,13 @@ export class ButtonGenerator {
    */
   registerEffect(effect) {
     if (!(effect instanceof ButtonEffect)) {
-      throw new Error('Effect must extend ButtonEffect class');
+      throw new Error("Effect must extend ButtonEffect class");
     }
 
     if (this.effectsById.has(effect.id)) {
-      console.warn(`Effect with ID "${effect.id}" is already registered. Skipping.`);
+      console.warn(
+        `Effect with ID "${effect.id}" is already registered. Skipping.`,
+      );
       return;
     }
 
@@ -125,14 +139,14 @@ export class ButtonGenerator {
    * @returns {Promise}
    */
   async preloadFonts() {
-    const fontPromises = this.fonts.flatMap(font => [
+    const fontPromises = this.fonts.flatMap((font) => [
       document.fonts.load(`400 12px "${font}"`),
       document.fonts.load(`700 12px "${font}"`),
-      document.fonts.load(`italic 400 12px "${font}"`)
+      document.fonts.load(`italic 400 12px "${font}"`),
     ]);
 
     await Promise.all(fontPromises);
-    console.log('All fonts loaded for canvas');
+    console.log("All fonts loaded for canvas");
   }
 
   /**
@@ -144,28 +158,28 @@ export class ButtonGenerator {
 
     // Get all registered control IDs from effects
     const allControls = new Set();
-    this.getAllEffects().forEach(effect => {
-      effect.controls.forEach(control => {
+    this.getAllEffects().forEach((effect) => {
+      effect.controls.forEach((control) => {
         allControls.add(control.id);
       });
     });
 
     // Read values from DOM
-    allControls.forEach(id => {
+    allControls.forEach((id) => {
       const element = document.getElementById(id);
       if (element) {
-        if (element.type === 'checkbox') {
+        if (element.type === "checkbox") {
           values[id] = element.checked;
-        } else if (element.type === 'range' || element.type === 'number') {
+        } else if (element.type === "range" || element.type === "number") {
           values[id] = parseFloat(element.value);
-        } else if (element.type === 'file') {
+        } else if (element.type === "file") {
           // For file inputs, return an object with file metadata and blob URL
           if (element.dataset.blobUrl) {
             values[id] = {
               fileName: element.dataset.fileName,
               blobUrl: element.dataset.blobUrl,
               fileSize: parseInt(element.dataset.fileSize),
-              fileType: element.dataset.fileType
+              fileType: element.dataset.fileType,
             };
           } else {
             values[id] = null;
@@ -200,21 +214,29 @@ export class ButtonGenerator {
       width: this.canvas.width,
       height: this.canvas.height,
       centerX: this.canvas.width / 2,
-      centerY: this.canvas.height / 2
+      centerY: this.canvas.height / 2,
     };
 
     // Apply effects in order: transform -> background -> background-animation -> text/text2 -> border -> general
-    const renderOrder = ['transform', 'background', 'background-animation', 'text', 'text2', 'border', 'general'];
+    const renderOrder = [
+      "transform",
+      "background",
+      "background-animation",
+      "text",
+      "text2",
+      "border",
+      "general",
+    ];
 
     // Save context once before transforms
     this.ctx.save();
 
-    renderOrder.forEach(type => {
-      this.effects[type]?.forEach(effect => {
+    renderOrder.forEach((type) => {
+      this.effects[type]?.forEach((effect) => {
         if (effect.canApply(controlValues)) {
           // Transform effects should NOT be wrapped in save/restore
           // They need to persist for all subsequent drawing operations
-          if (type !== 'transform') {
+          if (type !== "transform") {
             this.ctx.save();
           }
 
@@ -224,7 +246,7 @@ export class ButtonGenerator {
             console.error(`Error applying effect ${effect.id}:`, error);
           }
 
-          if (type !== 'transform') {
+          if (type !== "transform") {
             this.ctx.restore();
           }
         }
@@ -241,9 +263,10 @@ export class ButtonGenerator {
    */
   hasAnimationsEnabled() {
     const controlValues = this.getControlValues();
-    return this.getAllEffects().some(effect =>
-      effect.type !== 'background' && // Background effects can be static
-      effect.isEnabled(controlValues)
+    return this.getAllEffects().some(
+      (effect) =>
+        effect.type !== "background" && // Background effects can be static
+        effect.isEnabled(controlValues),
     );
   }
 
@@ -264,7 +287,7 @@ export class ButtonGenerator {
         const animState = new AnimationState(
           frameNum,
           this.animConfig.totalFrames,
-          this.animConfig.fps
+          this.animConfig.fps,
         );
         this.draw(animState);
         this.applyPreviewQuantization();
@@ -308,7 +331,11 @@ export class ButtonGenerator {
   applyPreviewQuantization() {
     const colorCount = this.gifConfig.colorCount;
     if (colorCount < 256) {
-      const quantizedData = ColorQuantizer.quantize(this.canvas, colorCount, 'floyd-steinberg');
+      const quantizedData = ColorQuantizer.quantize(
+        this.canvas,
+        colorCount,
+        "floyd-steinberg",
+      );
       this.ctx.putImageData(quantizedData, 0, 0);
     }
   }
@@ -326,27 +353,34 @@ export class ButtonGenerator {
     return new Promise((resolve, reject) => {
       try {
         // Create temporary canvas for frame generation
-        const frameCanvas = document.createElement('canvas');
+        const frameCanvas = document.createElement("canvas");
         frameCanvas.width = this.canvas.width;
         frameCanvas.height = this.canvas.height;
-        const frameCtx = frameCanvas.getContext('2d');
+        const frameCtx = frameCanvas.getContext("2d");
 
         // Merge options with defaults
-        const quality = options.quality !== undefined ? options.quality : this.gifConfig.quality;
-        const gifDither = options.dither !== undefined ? options.dither : this.gifConfig.dither;
-        const colorCount = options.colorCount !== undefined ? options.colorCount : this.gifConfig.colorCount;
+        const quality =
+          options.quality !== undefined
+            ? options.quality
+            : this.gifConfig.quality;
+        const gifDither =
+          options.dither !== undefined ? options.dither : this.gifConfig.dither;
+        const colorCount =
+          options.colorCount !== undefined
+            ? options.colorCount
+            : this.gifConfig.colorCount;
 
         // Determine if we need custom quantization
         const useCustomQuantization = colorCount < 256;
-        const customDither = useCustomQuantization ? 'floyd-steinberg' : false;
+        const customDither = useCustomQuantization ? "floyd-steinberg" : false;
 
         // Initialize gif.js
         const gifOptions = {
           workers: 2,
           quality: quality,
-          workerScript: '/js/gif.worker.js',
+          workerScript: "/js/gif.worker.js",
           width: this.canvas.width,
-          height: this.canvas.height
+          height: this.canvas.height,
         };
 
         // Add gif.js dither option if specified (only when not using custom quantization)
@@ -361,18 +395,22 @@ export class ButtonGenerator {
 
         const generateFrames = async () => {
           for (let i = 0; i < totalFrames; i++) {
-            const animState = new AnimationState(i, totalFrames, this.animConfig.fps);
+            const animState = new AnimationState(
+              i,
+              totalFrames,
+              this.animConfig.fps,
+            );
 
             // Draw to temporary canvas
             frameCtx.clearRect(0, 0, frameCanvas.width, frameCanvas.height);
             const tempGenerator = new ButtonGenerator(frameCanvas, {
               fps: this.animConfig.fps,
               duration: this.animConfig.duration,
-              fonts: this.fonts
+              fonts: this.fonts,
             });
 
             // Copy effects
-            this.getAllEffects().forEach(effect => {
+            this.getAllEffects().forEach((effect) => {
               tempGenerator.registerEffect(effect);
             });
 
@@ -380,40 +418,43 @@ export class ButtonGenerator {
 
             // Apply custom color quantization if needed
             if (useCustomQuantization) {
-              const quantizedData = ColorQuantizer.quantize(frameCanvas, colorCount, customDither);
+              const quantizedData = ColorQuantizer.quantize(
+                frameCanvas,
+                colorCount,
+                customDither,
+              );
               frameCtx.putImageData(quantizedData, 0, 0);
             }
 
             gif.addFrame(frameCtx, {
               delay: 1000 / this.animConfig.fps,
-              copy: true
+              copy: true,
             });
 
             if (progressCallback) {
-              progressCallback(i / totalFrames, 'generating');
+              progressCallback(i / totalFrames, "generating");
             }
 
             // Yield to browser every 5 frames
             if (i % 5 === 0) {
-              await new Promise(resolve => setTimeout(resolve, 0));
+              await new Promise((resolve) => setTimeout(resolve, 0));
             }
           }
         };
 
         generateFrames().then(() => {
-          gif.on('finished', (blob) => {
+          gif.on("finished", (blob) => {
             resolve(blob);
           });
 
-          gif.on('progress', (progress) => {
+          gif.on("progress", (progress) => {
             if (progressCallback) {
-              progressCallback(progress, 'encoding');
+              progressCallback(progress, "encoding");
             }
           });
 
           gif.render();
         });
-
       } catch (error) {
         reject(error);
       }
@@ -425,17 +466,17 @@ export class ButtonGenerator {
    */
   bindControls() {
     const allControls = new Set();
-    this.getAllEffects().forEach(effect => {
-      effect.controls.forEach(control => {
+    this.getAllEffects().forEach((effect) => {
+      effect.controls.forEach((control) => {
         allControls.add(control.id);
       });
     });
 
-    allControls.forEach(id => {
+    allControls.forEach((id) => {
       const element = document.getElementById(id);
       if (element) {
-        element.addEventListener('input', () => this.updatePreview());
-        element.addEventListener('change', () => this.updatePreview());
+        element.addEventListener("input", () => this.updatePreview());
+        element.addEventListener("change", () => this.updatePreview());
       }
     });
   }

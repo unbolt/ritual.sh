@@ -125,6 +125,10 @@ export class StandardTextEffect extends ButtonEffect {
           { value: "VT323", label: "VT323" },
           { value: "Press Start 2P", label: "Press Start 2P" },
           { value: "DSEG7-Classic", label: "DSEG7" },
+          { value: "Pixelify Sans", label: "Pixelify Sans" },
+          { value: "Bungee Spice", label: "Bungee Spice" },
+          { value: "Creepster", label: "Creepster" },
+          { value: "Barrio", label: "Barrio" },
         ],
       },
       {
@@ -151,8 +155,19 @@ export class StandardTextEffect extends ButtonEffect {
     const rainbowActive = controlValues[`animate-text-rainbow${suffix}`];
     const spinActive = controlValues[`animate-text-spin${suffix}`];
     const tickerActive = controlValues[`animate-text-ticker${suffix}`];
+    const bounceActive = controlValues[`animate-text-bounce${suffix}`];
+    const glowActive = controlValues[`animate-text-glow${suffix}`];
 
-    return text && text.trim() !== "" && !waveActive && !rainbowActive && !spinActive && !tickerActive;
+    return (
+      text &&
+      text.trim() !== "" &&
+      !waveActive &&
+      !rainbowActive &&
+      !spinActive &&
+      !tickerActive &&
+      !bounceActive &&
+      !glowActive
+    );
   }
 
   apply(context, controlValues, animState, renderData) {
