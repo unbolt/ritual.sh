@@ -255,10 +255,12 @@ const boxingDayGame = {
         {
           text: "<em>Your clock reads 11:54 PM.</em>",
           html: true,
+          className: "info",
         },
         {
           text: "<em>Six minutes until midnight.</em><br/><br />",
           html: true,
+          className: "info",
         },
         { type: "delay", ms: 800 },
         "",
