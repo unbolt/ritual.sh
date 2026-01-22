@@ -76,7 +76,6 @@ async function setupApp() {
     fps: 20,
     duration: 2,
     fonts: [
-      "Arial",
       "Lato",
       "Roboto",
       "Open Sans",
@@ -87,6 +86,10 @@ async function setupApp() {
       "VT323",
       "Press Start 2P",
       "DSEG7-Classic",
+      "Pixelify Sans",
+      "Bungee Spice",
+      "Creepster",
+      "Barrio",
     ],
   });
 
@@ -169,21 +172,21 @@ async function setupApp() {
  * Add GIF export settings controls
  */
 function addGifExportSettings(container, generator) {
-  const groupDiv = document.createElement('div');
-  groupDiv.className = 'control-group collapsed';
+  const groupDiv = document.createElement("div");
+  groupDiv.className = "control-group collapsed";
 
   // Header
-  const header = document.createElement('h3');
-  header.className = 'control-group-header';
-  header.textContent = 'Advanced Settings';
+  const header = document.createElement("h3");
+  header.className = "control-group-header";
+  header.textContent = "Advanced Settings";
   groupDiv.appendChild(header);
 
-  const controlsDiv = document.createElement('div');
-  controlsDiv.className = 'control-group-controls';
+  const controlsDiv = document.createElement("div");
+  controlsDiv.className = "control-group-controls";
 
   // Color count control
-  const colorsWrapper = document.createElement('div');
-  colorsWrapper.className = 'control-wrapper';
+  const colorsWrapper = document.createElement("div");
+  colorsWrapper.className = "control-wrapper";
   colorsWrapper.innerHTML = `
     <div class="info-text">Note: This only affects frame-by-frame settings, i.e. 8 colours would be 8 colours per frame. I am working on a solution for this.</div>
     <label for="gif-colors">
@@ -198,8 +201,8 @@ function addGifExportSettings(container, generator) {
   controlsDiv.appendChild(colorsWrapper);
 
   // Quality control
-  const qualityWrapper = document.createElement('div');
-  qualityWrapper.className = 'control-wrapper';
+  const qualityWrapper = document.createElement("div");
+  qualityWrapper.className = "control-wrapper";
   qualityWrapper.innerHTML = `
     <label for="gif-quality">
       Quantization Quality
@@ -213,8 +216,8 @@ function addGifExportSettings(container, generator) {
   controlsDiv.appendChild(qualityWrapper);
 
   // Dither control
-  const ditherWrapper = document.createElement('div');
-  ditherWrapper.className = 'control-wrapper';
+  const ditherWrapper = document.createElement("div");
+  ditherWrapper.className = "control-wrapper";
   ditherWrapper.innerHTML = `
     <label for="gif-dither">
       Dithering Pattern
@@ -234,38 +237,38 @@ function addGifExportSettings(container, generator) {
   container.appendChild(groupDiv);
 
   // Setup event listeners for value display
-  const colorsInput = document.getElementById('gif-colors');
-  const colorsValue = document.getElementById('gif-colors-value');
-  colorsInput.addEventListener('input', () => {
+  const colorsInput = document.getElementById("gif-colors");
+  const colorsValue = document.getElementById("gif-colors-value");
+  colorsInput.addEventListener("input", () => {
     colorsValue.textContent = colorsInput.value;
   });
 
-  const qualityInput = document.getElementById('gif-quality');
-  const qualityValue = document.getElementById('gif-quality-value');
-  qualityInput.addEventListener('input', () => {
+  const qualityInput = document.getElementById("gif-quality");
+  const qualityValue = document.getElementById("gif-quality-value");
+  qualityInput.addEventListener("input", () => {
     qualityValue.textContent = qualityInput.value;
   });
 
   // Update generator config when changed
-  colorsInput.addEventListener('change', () => {
+  colorsInput.addEventListener("change", () => {
     generator.gifConfig.colorCount = parseInt(colorsInput.value);
     generator.updatePreview(); // Update preview to show color quantization
   });
 
   // Also update preview on slider input for real-time feedback
-  colorsInput.addEventListener('input', () => {
+  colorsInput.addEventListener("input", () => {
     generator.gifConfig.colorCount = parseInt(colorsInput.value);
     generator.updatePreview(); // Real-time preview update
   });
 
-  qualityInput.addEventListener('change', () => {
+  qualityInput.addEventListener("change", () => {
     generator.gifConfig.quality = parseInt(qualityInput.value);
   });
 
-  const ditherSelect = document.getElementById('gif-dither');
-  ditherSelect.addEventListener('change', () => {
+  const ditherSelect = document.getElementById("gif-dither");
+  ditherSelect.addEventListener("change", () => {
     const value = ditherSelect.value;
-    generator.gifConfig.dither = value === 'false' ? false : value;
+    generator.gifConfig.dither = value === "false" ? false : value;
   });
 }
 
