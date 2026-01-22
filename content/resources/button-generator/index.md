@@ -26,6 +26,7 @@ Big thanks to [neonaut's 88x31 archive](https://neonaut.neocities.org/cyber/88x3
 - 08/01/2025 - Total refactor to be modular, added many more effects.
 - 09/01/2025 - Rewrote the bevel inset and outset border code so they look a lot nicer at the corners. Updates throughout so that multibyte (emoji!) characters should work.
 - 13/01/2025 - Added ticker scrolling and flashing text options. Added a background image selector.
+- 22/01/2025 - Added a few new effects and multiple new fonts. Send font requests if you want something specific!
 
 ---
 
