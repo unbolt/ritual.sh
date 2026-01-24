@@ -32,25 +32,25 @@ class GameEngine {
     const self = this;
     const def = this.definition;
 
-    this.terminal.registerCommand(
-      def.command || def.id,
-      def.description || `Play ${def.name}`,
-      async (args) => {
-        if (args[0] === "reset") {
-          self._reset();
-          return;
-        }
-        if (args[0] === "reset-series" && self.seriesId) {
-          self._resetSeries();
-          return;
-        }
-        if (args[0] === "continue" || args[0] === "resume") {
-          await self.start(true);
-          return;
-        }
-        await self.start();
-      },
-    );
+    // this.terminal.registerCommand(
+    //   def.command || def.id,
+    //   def.description || `Play ${def.name}`,
+    //   async (args) => {
+    //     if (args[0] === "reset") {
+    //       self._reset();
+    //       return;
+    //     }
+    //     if (args[0] === "reset-series" && self.seriesId) {
+    //       self._resetSeries();
+    //       return;
+    //     }
+    //     if (args[0] === "continue" || args[0] === "resume") {
+    //       await self.start(true);
+    //       return;
+    //     }
+    //     await self.start();
+    //   },
+    // );
   }
 
   // Start the game
