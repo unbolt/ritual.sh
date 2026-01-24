@@ -3,6 +3,9 @@
 {{ $init := resources.Get "js/init.js" }}
 {{ $commandFiles := resources.Match "js/commands/*.js" }}
 {{ $subfolderFiles := resources.Match "js/*/*.js" }}
+{{ $deepSubfolderFiles := resources.Match "js/*/*/*.js" }}
+{{ $deeperSubfolderFiles := resources.Match "js/*/*/*/*.js" }}
+{{ $deepestSubfolderFiles := resources.Match "js/*/*/*/*/*.js" }}
 {{ $remaining := resources.Match "js/*.js" }}
 {{ $filtered := slice }}
 {{ range $remaining }}
@@ -18,7 +21,33 @@
     {{ $filteredSubfolders = $filteredSubfolders | append . }}
   {{ end }}
 {{ end }}
-{{ $allFiles := slice $terminalShell | append $filtered | append $init | append $commandFiles | append $filteredSubfolders }}
+{{ $filteredDeepSubfolders := slice }}
+{{ range $deepSubfolderFiles }}
+  {{ $path := .RelPermalink }}
+  {{ if not (strings.Contains $path "/adoptables/") }}
+    {{ $filteredDeepSubfolders = $filteredDeepSubfolders | append . }}
+  {{ end }}
+{{ end }}
+{{ $filteredDeeperSubfolders := slice }}
+{{ $gameChapterFiles := slice }}
+{{ range $deeperSubfolderFiles }}
+  {{ $path := .RelPermalink }}
+  {{ if not (strings.Contains $path "/adoptables/") }}
+    {{ if strings.Contains $path "/games/games/" }}
+      {{ $gameChapterFiles = $gameChapterFiles | append . }}
+    {{ else }}
+      {{ $filteredDeeperSubfolders = $filteredDeeperSubfolders | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $filteredDeepestSubfolders := slice }}
+{{ range $deepestSubfolderFiles }}
+  {{ $path := .RelPermalink }}
+  {{ if not (strings.Contains $path "/adoptables/") }}
+    {{ $filteredDeepestSubfolders = $filteredDeepestSubfolders | append . }}
+  {{ end }}
+{{ end }}
+{{ $allFiles := slice $terminalShell | append $filtered | append $init | append $commandFiles | append $filteredSubfolders | append $filteredDeepSubfolders | append $filteredDeeperSubfolders | append $filteredDeepestSubfolders | append $gameChapterFiles }}
 {{ $terminalBundle := $allFiles | resources.Concat "js/terminal-bundle.js" | resources.Minify | resources.Fingerprint }}
 <!-- prettier-ignore-end -->
 <script
