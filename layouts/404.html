@@ -1,6 +1,384 @@
 {{ define "header" }}{{ partial "page-header.html" . }}{{ end }} {{ define
 "main" }}
-<article>
-  <h1>This is not the page you were looking for</h1>
-</article>
+<style>
+  .error-404 {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .terminal-window {
+    background: #0a0a0a;
+    border: 2px solid #333;
+    border-radius: 8px;
+    max-width: 650px;
+    width: 100%;
+    box-shadow:
+      0 0 30px rgba(0, 255, 0, 0.1),
+      inset 0 0 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #333;
+  }
+
+  .terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .terminal-btn.red {
+    background: #ff5f56;
+  }
+  .terminal-btn.yellow {
+    background: #ffbd2e;
+  }
+  .terminal-btn.green {
+    background: #27ca40;
+  }
+
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    color: #666;
+    font-family: monospace;
+    font-size: 12px;
+  }
+
+  .terminal-body {
+    padding: 20px;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    color: #00ff00;
+    line-height: 1.6;
+    position: relative;
+    min-height: 400px;
+  }
+
+  .terminal-body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .terminal-body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    pointer-events: none;
+  }
+
+  .terminal-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .prompt {
+    color: #00ff00;
+  }
+
+  .command {
+    color: #00ffff;
+  }
+
+  .error-text {
+    color: #ff4444;
+  }
+
+  .warning-text {
+    color: #ff9900;
+  }
+
+  .ascii-art {
+    color: #ff4444;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 10px;
+    line-height: 1.2;
+    margin: 15px 0;
+    text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+    animation: glitch-text 3s infinite;
+    overflow-x: auto;
+  }
+
+  @keyframes glitch-text {
+    0%,
+    90%,
+    100% {
+      text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+      transform: translate(0);
+    }
+    92% {
+      text-shadow:
+        -2px 0 #0ff,
+        2px 0 #f0f;
+      transform: translate(-2px, 1px);
+    }
+    94% {
+      text-shadow:
+        2px 0 #0ff,
+        -2px 0 #f0f;
+      transform: translate(2px, -1px);
+    }
+    96% {
+      text-shadow:
+        -1px 0 #0ff,
+        1px 0 #f0f;
+      transform: translate(1px, 2px);
+    }
+  }
+
+  .skull-art {
+    color: #00ff00;
+    white-space: pre;
+    font-size: 8px;
+    line-height: 1.1;
+    margin: 20px 0;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  }
+
+  .blink {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .typing-line {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 0.5s steps(40) forwards;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .delay-1 {
+    animation-delay: 0.3s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .delay-2 {
+    animation-delay: 0.6s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .delay-3 {
+    animation-delay: 0.9s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  .delay-4 {
+    animation-delay: 1.2s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .home-link {
+    color: #00ffff;
+    text-decoration: none;
+    border-bottom: 1px dashed #00ffff;
+    transition: all 0.2s;
+  }
+
+  .home-link:hover {
+    color: #ff00ff;
+    border-color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: #00ff00;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+
+  .status-bar {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .status-item {
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  .status-item .status-label {
+    color: #888;
+  }
+
+  .status-item .status-value {
+    color: #ff9900;
+  }
+
+  @media (max-width: 600px) {
+    .ascii-art {
+      font-size: 6px;
+    }
+    .skull-art {
+      font-size: 5px;
+    }
+    .terminal-body {
+      padding: 15px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+<div class="error-404">
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <span class="terminal-btn red"></span>
+      <span class="terminal-btn yellow"></span>
+      <span class="terminal-btn green"></span>
+      <span class="terminal-title">bash -- 404</span>
+    </div>
+    <div class="terminal-body">
+      <div class="terminal-content">
+        <div>
+          <span class="prompt">visitor@ritual.sh</span>:<span class="command"
+            >~$</span
+          >
+          cd {{ .Page.RelPermalink }}
+        </div>
+        <div class="fade-in delay-1">
+          <span class="error-text"
+            >bash: cd: {{ .Page.RelPermalink }}: No such file or directory</span
+          >
+        </div>
+
+        <div class="fade-in delay-2" style="margin-top: 10px">
+          <span class="prompt">visitor@ritual.sh</span>:<span class="command"
+            >~$</span
+          >
+          cat /var/log/error.log
+        </div>
+
+        <pre class="ascii-art fade-in delay-3">
+                   _.--""--._
+                .'          `.
+               /   O      O   \
+              :                :
+              |                |
+              : ',          ,' :
+               \  '-......-'  /
+                `.          .'
+                  '-......-'
+             .                       .
+            /:\                    /:\
+           /:::\ T H E   V O I D  /:::\
+          /:::::\   C L A I M S  /:::::\
+          \:::::/ A N O T H E R  \:::::/
+           \:::/                  \:::/
+            ':/  4       0       4 \:'
+              `.                 .'
+                `'-------------'`
+
+        YOUR PAGE HAS BEEN DEVOURED
+</pre
+        >
+
+        <div class="fade-in delay-4">
+          <div>
+            <span class="warning-text">[WARN]</span> The page you seek has
+            vanished into the void
+          </div>
+          <div><span class="warning-text">[WARN]</span> Possible causes:</div>
+          <div style="margin-left: 20px">
+            - Page was mass: 0, eaten by /dev/null
+          </div>
+          <div style="margin-left: 20px">- Gremlins in the mainframe</div>
+          <div style="margin-left: 20px">- You typed with your eyes closed</div>
+          <div style="margin-left: 20px">- The matrix had a hiccup</div>
+
+          <div style="margin-top: 15px">
+            <span class="prompt">visitor@ritual.sh</span>:<span class="command"
+              >~$</span
+            >
+            <a href="/" class="home-link">cd ~</a>
+            <span style="color: #666"># return to safety</span>
+            <span class="cursor"></span>
+          </div>
+        </div>
+
+        <div class="status-bar fade-in delay-4">
+          <span class="status-item"
+            ><span class="status-label">EXIT:</span>
+            <span class="status-value">404</span></span
+          >
+          <span class="status-item"
+            ><span class="status-label">ERRNO:</span>
+            <span class="status-value">ENOENT</span></span
+          >
+          <span class="status-item"
+            ><span class="status-label">SIGNAL:</span>
+            <span class="status-value">LOST</span></span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {{ end }}
