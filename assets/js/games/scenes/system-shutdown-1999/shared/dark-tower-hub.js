@@ -169,11 +169,6 @@ window.SceneFactories["system-shutdown-1999/dark-tower-hub"] = function (
           style: "single",
         },
         {
-          text: "The usual chatter.",
-          italic: true,
-          className: "info",
-        },
-        {
           condition: "found_number",
           content: {
             type: "text",
@@ -181,6 +176,11 @@ window.SceneFactories["system-shutdown-1999/dark-tower-hub"] = function (
             text: "Nothing about lighthouses...",
             className: "info",
           },
+        },
+        {
+          text: "The usual chatter, except...",
+          italic: true,
+          className: "info",
         },
       ],
       options: [
