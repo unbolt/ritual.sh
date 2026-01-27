@@ -79,6 +79,15 @@ buttons:
   - name: "Mosaic of Mags"
     url: "https://lamusica-queer-remix.neocities.org/"
     image: "mosaicofmags.png"
+  - name: "Snail Cafe 1997"
+    url: "https://snailcafe1997.neocities.org/"
+    image: "snailcafe1997.png"
+  - name: "ScifiPony"
+    url: "https://scifipony.com"
+    image: "scifipony.png"
+  - name: "Bunny vs CSS"
+    url: "https://skunkysevillair.neocities.org/"
+    image: "skunky.gif"
 ---
 
 Here are a bunch of ~stickers~ buttons that I've collected on my travels around the IndieWeb.

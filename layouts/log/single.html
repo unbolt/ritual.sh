@@ -35,8 +35,8 @@
               <div>❇️</div>
               <div>
                 {{ if eq .Type "blog" }} New blog post:
-                <a href="{{ .Permalink }}">{{ .Title }}</a> {{ else }} {{ .Plain
-                }} {{ end }}
+                <a href="{{ .Permalink }}">{{ .Title }}</a> {{ else }} {{
+                .Content }} {{ end }}
               </div>
 
               {{ end }}
