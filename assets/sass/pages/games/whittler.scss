@@ -157,5 +157,80 @@ body.games.whittler {
         border-radius: 5px;
       }
     }
+
+    .game-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+
+      @include media-up(md) {
+        flex-direction: row;
+        gap: 2rem;
+      }
+
+      > div {
+        flex: 1;
+        border-image: url("/images/games/whittler/panelInset_brown.png") 10 10 /
+          10px 10px / 1px round round;
+        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.6));
+        margin-bottom: 2rem;
+        padding: 5px;
+
+        a {
+          color: #563c23;
+          font-weight: bold;
+        }
+
+        > div {
+          padding: 1em;
+          background-color: #97714a;
+          min-height: 100%;
+        }
+      }
+      .game-highscores {
+        ol {
+          text-align: left;
+          list-style: none;
+          li.highscore-entry {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            color: #563c23;
+            font-size: 1.5em;
+            border-bottom: 1px dotted #563c23;
+            padding: 0.5em;
+            &.top-score {
+              color: #f6e6c4;
+              border: 1px dashed #563c23;
+              border-radius: 1em;
+              font-weight: bold;
+            }
+
+            &:last-child {
+              border-bottom: 0px;
+            }
+          }
+        }
+      }
+      .game-details {
+        p {
+          text-align: left;
+          color: #563c23;
+          margin-bottom: 0.5rem;
+        }
+        li {
+          text-align: left;
+          color: #563c23;
+          margin-bottom: 0.5rem;
+          list-style: "🪵 ";
+          list-style-position: outside;
+          margin-left: 1.25rem;
+          strong {
+            color: #f6e6c4;
+          }
+        }
+      }
+    }
   }
 }
