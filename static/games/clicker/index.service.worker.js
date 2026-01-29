@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1769693184|4645131895';
+const CACHE_VERSION = '1769693384|4844716121';
 /** @type {string} */
 const CACHE_PREFIX = 'Clicker-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
