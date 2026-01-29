@@ -1,0 +1,88 @@
+{{ define "main" }}
+
+<div id="whittler-game">
+  <div class="whittler-birds">
+    <img src="/images/games/whittler/birds1.png" />
+  </div>
+  <div class="whitter-game-container">
+    {{ if .Params.logo }}
+    <div class="banner-image">
+      <picture>
+        <img
+          src="{{ .Params.logo }}"
+          srcset="{{ .Params.logo }} 1x"
+          width="430"
+          alt="{{ .Title }}"
+          class="header-image"
+        />
+      </picture>
+    </div>
+    {{ end }}
+
+    <h1>
+      a game where you try to earn ¥1,000,000 as quickly as possible so you can
+      retire
+    </h1>
+
+    <div class="iframe-container">
+      <div>
+        <iframe src="http://localhost:1313/games/clicker/index.html"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const gameContainer = document.getElementById("whittler-game");
+    const birds = document.querySelector(".whittler-birds");
+
+    // Parallax effect
+    document.addEventListener("mousemove", function (e) {
+      const windowWidth = window.innerWidth;
+      const mouseX = e.clientX;
+
+      // Calculate percentage from center (-1 to 1)
+      const percentX = (mouseX / windowWidth - 0.5) * 2;
+
+      // Maximum shift amount in pixels
+      const maxShift = 50;
+
+      // Different parallax speeds for each layer (layer 1 is closest, moves most)
+      const layer1Shift = percentX * maxShift * 0.6;
+      const layer2Shift = percentX * maxShift * 0.5;
+      const layer3Shift = percentX * maxShift * 0.35;
+      const layer4Shift = percentX * maxShift * 0.2;
+      const layer5Shift = percentX * maxShift * 0.1;
+
+      gameContainer.style.backgroundPosition =
+        `${layer1Shift}px 0, ` +
+        `${layer2Shift}px 0, ` +
+        `${layer3Shift}px 0, ` +
+        `${layer4Shift}px 0, ` +
+        `${layer5Shift}px 0`;
+    });
+
+    // Occasional bird flying
+    function flyBirds() {
+      const randomTop = Math.random() * 2 + 5;
+      birds.style.top = randomTop + "%";
+
+      birds.classList.add("flying");
+
+      // Remove class after animation completes
+      setTimeout(() => {
+        birds.classList.remove("flying");
+
+        const nextFlight = Math.random() * 20000 + 10000;
+        setTimeout(flyBirds, nextFlight);
+      }, 15000);
+    }
+
+    // Wait  2 seconds to start first flyby
+    const initialDelay = 2000;
+    setTimeout(flyBirds, initialDelay);
+  })();
+</script>
+
+{{ end }}

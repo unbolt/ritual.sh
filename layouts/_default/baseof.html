@@ -35,7 +35,7 @@
     {{ end }}
   </head>
 
-  <body>
+  <body class="{{ urlize  .Type }} {{ urlize .Title }}">
     {{ block "header" . }}{{ partial "site-header.html" .}}{{ end }}
     <main role="main">{{ block "main" . }}{{ end }}</main>
     {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }} {{ block

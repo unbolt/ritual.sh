@@ -1,0 +1,161 @@
+body.games.whittler {
+  font-family: "Pixelify Sans", display;
+  -webkit-font-smoothing: none;
+  text-transform: uppercase;
+  color: #f6e6c4;
+
+  a {
+    text-decoration-style: wavy;
+  }
+
+  .neon-sign {
+    transform: none;
+    top: 10px;
+    left: 20px;
+    line-height: 3rem;
+    .neon-text {
+      color: #f6e6c4;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+      animation: none;
+      font-family: "Pixelify Sans", display;
+
+      &:after {
+        color: #4e4223;
+        content: "GAMES";
+        font-size: 1.25rem;
+        position: absolute;
+        bottom: -15px;
+        right: 0;
+        transform: rotate(-5deg);
+      }
+    }
+  }
+
+  footer[role="contentinfo"] {
+    border-image: url("/images/games/whittler/panelInset_brown.png") 10 10 /
+      10px 10px / 1px round round;
+
+    right: 5px;
+    bottom: 5px;
+    background: transparent;
+    padding: 2px;
+    .crt,
+    .warning,
+    a {
+      animation: none;
+      background: #97714a;
+      color: #4e4223 !important;
+      font-family: "Pixelify Sans", display;
+
+      &:before,
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  #whittler-game {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 2rem;
+    margin: auto;
+    text-align: center;
+    background-color: #4e4223;
+    overflow: hidden;
+    background-image:
+      url("/images/games/whittler/layer_1.png"),
+      url("/images/games/whittler/layer_2.png"),
+      url("/images/games/whittler/layer_3.png"),
+      url("/images/games/whittler/layer_4.png"),
+      url("/images/games/whittler/layer_5.png");
+    background-size: 100%;
+    background-repeat: repeat-x;
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+    transition: background-position 0.15s ease-out;
+
+    .whittler-birds {
+      position: absolute;
+      top: 10%;
+      left: -200px;
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+
+      img {
+        filter: none;
+        margin: 0;
+      }
+
+      &.flying {
+        animation: flyAcross 15s linear;
+      }
+    }
+
+    @keyframes flyAcross {
+      0% {
+        left: -200px;
+        opacity: 0;
+      }
+      5% {
+        opacity: 1;
+      }
+      95% {
+        opacity: 1;
+      }
+      100% {
+        left: 110%;
+        opacity: 0;
+      }
+    }
+
+    .whitter-game-container {
+      width: 1152px;
+      margin: auto;
+    }
+
+    h1 {
+      width: 70%;
+      margin: auto;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+      margin-bottom: 3rem;
+    }
+
+    .header-image {
+      position: relative;
+      filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.6));
+      margin-bottom: 3rem;
+      z-index: 999;
+    }
+
+    .iframe-container {
+      border-image: url("/images/games/whittler/panelInset_brown.png") 10 10 /
+        10px 10px / 1px round round;
+      border-width: 8px;
+      border-style: solid;
+      width: 1152px;
+      height: auto;
+      aspect-ratio: 16/9;
+      margin: auto;
+      filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.6));
+
+      div {
+        background-color: #97714a;
+      }
+
+      iframe {
+        margin-top: 2px;
+        border: 0px;
+        width: 100%;
+        aspect-ratio: 16/9;
+        border: 2px solid #563c23;
+        border-radius: 5px;
+      }
+    }
+  }
+}
