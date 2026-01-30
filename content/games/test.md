@@ -1,7 +1,6 @@
 ---
-title: "Whittler"
+title: "Test"
 type: games
-layout: whittler
 logo: logo.avif
 thumbnail: "logo.avif"
 description: "A clicker game where you whittle wood to earn ¥1,000,000"

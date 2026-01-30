@@ -1,0 +1,27 @@
+<div class="game-summary">
+  {{ if .Params.thumbnail }}
+    <div class="game-thumbnail">
+      <img src="{{ .Params.thumbnail }}" alt="{{ .Title }}" loading="lazy">
+    </div>
+  {{ else }}
+    <div class="game-thumbnail game-thumbnail-placeholder">
+      <div class="placeholder-icon">🎮</div>
+    </div>
+  {{ end }}
+
+  <div class="game-info">
+    <h3 class="game-title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h3>
+
+    {{ if .Params.description }}
+      <p class="game-description">{{ .Params.description }}</p>
+    {{ end }}
+
+    {{ if .Params.genre }}
+      <div class="game-meta">
+        <span class="game-genre">{{ .Params.genre }}</span>
+      </div>
+    {{ end }}
+  </div>
+</div>

@@ -64,5 +64,6 @@
     {{ $buttons := resources.Get "js/buttons.js" | resources.Minify | resources.Fingerprint }}
     <script src="{{ $buttons.RelPermalink }}" integrity="{{ $buttons.Data.Integrity }}"></script>
     {{ end }}
+
   </body>
 </html>

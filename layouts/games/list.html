@@ -1,0 +1,137 @@
+{{ define "main" }}
+
+<div class="games-arcade-page">
+  <div class="desk"></div>
+
+  <div class="xfiles-poster hidden-lg-down">
+    <div class="xfiles-content">
+      <div class="ufo-illustration">
+        <div class="ufo-dome"></div>
+        <div class="ufo-body">
+          <div class="ufo-lights">
+            <div class="ufo-light"></div>
+            <div class="ufo-light"></div>
+            <div class="ufo-light"></div>
+            <div class="ufo-light"></div>
+          </div>
+        </div>
+        <div class="light-beam"></div>
+      </div>
+      <div class="believe-text">I WANT TO<br />BELIEVE</div>
+    </div>
+  </div>
+  <div class="arcade-neon">{{ partial "elements/neon-sign.html" . }}</div>
+  <div class="arcade-lamp">{{ partial "elements/lavalamp.html" . }}</div>
+  <div class="arcade-container">
+    <!-- Arcade Cabinet Top/Marquee -->
+    <div class="arcade-marquee">
+      <div class="marquee-light marquee-light-left"></div>
+      <div class="marquee-content">
+        <pre class="arcade-title">
+       ██████   █████  ███    ███ ███████ ███████
+██       ██   ██ ████  ████ ██      ██
+      ██   ███ ███████ ██ ████ ██ █████   ███████
+  ██    ██ ██   ██ ██  ██  ██ ██           ██
+  ██████  ██   ██ ██      ██ ███████ ███████
+        </pre>
+      </div>
+      <div class="marquee-light marquee-light-right"></div>
+    </div>
+
+    <!-- Main Cabinet Body -->
+    <div class="arcade-cabinet">
+      <!-- CRT Screen Area -->
+      <div class="arcade-screen-bezel">
+        <div class="arcade-screen crt">
+          <div class="screen-content">
+            <!-- Games Grid/List -->
+            <div class="games-grid" id="games-grid">
+              {{ range $index, $element := .Paginator.Pages }}
+              <div class="game-card" data-game-index="{{ $index }}">
+                {{ .Render "summary" }}
+              </div>
+              {{ end }}
+            </div>
+
+            <!-- Insert Coin Message (if no games or initial state) -->
+            {{ if eq (len .Paginator.Pages) 0 }}
+            <div class="insert-coin-message visible">
+              <span class="blinking">INSERT COIN</span>
+            </div>
+            {{ else }}
+            <div class="insert-coin-message">
+              <span class="blinking">INSERT COIN</span>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Panel -->
+      <div class="control-panel">
+        <!-- Joystick (separate from surface to avoid perspective transform) -->
+        <div class="joystick-container">
+          <div class="joystick" id="arcade-joystick">
+            <div class="joystick-base"></div>
+            <div class="joystick-stick">
+              <div class="joystick-ball"></div>
+            </div>
+          </div>
+          <div class="control-label">MOVE</div>
+        </div>
+
+        <!-- Buttons (separate from surface to avoid perspective transform) -->
+        <div class="buttons-overlay">
+          <div class="buttons-container">
+            <div class="arcade-button-wrap">
+              <button
+                class="arcade-button arcade-button-select"
+                id="button-select"
+                aria-label="Select Game"
+              >
+                <span class="button-top"></span>
+              </button>
+              <div class="control-label">SELECT</div>
+            </div>
+            <div class="arcade-button-wrap">
+              <button
+                class="arcade-button arcade-button-back"
+                id="button-back"
+                aria-label="Back"
+              >
+                <span class="button-top"></span>
+              </button>
+              <div class="control-label">BACK</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mute Toggle (separate from surface to avoid perspective transform) -->
+        <div class="sound-toggle-overlay">
+          <button
+            class="sound-toggle"
+            id="sound-toggle"
+            aria-label="Toggle Sound"
+          >
+            <span class="sound-icon sound-on">🔊</span>
+            <span class="sound-icon sound-off" style="display: none">🔇</span>
+          </button>
+          <div class="control-label">SOUND</div>
+        </div>
+
+        <div class="control-panel-surface">
+          <!-- Visual surface only, no interactive elements -->
+        </div>
+      </div>
+
+      <!-- Cabinet Base/Kick Plate -->
+      <div class="cabinet-base">
+        <div class="coin-slot"></div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    {{ partial "pagination.html" .Paginator }}
+  </div>
+</div>
+{{ end }}
