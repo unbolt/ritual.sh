@@ -14,10 +14,13 @@ draft: false
 - 🦷 I lost my only filling so had to go to the dentist and get that sorted out.
 - ❤️‍🩹 Slipped on our wet muddy patio last Sunday and hurt my knee which has been painful all week - overall a crap week, health-wise!
 - ⚔️ I completed Final Fantasy VII: Remake, this time the PC version mostly played on the Steam Deck. Still don't have a good grasp on what the heck is going on with the fate elements, but overall it's a good game and a worthy remake.
+- 📺️ Finished watching DanDaDan series 1, it was excellent and I highly recommend it.
 
 ## Links I Found Interesting
 
 - [Astrological CPU Scheduler](https://github.com/zampierilucas/scx_horoscope) - I'd like to find a reason to use this.
+- [Soup of Life](https://soupof.life/) - Cool life/world simulation. Would be cool to make something like this.
+- [Snow Simulator](https://potch.me/2026/snow-simulation-toy.html) - Just a snow simulation.
 
 ## Music
 
