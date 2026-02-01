@@ -1,0 +1,323 @@
+// ============================================
+// STANDALONE ARCADE JOYSTICK ELEMENT
+// Decorative joystick with neon arcade aesthetics
+// ============================================
+
+.joystick-element {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  container-type: inherit;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  //padding: 10% 20%;
+  //margin: 2rem auto;
+  perspective: 800px;
+  max-width: 250px;
+  margin: auto;
+
+  // Ground shadow for depth
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 20%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    filter: blur(0.5cqw);
+    z-index: -1;
+  }
+
+  .joystick-housing {
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%) rotateX(25deg);
+    transform-style: preserve-3d;
+    width: 50%;
+    height: 20%;
+    background: linear-gradient(
+      180deg,
+      #0a0a0a 0%,
+      #1a1a1a 10%,
+      #2a2a2a 50%,
+      #3a3a3a 70%,
+      #4a4a4a 90%
+    );
+    border-radius: 1.5cqw 1.5cqw 0.5cqw 0.5cqw;
+    box-shadow:
+      inset 0 0.8cqw 1.5cqw rgba(255, 255, 255, 0.08),
+      inset 0 -0.8cqw 1.5cqw rgba(0, 0, 0, 0.4);
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 35%;
+      transform: rotateX(-55deg);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.03) 20%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.2) 100%
+      );
+      border-radius: 1cqw;
+      pointer-events: none;
+    }
+  }
+
+  .joystick-base {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 20%;
+    height: 8%;
+    background: radial-gradient(
+      ellipse at center,
+      #3a3a3a 0%,
+      #2a2a2a 40%,
+      #1a1a1a 70%,
+      #0a0a0a 100%
+    );
+    border-radius: 50%;
+    box-shadow:
+      0 0 2cqw rgba(0, 255, 255, 0.2),
+      0 0.8cqw 2cqw rgba(0, 0, 0, 0.8),
+      inset 0 0.5cqw 1.5cqw rgba(0, 0, 0, 0.9),
+      inset 0 -0.3cqw 0.8cqw rgba(255, 255, 255, 0.08);
+    z-index: 2;
+
+    &::before {
+      content: none;
+    }
+
+    // Mounting screws
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 15%;
+      transform: translateY(-50%);
+      width: 8%;
+      aspect-ratio: 1 / 1;
+      background: radial-gradient(
+        circle at 30% 30%,
+        #4a4a4a 0%,
+        #2a2a2a 50%,
+        #1a1a1a 100%
+      );
+      border-radius: 50%;
+      box-shadow:
+        inset 0 0.15cqw 0.3cqw rgba(0, 0, 0, 0.9),
+        inset 0 -0.08cqw 0.15cqw rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .joystick-stick {
+    position: absolute;
+    bottom: 37%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5%;
+    height: 20%;
+    background: linear-gradient(
+      90deg,
+      #5a5a5a 0%,
+      #4a4a4a 30%,
+      #3a3a3a 50%,
+      #2a2a2a 70%,
+      #1a1a1a 100%
+    );
+    border-radius: 50% / 8%;
+    box-shadow:
+      -0.4cqw 0 1cqw rgba(0, 0, 0, 0.7),
+      0.4cqw 0 0.8cqw rgba(255, 255, 255, 0.1),
+      inset 0.2cqw 0 0.5cqw rgba(255, 255, 255, 0.08),
+      inset -0.2cqw 0 0.5cqw rgba(0, 0, 0, 0.6);
+    transform-origin: bottom center;
+    animation: joystick-idle-sway 4s ease-in-out infinite;
+    z-index: 3;
+  }
+
+  .joystick-ball {
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    aspect-ratio: 1 / 1;
+    width: 300%;
+    height: auto;
+    background: radial-gradient(
+      circle at 35% 35%,
+      #7dffff 0%,
+      #00ffff 40%,
+      #00cccc 70%,
+      #00aaaa 100%
+    );
+    border-radius: 50%;
+    box-shadow:
+      0 0 2cqw rgba(0, 255, 255, 0.9),
+      0 0 4cqw rgba(0, 255, 255, 0.7),
+      0 0 6cqw rgba(0, 255, 255, 0.4),
+      0 1cqw 2cqw rgba(0, 0, 0, 0.8),
+      inset -0.5cqw -0.5cqw 1cqw rgba(0, 0, 0, 0.6),
+      inset 0.5cqw 0.5cqw 1cqw rgba(125, 255, 255, 0.7);
+    animation: joystick-neon-pulse 3s ease-in-out infinite;
+    z-index: 4;
+  }
+
+  // ============================================
+  // ANIMATIONS
+  // ============================================
+
+  // Gentle swaying motion
+  @keyframes joystick-idle-sway {
+    0%,
+    100% {
+      transform: translateX(-50%) rotate(0deg);
+    }
+    25% {
+      transform: translateX(-50%) rotate(-3deg);
+    }
+    50% {
+      transform: translateX(-50%) rotate(0deg);
+    }
+    75% {
+      transform: translateX(-50%) rotate(3deg);
+    }
+  }
+
+  // Pulsing neon glow
+  @keyframes joystick-neon-pulse {
+    0%,
+    100% {
+      filter: brightness(1);
+    }
+    50% {
+      filter: brightness(1.2);
+    }
+  }
+
+  // Optional: Color cycling animation
+  @keyframes joystick-color-cycle {
+    0%,
+    100% {
+      background: radial-gradient(
+        circle at 35% 35%,
+        #7dffff 0%,
+        #00ffff 40%,
+        #00cccc 70%,
+        #00aaaa 100%
+      );
+      box-shadow:
+        0 0 1.5cqw rgba(0, 255, 255, 0.8),
+        0 0 3cqw rgba(0, 255, 255, 0.6),
+        0 0 5cqw rgba(0, 255, 255, 0.4),
+        0 0.8cqw 1.5cqw rgba(0, 0, 0, 0.7),
+        inset -0.3cqw -0.3cqw 0.8cqw rgba(0, 0, 0, 0.5),
+        inset 0.3cqw 0.3cqw 0.8cqw rgba(125, 255, 255, 0.6);
+    }
+    33% {
+      background: radial-gradient(
+        circle at 35% 35%,
+        #ff7dff 0%,
+        #ff00ff 40%,
+        #cc00cc 70%,
+        #aa00aa 100%
+      );
+      box-shadow:
+        0 0 1.5cqw rgba(255, 0, 255, 0.8),
+        0 0 3cqw rgba(255, 0, 255, 0.6),
+        0 0 5cqw rgba(255, 0, 255, 0.4),
+        0 0.8cqw 1.5cqw rgba(0, 0, 0, 0.7),
+        inset -0.3cqw -0.3cqw 0.8cqw rgba(0, 0, 0, 0.5),
+        inset 0.3cqw 0.3cqw 0.8cqw rgba(255, 125, 255, 0.6);
+    }
+    66% {
+      background: radial-gradient(
+        circle at 35% 35%,
+        #ffff7d 0%,
+        #ffff00 40%,
+        #cccc00 70%,
+        #aaaa00 100%
+      );
+      box-shadow:
+        0 0 1.5cqw rgba(255, 255, 0, 0.8),
+        0 0 3cqw rgba(255, 255, 0, 0.6),
+        0 0 5cqw rgba(255, 255, 0, 0.4),
+        0 0.8cqw 1.5cqw rgba(0, 0, 0, 0.7),
+        inset -0.3cqw -0.3cqw 0.8cqw rgba(0, 0, 0, 0.5),
+        inset 0.3cqw 0.3cqw 0.8cqw rgba(255, 255, 125, 0.6);
+    }
+  }
+}
+
+// ============================================
+// COLOR VARIANTS
+// ============================================
+
+.joystick-element.magenta .joystick-ball {
+  background: radial-gradient(
+    circle at 35% 35%,
+    #ff7dff 0%,
+    #ff00ff 40%,
+    #cc00cc 70%,
+    #aa00aa 100%
+  );
+  box-shadow:
+    0 0 1.5cqw rgba(255, 0, 255, 0.8),
+    0 0 3cqw rgba(255, 0, 255, 0.6),
+    0 0 5cqw rgba(255, 0, 255, 0.4),
+    0 0.8cqw 1.5cqw rgba(0, 0, 0, 0.7),
+    inset -0.3cqw -0.3cqw 0.8cqw rgba(0, 0, 0, 0.5),
+    inset 0.3cqw 0.3cqw 0.8cqw rgba(255, 125, 255, 0.6);
+}
+
+.joystick-element.yellow .joystick-ball {
+  background: radial-gradient(
+    circle at 35% 35%,
+    #ffff7d 0%,
+    #ffff00 40%,
+    #cccc00 70%,
+    #aaaa00 100%
+  );
+  box-shadow:
+    0 0 1.5cqw rgba(255, 255, 0, 0.8),
+    0 0 3cqw rgba(255, 255, 0, 0.6),
+    0 0 5cqw rgba(255, 255, 0, 0.4),
+    0 0.8cqw 1.5cqw rgba(0, 0, 0, 0.7),
+    inset -0.3cqw -0.3cqw 0.8cqw rgba(0, 0, 0, 0.5),
+    inset 0.3cqw 0.3cqw 0.8cqw rgba(255, 255, 125, 0.6);
+}
+
+// Apply color cycle animation to modifier class
+.joystick-element.color-cycle .joystick-ball {
+  animation:
+    joystick-color-cycle 6s ease-in-out infinite,
+    joystick-neon-pulse 3s ease-in-out infinite;
+}
+
+// ============================================
+// ACCESSIBILITY
+// ============================================
+
+@media (prefers-reduced-motion: reduce) {
+  .joystick-stick,
+  .joystick-ball {
+    animation: none;
+  }
+}
