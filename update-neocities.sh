@@ -54,6 +54,7 @@ FOLDERS_TO_REMOVE=(
     "fonts"
     "images"
     "js"
+    "games"
 )
 
 echo -e "${BLUE}Removing excluded folders from public...${NC}"
