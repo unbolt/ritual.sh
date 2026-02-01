@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 <div class="games-arcade-page">
-  <div class="desk"></div>
+  <div class="desk hidden-lg-down"></div>
 
   <div class="xfiles-poster hidden-lg-down">
     <div class="xfiles-content">
@@ -20,22 +20,44 @@
       <div class="believe-text">I WANT TO<br />BELIEVE</div>
     </div>
   </div>
-  <div class="arcade-neon">{{ partial "elements/neon-sign.html" . }}</div>
-  <div class="arcade-lamp">{{ partial "elements/lavalamp.html" . }}</div>
+  <div class="arcade-neon hidden-lg-down">
+    {{ partial "elements/neon-sign.html" . }}
+  </div>
+  <div class="arcade-lamp hidden-lg-down">
+    {{ partial "elements/lavalamp.html" . }}
+  </div>
   <div class="arcade-container">
     <!-- Arcade Cabinet Top/Marquee -->
     <div class="arcade-marquee">
-      <div class="marquee-light marquee-light-left"></div>
+      <div class="marquee-light marquee-light-left hidden-lg-down"></div>
       <div class="marquee-content">
-        <pre class="arcade-title">
-       ██████   █████  ███    ███ ███████ ███████
-██       ██   ██ ████  ████ ██      ██
-      ██   ███ ███████ ██ ████ ██ █████   ███████
-  ██    ██ ██   ██ ██  ██  ██ ██           ██
-  ██████  ██   ██ ██      ██ ███████ ███████
-        </pre>
+        <div class="arcade-title-wrapper">
+          <pre class="arcade-title">
+ ██████╗  █████╗ ███╗   ███╗███████╗███████╗
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝██╔════╝
+██║  ███╗███████║██╔████╔██║█████╗  ███████╗
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ╚════██║
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗███████║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝
+
+          </pre>
+          <div class="arcade-subtitle">INSERT COIN</div>
+        </div>
       </div>
-      <div class="marquee-light marquee-light-right"></div>
+      <div class="marquee-light marquee-light-right hidden-lg-down"></div>
+
+      <!-- Sound Toggle in Header -->
+      <div class="marquee-sound-toggle">
+        <button
+          class="sound-toggle"
+          id="sound-toggle"
+          aria-label="Toggle Sound"
+        >
+          <span class="sound-icon sound-on">🔊</span>
+          <span class="sound-icon sound-off" style="display: none">🔇</span>
+        </button>
+        <div class="sound-label">SOUND</div>
+      </div>
     </div>
 
     <!-- Main Cabinet Body -->
@@ -46,8 +68,13 @@
           <div class="screen-content">
             <!-- Games Grid/List -->
             <div class="games-grid" id="games-grid">
-              {{ range $index, $element := .Paginator.Pages }}
-              <div class="game-card" data-game-index="{{ $index }}">
+              {{ range $index, $element := (.Paginator.Pages.ByParam
+              "released").Reverse }}
+              <div
+                class="game-card{{ if not .Params.released }} unreleased{{ end }}"
+                data-game-index="{{ $index }}"
+                data-released="{{ .Params.released }}"
+              >
                 {{ .Render "summary" }}
               </div>
               {{ end }}
@@ -68,7 +95,7 @@
       </div>
 
       <!-- Control Panel -->
-      <div class="control-panel">
+      <div class="control-panel hidden-lg-down">
         <!-- Joystick (separate from surface to avoid perspective transform) -->
         <div class="joystick-container">
           <div class="joystick" id="arcade-joystick">
@@ -77,11 +104,10 @@
               <div class="joystick-ball"></div>
             </div>
           </div>
-          <div class="control-label">MOVE</div>
         </div>
 
         <!-- Buttons (separate from surface to avoid perspective transform) -->
-        <div class="buttons-overlay">
+        <div class="buttons-overlay hidden-lg-down">
           <div class="buttons-container">
             <div class="arcade-button-wrap">
               <button
@@ -106,26 +132,10 @@
           </div>
         </div>
 
-        <!-- Mute Toggle (separate from surface to avoid perspective transform) -->
-        <div class="sound-toggle-overlay">
-          <button
-            class="sound-toggle"
-            id="sound-toggle"
-            aria-label="Toggle Sound"
-          >
-            <span class="sound-icon sound-on">🔊</span>
-            <span class="sound-icon sound-off" style="display: none">🔇</span>
-          </button>
-          <div class="control-label">SOUND</div>
-        </div>
-
-        <div class="control-panel-surface">
-          <!-- Visual surface only, no interactive elements -->
-        </div>
+        <div class="control-panel-surface hidden-lg-down"></div>
       </div>
 
-      <!-- Cabinet Base/Kick Plate -->
-      <div class="cabinet-base">
+      <div class="cabinet-base hidden-lg-down">
         <div class="coin-slot"></div>
       </div>
     </div>

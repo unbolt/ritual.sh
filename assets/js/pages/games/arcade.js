@@ -16,7 +16,7 @@ class ArcadeGamesController {
     // State
     this.currentGameIndex = 0;
     this.gameCards = [];
-    this.soundEnabled = true;
+    this.soundEnabled = false; // Start muted
     this.sounds = {};
 
     // Initialize
@@ -31,9 +31,14 @@ class ArcadeGamesController {
   init() {
     this.gameCards = Array.from(this.gamesGrid.querySelectorAll('.game-card'));
 
-    // Select first game by default
+    // Select first released game by default
     if (this.gameCards.length > 0) {
-      this.selectGame(0);
+      const firstReleasedIndex = this.gameCards.findIndex(card => this.isGameReleased(card));
+      if (firstReleasedIndex >= 0) {
+        this.selectGame(firstReleasedIndex);
+      } else {
+        this.selectGame(0);
+      }
     } else {
       this.showInsertCoin();
     }
@@ -142,8 +147,10 @@ class ArcadeGamesController {
     // Game cards click
     this.gameCards.forEach((card, index) => {
       card.addEventListener('click', () => {
-        this.selectGame(index);
-        this.pressSelect();
+        if (this.isGameReleased(card)) {
+          this.selectGame(index);
+          this.pressSelect();
+        }
       });
 
       card.addEventListener('mouseenter', () => {
@@ -165,11 +172,15 @@ class ArcadeGamesController {
    * Set up sound toggle button
    */
   setupSoundToggle() {
+    const soundOn = this.soundToggle.querySelector('.sound-on');
+    const soundOff = this.soundToggle.querySelector('.sound-off');
+
+    // Set initial state (muted)
+    soundOn.style.display = 'none';
+    soundOff.style.display = 'inline-block';
+
     this.soundToggle.addEventListener('click', () => {
       this.soundEnabled = !this.soundEnabled;
-
-      const soundOn = this.soundToggle.querySelector('.sound-on');
-      const soundOff = this.soundToggle.querySelector('.sound-off');
 
       if (this.soundEnabled) {
         soundOn.style.display = 'inline-block';
@@ -213,8 +224,9 @@ class ArcadeGamesController {
    * Navigate left in grid
    */
   moveLeft() {
-    if (this.currentGameIndex > 0) {
-      this.selectGame(this.currentGameIndex - 1);
+    const newIndex = this.findPreviousSelectableGame(this.currentGameIndex);
+    if (newIndex !== -1) {
+      this.selectGame(newIndex);
       this.playSound('move');
     }
   }
@@ -223,8 +235,9 @@ class ArcadeGamesController {
    * Navigate right in grid
    */
   moveRight() {
-    if (this.currentGameIndex < this.gameCards.length - 1) {
-      this.selectGame(this.currentGameIndex + 1);
+    const newIndex = this.findNextSelectableGame(this.currentGameIndex);
+    if (newIndex !== -1) {
+      this.selectGame(newIndex);
       this.playSound('move');
     }
   }
@@ -241,6 +254,37 @@ class ArcadeGamesController {
     const gap = 20; // From CSS
 
     return Math.floor((gridWidth + gap) / (cardWidth + gap)) || 1;
+  }
+
+  /**
+   * Check if a game is released
+   */
+  isGameReleased(card) {
+    return card.dataset.released === 'true';
+  }
+
+  /**
+   * Find next selectable game (skip unreleased)
+   */
+  findNextSelectableGame(currentIndex) {
+    for (let i = currentIndex + 1; i < this.gameCards.length; i++) {
+      if (this.isGameReleased(this.gameCards[i])) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  /**
+   * Find previous selectable game (skip unreleased)
+   */
+  findPreviousSelectableGame(currentIndex) {
+    for (let i = currentIndex - 1; i >= 0; i--) {
+      if (this.isGameReleased(this.gameCards[i])) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   /**
@@ -265,9 +309,15 @@ class ArcadeGamesController {
    * Press select button (navigate to game)
    */
   pressSelect() {
+    const selectedCard = this.gameCards[this.currentGameIndex];
+
+    // Don't allow selecting unreleased games
+    if (!this.isGameReleased(selectedCard)) {
+      return;
+    }
+
     this.playSound('select');
 
-    const selectedCard = this.gameCards[this.currentGameIndex];
     const link = selectedCard.querySelector('a');
 
     if (link) {

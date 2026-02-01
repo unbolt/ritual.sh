@@ -2,10 +2,10 @@
 title: "Whittler"
 type: games
 layout: whittler
-logo: logo.avif
+logo: whittler.webp
 thumbnail: "logo.avif"
 description: "A clicker game where you whittle wood to earn ¥1,000,000"
-genre: "Clicker"
+released: true
 ---
 
 Whittler the game :)

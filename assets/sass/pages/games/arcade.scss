@@ -67,13 +67,23 @@
 
   .arcade-cabinet {
     background:
-      repeating-linear-gradient(90deg, #3d2817 0px, #4a3420 2px, #3d2817 4px),
-      linear-gradient(180deg, #4a3420 0%, #2d1f12 100%);
-    border: 4px solid #2a2a2a;
+      linear-gradient(
+        135deg,
+        rgba(255, 0, 255, 0.1) 0%,
+        rgba(0, 255, 255, 0.1) 50%,
+        rgba(255, 255, 0, 0.1) 100%
+      ),
+      repeating-linear-gradient(90deg, #1a1a2e 0px, #2a2a4e 2px, #1a1a2e 4px),
+      linear-gradient(180deg, #2a2a4e 0%, #1a1a2e 100%);
+    border: 6px solid #5a5a8e;
     border-top: none;
     border-bottom: none;
     position: relative;
     padding-top: 30px;
+    box-shadow:
+      0 0 30px rgba(138, 43, 226, 0.3),
+      0 0 60px rgba(0, 255, 255, 0.2),
+      inset 0 0 100px rgba(138, 43, 226, 0.1);
 
     @include media-down(lg) {
       border-left: none;
@@ -87,28 +97,56 @@
 
   .arcade-marquee {
     position: relative;
-    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
-    border: 4px solid #2a2a2a;
-    border-bottom: none;
-    border-radius: 20px 20px 0 0;
-    padding: 20px;
+    background:
+      linear-gradient(
+        135deg,
+        #ff00ff 0%,
+        #00ffff 25%,
+        #ffff00 50%,
+        #ff00ff 75%,
+        #00ffff 100%
+      ),
+      linear-gradient(180deg, #1a1a2e 0%, #0f0f1e 100%);
+    background-size:
+      400% 100%,
+      100% 100%;
+    background-blend-mode: overlay, normal;
+    border: 6px solid #bcffff;
+    border-radius: 20px;
+    margin-bottom: -20px;
+    z-index: 9;
+    padding: 30px 20px;
     text-align: center;
     box-shadow:
-      inset 0 2px 4px rgba(255, 255, 255, 0.1),
+      0 0 20px rgba(0, 255, 255, 0.9),
+      0 0 40px rgba(0, 255, 255, 0.7),
+      0 0 60px rgba(255, 0, 255, 0.6),
+      0 0 80px rgba(255, 255, 0, 0.5),
+      0 0 100px rgba(255, 0, 255, 0.4),
+      inset 0 2px 8px rgba(255, 255, 255, 0.3),
       inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+    animation: marqueeGradient 8s linear infinite;
 
     @include media-down(lg) {
       border-radius: 0;
-      padding: 15px 10px;
-      border-left: none;
-      border-right: none;
+      padding: 20px 10px;
+    }
+
+    // Sound toggle in marquee
+    .marquee-sound-toggle {
+      position: absolute;
+      top: 50%;
+      right: 80px;
+      transform: translateY(-50%);
+      text-align: center;
+      z-index: 10;
+
+      @include media-down(lg) {
+        right: 50px;
+      }
     }
 
     .marquee-content {
-      color: #0f0;
-      text-shadow:
-        0 0 10px rgba(0, 255, 0, 0.8),
-        0 0 20px rgba(0, 255, 0, 0.5);
       font-family: "Pixelify Sans", monospace;
 
       @include media-down(lg) {
@@ -116,23 +154,51 @@
       }
     }
 
+    .arcade-title-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
     .arcade-title {
       margin: 0;
-      animation: textGlow 2s ease-in-out infinite alternate;
+      color: #fff;
+      font-weight: bold;
+      animation: arcadeTitleGlow 2s ease-in-out infinite alternate;
+    }
+
+    .arcade-subtitle {
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: #ffff00;
+      text-shadow:
+        0 0 10px rgba(255, 255, 0, 1),
+        0 0 20px rgba(255, 255, 0, 0.8),
+        0 0 30px rgba(255, 165, 0, 0.6);
+      animation: subtitlePulse 1.5s ease-in-out infinite;
+
+      @include media-down(lg) {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+      }
     }
   }
 
   .marquee-light {
     position: absolute;
     top: 50%;
-    width: 20px;
-    height: 20px;
-    background: #ff0;
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle at 30% 30%, #fff, #ff00ff);
     border-radius: 50%;
     box-shadow:
-      0 0 15px #ff0,
-      0 0 30px #ff0;
-    animation: marquee-blink 1.5s ease-in-out infinite alternate;
+      0 0 20px rgba(255, 0, 255, 1),
+      0 0 40px rgba(255, 0, 255, 0.8),
+      0 0 60px rgba(0, 255, 255, 0.6),
+      inset 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: marqueeLightCycle 2s ease-in-out infinite;
 
     &.marquee-light-left {
       left: 20px;
@@ -140,12 +206,12 @@
 
     &.marquee-light-right {
       right: 20px;
-      animation-delay: 0.75s;
+      animation-delay: 1s;
     }
 
     @include media-down(lg) {
-      width: 12px;
-      height: 12px;
+      width: 16px;
+      height: 16px;
 
       &.marquee-light-left {
         left: 10px;
@@ -156,13 +222,76 @@
     }
   }
 
-  @keyframes marquee-blink {
+  @keyframes marqueeGradient {
+    0% {
+      background-position:
+        0% 50%,
+        0% 0%;
+    }
+    100% {
+      background-position:
+        400% 50%,
+        0% 0%;
+    }
+  }
+
+  @keyframes marqueeLightCycle {
+    0%,
+    100% {
+      background: radial-gradient(circle at 30% 30%, #fff, #ff00ff);
+      box-shadow:
+        0 0 20px rgba(255, 0, 255, 1),
+        0 0 40px rgba(255, 0, 255, 0.8),
+        0 0 60px rgba(0, 255, 255, 0.6);
+    }
+    33% {
+      background: radial-gradient(circle at 30% 30%, #fff, #00ffff);
+      box-shadow:
+        0 0 20px rgba(0, 255, 255, 1),
+        0 0 40px rgba(0, 255, 255, 0.8),
+        0 0 60px rgba(255, 255, 0, 0.6);
+    }
+    66% {
+      background: radial-gradient(circle at 30% 30%, #fff, #ffff00);
+      box-shadow:
+        0 0 20px rgba(255, 255, 0, 1),
+        0 0 40px rgba(255, 255, 0, 0.8),
+        0 0 60px rgba(255, 0, 255, 0.6);
+    }
+  }
+
+  @keyframes subtitlePulse {
     0%,
     100% {
       opacity: 1;
+      transform: scale(1);
     }
     50% {
-      opacity: 0.3;
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes arcadeTitleGlow {
+    0% {
+      text-shadow:
+        0 0 10px rgba(0, 255, 255, 1),
+        0 0 20px rgba(0, 255, 255, 0.8),
+        0 0 30px rgba(255, 0, 255, 0.6),
+        0 0 40px rgba(255, 0, 255, 0.4),
+        2px 2px 0px rgba(255, 0, 255, 0.8),
+        -2px -2px 0px rgba(0, 255, 255, 0.8);
+      filter: drop-shadow(0 0 20px rgba(255, 255, 0, 0.5));
+    }
+    100% {
+      text-shadow:
+        0 0 15px rgba(0, 255, 255, 1),
+        0 0 25px rgba(0, 255, 255, 0.9),
+        0 0 35px rgba(255, 0, 255, 0.7),
+        0 0 50px rgba(255, 0, 255, 0.5),
+        2px 2px 0px rgba(255, 0, 255, 0.9),
+        -2px -2px 0px rgba(0, 255, 255, 0.9);
+      filter: drop-shadow(0 0 30px rgba(255, 255, 0, 0.7));
     }
   }
 
@@ -171,19 +300,31 @@
   // ============================================
 
   .arcade-screen-bezel {
-    background: linear-gradient(145deg, #e8e0c8, #c4b89a);
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 0, 255, 0.2) 0%,
+        rgba(0, 255, 255, 0.2) 100%
+      ),
+      linear-gradient(145deg, #3a3a5e, #2a2a4e);
     padding: 30px;
     margin: 30px;
     margin-top: 0px;
     border-radius: 12px;
+    border: 3px solid #5a5a8e;
     box-shadow:
-      inset 0 4px 8px rgba(0, 0, 0, 0.4),
-      inset 0 -2px 4px rgba(255, 255, 255, 0.3);
+      0 0 20px rgba(138, 43, 226, 0.3),
+      0 0 40px rgba(0, 255, 255, 0.2),
+      inset 0 4px 8px rgba(0, 0, 0, 0.6),
+      inset 0 -2px 4px rgba(138, 43, 226, 0.3);
     position: relative;
 
     @include media-down(lg) {
       margin: 15px;
       padding: 20px;
+      border: 0;
+      padding: 0;
+      margin: 0;
     }
 
     &::before {
@@ -192,25 +333,38 @@
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
-      color: #666;
+      color: #7dffff;
       font-size: 10px;
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      text-shadow:
+        0 0 5px rgba(0, 255, 255, 0.8),
+        0 0 10px rgba(0, 255, 255, 0.5);
+
+      @include media-down(lg) {
+        display: none;
+      }
     }
   }
 
   .arcade-screen {
     width: 100%;
     min-height: 500px;
-    background: #000;
+    background:
+      radial-gradient(ellipse at center, rgba(138, 43, 226, 0.05) 0%, #000 60%),
+      #000;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+    border: 2px solid #1a1a3e;
     box-shadow:
-      inset 0 0 80px rgba(0, 255, 100, 0.1),
-      inset 0 0 40px rgba(0, 255, 100, 0.05),
-      inset 3px 3px 8px rgba(255, 255, 255, 0.1),
-      inset -3px -3px 8px rgba(0, 0, 0, 0.5);
+      0 0 30px rgba(138, 43, 226, 0.4),
+      0 0 60px rgba(0, 255, 255, 0.2),
+      inset 0 0 100px rgba(138, 43, 226, 0.15),
+      inset 0 0 80px rgba(0, 255, 255, 0.1),
+      inset 0 0 40px rgba(255, 0, 255, 0.08),
+      inset 3px 3px 8px rgba(138, 43, 226, 0.2),
+      inset -3px -3px 8px rgba(0, 0, 0, 0.8);
 
     @include media-down(lg) {
       min-height: 400px;
@@ -268,10 +422,12 @@
       width: 100%;
       height: 100%;
       padding: 30px;
-      color: #0f0;
+      color: #7dffff;
       z-index: 1;
       font-family: monospace;
-      text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+      text-shadow:
+        0 0 10px rgba(0, 255, 255, 0.8),
+        0 0 20px rgba(138, 43, 226, 0.4);
 
       @include media-down(lg) {
         padding: 20px;
@@ -288,37 +444,90 @@
         margin-bottom: 30px;
 
         @include media-down(lg) {
+          padding-top: 10px;
           grid-template-columns: 1fr;
           gap: 15px;
-          max-height: 400px;
+          max-height: auto;
           overflow-y: auto;
-          @include scrollbar-custom(#0f0, 6px);
+          @include scrollbar-custom(#7dffff, 6px);
         }
       }
 
       .game-card {
-        background: rgba(0, 255, 0, 0.05);
-        border: 2px solid rgba(0, 255, 0, 0.3);
+        background: linear-gradient(
+          135deg,
+          rgba(138, 43, 226, 0.08) 0%,
+          rgba(0, 255, 255, 0.08) 100%
+        );
+        border: 2px solid rgba(0, 255, 255, 0.3);
         border-radius: 8px;
         padding: 15px;
         transition: all 0.3s ease;
         cursor: pointer;
         position: relative;
+        box-shadow: 0 0 10px rgba(138, 43, 226, 0.2);
 
         @include enhance-3d-transform;
 
         &:hover,
         &.selected {
-          background: rgba(0, 255, 0, 0.1);
-          border-color: rgba(0, 255, 0, 0.8);
+          background: linear-gradient(
+            135deg,
+            rgba(138, 43, 226, 0.15) 0%,
+            rgba(0, 255, 255, 0.15) 100%
+          );
+          border-color: rgba(0, 255, 255, 0.8);
           box-shadow:
-            0 0 20px rgba(0, 255, 0, 0.4),
-            inset 0 0 10px rgba(0, 255, 0, 0.1);
+            0 0 20px rgba(0, 255, 255, 0.5),
+            0 0 40px rgba(138, 43, 226, 0.3),
+            inset 0 0 20px rgba(0, 255, 255, 0.1);
           transform: translateY(-2px);
+
+          @include media-down(lg) {
+            box-shadow: 0 0;
+            animation: none;
+          }
         }
 
         &.selected {
           animation: card-pulse 1s ease-in-out infinite alternate;
+
+          .game-logo {
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8))
+              drop-shadow(0 0 20px rgba(138, 43, 226, 0.6));
+          }
+
+          .game-title {
+            color: #ffff00;
+            text-shadow:
+              0 0 10px rgba(255, 255, 0, 1),
+              0 0 20px rgba(255, 0, 255, 0.6);
+          }
+        }
+
+        // Unreleased games styling
+        &.unreleased {
+          opacity: 0.5;
+          cursor: not-allowed;
+          filter: grayscale(0.7);
+
+          &:hover,
+          &.selected {
+            background: linear-gradient(
+              135deg,
+              rgba(138, 43, 226, 0.08) 0%,
+              rgba(0, 255, 255, 0.08) 100%
+            );
+            border-color: rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.2);
+            transform: none;
+            animation: none;
+          }
+
+          .game-logo {
+            opacity: 0.7;
+            filter: grayscale(0.7);
+          }
         }
 
         // ============================================
@@ -327,7 +536,36 @@
 
         .game-summary {
           display: flex;
+          flex-direction: column;
           gap: 15px;
+          position: relative;
+
+          .game-link {
+            display: contents;
+            text-decoration: none;
+          }
+
+          .coming-soon-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: "Pixelify Sans", monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff0;
+            text-shadow:
+              0 0 10px rgba(255, 255, 0, 0.8),
+              0 0 20px rgba(255, 255, 0, 0.5),
+              2px 2px 0px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 2px solid rgba(255, 255, 0, 0.6);
+            animation: coming-soon-pulse 2s ease-in-out infinite;
+          }
         }
 
         .game-thumbnail {
@@ -337,17 +575,56 @@
           border-radius: 6px;
           overflow: hidden;
           background: rgba(0, 0, 0, 0.5);
-          border: 1px solid rgba(0, 255, 0, 0.3);
+          border: 1px solid rgba(0, 255, 255, 0.4);
+          box-shadow:
+            0 0 10px rgba(138, 43, 226, 0.3),
+            inset 0 0 10px rgba(0, 255, 255, 0.1);
 
           img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: contrast(1.1) brightness(0.9);
+            filter: contrast(1.2) brightness(0.95) saturate(1.2);
           }
         }
 
         .game-thumbnail-placeholder {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .placeholder-icon {
+            font-size: 2rem;
+            opacity: 0.5;
+          }
+        }
+
+        .game-logo {
+          flex-shrink: 0;
+          width: 100%;
+          border-radius: 6px;
+          overflow: visible;
+          background: #7dffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px;
+          -webkit-mask-size: contain;
+          -webkit-mask-repeat: no-repeat;
+          -webkit-mask-position: center;
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          mask-position: center;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+          }
+        }
+
+        .game-logo-placeholder {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -365,15 +642,26 @@
 
         .game-title {
           font-size: 1.2rem;
-          margin: 0 0 8px 0;
+          margin: 0;
+          color: #7dffff;
+          font-weight: bold;
+          text-shadow:
+            0 0 5px rgba(0, 255, 255, 0.8),
+            0 0 10px rgba(138, 43, 226, 0.4);
 
           a {
-            color: greenyellow;
+            color: #7dffff;
             text-decoration: none;
-            text-shadow: 0 0 5px rgba(173, 255, 47, 0.5);
+            font-weight: bold;
+            text-shadow:
+              0 0 5px rgba(0, 255, 255, 0.8),
+              0 0 10px rgba(138, 43, 226, 0.4);
 
             &:hover {
-              text-shadow: 0 0 10px rgba(173, 255, 47, 0.8);
+              color: #ffff00;
+              text-shadow:
+                0 0 10px rgba(255, 255, 0, 1),
+                0 0 20px rgba(255, 0, 255, 0.6);
             }
           }
         }
@@ -391,19 +679,41 @@
           .game-genre {
             display: inline-block;
             padding: 3px 8px;
-            background: rgba(0, 255, 0, 0.2);
-            border: 1px solid rgba(0, 255, 0, 0.5);
+            background: linear-gradient(
+              135deg,
+              rgba(138, 43, 226, 0.3) 0%,
+              rgba(0, 255, 255, 0.3) 100%
+            );
+            border: 1px solid rgba(0, 255, 255, 0.6);
             border-radius: 3px;
+            box-shadow: 0 0 5px rgba(138, 43, 226, 0.4);
           }
         }
       }
 
       @keyframes card-pulse {
         0% {
-          box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+          box-shadow:
+            0 0 20px rgba(0, 255, 255, 0.5),
+            0 0 40px rgba(138, 43, 226, 0.3);
         }
         100% {
-          box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+          box-shadow:
+            0 0 30px rgba(0, 255, 255, 0.7),
+            0 0 60px rgba(138, 43, 226, 0.5),
+            0 0 80px rgba(255, 0, 255, 0.3);
+        }
+      }
+
+      @keyframes coming-soon-pulse {
+        0%,
+        100% {
+          opacity: 0.9;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.05);
         }
       }
     }
@@ -473,16 +783,20 @@
 
 .control-panel-surface {
   background:
-    linear-gradient(135deg, #4a4a4a 25%, transparent 25%),
-    linear-gradient(225deg, #4a4a4a 25%, transparent 25%),
-    linear-gradient(45deg, #3a3a3a 25%, transparent 25%),
-    linear-gradient(315deg, #3a3a3a 25%, #2a2a2a 25%);
-  background-size: 20px 20px;
-  background-position:
-    0 0,
-    0 10px,
-    10px -10px,
-    -10px 0px;
+    linear-gradient(
+      135deg,
+      rgba(138, 43, 226, 0.15) 0%,
+      rgba(0, 255, 255, 0.15) 50%,
+      rgba(255, 0, 255, 0.15) 100%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #2a2a4e 0px,
+      #2a2a4e 10px,
+      #1a1a3e 10px,
+      #1a1a3e 20px
+    ),
+    linear-gradient(180deg, #2a2a4e 0%, #1a1a3e 100%);
   height: 225px;
   padding: 40px;
   position: relative;
@@ -493,20 +807,23 @@
   transform-origin: bottom center;
   transform-style: preserve-3d;
 
-  // Enhanced 3D beveled edges
+  // Enhanced 3D beveled edges with neon glow
   box-shadow:
+    // Neon glow
+    0 0 20px rgba(138, 43, 226, 0.3),
+    0 0 40px rgba(0, 255, 255, 0.2),
     // Stronger outer shadow for lifted appearance
     0 12px 24px rgba(0, 0, 0, 0.6),
     0 8px 16px rgba(0, 0, 0, 0.4),
     0 4px 8px rgba(0, 0, 0, 0.3),
     // Top highlight (raised effect)
-    inset 0 3px 0 rgba(0, 0, 0, 0.2),
-    inset 0 6px 12px rgba(0, 0, 0, 0.08),
+    inset 0 3px 0 rgba(0, 255, 255, 0.2),
+    inset 0 6px 12px rgba(138, 43, 226, 0.08),
     // Bottom shadow (depth)
     inset 0 -3px 0 rgba(0, 0, 0, 0.7),
     inset 0 -6px 12px rgba(0, 0, 0, 0.5),
     // Left highlight
-    inset 3px 0 0 rgba(255, 255, 255, 0.12),
+    inset 3px 0 0 rgba(138, 43, 226, 0.15),
     // Right shadow
     inset -3px 0 0 rgba(0, 0, 0, 0.6);
 
@@ -522,12 +839,12 @@
     background:
       radial-gradient(
         ellipse at top left,
-        rgba(255, 255, 255, 0.1) 0%,
+        rgba(0, 255, 255, 0.15) 0%,
         transparent 50%
       ),
       radial-gradient(
         ellipse at bottom right,
-        rgba(0, 0, 0, 0.4) 0%,
+        rgba(138, 43, 226, 0.2) 0%,
         transparent 50%
       );
     pointer-events: none;
@@ -558,8 +875,11 @@
   margin-top: 10px;
   font-family: "Pixelify Sans", monospace;
   font-size: 0.75rem;
-  color: #666;
+  color: #7dffff;
   letter-spacing: 1px;
+  text-shadow:
+    0 0 5px rgba(0, 255, 255, 0.6),
+    0 0 10px rgba(138, 43, 226, 0.3);
 }
 
 // Buttons overlay - positioned absolutely to avoid perspective transform
@@ -578,23 +898,6 @@
   }
 }
 
-// Sound toggle overlay - positioned absolutely to avoid perspective transform
-.sound-toggle-overlay {
-  position: absolute;
-  right: 15%;
-  top: 50%;
-  transform: translate(0, -50%) scaleY(0.85);
-  z-index: 10;
-  pointer-events: none;
-  text-align: center;
-
-  @include media-down(lg) {
-    position: static;
-    transform: none;
-    pointer-events: auto;
-  }
-}
-
 // ============================================
 // JOYSTICK
 // ============================================
@@ -605,7 +908,7 @@
   // Position absolutely to place on control panel without perspective transform
   position: absolute;
   left: 12.5%;
-  top: 35%;
+  top: 40%;
   transform: translateY(-50%);
   z-index: 0; // Behind the control panel surface
   pointer-events: none; // Allow clicks to pass through to buttons below
@@ -685,12 +988,14 @@
   transform: translateX(-50%);
   width: 40px;
   height: 40px;
-  background: radial-gradient(circle at 30% 30%, #ff3333 0%, #cc0000 100%);
+  background: radial-gradient(circle at 30% 30%, #00ffff 0%, #00aaaa 100%);
   border-radius: 50%;
   box-shadow:
+    0 0 15px rgba(0, 255, 255, 0.6),
+    0 0 30px rgba(0, 255, 255, 0.4),
     0 4px 8px rgba(0, 0, 0, 0.6),
     inset -2px -2px 4px rgba(0, 0, 0, 0.4),
-    inset 2px 2px 4px rgba(255, 100, 100, 0.4);
+    inset 2px 2px 4px rgba(0, 255, 255, 0.6);
 }
 
 .joystick.up .joystick-stick {
@@ -771,6 +1076,8 @@
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #ffff00 0%, #cccc00 100%);
   box-shadow:
+    0 0 15px rgba(255, 255, 0, 0.6),
+    0 0 30px rgba(255, 255, 0, 0.4),
     0 6px 0 #999900,
     0 8px 12px rgba(0, 0, 0, 0.6),
     inset -2px -2px 4px rgba(0, 0, 0, 0.3),
@@ -781,27 +1088,33 @@
 }
 
 .arcade-button-select .button-top {
-  background: radial-gradient(circle at 30% 30%, #ff3333 0%, #cc0000 100%);
+  background: radial-gradient(circle at 30% 30%, #ff00ff 0%, #cc00cc 100%);
   box-shadow:
-    0 6px 0 #990000,
+    0 0 15px rgba(255, 0, 255, 0.6),
+    0 0 30px rgba(255, 0, 255, 0.4),
+    0 6px 0 #990099,
     0 8px 12px rgba(0, 0, 0, 0.6),
     inset -2px -2px 4px rgba(0, 0, 0, 0.3),
-    inset 2px 2px 4px rgba(255, 100, 100, 0.5);
+    inset 2px 2px 4px rgba(255, 100, 255, 0.5);
 }
 
 .arcade-button-back .button-top {
-  background: radial-gradient(circle at 30% 30%, #3333ff 0%, #0000cc 100%);
+  background: radial-gradient(circle at 30% 30%, #00ffff 0%, #00cccc 100%);
   box-shadow:
-    0 6px 0 #000099,
+    0 0 15px rgba(0, 255, 255, 0.6),
+    0 0 30px rgba(0, 255, 255, 0.4),
+    0 6px 0 #009999,
     0 8px 12px rgba(0, 0, 0, 0.6),
     inset -2px -2px 4px rgba(0, 0, 0, 0.3),
-    inset 2px 2px 4px rgba(100, 100, 255, 0.5);
+    inset 2px 2px 4px rgba(100, 255, 255, 0.5);
 }
 
 .arcade-button:active .button-top,
 .arcade-button.pressed .button-top {
   top: 4px;
   box-shadow:
+    0 0 10px rgba(255, 255, 0, 0.5),
+    0 0 20px rgba(255, 255, 0, 0.3),
     0 2px 0 #999900,
     0 4px 8px rgba(0, 0, 0, 0.6),
     inset -2px -2px 4px rgba(0, 0, 0, 0.3),
@@ -811,19 +1124,23 @@
 .arcade-button-select:active .button-top,
 .arcade-button-select.pressed .button-top {
   box-shadow:
-    0 2px 0 #990000,
+    0 0 10px rgba(255, 0, 255, 0.5),
+    0 0 20px rgba(255, 0, 255, 0.3),
+    0 2px 0 #990099,
     0 4px 8px rgba(0, 0, 0, 0.6),
     inset -2px -2px 4px rgba(0, 0, 0, 0.3),
-    inset 2px 2px 4px rgba(255, 100, 100, 0.5);
+    inset 2px 2px 4px rgba(255, 100, 255, 0.5);
 }
 
 .arcade-button-back:active .button-top,
 .arcade-button-back.pressed .button-top {
   box-shadow:
-    0 2px 0 #000099,
+    0 0 10px rgba(0, 255, 255, 0.5),
+    0 0 20px rgba(0, 255, 255, 0.3),
+    0 2px 0 #009999,
     0 4px 8px rgba(0, 0, 0, 0.6),
     inset -2px -2px 4px rgba(0, 0, 0, 0.3),
-    inset 2px 2px 4px rgba(100, 100, 255, 0.5);
+    inset 2px 2px 4px rgba(100, 255, 255, 0.5);
 }
 
 // ============================================
@@ -837,10 +1154,10 @@
 .sound-toggle {
   width: 50px;
   height: 50px;
-  border: 2px solid #3a3a3a;
+  border: 2px solid #5a5a8e;
   border-radius: 8px;
-  background: #1a1a1a;
-  color: #0f0;
+  background: linear-gradient(145deg, #2a2a4e, #1a1a3e);
+  color: #ffff00;
   font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -848,15 +1165,19 @@
   z-index: 10;
   position: relative;
   box-shadow:
+    0 0 15px rgba(255, 255, 0, 0.4),
+    0 0 30px rgba(255, 255, 0, 0.2),
     inset 0 2px 4px rgba(0, 0, 0, 0.6),
     0 2px 4px rgba(0, 0, 0, 0.3);
 
   &:hover {
-    background: #2a2a2a;
+    background: linear-gradient(145deg, #3a3a5e, #2a2a4e);
+    border-color: #7a7aae;
     box-shadow:
+      0 0 20px rgba(255, 255, 0, 0.6),
+      0 0 40px rgba(255, 255, 0, 0.4),
       inset 0 2px 4px rgba(0, 0, 0, 0.6),
-      0 2px 4px rgba(0, 0, 0, 0.3),
-      0 0 10px rgba(0, 255, 0, 0.3);
+      0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   &:active {
@@ -866,8 +1187,10 @@
   &:focus {
     outline: none;
     box-shadow:
+      0 0 20px rgba(255, 255, 0, 0.8),
+      0 0 40px rgba(255, 255, 0, 0.6),
       inset 0 2px 4px rgba(0, 0, 0, 0.6),
-      0 0 0 2px rgba(0, 255, 0, 0.5);
+      0 0 0 2px rgba(255, 255, 0, 0.5);
   }
 }
 
@@ -875,23 +1198,44 @@
   display: inline-block;
 }
 
+.sound-label {
+  text-align: center;
+  margin-top: 8px;
+  font-family: "Pixelify Sans", monospace;
+  font-size: 0.65rem;
+  color: #7dffff;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 5px rgba(0, 255, 255, 0.6),
+    0 0 10px rgba(138, 43, 226, 0.3);
+}
+
 // ============================================
 // CABINET BASE
 // ============================================
 
 .cabinet-base {
-  width: 112%;
+  width: 112.5%;
   margin-left: -6%;
   height: 80px;
-  background: linear-gradient(180deg, #2d1f12 0%, #1d1208 100%);
-  border: 4px solid #2a2a2a;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 0, 255, 0.15) 0%,
+      rgba(0, 255, 255, 0.15) 50%,
+      rgba(255, 255, 0, 0.15) 100%
+    ),
+    linear-gradient(180deg, #2a2a4e 0%, #1a1a2e 100%);
+  border: 6px solid #5a5a8e;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow:
+    0 0 40px rgba(138, 43, 226, 0.4),
+    0 0 80px rgba(0, 255, 255, 0.3),
     0 30px 60px rgba(0, 0, 0, 0.9),
-    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
     inset 0 -2px 4px rgba(0, 0, 0, 0.5);
 
   @include media-down(lg) {
@@ -916,10 +1260,13 @@
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.65rem;
-    color: #666;
+    color: #7dffff;
     font-family: "Pixelify Sans", monospace;
     letter-spacing: 1px;
     white-space: nowrap;
+    text-shadow:
+      0 0 5px rgba(0, 255, 255, 0.8),
+      0 0 10px rgba(138, 43, 226, 0.4);
   }
 }
 
