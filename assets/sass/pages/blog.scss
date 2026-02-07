@@ -333,6 +333,20 @@
             box-shadow: 0 0 10px rgb(255, 213, 47);
           }
         }
+
+        .blog-img {
+          background:
+            linear-gradient(#000, #000) padding-box,
+            linear-gradient(180deg, #ff9900, #000) border-box;
+          filter: grayscale(100%) contrast(1.2) brightness(0.9) sepia(100%)
+            hue-rotate(10deg) saturate(300%);
+        }
+
+        .blog-img-caption {
+          color: #ff9900;
+          border: 1px solid rgba(255, 153, 0, 0.5);
+          text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+        }
       }
 
       .tag-filter-link {
