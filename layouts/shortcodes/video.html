@@ -1,0 +1,8 @@
+{{ $src := .Get "src" }}
+{{ with .Page.Resources.GetMatch $src }}
+<div style="text-align: center;">
+  <video autoplay loop muted playsinline>
+    <source src="{{ .RelPermalink }}" type="{{ .MediaType }}">
+  </video>
+</div>
+{{ end }}
