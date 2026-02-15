@@ -27,12 +27,14 @@ rm -rf public/
 mkdir -p public/log
 
 # Create index.html with redirect to https://ritual.sh
-cat > public/index.html << 'EOF'
+DEPLOY_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+cat > public/index.html << EOF
+<!-- deployed: $DEPLOY_TIMESTAMP -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="refresh" content="0; url=https://ritual.sh">
-    <title>Redirecting...</title>
+    <title>ritual.sh</title>
 </head>
 <body>
     <p>Redirecting to <a href="https://ritual.sh">ritual.sh</a>...</p>
@@ -41,12 +43,13 @@ cat > public/index.html << 'EOF'
 EOF
 
 # Create log/index.html with redirect to https://ritual.sh/logs/
-cat > public/log/index.html << 'EOF'
+cat > public/log/index.html << EOF
+<!-- deployed: $DEPLOY_TIMESTAMP -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="refresh" content="0; url=https://ritual.sh/log/">
-    <title>Redirecting...</title>
+    <title>Updates to ritual.sh!</title>
 </head>
 <body>
     <p>Redirecting to <a href="https://ritual.sh/log/">ritual.sh/log/</a>...</p>
